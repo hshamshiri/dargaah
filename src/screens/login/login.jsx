@@ -1,4 +1,4 @@
-import LoginFrame from "../../component/layout/login/loginFrame";
+import LoginFrame from "../../component/layout/loginFrame/loginFrame";
 
 const Login = () => {
   return (

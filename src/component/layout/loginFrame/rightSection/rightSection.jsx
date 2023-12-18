@@ -1,6 +1,6 @@
-import "./css/login.css";
-import "./scss/login.scss";
-import swipDown from "./images/swipeDown.png";
+import "./../css/login.css";
+import "./../scss/login.scss";
+import swipDown from "./../images/swipeDown.png";
 
 const RightSection = ({ setSwipUp }) => {
   return (

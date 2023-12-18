@@ -1,9 +1,9 @@
-import "./scss/login.scss";
-import "./css/login.css";
+import "./../scss/login.scss";
+import "./../css/login.css";
 import { clsx } from "clsx";
-import AppPreview from "./images/AppPreview.png";
-import swipeUpImage from "./images/swipeUp.png";
-import directLink from "./images/directLink.png";
+import AppPreview from "./../images/AppPreview.png";
+import swipeUpImage from "./../images/swipeUp.png";
+import directLink from "./../images/directLink.png";
 
 const LandingFrame = ({ swipUp, setSwipUp }) => {
   return (

@@ -12,33 +12,37 @@ const Slider = ({ props }) => {
       src: slide1,
       description:
         "دسترسی به خدمات حوزه سلامت، آموزش، اقتصادی، امور عمومی و ثبت نام یارانه با ورود به پنجره ملی خدمات دولت هوشمند.",
+      app: false
     },
     {
       name: "slide2",
       src: slide2,
       description:
         "ارائه خدمات مستقیم استعلامی و اتصال به سامانه‌های دولتی بدون احراز هویت مجدد.",
+      app: false
     },
     {
       name: "slide3",
       src: slide3,
       description:
         "با ورود به پنجره ملی خدمات دولت هوشمند از قابلیت‌های دسترسی سریع به خدمات، احراز هویت یکپارچه و حفظ حریم خصوصی کاربران بهرمند شوید.",
+      app: false
     },
     {
       name: "appPreview",
       src: appPreview,
       description: "دانلود اپلیکیشن پنجره ملی خدمات دولت هوشمند",
+      appButtonTitle: "دانلود اپلیکیشن",
+      app: true
     },
   ];
 
   return (
     <Carousel
-      autoPlay={false}
+      //autoPlay={false}
       stopAutoPlayOnHover
-      interval={3000}
-      animation="slide"
-      className=" mt-10 "
+      interval={4000}
+      animation="fade"
     >
       {items.map((item, i) => (
         <Item key={i} item={item} />

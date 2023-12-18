@@ -1,11 +1,17 @@
-import { Paper, Button } from "@mui/material";
+import { Paper } from "@mui/material";
+import UiButtonRound from "../../uiKit/uiButton/UiButtonRound"
 
-const Item = (props) => {
+const Item = ({ item }) => {
+  console.log(item.app)
   return (
     <Paper style={{ backgroundColor: "transparent", boxShadow: "none" }}>
-      <img className="w-60 h-80 object-contain" src={props.item.src} />
-      <p className="text-white">{props.item.description}</p>
-      <Button className="CheckButton">Check it out!</Button>
+      <img className="w-80 h-96 object-contain" src={item.src} />
+      <div className="flex w-full justify-center">
+        <p className="w-96 text-white">{item.description}</p>
+      </div>
+
+      {item.app && <UiButtonRound title={item.appButtonTitle} />
+      }
     </Paper>
   );
 };
