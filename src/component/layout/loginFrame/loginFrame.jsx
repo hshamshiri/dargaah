@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
 import LandingFrame from "./landingFrame/landingFrame";
-import BoxFrame from "./boxFrame/boxFrame"
+import BoxFrame from "./boxFrame/boxFrame";
 import RightSection from "./rightSection/rightSection";
 import Leftsection from "./leftSection/leftSection";
 import Slider from "../carouselSlider/carouselSlider";
-import IconsView from "./leftSection/topIconsView/topIconsView";
+import TopIconsView from "./leftSection/topIconsView/topIconsView";
 import "./scss/login.scss";
 import "./css/login.css";
 
 const LoginFrame = () => {
-  const [swipUp, setSwipUp] = useState(true);
+  const [swipUp, setSwipUp] = useState(false);
   return (
     <div className="body">
       <BoxFrame setSwipUp={setSwipUp}>
         <RightSection setSwipUp={setSwipUp} />
-        <Leftsection >
-          <IconsView />
+        <Leftsection>
+          <TopIconsView />
           <Slider />
         </Leftsection>
       </BoxFrame>

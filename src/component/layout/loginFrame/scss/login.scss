@@ -19,6 +19,7 @@
   overflow: hidden;
   width: 100%;
   max-width: 1100px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1), 0px 4px 30px rgba(0, 0, 0, 0.2);
   background-color: gray;
 }
 
@@ -43,13 +44,21 @@
 
 .right-section {
   width: 50%;
-  background-color: gold;
+}
+
+.swipUpView {
+  width: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  bottom: 40px;
+  position: absolute;
+  z-index: 1000;
 }
 
 @media screen and (min-width: 980px) {
   .box {
     flex-direction: row;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1), 0px 4px 30px rgba(0, 0, 0, 0.2);
     display: flex;
   }
 }
@@ -60,25 +69,29 @@
     max-width: 430px;
     min-width: 430px;
     overflow: visible;
-    background-color: green;
   }
   .left-section {
     display: none;
   }
   .right-section {
     width: 100%;
+  }
+  .swipUpView {
+    display: flex;
   }
 }
 
 @media screen and (max-width: 420px) {
   .box {
     flex-direction: column;
-    background-color: red;
   }
   .left-section {
     display: none;
   }
   .right-section {
     width: 100%;
+  }
+  .swipUpView {
+    display: flex;
   }
 }
