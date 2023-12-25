@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material";
-import UiButtonRound from "../../uiKit/uiButton/UiButtonRound";
+import UiButtonRound from "../../uiKit/uiButton/uiButton";
 
 const Item = ({ item }) => {
   return (

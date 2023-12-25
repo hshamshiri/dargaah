@@ -28,10 +28,12 @@ const TopView = () => {
   );
 };
 
-const RightSection = ({ swipUp, setSwipUp }) => {
+const RightSection = ({ children, swipUp, setSwipUp }) => {
   return (
     <div className="right-section">
       <TopView />
+      <div className="flex justify-center w-full h-full ml-5 ">{children}</div>
+
       <SwipUpButton swipUp={swipUp} setSwipUp={setSwipUp} />
     </div>
   );
