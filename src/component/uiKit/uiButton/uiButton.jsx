@@ -1,7 +1,5 @@
 import { Button } from "@mui/material";
 import palette from "../../../utils/colors";
-import { DownloadSharp } from "@mui/icons-material";
-import { Send } from "@mui/icons-material";
 import UiIcon from "../uiIcon/uiIcon";
 
 /**
@@ -15,6 +13,7 @@ import UiIcon from "../uiIcon/uiIcon";
  * @param {string} props icon
  * @param {object} props classes
  * @param {string} props send/download
+ * @param {string} props send/mobile/...
  *
  */
 const UiButton = ({
@@ -33,7 +32,7 @@ const UiButton = ({
       disabled={disable || false}
       variant={variant || "filled"}
       className={`w-60 ${classes}`}
-      startIcon={<UiIcon type={"send"} />}
+      startIcon={<UiIcon iconType={iconType} />}
       sx={{
         borderRadius: 30,
         width: 240,

@@ -2,6 +2,8 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import RtlDirection from "../../../utils/changeDirection";
+import UiIcon from "../uiIcon/uiIcon";
+
 
 const UiInputText = ({
   id = "outlined-basic", //outlined-basic
@@ -14,8 +16,11 @@ const UiInputText = ({
   onChange,
   required,
   startAdornment,
+  iconType,
   endAdornment,
+  captcha
 }) => {
+
   return (
     <RtlDirection>
       <TextField
@@ -28,19 +33,24 @@ const UiInputText = ({
         defaultValue={defaultValue}
         onChange={(e) => onChange(e)}
         required={required}
+        size="small"
         InputProps={{
           sx: {
             borderRadius: 10,
-            width: 250,
+            width: 250
           },
           startAdornment: startAdornment && (
-            <InputAdornment position="start">kg</InputAdornment>
+            <InputAdornment position="start">
+              <UiIcon iconType={iconType} />
+            </InputAdornment>
           ),
-          endAdornment: endAdornment && (
-            <InputAdornment position="end">kg</InputAdornment>
+          endAdornment: (
+            <InputAdornment position="end">
+              <UiIcon iconType={iconType} />
+            </InputAdornment>
           ),
         }}
-        size="small"
+
       />
     </RtlDirection>
   );

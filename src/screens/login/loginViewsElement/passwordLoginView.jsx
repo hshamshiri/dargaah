@@ -2,6 +2,7 @@ import { useState } from "react";
 import WithMaterialUI from "../../../component/hoc/withLoginFormik";
 import { useTranslation } from "react-i18next";
 import UiMobileInput from "../../../component/uiKit/uiInput/mobile/uiMobileInput";
+import UiCaptchaInput from "../../../component/uiKit/uiInput/captcha/uiCaptchaInput";
 import UiButton from "../../../component/uiKit/uiButton/uiButton";
 
 const PasswordLoginView = ({ onSubmit, formik }) => {
@@ -17,14 +18,16 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
   };
 
   return (
+
     <form onSubmit={formik.handleSubmit}>
       <UiMobileInput formik={formik} />
-
+      <UiCaptchaInput formik={formik} />
       <UiButton
         type="submit"
-        label={"ارسال کد"}
+        label={t("login.form.sendCode")}
         onclick={submitAction}
         variant="contained"
+        iconType={"send"}
       />
       {/* <UiInputText
         label="تلفن همراه"
@@ -35,6 +38,7 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
       /> */}
       {/* <UiInputText label="تلفن همراه" onChange={changePhone} /> */}
     </form>
+
   );
 };
 
