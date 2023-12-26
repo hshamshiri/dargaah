@@ -6,6 +6,9 @@ import { TabPanel as BaseTabPanel } from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
 import { Tab as BaseTab, tabClasses } from "@mui/base/Tab";
 import Box from "@mui/material/Box";
+import { Button, Typography } from "@mui/material";
+
+
 
 export default function TabComp({ tabViews, tabLabels }) {
   return (
@@ -14,8 +17,8 @@ export default function TabComp({ tabViews, tabLabels }) {
         <Tabs defaultValue={0}>
           <TabsList>
             {tabLabels.map((label, i) => (
-              <Tab key={i} value={i}>
-                {label}
+              <Tab variant="contained" key={i} value={i}>
+                <Typography variant="button" >{label}</Typography>
               </Tab>
             ))}
           </TabsList>
@@ -32,20 +35,8 @@ export default function TabComp({ tabViews, tabLabels }) {
   );
 }
 
-const blue = {
-  50: "#F0F7FF",
-  100: "#1f405d",
-  200: "#1b3852",
-  800: "#142d44",
-};
-const gray = {
-  50: "#fafafa",
-  100: "#efefef",
-  200: "#e8e8e8",
-  300: "#e1e1e1",
-};
 
-const Tab = styled(BaseTab)`
+const Tab = styled(BaseTab)(({ theme }) => `
   font-family: "IBM Plex Sans", sans-serif;
   color: black;
   cursor: pointer;
@@ -62,16 +53,15 @@ const Tab = styled(BaseTab)`
   border-radius: 100px;
 
   &:hover {
-    //background-color: ${blue[50]};
+    //background-color: ${theme.palette.main.light};
   }
-
   &:focus {
-    color: ${blue[50]};
-    outline: 0px solid ${blue[800]};
+    color: ${theme.palette.main.light};
+    outline: 0px solid ${theme.palette.main.dark};
   }
 
   &.${tabClasses.selected} {
-    background-color: ${blue[800]};
+    background-color:${theme.palette.main.dark} ;
     color: #fff;
   }
 
@@ -79,7 +69,7 @@ const Tab = styled(BaseTab)`
     opacity: 0.5;
     cursor: not-allowed;
   }
-`;
+`)
 
 const TabPanel = styled(BaseTabPanel)`
   width: 100%;
@@ -90,7 +80,7 @@ const TabPanel = styled(BaseTabPanel)`
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
   min-width: 80%;
-  background-color: ${gray[300]};
+  background-color: ${theme.palette.disable.light};
   border-radius: 100px;
   margin-bottom: 16px;
   display: flex;

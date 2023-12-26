@@ -37,7 +37,7 @@ const UiInputText = ({
         InputProps={{
           sx: {
             borderRadius: 10,
-            width: 250
+            width: 250,
           },
           startAdornment: startAdornment && (
             <InputAdornment position="start">
