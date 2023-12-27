@@ -5,14 +5,16 @@ import { TabsList as BaseTabsList } from "@mui/base/TabsList";
 import { TabPanel as BaseTabPanel } from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
 import { Tab as BaseTab, tabClasses } from "@mui/base/Tab";
-import Box from "@mui/material/Box";
-import { Button, Typography } from "@mui/material";
+import { useTheme, Typography, Box, Button } from "@mui/material";
+
 
 
 
 export default function TabComp({ tabViews, tabLabels }) {
+  const theme = useTheme("theme")
+
   return (
-    <Box sx={{ width: "80%" }}>
+    <Box variant="contained" sx={{ width: "80%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tabs defaultValue={0}>
           <TabsList>
@@ -31,7 +33,7 @@ export default function TabComp({ tabViews, tabLabels }) {
           })}
         </Tabs>
       </Box>
-    </Box>
+    </Box >
   );
 }
 
@@ -44,6 +46,7 @@ const Tab = styled(BaseTab)(({ theme }) => `
   font-weight: bold;
   //background-color: transparent;
   width: 50%;
+  height:40px;
   //line-height: 1.5;
   padding: 10px 12px;
   margin: 0px;
@@ -53,15 +56,15 @@ const Tab = styled(BaseTab)(({ theme }) => `
   border-radius: 100px;
 
   &:hover {
-    //background-color: ${theme.palette.main.light};
+    //background-color: ${theme.palette.base.main};
   }
   &:focus {
-    color: ${theme.palette.main.light};
-    outline: 0px solid ${theme.palette.main.dark};
+    color: ${theme.palette.base.light};
+    outline: 0px solid ${theme.palette.base.main};
   }
 
   &.${tabClasses.selected} {
-    background-color:${theme.palette.main.dark} ;
+    background-color:${theme.palette.base.main} ;
     color: #fff;
   }
 
@@ -79,8 +82,16 @@ const TabPanel = styled(BaseTabPanel)`
 
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
-  min-width: 80%;
-  background-color: ${theme.palette.disable.light};
+  width:50%;
+  @media only screen and (min-width: 420px) and (max-width: 980px) {
+  width:80%;
+}
+@media screen and (max-width: 420px) {
+  width:200px;
+}
+
+
+  background-color: ${theme.palette.disable.main};
   border-radius: 100px;
   margin-bottom: 16px;
   display: flex;
