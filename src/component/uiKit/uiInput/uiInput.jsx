@@ -1,8 +1,11 @@
 import * as React from "react";
-import TextField from "@mui/material/TextField";
+import { TextField } from "@mui/material";
 import InputAdornment from "@mui/material/InputAdornment";
 import RtlDirection from "../../../utils/changeDirection";
 import UiIcon from "../uiIcon/uiIcon";
+import { useTheme } from "@mui/material";
+
+
 
 
 const UiInputText = ({
@@ -18,9 +21,11 @@ const UiInputText = ({
   startAdornment,
   iconType,
   endAdornment,
-  captcha
+  captcha,
+  captchaView: CaptchaView,
+  maxLength
 }) => {
-
+  const theme = useTheme("theme")
   return (
     <RtlDirection>
       <TextField
@@ -28,16 +33,32 @@ const UiInputText = ({
         label={label}
         variant={variant}
         error={error}
-        helperText={helperText}
+        helperText={<typography>{helperText}</typography>}
         placeholder={placeHolder}
         defaultValue={defaultValue}
         onChange={(e) => onChange(e)}
         required={required}
         size="small"
+        InputLabelProps={{ style: { fontFamily: theme.typography.fontFamily, fontSize: 14 } }}
+        inputProps={{
+          maxLength: maxLength,
+        }}
         InputProps={{
           sx: {
             borderRadius: 10,
-            width: 250,
+            width: 300,
+            '@media only screen and (min-width: 980px)': {
+
+            },
+            '@media only screen and (min-width: 420px) and (max-width: 980px)': {
+              width: 300
+            },
+            '@media screen and (max-width: 420px)': {
+              width: 200
+            },
+            fontFamily: theme.typography.fontFamily,
+            fontSize: 16,
+
           },
           startAdornment: startAdornment && (
             <InputAdornment position="start">
@@ -45,14 +66,16 @@ const UiInputText = ({
             </InputAdornment>
           ),
           endAdornment: (
-            <InputAdornment position="end">
-              <UiIcon iconType={iconType} />
-            </InputAdornment>
+            captcha ? < CaptchaView /> :
+              <InputAdornment position="end">
+                <UiIcon iconType={iconType} />
+              </InputAdornment>
           ),
         }}
 
       />
-    </RtlDirection>
+
+    </RtlDirection >
   );
 };
 

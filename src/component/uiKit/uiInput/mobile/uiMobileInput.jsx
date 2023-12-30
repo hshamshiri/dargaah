@@ -18,7 +18,10 @@ const UiMobileInput = ({ formik }) => {
       iconType="mobile"
       //startAdornment
       endAdornment
+      maxLength={11}
+
     />
+
   );
 };
 

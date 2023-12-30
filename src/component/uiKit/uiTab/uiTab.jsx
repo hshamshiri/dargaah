@@ -8,7 +8,6 @@ import { Tab as BaseTab, tabClasses } from "@mui/base/Tab";
 import { useTheme, Typography, Box, Button, Grid } from "@mui/material";
 
 export default function TabComp({ tabViews, tabLabels }) {
-  const theme = useTheme("theme");
 
   return (
     <Tabs
@@ -95,8 +94,7 @@ const TabsList = styled(BaseTabsList)(
   align-items: center;
   justify-content: center;
   align-content: space-between;
-  box-shadow: 0px 4px 6px ${
-    theme.palette.mode === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0,0,0, 0.2)"
-  };
+  box-shadow: 0px 4px 6px ${theme.palette.mode === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0,0,0, 0.2)"
+    };
   `
 );
