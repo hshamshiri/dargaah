@@ -5,41 +5,36 @@ import { TabsList as BaseTabsList } from "@mui/base/TabsList";
 import { TabPanel as BaseTabPanel } from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
 import { Tab as BaseTab, tabClasses } from "@mui/base/Tab";
-import { useTheme, Typography, Box, Button } from "@mui/material";
-
-
-
+import { useTheme, Typography, Box, Button, Grid } from "@mui/material";
 
 export default function TabComp({ tabViews, tabLabels }) {
-  const theme = useTheme("theme")
+  const theme = useTheme("theme");
 
   return (
-    <Box variant="contained" sx={{ width: "80%" }}>
-      <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs defaultValue={0}>
-          <TabsList>
-            {tabLabels.map((label, i) => (
-              <Tab variant="contained" key={i} value={i}>
-                <Typography variant="button" >{label}</Typography>
-              </Tab>
-            ))}
-          </TabsList>
-          {tabViews.map((tabView, i) => {
-            return (
-              <TabPanel index={i} key={i}>
-                {tabView}
-              </TabPanel>
-            );
-          })}
-        </Tabs>
-      </Box>
-    </Box >
+    <Tabs
+      defaultValue={0}
+      className="bg-red-200 w-full flex flex-col  items-center"
+    >
+      <TabsList>
+        {tabLabels.map((label, i) => (
+          <Tab sx={{ width: "100%" }} key={i} value={i}>
+            <Typography variant="button">{label}</Typography>
+          </Tab>
+        ))}
+      </TabsList>
+      {tabViews.map((tabView, i) => {
+        return (
+          <TabPanel index={i} key={i}>
+            {tabView}
+          </TabPanel>
+        );
+      })}
+    </Tabs>
   );
 }
 
-
-const Tab = styled(BaseTab)(({ theme }) => `
-  font-family: "IBM Plex Sans", sans-serif;
+const Tab = styled(BaseTab)(
+  ({ theme }) => `
   color: black;
   cursor: pointer;
   font-size: 0.875rem;
@@ -72,7 +67,8 @@ const Tab = styled(BaseTab)(({ theme }) => `
     opacity: 0.5;
     cursor: not-allowed;
   }
-`)
+`
+);
 
 const TabPanel = styled(BaseTabPanel)`
   width: 100%;
@@ -82,15 +78,16 @@ const TabPanel = styled(BaseTabPanel)`
 
 const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
-  width:50%;
+  width:270px;
+  @media only screen and (min-width: 980px) {
+   width:60%;
+  }
   @media only screen and (min-width: 420px) and (max-width: 980px) {
-  width:80%;
-}
-@media screen and (max-width: 420px) {
-  width:200px;
-}
-
-
+   width:70%
+  }
+  @media screen and (max-width: 420px) {
+   width:50%
+  }
   background-color: ${theme.palette.disable.main};
   border-radius: 100px;
   margin-bottom: 16px;
@@ -98,7 +95,8 @@ const TabsList = styled(BaseTabsList)(
   align-items: center;
   justify-content: center;
   align-content: space-between;
-  box-shadow: 0px 4px 6px ${theme.palette.mode === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0,0,0, 0.2)"
-    };
+  box-shadow: 0px 4px 6px ${
+    theme.palette.mode === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0,0,0, 0.2)"
+  };
   `
 );

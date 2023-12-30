@@ -23,7 +23,7 @@ const TopView = () => {
   return (
     <div className="flex flex-col justify-center items-center w-full h-1/4 ">
       <img className="w-1/6 mt-2 object-contain" src={iriLogo} />
-      <img className="w-1/3 m-1 object-contain" src={ssoTitle} />
+      <img className="w-1/4 m-1 object-contain" src={ssoTitle} />
     </div>
   );
 };
