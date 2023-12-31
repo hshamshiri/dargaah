@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material";
-import UiButtonRound from "../../uiKit/uiButton/uiButton";
+import UiButton from "../../uiKit/uiButton/uiButton";
 
 const Item = ({ item }) => {
   return (
@@ -8,7 +8,20 @@ const Item = ({ item }) => {
       <div className="flex w-full justify-center">
         <p className="w-96 text-white">{item.description}</p>
       </div>
-      {item.app && <UiButtonRound title={item.appButtonTitle} />}
+      {item.app && (
+        <UiButton
+          type="submit"
+          label={item.appButtonTitle}
+          onclick={<a href="#" />}
+          variant="contained"
+          iconType={"download"}
+          sx={{
+            borderColor: "white",
+            border: 1,
+            backgroundColor: "transparent",
+          }}
+        />
+      )}
     </Paper>
   );
 };
