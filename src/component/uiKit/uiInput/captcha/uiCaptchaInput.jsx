@@ -9,10 +9,14 @@ import Icon from "../../../uiKit/uiIcon/uiIcon"
 
 const CaptchaView = () => {
     return (
-        <Box flex={"row"} >
-            <div><Icon iconType={"volumeUp"} classes={{ backgroundColor: "transparent" }} /></div>
-            <div> <Icon iconType={"refresh"} classes={{ right: 30, backgroundColor: "transparent" }} /></div>
-            <div className="w-20 h-full p-2 border ml-12"><image />sadfs</div>
+        <Box sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center"
+        }} >
+            <div className="w-15 h-full p-1 "><image />sadfs</div>
+            <div> <Icon iconType={"refresh"} iconName={"refresh"} classes={{ right: 0, backgroundColor: "transparent" }} /></div>
+            <div><Icon iconType={"volumeUp"} iconName={"volumeUp"} classes={{ backgroundColor: "transparent" }} /></div>
         </Box>
     )
 
@@ -32,7 +36,8 @@ const UiCaptchaInput = ({ formik }) => {
             error={formik.touched.captcha && Boolean(formik.errors.captcha)}
             helperText={formik.touched.captcha && formik.errors.captcha}
             required={true}
-            iconType="send"
+            iconType={"button"}
+            iconName={"send"}
             //startAdornment
             endAdornment
             captcha={true}

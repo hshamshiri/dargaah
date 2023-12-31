@@ -1,3 +1,4 @@
+import { Box, Typography } from "@mui/material";
 import LoginFrame from "../../component/layout/loginFrame/loginFrame";
 import TabComp from "../../component/uiKit/uiTab/uiTab";
 import PasswordLoginView from "./loginViewsElement/passwordLoginView";
@@ -7,17 +8,19 @@ import { useTranslation } from "react-i18next";
 const Login = () => {
   const [t] = useTranslation()
   return (
-    <div>
-      <LoginFrame>
-        <TabComp
-          tabViews={[<PasswordLoginView />, <QRLoginView />]}
-          tabLabels={[t("login.tab.qrTabTitle"), t("login.tab.passwordTabTitle")]}
-        >
-          <PasswordLoginView />
-          <QRLoginView />
-        </TabComp>
-      </LoginFrame>
-    </div>
+    <LoginFrame>
+      {/* <Box sx={{ display: "flex", width: "100%", flexDirection: "column", padding: 1 }}> */}
+      {/* <Typography variant="body1">{t("login.rightSection.enter")}</Typography> */}
+      <TabComp
+        tabViews={[<PasswordLoginView />, <QRLoginView />]}
+        tabLabels={[t("login.tab.qrTabTitle"), t("login.tab.passwordTabTitle")]}
+      >
+        <PasswordLoginView />
+        <QRLoginView />
+      </TabComp>
+      {/* </Box> */}
+    </LoginFrame>
+
   );
 };
 

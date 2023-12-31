@@ -14,7 +14,8 @@ const Item = ({ item }) => {
           label={item.appButtonTitle}
           onclick={<a href="#" />}
           variant="contained"
-          iconType={"download"}
+          iconName={"download"}
+          iconType={"button"}
           sx={{
             borderColor: "white",
             border: 1,

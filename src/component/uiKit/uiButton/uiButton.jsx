@@ -24,6 +24,7 @@ const UiButton = ({
   variant,
   classes,
   iconType,
+  iconName,
   sx,
 }) => {
   return (
@@ -33,7 +34,7 @@ const UiButton = ({
       disabled={disable || false}
       variant={variant || "filled"}
       className={`w-60 ${classes}`}
-      startIcon={<UiIcon iconType={iconType} />}
+      startIcon={<UiIcon iconType={iconType} iconName={iconName} />}
       sx={[
         {
           borderRadius: 30,

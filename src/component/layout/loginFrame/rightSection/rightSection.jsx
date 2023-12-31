@@ -4,38 +4,38 @@ import { useTranslation } from "react-i18next";
 import swipDownImage from "./../images/swipeDown.png";
 import iriLogo from "./../images/iriLogo.png";
 import ssoTitle from "./../images/ssoTitle.png";
+import { Box, Typography } from "@mui/material";
 
 const SwipUpButton = ({ swipUp, setSwipUp }) => {
   const [t] = useTranslation();
 
   return (
-    <div className="swipUpView ">
-      <p className=" h-fit ">{t("login.rightSection.appDownload")}</p>
+    <Box className="swipUpView ">
+      <Typography className=" h-fit ">{t("login.rightSection.appDownload")}</Typography>
       <img
         className="w-20"
         src={swipDownImage}
         onClick={() => setSwipUp(true)}
       />
-    </div>
+    </Box>
   );
 };
 const TopView = () => {
   return (
-    <div className="flex flex-col justify-center items-center w-full h-1/4 ">
+    <Box className="flex flex-col justify-center items-center w-full h-1/4 ">
       <img className="w-1/6 mt-2 object-contain" src={iriLogo} />
       <img className="w-1/4 m-1 object-contain" src={ssoTitle} />
-    </div>
+    </Box>
   );
 };
 
 const RightSection = ({ children, swipUp, setSwipUp }) => {
   return (
-    <div className="right-section">
+    <Box className="right-section">
       <TopView />
-      <div className="flex justify-center w-full h-full ml-5 ">{children}</div>
-
+      {children}
       <SwipUpButton swipUp={swipUp} setSwipUp={setSwipUp} />
-    </div>
+    </Box>
   );
 };
 

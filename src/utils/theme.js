@@ -13,11 +13,19 @@ const theme = createTheme({
             "@media only screen and (max-width:420px)": {
                 fontSize: 8,
             },
-            // [theme.breakpoints.up('md')]: {
-            //     fontSize: '2.4rem',
-            // },
         },
 
+        body1: {
+            fontSize: 14,
+            fontWeight: 400,
+            "@media only screen and (min-width: 420px) and (max-width: 980px)": {
+                fontSize: 16,
+            },
+            "@media only screen and (max-width:420px)": {
+                fontSize: 12,
+            },
+
+        },
         body2: {
             fontSize: 16,
         },

@@ -20,6 +20,7 @@ const UiInputText = ({
   required,
   startAdornment,
   iconType,
+  iconName,
   endAdornment,
   captcha,
   captchaView: CaptchaView,
@@ -48,7 +49,7 @@ const UiInputText = ({
             borderRadius: 10,
             width: 300,
             '@media only screen and (min-width: 980px)': {
-
+              width: 270
             },
             '@media only screen and (min-width: 420px) and (max-width: 980px)': {
               width: 300
@@ -62,13 +63,13 @@ const UiInputText = ({
           },
           startAdornment: startAdornment && (
             <InputAdornment position="start">
-              <UiIcon iconType={iconType} />
+              <UiIcon iconType={iconType} iconName={iconName} />
             </InputAdornment>
           ),
           endAdornment: (
             captcha ? < CaptchaView /> :
               <InputAdornment position="end">
-                <UiIcon iconType={iconType} />
+                <UiIcon iconType={iconType} iconName={iconName} />
               </InputAdornment>
           ),
         }}

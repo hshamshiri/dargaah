@@ -5,19 +5,24 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
 import RefreshOutlinedIcon from "@mui/icons-material/RefreshOutlined";
 import DownloadIcon from "@mui/icons-material/Download";
+import ContactSupportIcon from '@mui/icons-material/ContactSupport';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import InfoIcon from '@mui/icons-material/Info';
 
-const UiIcon = ({ iconType, classes }) => {
+const UiIcon = ({ iconType, iconName, classes }) => {
   const theme = [
     {
       borderRadius: 15,
       width: 30,
       height: 30,
       padding: 0.5,
+      color: palette.darkBlue,
+      backgroundColor: "white"
+    },
+    iconType === "button" && {
       right: 5,
       top: 5,
       position: "absolute",
-      color: palette.darkBlue,
-      backgroundColor: "white",
     },
     classes,
   ];
@@ -28,9 +33,12 @@ const UiIcon = ({ iconType, classes }) => {
     volumeUp: <VolumeUpOutlinedIcon sx={theme} />,
     refresh: <RefreshOutlinedIcon sx={theme} />,
     download: <DownloadIcon sx={theme} />,
+    contact: <ContactSupportIcon sx={theme} />,
+    phone: <LocalPhoneIcon sx={theme} />,
+    InfoIcon: <InfoIcon sx={theme} />
   };
 
-  return icons[iconType];
+  return icons[iconName];
 };
 
 export default UiIcon;

@@ -1,26 +1,26 @@
 import { useState } from "react";
 import LandingFrame from "./landingFrame/landingFrame";
-import BoxFrame from "./boxFrame/boxFrame";
 import RightSection from "./rightSection/rightSection";
 import Leftsection from "./leftSection/leftSection";
 import Slider from "../carouselSlider/carouselSlider";
 import TopIconsView from "./leftSection/topIconsView/topIconsView";
 import "./scss/login.scss";
 import "./css/login.css";
+import { Box } from "@mui/material";
 
 const LoginFrame = ({ children }) => {
   const [swipUp, setSwipUp] = useState(false);
   return (
-    <div className="body">
-      <BoxFrame setSwipUp={setSwipUp}>
+    <Box className="body">
+      <Box className="box">
         <RightSection setSwipUp={setSwipUp}>{children}</RightSection>
         <Leftsection>
           <TopIconsView />
           <Slider />
         </Leftsection>
-      </BoxFrame>
+      </Box>
       <LandingFrame swipUp={swipUp} setSwipUp={setSwipUp} />
-    </div>
+    </Box>
   );
 };
 

@@ -12,7 +12,7 @@ export default function TabComp({ tabViews, tabLabels }) {
   return (
     <Tabs
       defaultValue={0}
-      className="bg-red-200 w-full flex flex-col  items-center"
+      className="bg-red-200 w-full flex flex-col  items-center pt-5"
     >
       <TabsList>
         {tabLabels.map((label, i) => (
@@ -79,7 +79,7 @@ const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
   width:270px;
   @media only screen and (min-width: 980px) {
-   width:60%;
+   width:50%;
   }
   @media only screen and (min-width: 420px) and (max-width: 980px) {
    width:70%

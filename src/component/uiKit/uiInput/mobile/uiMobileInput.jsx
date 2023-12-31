@@ -15,7 +15,8 @@ const UiMobileInput = ({ formik }) => {
       error={formik.touched.mobile && Boolean(formik.errors.mobile)}
       helperText={formik.touched.mobile && formik.errors.mobile}
       required={true}
-      iconType="mobile"
+      iconType="button"
+      iconName="mobile"
       //startAdornment
       endAdornment
       maxLength={11}
