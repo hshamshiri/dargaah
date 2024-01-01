@@ -1,5 +1,5 @@
 import { createTheme, responsiveFontSizes } from "@mui/material";
-import { indigo, purple } from "@mui/material/colors";
+import { indigo, purple, blueGrey } from "@mui/material/colors";
 
 const theme = createTheme({
     typography: {
@@ -38,6 +38,17 @@ const theme = createTheme({
                     style: {
                         textTransform: "none",
                         border: `2px dashed ${purple[500]}`,
+                    },
+                },
+            ],
+        },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: "dashed" },
+                    style: {
+                        textTransform: "none",
+                        border: `1px dashed ${blueGrey[500]}`,
                     },
                 },
             ],

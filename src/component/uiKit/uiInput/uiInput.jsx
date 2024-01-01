@@ -34,7 +34,7 @@ const UiInputText = ({
         label={label}
         variant={variant}
         error={error}
-        helperText={<typography>{helperText}</typography>}
+        helperText={helperText}
         placeholder={placeHolder}
         defaultValue={defaultValue}
         onChange={(e) => onChange(e)}

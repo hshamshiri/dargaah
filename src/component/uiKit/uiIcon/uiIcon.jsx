@@ -17,12 +17,12 @@ const UiIcon = ({ iconType, iconName, classes }) => {
       height: 30,
       padding: 0.5,
       color: palette.darkBlue,
-      backgroundColor: "white"
     },
     iconType === "button" && {
       right: 5,
       top: 5,
       position: "absolute",
+      backgroundColor: "white"
     },
     classes,
   ];
