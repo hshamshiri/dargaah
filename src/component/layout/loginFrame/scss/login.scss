@@ -30,9 +30,11 @@
   background-position-y: 0%;
   background-repeat: repeat;
   background-attachment: scroll;
-  background-image: linear-gradient(205.03deg,
-      rgb(15, 50, 83) 0.98%,
-      rgb(48, 88, 125) 97.98%);
+  background-image: linear-gradient(
+    205.03deg,
+    rgb(15, 50, 83) 0.98%,
+    rgb(48, 88, 125) 97.98%
+  );
   background-size: auto;
   background-origin: padding-box;
   background-clip: border-box;
@@ -48,7 +50,6 @@
   display: none;
   justify-content: center;
   align-items: center;
-
 }
 
 @media screen and (min-width: 980px) {
@@ -72,6 +73,8 @@
 
   .right-section {
     width: 100%;
+    padding-bottom: 3rem;
+    padding-top: 2rem;
   }
 
   .swipUpView {
@@ -86,6 +89,8 @@
 
   .left-section {
     display: none;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
   }
 
   .right-section {

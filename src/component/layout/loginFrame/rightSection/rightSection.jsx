@@ -10,8 +10,10 @@ const SwipUpButton = ({ swipUp, setSwipUp }) => {
   const [t] = useTranslation();
 
   return (
-    <Box className="swipUpView ">
-      <Typography className=" h-fit ">{t("login.rightSection.appDownload")}</Typography>
+    <Box className="swipUpView">
+      <Typography className=" h-fit ">
+        {t("login.rightSection.appDownload")}
+      </Typography>
       <img
         className="w-20"
         src={swipDownImage}

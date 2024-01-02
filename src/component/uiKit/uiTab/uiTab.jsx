@@ -8,12 +8,8 @@ import { Tab as BaseTab, tabClasses } from "@mui/base/Tab";
 import { useTheme, Typography, Box, Button, Grid } from "@mui/material";
 
 export default function TabComp({ tabViews, tabLabels }) {
-
   return (
-    <Tabs
-      defaultValue={0}
-      className="bg-red-200 w-full flex flex-col  items-center pt-5"
-    >
+    <Tabs defaultValue={0} className=" w-full flex flex-col  items-center pt-5">
       <TabsList>
         {tabLabels.map((label, i) => (
           <Tab sx={{ width: "100%" }} key={i} value={i}>
@@ -79,7 +75,7 @@ const TabsList = styled(BaseTabsList)(
   ({ theme }) => `
   width:270px;
   @media only screen and (min-width: 980px) {
-   width:50%;
+   width:55%;
   }
   @media only screen and (min-width: 420px) and (max-width: 980px) {
    width:70%
@@ -94,7 +90,8 @@ const TabsList = styled(BaseTabsList)(
   align-items: center;
   justify-content: center;
   align-content: space-between;
-  box-shadow: 0px 4px 6px ${theme.palette.mode === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0,0,0, 0.2)"
-    };
+  box-shadow: 0px 4px 6px ${
+    theme.palette.mode === "dark" ? "rgba(0,0,0, 0.4)" : "rgba(0,0,0, 0.2)"
+  };
   `
 );
