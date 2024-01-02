@@ -48,7 +48,7 @@ const QRLoginView = () => {
           style={{
             opacity: refresh ? 0.1 : 1,
           }}
-          value={"fgdfg"}
+          value={"https://sso.my.gov.ir/login"}
           viewBox={`0 0 256 256`}
         />
 

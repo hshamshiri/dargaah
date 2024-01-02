@@ -1,13 +1,13 @@
-import { Paper } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import UiButton from "../../uiKit/uiButton/uiButton";
 
 const Item = ({ item }) => {
   return (
     <Paper style={{ backgroundColor: "transparent", boxShadow: "none" }}>
       <img className="w-80 h-96 object-contain" src={item.src} />
-      <div className="flex w-full justify-center">
-        <p className="w-96 text-white">{item.description}</p>
-      </div>
+      <Box className="flex w-full justify-center">
+        <Typography className="w-96 text-white">{item.description}</Typography>
+      </Box>
       {item.app && (
         <UiButton
           type="submit"
