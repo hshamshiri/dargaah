@@ -16,8 +16,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import Avatar from "@mui/material/Avatar";
+//icons
+import UiIcon from "../../uiKit/uiIcon/uiIcon";
+import godlogo from "../../../images/godlogo.png";
+//
+import avatarImg from "../../../images/avatar.png";
+//translation
+import { useTranslation } from "react-i18next";
 
 const drawerWidth = 240;
 
@@ -74,6 +80,17 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerRight() {
+  const [t] = useTranslation();
+  //const sideItems= [{t("dashboard.home")},{},{},{},{}]
+  const sideItems = [
+    { label: t("dashboard.drawer.home"), iconName: "home" },
+    { label: t("dashboard.drawer.notifications"), iconName: "notification" },
+    { label: t("dashboard.drawer.mychild"), iconName: "mychild" },
+    { label: t("dashboard.drawer.servieces"), iconName: "servieces" },
+    { label: t("dashboard.drawer.graduates"), iconName: "graduates" },
+    { label: t("dashboard.drawer.organizational"), iconName: "organizational" },
+  ];
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -88,13 +105,19 @@ export default function PersistentDrawerRight() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: "inherit" }}>
         <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+          <Typography
+            variant="h6"
+            color="base.main"
+            noWrap
+            sx={{ flexGrow: 1 }}
+            component="div"
+          >
             درگاه وزارت آموزش و پرورش
           </Typography>
           <IconButton
-            color="inherit"
+            color="base.main"
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
@@ -105,8 +128,9 @@ export default function PersistentDrawerRight() {
         </Toolbar>
       </AppBar>
       <Main open={open}>
+        {/* <DrawerHeader sx={{ backgroundColor: "red", width: 300 }} /> */}
+
         {/*         
-        <DrawerHeader />
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
@@ -158,22 +182,25 @@ export default function PersistentDrawerRight() {
             )}
           </IconButton>
         </DrawerHeader>
+
         <Divider />
+
         <List>
-          {[
-            "خانه",
-            "اطلاعیه",
-            "فرزندان من",
-            "خدمات الکترونیکی عمومی",
-            "فارغ التحصیلان",
-            "سامانه های سازمانی",
-          ].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          <TopView />
+          {sideItems.map((item, index) => (
+            <ListItem key={index} disablePadding>
               <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <ListItemText
+                  sx={{
+                    display: "flex",
+                    justifyContent: "end",
+                  }}
+                  primaryTypographyProps={{ fontSize: "14px", fontWeight: 500 }}
+                  primary={item.label}
+                />
+                <ListItemIcon sx={{ display: "flex", justifyContent: "end" }}>
+                  <UiIcon iconName={item.iconName} />
                 </ListItemIcon>
-                <ListItemText primary={text} />
               </ListItemButton>
             </ListItem>
           ))}
@@ -183,3 +210,40 @@ export default function PersistentDrawerRight() {
     </Box>
   );
 }
+
+const TopView = () => {
+  return (
+    <Box>
+      <Box
+        sx={{
+          backgroundColor: "drawer.main",
+          position: "relative",
+          height: 200,
+        }}
+      >
+        <div className="w-full h-1/2  bg-red-500">
+          <img className=" h-full object-contain" src={godlogo} />
+        </div>
+        <div className="w-full flex justify-between items-center h-1/2  bg-red-200">
+          <UiIcon iconName={"dots"} />
+          <Typography variant="button">حسن شیرازی</Typography>
+        </div>
+        <Avatar
+          alt="hassan"
+          src={avatarImg}
+          sx={{
+            width: 90,
+            height: 90,
+            boxShadow: 3,
+            position: "absolute",
+            bottom: -45,
+            left: drawerWidth / 2 - 45,
+            zIndex: 10,
+          }}
+        />
+      </Box>
+      <Box sx={{ backgroundColor: "drawerItem.main", height: 150 }}></Box>
+    </Box>
+  );
+};
+const profileView = () => {};
