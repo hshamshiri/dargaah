@@ -6,6 +6,12 @@ const theme = createTheme({
     fontFamily: ["Vazirmatn"].join(","),
     fontSize: 12,
 
+    small: {
+      fontSize: 10
+    },
+    medium: {
+      fontSize: 12
+    },
     tab: {
       fontSize: 11,
       fontWeight: 800,
@@ -39,6 +45,17 @@ const theme = createTheme({
         },
       ],
     },
+    MuiPaper: {
+      variants: [
+        {
+          props: { variant: "dashed" },
+          style: {
+            textTransform: "none",
+            border: `2px dashed ${purple[500]}`,
+          },
+        },
+      ],
+    },
     MuiButton: {
       variants: [
         {
@@ -62,9 +79,7 @@ const theme = createTheme({
       light: "#e0e0e0",
       dark: "#bdbdbd",
     },
-    drawer: {
-      main: "#27327a",
-    },
+    drawer: { main: "#27327a" },
     drawerItem: { main: "#35b4cf" },
   },
   breakpoints: {

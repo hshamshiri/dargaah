@@ -31,12 +31,16 @@
   },
   "dashboard": {
     "drawer": {
+      "vezarat":"درگاه وزارت آموزش و پرورش",
       "home": "خانه",
       "notifications": "اطلاعیه ها",
       "mychild": "فرزندان من",
       "servieces": "خدمات الکترونیکی عمومی",
       "graduates": "فارغ التحصیلان",
-      "organizational": "سامانه های سازمانی"
+      "organizational": "سامانه های سازمانی",
+      "date":"تاریخ امروز",
+      "lastEnter":"آخرین ورود",
+      "exit":"خروج"
     }
   }
 }

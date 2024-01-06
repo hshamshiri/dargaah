@@ -24,6 +24,7 @@ import godlogo from "../../../images/godlogo.png";
 import avatarImg from "../../../images/avatar.png";
 //translation
 import { useTranslation } from "react-i18next";
+import { t } from "i18next";
 
 const drawerWidth = 240;
 
@@ -79,7 +80,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight({ children }) {
   const [t] = useTranslation();
   //const sideItems= [{t("dashboard.home")},{},{},{},{}]
   const sideItems = [
@@ -114,7 +115,7 @@ export default function PersistentDrawerRight() {
             sx={{ flexGrow: 1 }}
             component="div"
           >
-            درگاه وزارت آموزش و پرورش
+            {t("dashboard.drawer.vezarat")}
           </Typography>
           <IconButton
             color="base.main"
@@ -128,38 +129,8 @@ export default function PersistentDrawerRight() {
         </Toolbar>
       </AppBar>
       <Main open={open}>
-        {/* <DrawerHeader sx={{ backgroundColor: "red", width: 300 }} /> */}
-
-        {/*         
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Rhoncus
-          dolor purus non enim praesent elementum facilisis leo vel. Risus at
-          ultrices mi tempus imperdiet. Semper risus in hendrerit gravida rutrum
-          quisque non tellus. Convallis convallis tellus id interdum velit
-          laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed
-          adipiscing. Amet nisl suscipit adipiscing bibendum est ultricies
-          integer quis. Cursus euismod quis viverra nibh cras. Metus vulputate
-          eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo
-          quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat
-          vivamus at augue. At augue eget arcu dictum varius duis at consectetur
-          lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa sapien
-          faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est
-          ullamcorper eget nulla facilisi etiam dignissim diam. Pulvinar
-          elementum integer enim neque volutpat ac tincidunt. Ornare suspendisse
-          sed nisi lacus sed viverra tellus. Purus sit amet volutpat consequat
-          mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis
-          risus sed vulputate odio. Morbi tincidunt ornare massa eget egestas
-          purus viverra accumsan in. In hendrerit gravida rutrum quisque non
-          tellus orci ac. Pellentesque nec nam aliquam sem et tortor. Habitant
-          morbi tristique senectus et. Adipiscing elit duis tristique
-          sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
+        <DrawerHeader />
+        {children}
       </Main>
       <Drawer
         sx={{
@@ -228,10 +199,14 @@ const TopView = () => {
   return (
     <Box>
       <Box
+        height={200}
+        position={"relative"}
         sx={{
           backgroundColor: "drawer.main",
           position: "relative",
           height: 200,
+          borderBottomWidth: 1,
+          paddingTop: 1,
         }}
       >
         <div className="w-full h-1/2">
@@ -257,25 +232,71 @@ const TopView = () => {
           }}
         />
       </Box>
-      <Box sx={{ backgroundColor: "drawer.main", height: 150 }}>
-        <LogoutView />
+      <Box sx={{ backgroundColor: "drawerItem.main", height: 150 }}>
+        <LogoutView t={t} />
       </Box>
     </Box>
   );
 };
 
-const LogoutView = () => {
+const LogoutView = ({ t }) => {
   return (
     <Box
-      sx={{
-        height: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "red",
-      }}
+      height={"100%"}
+      display={"flex"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      backgroundColor={"drawer.main"}
+      padding={0.5}
     >
-      fff asdfasdf
+      <Box
+        width={1 / 3}
+        height={"50%"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+      >
+        <Typography variant="medium" color={"white"} margin={0.5}>
+          {t("dashboard.drawer.date")}
+        </Typography>
+        <Typography variant="button" borderRadius={5} backgroundColor={"white"}>
+          {"۱۴۰۲/۰۲/۰۴"}
+        </Typography>
+      </Box>
+      <Box
+        width={1 / 3}
+        height={"70%"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"end"}
+        alignItems={"center"}
+      >
+        <UiIcon
+          iconName={"power"}
+          classes={{
+            width: 35,
+            height: 35,
+            color: "red",
+            backgroundColor: "white",
+          }}
+        />
+        <Typography color={"white"}>{t("dashboard.drawer.exit")}</Typography>
+      </Box>
+      <Box
+        width={1 / 3}
+        height={"50%"}
+        display={"flex"}
+        flexDirection={"column"}
+        justifyContent={"center"}
+      >
+        <Typography variant="medium" color={"white"} margin={0.5}>
+          {t("dashboard.drawer.lastEnter")}
+        </Typography>
+        <Typography variant="button" borderRadius={5} backgroundColor={"white"}>
+          {"دقیقه قبل"}
+          {"28"}
+        </Typography>
+      </Box>
     </Box>
   );
 };
