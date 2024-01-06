@@ -173,7 +173,7 @@ export default function PersistentDrawerRight() {
         anchor="right"
         open={open}
       >
-        <DrawerHeader>
+        <DrawerHeader sx={{ boxShadow: 3 }}>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronLeftIcon />
@@ -183,26 +183,39 @@ export default function PersistentDrawerRight() {
           </IconButton>
         </DrawerHeader>
 
-        <Divider />
+        {/* <Divider /> */}
 
-        <List>
+        <List sx={{ padding: 0 }}>
           <TopView />
+
           {sideItems.map((item, index) => (
-            <ListItem key={index} disablePadding>
-              <ListItemButton>
-                <ListItemText
-                  sx={{
-                    display: "flex",
-                    justifyContent: "end",
-                  }}
-                  primaryTypographyProps={{ fontSize: "14px", fontWeight: 500 }}
-                  primary={item.label}
-                />
-                <ListItemIcon sx={{ display: "flex", justifyContent: "end" }}>
-                  <UiIcon iconName={item.iconName} />
-                </ListItemIcon>
-              </ListItemButton>
-            </ListItem>
+            <Box>
+              <ListItem key={index} disablePadding>
+                <ListItemButton>
+                  <ListItemText
+                    sx={{
+                      display: "flex",
+                      justifyContent: "end",
+                    }}
+                    primaryTypographyProps={{
+                      fontSize: "14px",
+                      fontWeight: 500,
+                    }}
+                    primary={item.label}
+                  />
+                  <ListItemIcon
+                    sx={{
+                      display: "flex",
+                      minWidth: 40,
+                      justifyContent: "end",
+                    }}
+                  >
+                    <UiIcon iconName={item.iconName} />
+                  </ListItemIcon>
+                </ListItemButton>
+              </ListItem>
+              <Divider />
+            </Box>
           ))}
         </List>
         <Divider />
@@ -221,12 +234,14 @@ const TopView = () => {
           height: 200,
         }}
       >
-        <div className="w-full h-1/2  bg-red-500">
+        <div className="w-full h-1/2">
           <img className=" h-full object-contain" src={godlogo} />
         </div>
-        <div className="w-full flex justify-between items-center h-1/2  bg-red-200">
-          <UiIcon iconName={"dots"} />
-          <Typography variant="button">حسن شیرازی</Typography>
+        <div className="w-full flex p-1 justify-between items-center h-1/2  s">
+          <UiIcon iconName={"dots"} classes={{ color: "white" }} />
+          <Typography variant="body1" sx={{ color: "white", fontWeight: 700 }}>
+            حسن شیرازی
+          </Typography>
         </div>
         <Avatar
           alt="hassan"
@@ -242,8 +257,25 @@ const TopView = () => {
           }}
         />
       </Box>
-      <Box sx={{ backgroundColor: "drawerItem.main", height: 150 }}></Box>
+      <Box sx={{ backgroundColor: "drawer.main", height: 150 }}>
+        <LogoutView />
+      </Box>
     </Box>
   );
 };
-const profileView = () => {};
+
+const LogoutView = () => {
+  return (
+    <Box
+      sx={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "red",
+      }}
+    >
+      fff asdfasdf
+    </Box>
+  );
+};
