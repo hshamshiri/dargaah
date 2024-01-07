@@ -16,6 +16,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 const UiIcon = ({ iconType, iconName, classes }) => {
   const theme = [
@@ -53,6 +54,7 @@ const UiIcon = ({ iconType, iconName, classes }) => {
     organizational: <CorporateFareIcon sx={theme} />,
     dots: <MoreVertIcon sx={theme} />,
     power: <PowerSettingsNewIcon sx={theme} />,
+    people: <PeopleAltIcon sx={theme} />,
   };
 
   return icons[iconName];
