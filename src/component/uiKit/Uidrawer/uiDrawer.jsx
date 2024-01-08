@@ -106,7 +106,7 @@ export default function PersistentDrawerRight({ children }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{ backgroundColor: "inherit" }}>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: "white" }}>
         <Toolbar>
           <Typography
             variant="h6"
@@ -160,8 +160,8 @@ export default function PersistentDrawerRight({ children }) {
           <TopView />
 
           {sideItems.map((item, index) => (
-            <Box>
-              <ListItem key={index} disablePadding>
+            <Box key={index}>
+              <ListItem disablePadding>
                 <ListItemButton>
                   <ListItemText
                     sx={{

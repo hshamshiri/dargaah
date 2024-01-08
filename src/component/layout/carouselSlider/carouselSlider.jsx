@@ -42,6 +42,12 @@ const Slider = ({ props }) => {
       stopAutoPlayOnHover
       interval={4000}
       animation="fade"
+
+      // stopAutoPlayOnHover
+      // interval={5000}
+      // duration={2000}
+      // animation="slide"
+      // swipe
     >
       {items.map((item, i) => (
         <Item key={i} item={item} />

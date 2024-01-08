@@ -2,83 +2,45 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
 import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
-import UiButton from "../../component/uiKit/uiButton/uiButton";
 import estelam from "../../images/estelamshahrie.png";
-import {
-  Box,
-  Breadcrumbs,
-  Card,
-  Link,
-  Paper,
-  Typography,
-  Container,
-  styled,
-  Button,
-} from "@mui/material";
-import { purple } from "@mui/material/colors";
+import { Box, Paper, Typography, Button } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
-
+import ShakingView from "../../component/uiKit/uiTransitions/uiShake/uiShake";
+import Slider from "../../component/layout/carouselSlider/carouselSlider";
 // -------
+import { purple } from "@mui/material/colors";
 import Grid from "@mui/material/Unstable_Grid2";
 import heatherMother from "../../images/headermother.png";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
-import { red } from "@mui/material/colors";
-import { theme } from "../../utils/theme";
-import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
-
-const ButtonShake = () => {
-  const [shake, setShake] = useState(false);
-  const animate = () => {
-    // Button begins to shake
-    setShake(true);
-
-    // Buttons stops to shake after 2 seconds
-    setTimeout(() => setShake(false), 500);
-  };
-  return (
-    <Button
-      elevation={4}
-      onMouseEnter={animate}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-
-        // ":hover": {
-        //   bgcolor: "primary.main", // theme.palette.primary.main
-        //   color: "white",
-        // },
-      }}
-      className={shake ? `shake` : null}
-    >
-      <img src={estelam} />
-      <Typography marginTop={1}>{"ادارات"}</Typography>
-    </Button>
-  );
-};
 
 const DashedView = () => {
   return (
     <Grid
       display={"flex"}
       flexDirection={"column"}
+      position={"relative"}
       justifyContent={"center"}
       alignItems={"end"}
+      backgroundColor={"blue"}
+      margin={5}
     >
       <Box
-        height={50}
+        height={55}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
         color={"white"}
         padding={2}
+        position={"absolute"}
+        top={-40}
+        zIndex={-1}
         sx={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
           background: "linear-gradient(to right bottom, #430089, #82ffa1)",
         }}
       >
-        چیزای سازمانی
+        ثصقضصثضص چیزای سازمانی
       </Box>
       <Grid
         xs={12}
@@ -87,14 +49,16 @@ const DashedView = () => {
         sx={{
           textTransform: "none",
           border: `2px dashed ${purple[500]}`,
-          //backgroundColor: "red",
+          borderRadius: 5,
+          backgroundColor: "red",
         }}
       >
         <Grid
           direction={"rtl"}
           display={"flex"}
-          justifyContent={"center"}
+          justifyContent={"end"}
           sx={{
+            backgroundColor: "blue",
             display: "flex",
             flexWrap: "wrap",
             "& > :not(style)": {
@@ -104,16 +68,25 @@ const DashedView = () => {
             },
           }}
         >
-          <ButtonShake />
-          <ButtonShake />
-          <ButtonShake />
-          <ButtonShake />
-          <ButtonShake />
-
-          <Paper />
+          <ShakingView>
+            <img src={estelam} />
+            <Typography marginTop={1}>{"ادارات"}</Typography>
+          </ShakingView>
+          <ShakingView>
+            <img src={estelam} />
+            <Typography marginTop={1}>{"ادارات"}</Typography>
+          </ShakingView>
+          <ShakingView>
+            <img src={estelam} />
+            <Typography marginTop={1}>{"ادارات"}</Typography>
+          </ShakingView>
+          <ShakingView>
+            <Paper elevation={3}>
+              <img src={estelam} />
+              <Typography marginTop={1}>{"ادارات"}</Typography>
+            </Paper>
+          </ShakingView>
           <Paper elevation={3} />
-          <Paper elevation={1} />
-          <Paper />
           <Paper elevation={3} />
         </Grid>
       </Grid>
@@ -240,7 +213,9 @@ const Dashboard = () => {
             bgcolor={"orange"}
           >
             <Grid xs={12} sm={12} md={12}>
-              <Box sx={{ border: 1 }}>hassan</Box>
+              <Box sx={{ border: 1 }}>
+                <Slider />
+              </Box>
             </Grid>
           </Grid>
 
