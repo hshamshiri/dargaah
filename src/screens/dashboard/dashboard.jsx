@@ -6,14 +6,14 @@ import estelam from "../../images/estelamshahrie.png";
 import { Box, Paper, Typography, Button } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
 import ShakingView from "../../component/uiKit/uiTransitions/uiShake/uiShake";
-import Slider from "../../component/layout/carouselSlider/carouselSlider";
+import UiSlider from "../../component/uiKit/uiSlider/uislider";
 // -------
 import { purple } from "@mui/material/colors";
 import Grid from "@mui/material/Unstable_Grid2";
 import heatherMother from "../../images/headermother.png";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
 
-const DashedView = () => {
+const DashedView = ({ title }) => {
   return (
     <Grid
       display={"flex"}
@@ -21,8 +21,8 @@ const DashedView = () => {
       position={"relative"}
       justifyContent={"center"}
       alignItems={"end"}
-      backgroundColor={"blue"}
-      margin={5}
+      margin={2}
+      //backgroundColor={"blue"}
     >
       <Box
         height={55}
@@ -40,18 +40,17 @@ const DashedView = () => {
           background: "linear-gradient(to right bottom, #430089, #82ffa1)",
         }}
       >
-        ثصقضصثضص چیزای سازمانی
+        {title}
       </Box>
       <Grid
         xs={12}
         sm={12}
         md={12}
-        sx={{
-          textTransform: "none",
-          border: `2px dashed ${purple[500]}`,
-          borderRadius: 5,
-          backgroundColor: "red",
-        }}
+        borderRadius={5}
+        boxShadow={3}
+        textTransform={"noun"}
+        border={`2px dashed ${purple[500]}`}
+        backgroundColor={"white"}
       >
         <Grid
           direction={"rtl"}
@@ -107,7 +106,7 @@ const Dashboard = () => {
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           backgroundColor={"red"}
         >
-          <Grid xs={12} backgroundColor={"blue"}>
+          <Grid xs={12}>
             <img src={heatherMother} />
           </Grid>
         </Grid>
@@ -206,16 +205,38 @@ const Dashboard = () => {
           {/* left side */}
           <Grid
             rowSpacing={3}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+            columnSpacing={{ xs: 1, sm: 2, md: 2 }}
+            paddingTop={2}
             xs={12}
             sm={12}
             md={4}
-            bgcolor={"orange"}
           >
-            <Grid xs={12} sm={12} md={12}>
-              <Box sx={{ border: 1 }}>
-                <Slider />
-              </Box>
+            <Grid
+              boxShadow={3}
+              sx={{
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20,
+                borderRadius: 5,
+              }}
+            >
+              <Typography
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: 60,
+                  borderTopLeftRadius: 20,
+                  borderTopRightRadius: 20,
+                  color: "white",
+                  fontSize: 20,
+                  fontWeight: 700,
+                  background:
+                    "linear-gradient(to right bottom, #430089, #82ffa1)",
+                }}
+              >
+                {t("dashboard.main.journals")}
+              </Typography>
+              <UiSlider />
             </Grid>
           </Grid>
 
@@ -228,11 +249,10 @@ const Dashboard = () => {
               xs={12}
               rowGap={3}
             >
-              <DashedView>asdfsdf3</DashedView>
-
-              <DashedView> sadfsadfsad</DashedView>
-
-              <DashedView>safd</DashedView>
+              <DashedView title={t("dashboard.main.servieces")} />
+              <DashedView title={t("dashboard.main.graduates")} />
+              <DashedView title={t("dashboard.main.organizational")} />
+              <DashedView title={t("dashboard.main.face")} />
             </Grid>
           </Grid>
         </Grid>
