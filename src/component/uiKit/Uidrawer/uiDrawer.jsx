@@ -17,13 +17,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
+import useWindowSize from "../../hooks/useWindowSize";
 //icons
 import UiIcon from "../../uiKit/uiIcon/uiIcon";
 import godlogo from "../../../images/godlogo.png";
 //
 import avatarImg from "../../../images/avatar.png";
 //translation
-import { useTranslation } from "react-i18next";
 import { t } from "i18next";
 
 const drawerWidth = 240;
@@ -81,7 +81,11 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 export default function PersistentDrawerRight({ children }) {
-  const [t] = useTranslation();
+  const [size] = useWindowSize();
+  React.useEffect(() => {
+    size > 992 && handleDrawerOpen();
+    size < 768 && handleDrawerClose();
+  }, [size]);
   //const sideItems= [{t("dashboard.home")},{},{},{},{}]
   const sideItems = [
     { label: t("dashboard.drawer.home"), iconName: "home" },
@@ -233,13 +237,13 @@ const TopView = () => {
         />
       </Box>
       <Box sx={{ backgroundColor: "drawerItem.main", height: 150 }}>
-        <LogoutView t={t} />
+        <LogoutView />
       </Box>
     </Box>
   );
 };
 
-const LogoutView = ({ t }) => {
+const LogoutView = () => {
   return (
     <Box
       height={"100%"}

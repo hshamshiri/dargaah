@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { Typography, keyframes, Box } from "@mui/material";
 import estelam from "../../../../images/estelamshahrie.png";
 
-const ShakingView = ({ children }) => {
+const ShakingView = ({ children, sx }) => {
   const [shake, setShake] = useState(false);
 
   const inZoom = () => {
@@ -19,13 +19,14 @@ const ShakingView = ({ children }) => {
       elevation={4}
       onMouseEnter={inZoom}
       onMouseLeave={outZoom}
-      sx={
+      sx={[
         shake
           ? {
               animation: `${shakeAnime} 1s infinite ease`,
             }
-          : {}
-      }
+          : {},
+        sx,
+      ]}
     >
       {children}
     </Box>

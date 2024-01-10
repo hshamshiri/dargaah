@@ -13,16 +13,36 @@ import Grid from "@mui/material/Unstable_Grid2";
 import heatherMother from "../../images/headermother.png";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
 
+const arr = [1, 2, 3, 4, 5, 6, 7];
+const IconButt = () => {
+  return (
+    <Grid
+      xs={3}
+      sm={3}
+      md={3}
+      display={"flex"}
+      flexDirection={"column"}
+      flexWrap={"wrap"}
+      backgroundColor={"red"}
+    >
+      <img src={estelam} />
+      fdgh
+    </Grid>
+  );
+};
+
 const DashedView = ({ title }) => {
   return (
     <Grid
+      container
       display={"flex"}
-      flexDirection={"column"}
       position={"relative"}
-      justifyContent={"center"}
-      alignItems={"end"}
-      margin={2}
-      //backgroundColor={"blue"}
+      borderRadius={5}
+      boxShadow={3}
+      marginTop={2}
+      textTransform={"noun"}
+      border={`2px dashed ${purple[500]}`}
+      backgroundColor={"white"}
     >
       <Box
         height={55}
@@ -32,7 +52,8 @@ const DashedView = ({ title }) => {
         color={"white"}
         padding={2}
         position={"absolute"}
-        top={-40}
+        top={-50}
+        right={0}
         zIndex={-1}
         sx={{
           borderTopLeftRadius: 15,
@@ -46,48 +67,31 @@ const DashedView = ({ title }) => {
         xs={12}
         sm={12}
         md={12}
-        borderRadius={5}
-        boxShadow={3}
-        textTransform={"noun"}
-        border={`2px dashed ${purple[500]}`}
-        backgroundColor={"white"}
+        container
+        display={"flex"}
+        direction={"rtl"}
+        height={"100%"}
+        backgroundColor={"yellow"}
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          "& > :not(style)": {
+            m: 1,
+            width: 100,
+            height: 128,
+          },
+        }}
       >
-        <Grid
-          direction={"rtl"}
-          display={"flex"}
-          justifyContent={"end"}
-          sx={{
-            backgroundColor: "blue",
-            display: "flex",
-            flexWrap: "wrap",
-            "& > :not(style)": {
-              m: 1,
-              width: 100,
-              height: 128,
-            },
-          }}
-        >
-          <ShakingView>
+        {arr.map(() => {
+          return <IconButt />;
+        })}
+        {/* 
+          <ShakingView sx={{ width: 100, height: 150, padding: 2 }}>
             <img src={estelam} />
             <Typography marginTop={1}>{"ادارات"}</Typography>
           </ShakingView>
-          <ShakingView>
-            <img src={estelam} />
-            <Typography marginTop={1}>{"ادارات"}</Typography>
-          </ShakingView>
-          <ShakingView>
-            <img src={estelam} />
-            <Typography marginTop={1}>{"ادارات"}</Typography>
-          </ShakingView>
-          <ShakingView>
-            <Paper elevation={3}>
-              <img src={estelam} />
-              <Typography marginTop={1}>{"ادارات"}</Typography>
-            </Paper>
-          </ShakingView>
-          <Paper elevation={3} />
-          <Paper elevation={3} />
-        </Grid>
+          <Paper />
+          <Paper elevation={3} /> */}
       </Grid>
     </Grid>
   );
@@ -101,11 +105,7 @@ const Dashboard = () => {
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
-        <Grid
-          container
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          backgroundColor={"red"}
-        >
+        <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid xs={12}>
             <img src={heatherMother} />
           </Grid>
@@ -129,7 +129,6 @@ const Dashboard = () => {
             columnSpacing={{ xs: 1, sm: 2, md: 3 }}
             display={"felx"}
             justifyContent={"center"}
-            backgroundColor={"red"}
           >
             <Grid xs={8} sm={6} md={3}>
               <SearchInputBase placeholder={t("dashboard.main.search")} />
@@ -199,7 +198,7 @@ const Dashboard = () => {
           }}
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          //backgroundColor={"red"}
+          padding={1}
           marginTop={5}
         >
           {/* left side */}
@@ -241,19 +240,19 @@ const Dashboard = () => {
           </Grid>
 
           {/* right side */}
-          <Grid container xs={12} sm={12} md={8}>
-            <Grid
-              container
-              display={"flex"}
-              flexDirection={"column"}
-              xs={12}
-              rowGap={3}
-            >
-              <DashedView title={t("dashboard.main.servieces")} />
-              <DashedView title={t("dashboard.main.graduates")} />
-              <DashedView title={t("dashboard.main.organizational")} />
-              <DashedView title={t("dashboard.main.face")} />
-            </Grid>
+          <Grid
+            container
+            xs={12}
+            sm={12}
+            md={8}
+            display={"flex"}
+            flexDirection={"column"}
+            rowGap={5}
+          >
+            <DashedView title={t("dashboard.main.servieces")} />
+            <DashedView title={t("dashboard.main.graduates")} />
+            <DashedView title={t("dashboard.main.organizational")} />
+            <DashedView title={t("dashboard.main.face")} />
           </Grid>
         </Grid>
       </Box>
@@ -268,7 +267,7 @@ const Dashboard = () => {
 // );
 // const arr = [icon, icon, icon];
 // {arr.map((icon, i) => (
-//     <UiSlide timeout={1000 * ((i + 1) / 2)}>{icon}</UiSlide>
+//     <UiSlide timeout={1000 * ((i + 1) / 2)} key={i}>{icon}</UiSlide>
 //   ))}
 
 export default Dashboard;
