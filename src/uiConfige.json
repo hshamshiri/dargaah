@@ -1,0 +1,142 @@
+{
+    "topSlider":{
+        "images":[
+            {"id":"1","url":"https://my.medu.ir/assets/img/pages/headermother.png"},
+            {"id":"2","url":"https://my.medu.ir/assets/img/pages/headermother.png"},
+            {"id":"3","url":"https://my.medu.ir/assets/img/pages/headermother.png"}
+        ]
+    },
+
+    "journals":{
+       "images":[
+        {"id":"1","url":"https://my.medu.ir/assets/img/pages/headermother.png","link":"#"},
+        {"id":"2","url":"https://my.medu.ir/assets/img/pages/headermother.png","link":"#"},
+        {"id":"3","url":"https://my.medu.ir/assets/img/pages/headermother.png","link":"#"}
+       ]
+    },
+    "dashedBorderContainers":{
+     "dashBoxes":[
+        {
+            "id":"1",
+            "label":"خدمات الکترونیکی عمومی",
+            "buttons":[
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"ویرانه"
+                }
+                
+            ]
+        },
+        {
+            "id":"1",
+            "label":"خدمات الکترونیکی عمومی",
+            "buttons":[
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"ویرانه"
+                }
+                ,  {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خانه"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                },  {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خانه"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"ویرانه"
+                },  {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خانه"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                }
+            ]
+        },
+        {
+            "id":"1",
+            "label":"خدمات الکترونیکی عمومی",
+            "buttons":[
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"ویرانه"
+                }
+                ,  {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خانه"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                }
+            ]
+        },
+        {
+            "id":"1",
+            "label":"خدمات الکترونیکی عمومی",
+            "buttons":[
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"ویرانه"
+                }
+                
+            ]
+        },
+        {
+            "id":"1",
+            "label":"خدمات الکترونیکی عمومی",
+            "buttons":[
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"},
+                    "label":"خدمات الکترونیکی عمومی"
+                },
+                {
+                    "id":"1",
+                    "image":{"id":"1","url":"https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"},
+                    "label":"ویرانه"
+                }
+                
+            ]
+        }
+     ]   
+    }
+}

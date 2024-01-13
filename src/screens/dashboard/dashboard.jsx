@@ -1,89 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
 import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
-import estelam from "../../images/estelamshahrie.png";
 import { Box, Paper, Typography, Button } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
-import ShakingView from "../../component/uiKit/uiTransitions/uiShake/uiShake";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
+import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
+import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
+import { v4 as uuidv4 } from "uuid";
 // -------
-import { purple } from "@mui/material/colors";
 import Grid from "@mui/material/Unstable_Grid2";
-import heatherMother from "../../images/headermother.png";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
-
-const arr = [1, 2, 3, 4, 5, 6, 7];
-const IconButt = () => {
-  return (
-    <Grid xs={4} sm={3} md={2} container padding={{ xs: 2, sm: 2, md: 1 }}>
-      <ShakingView>
-        <img className="w-full p-3  object-contain " src={estelam} />
-        <Typography sx={{ width: "100%" }}>
-          درگاه اموزشی درگاه اموزشی{" "}
-        </Typography>
-      </ShakingView>
-    </Grid>
-  );
-};
-
-const DashedView = ({ title }) => {
-  return (
-    <Grid
-      container
-      display={"flex"}
-      position={"relative"}
-      borderRadius={5}
-      boxShadow={3}
-      marginTop={2}
-      textTransform={"noun"}
-      border={`2px dashed ${purple[500]}`}
-      backgroundColor={"white"}
-    >
-      <Box
-        height={55}
-        display={"flex"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        color={"white"}
-        padding={2}
-        position={"absolute"}
-        top={-50}
-        right={0}
-        zIndex={-1}
-        sx={{
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          background: "linear-gradient(to right bottom, #430089, #82ffa1)",
-        }}
-      >
-        {title}
-      </Box>
-      <Grid
-        xs={12}
-        sm={12}
-        md={12}
-        container
-        height={"100%"}
-        display={"flex"}
-        flexWrap={"wrap"}
-        justifyContent={"end"}
-        direction={"rtl"}
-      >
-        {arr.map(() => {
-          return <IconButt />;
-        })}
-        {/* 
-          <ShakingView sx={{ width: 100, height: 150, padding: 2 }}>
-            <img src={estelam} />
-            <Typography marginTop={1}>{"ادارات"}</Typography>
-          </ShakingView>
-          <Paper />
-          <Paper elevation={3} /> */}
-      </Grid>
-    </Grid>
-  );
-};
 
 const Dashboard = () => {
   const [t] = useTranslation();
@@ -93,12 +21,7 @@ const Dashboard = () => {
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
-        <Grid container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid xs={12}>
-            <img src={heatherMother} />
-          </Grid>
-        </Grid>
-
+        <UiTopSlider images={interfaceConfige?.topSlider?.images} />
         {/* search */}
         <Box sx={{ marginTop: 2 }}>
           <Grid
@@ -223,7 +146,7 @@ const Dashboard = () => {
               >
                 {t("dashboard.main.journals")}
               </Typography>
-              <UiSlider />
+              <UiSlider images={interfaceConfige?.journals?.images} />
             </Grid>
           </Grid>
 
@@ -237,10 +160,15 @@ const Dashboard = () => {
             flexDirection={"column"}
             rowGap={5}
           >
-            <DashedView title={t("dashboard.main.servieces")} />
-            <DashedView title={t("dashboard.main.graduates")} />
-            <DashedView title={t("dashboard.main.organizational")} />
-            <DashedView title={t("dashboard.main.face")} />
+            {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
+              (DashedBox) => (
+                <UiDashedBox
+                  key={uuidv4()}
+                  buttons={DashedBox.buttons}
+                  label={DashedBox.label}
+                />
+              )
+            )}
           </Grid>
         </Grid>
       </Box>
