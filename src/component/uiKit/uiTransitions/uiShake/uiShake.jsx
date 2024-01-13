@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { Typography, keyframes, Box } from "@mui/material";
-import estelam from "../../../../images/estelamshahrie.png";
+import { Typography, keyframes, Grid, Box } from "@mui/material";
 
 const ShakingView = ({ children, sx }) => {
   const [shake, setShake] = useState(false);
@@ -15,8 +14,7 @@ const ShakingView = ({ children, sx }) => {
   };
 
   return (
-    <Box
-      elevation={4}
+    <Grid
       onMouseEnter={inZoom}
       onMouseLeave={outZoom}
       sx={[
@@ -29,7 +27,7 @@ const ShakingView = ({ children, sx }) => {
       ]}
     >
       {children}
-    </Box>
+    </Grid>
   );
 };
 

@@ -16,17 +16,13 @@ import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
 const arr = [1, 2, 3, 4, 5, 6, 7];
 const IconButt = () => {
   return (
-    <Grid
-      xs={3}
-      sm={3}
-      md={3}
-      display={"flex"}
-      flexDirection={"column"}
-      flexWrap={"wrap"}
-      backgroundColor={"red"}
-    >
-      <img src={estelam} />
-      fdgh
+    <Grid xs={4} sm={3} md={2} container padding={{ xs: 2, sm: 2, md: 1 }}>
+      <ShakingView>
+        <img className="w-full p-3  object-contain " src={estelam} />
+        <Typography sx={{ width: "100%" }}>
+          درگاه اموزشی درگاه اموزشی{" "}
+        </Typography>
+      </ShakingView>
     </Grid>
   );
 };
@@ -68,19 +64,11 @@ const DashedView = ({ title }) => {
         sm={12}
         md={12}
         container
-        display={"flex"}
-        direction={"rtl"}
         height={"100%"}
-        backgroundColor={"yellow"}
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          "& > :not(style)": {
-            m: 1,
-            width: 100,
-            height: 128,
-          },
-        }}
+        display={"flex"}
+        flexWrap={"wrap"}
+        justifyContent={"end"}
+        direction={"rtl"}
       >
         {arr.map(() => {
           return <IconButt />;
