@@ -39,7 +39,7 @@ const UiButton = ({
         {
           borderRadius: 30,
           padding: 1,
-          margin: 2,
+          margin: 0,
           backgroundColor: palette.darkBlue,
           height: 40,
           width: 300,

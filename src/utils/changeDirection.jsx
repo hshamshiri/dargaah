@@ -17,7 +17,9 @@ const RtlDirection = ({ children }) => {
   return (
     <CacheProvider value={cacheRtl}>
       <ThemeProvider theme={theme}>
-        <div dir="rtl">{children}</div>
+        <div className="w-fit" dir="rtl">
+          {children}
+        </div>
       </ThemeProvider>
     </CacheProvider>
   );

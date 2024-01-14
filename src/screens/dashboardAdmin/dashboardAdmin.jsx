@@ -1,25 +1,69 @@
 import React, { useEffect, useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
-import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
 import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
-import { Box, Paper, Typography, Button } from "@mui/material";
+import { Box, Paper, Typography, Button, Stack } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
+import UiModal from "../../component/uiKit/uiModal/uiModal";
+import WithMaterialUI from "../../component/hoc/withLoginFormik";
 import { v4 as uuidv4 } from "uuid";
-import { useNavigate } from "react-router-dom";
 // -------
 import Grid from "@mui/material/Unstable_Grid2";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
+import UiButton from "../../component/uiKit/uiButton/uiButton";
+import UiInputText from "../../component/uiKit/uiInput/uiInput";
 
-const Dashboard = () => {
-  const navigate = useNavigate();
+const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
+  const [activeModal, setActiveModal] = useState(false);
+  const [boxName, setBoxName] = useState("");
+
+  const toggleShowModal = () => setActiveModal(!activeModal);
+  const handleAddBox = () => {
+    console.log("ddd");
+    if (boxName !== "") {
+      toggleShowModal();
+    }
+  };
 
   return (
     <MiniDrawer buttonList={interfaceConfige?.drawerButtons?.buttons}>
+      {/* add Box */}
+      <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
+        <form onSubmit={formik.handleSubmit}>
+          <Stack
+            spacing={3}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
+            <UiInputText
+              formik={formik}
+              //onChange={(e) => setBoxName(e?.target?.value)}
+              id="boxName"
+              name="boxName"
+              label={t("dashboard.main.boxName")}
+              value={formik.values.boxName}
+              onChange={formik.handleChange}
+              error={formik.touched.boxName && Boolean(formik.errors.boxName)}
+              helperText={formik.touched.boxName && formik.errors.boxName}
+            />
+            <UiButton
+              type="submit"
+              label={"افزودن"}
+              variant={"contained"}
+              sx={{ width: "50%" }}
+              onclick={handleAddBox}
+              //disabled={true}
+            />
+          </Stack>
+        </form>
+      </UiModal>
+
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
@@ -71,9 +115,7 @@ const Dashboard = () => {
                     borderBottomLeftRadius: 8,
                   }}
                 />
-
                 <Button
-                  onClick={() => navigate("dashboardAdmin")}
                   sx={{
                     width: "80%",
                     height: "100%",
@@ -91,15 +133,13 @@ const Dashboard = () => {
                 </Button>
               </Grid>
             </Grid>
-            <Grid xs={12} sm={8} md={6} display={"flex"} justifyContent={"end"}>
-              <UiBreadcrumbs
-                items={[
-                  { label: t("dashboard.main.about"), link: "#" },
-                  { label: t("dashboard.main.contact"), link: "#" },
-                  { label: t("dashboard.main.specifications"), link: "#" },
-                ]}
-              />
-            </Grid>
+            <Grid
+              xs={12}
+              sm={8}
+              md={6}
+              display={"flex"}
+              justifyContent={"end"}
+            ></Grid>
           </Grid>
         </Box>
 
@@ -165,9 +205,11 @@ const Dashboard = () => {
             md={8}
             display={"flex"}
             flexDirection={"column"}
+            alignItems={"end"}
             rowGap={5}
           >
-            {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
+            <Button onClick={toggleShowModal}>add</Button>
+            {/* {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
               (DashedBox) => (
                 <UiDashedBox
                   key={uuidv4()}
@@ -175,7 +217,7 @@ const Dashboard = () => {
                   label={DashedBox.label}
                 />
               )
-            )}
+            )} */}
           </Grid>
         </Grid>
       </Box>
@@ -193,4 +235,4 @@ const Dashboard = () => {
 //     <UiSlide timeout={1000 * ((i + 1) / 2)} key={i}>{icon}</UiSlide>
 //   ))}
 
-export default Dashboard;
+export default WithMaterialUI(DashboardAdmin);

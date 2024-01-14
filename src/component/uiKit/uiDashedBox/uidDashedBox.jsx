@@ -1,9 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import LinkButton from "./LinkButton";
+import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import ShakingView from "../uiTransitions/uiShake/uiShake";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
 
 const UiDashedBox = ({ buttons, label }) => {
   return (
@@ -50,42 +49,9 @@ const UiDashedBox = ({ buttons, label }) => {
         direction={"rtl"}
       >
         {buttons.map((button) => {
-          return (
-            <IconButton
-              key={uuidv4()}
-              label={button.label}
-              image={button.image}
-            />
-          );
+          return <LinkButton key={uuidv4()} buttonDetalis={button} />;
         })}
       </Grid>
-    </Grid>
-  );
-};
-const IconButton = ({ label, image }) => {
-  return (
-    <Grid
-      xs={6}
-      sm={3}
-      md={2}
-      //width={"100%"}
-      container
-      display={"flex"}
-      justifyContent={"center"}
-      alignItems={"start"}
-      padding={{ xs: 2, sm: 2, md: 1 }}
-    >
-      <ShakingView>
-        <img
-          className="w-96 p-2 object-contain "
-          style={{ maxWidth: 100, maxHeight: 150 }}
-          value
-          src={image.url}
-        />
-        <Typography sx={{ width: "100%", height: "100%", marginTop: 1 }}>
-          {label}
-        </Typography>
-      </ShakingView>
     </Grid>
   );
 };

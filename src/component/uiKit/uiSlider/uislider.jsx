@@ -1,12 +1,11 @@
 import Carousel from "react-material-ui-carousel";
 import Item from "./items";
 import { useTranslation } from "react-i18next";
-import slide1 from "../../../images/2.jpg";
-import slide2 from "../../../images/3.jpg";
-import slide3 from "../../../images/4.jpg";
-import { Box, Typography } from "@mui/material";
+import { v4 as uuidv4 } from "uuid";
 
 const UiSlider = ({
+  images,
+  label,
   interval = 4000,
   duration = 2000,
   animation = "slide",
@@ -14,26 +13,6 @@ const UiSlider = ({
   sx,
 }) => {
   const [t] = useTranslation();
-  var items = [
-    {
-      name: "slide1",
-      src: slide1,
-      description: "",
-      app: false,
-    },
-    {
-      name: "slide2",
-      src: slide2,
-      description: "",
-      app: false,
-    },
-    {
-      name: "slide3",
-      src: slide3,
-      description: "",
-      app: false,
-    },
-  ];
 
   return (
     <Carousel
@@ -66,9 +45,8 @@ const UiSlider = ({
         }
       }
     >
-      {items.map((item, i) => (
-        <Item key={i} item={item} />
-      ))}
+      {images.length > 0 &&
+        images.map((image, i) => <Item key={uuidv4()} item={image} />)}
     </Carousel>
   );
 };

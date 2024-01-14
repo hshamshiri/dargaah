@@ -31,28 +31,32 @@
   },
   "dashboard": {
     "drawer": {
-      "vezarat":"درگاه وزارت آموزش و پرورش",
+      "vezarat": "درگاه وزارت آموزش و پرورش",
       "home": "خانه",
       "notifications": "اطلاعیه ها",
       "mychild": "فرزندان من",
       "servieces": "خدمات الکترونیکی عمومی",
       "graduates": "فارغ التحصیلان",
       "organizational": "سامانه های سازمانی",
-      "date":"تاریخ امروز",
-      "lastEnter":"آخرین ورود",
-      "exit":"خروج"
+      "date": "تاریخ امروز",
+      "lastEnter": "آخرین ورود",
+      "exit": "خروج"
     },
-    "main":{
-      "specifications":"مشخصات",
-      "contact":"تماس با ما",
-      "about":"درباره ما",
-      "change":"تغییر نقش کاربری",
-      "search":"جستجو...",
-      "journals":"نشریات",
+    "main": {
+      "specifications": "مشخصات",
+      "contact": "تماس با ما",
+      "about": "درباره ما",
+      "change": "تغییر نقش کاربری",
+      "search": "جستجو...",
+      "journals": "نشریات",
       "servieces": "خدمات الکترونیکی عمومی",
       "graduates": "فارغ التحصیلان",
       "organizational": "سامانه های سازمانی",
-      "face":"چهره های ماندگار"
+      "face": "چهره های ماندگار",
+      "boxName": "نام مجموعه"
     }
+  },
+  "helperText": {
+    "requiredField": "پر کردن فیلد الزامی است"
   }
 }

@@ -12,10 +12,13 @@ const WithMaterialUI = (WrappedComponent) => {
         .string()
         .required(t("login.form.mobileRequired"))
         .matches(regexList.mobile, t("login.form.mobileInvalid")),
+      boxName: yup.string().required(t("helperText.requiredField")),
     });
+
     const formik = useFormik({
       initialValues: {
         mobile: "",
+        boxName: "",
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {

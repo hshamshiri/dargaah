@@ -80,7 +80,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight({ children }) {
+export default function PersistentDrawerRight({ children, buttonList }) {
   const [size] = useWindowSize();
   React.useEffect(() => {
     size > 992 && handleDrawerOpen();
@@ -163,35 +163,40 @@ export default function PersistentDrawerRight({ children }) {
         <List sx={{ padding: 0 }}>
           <TopView />
 
-          {sideItems.map((item, index) => (
-            <Box key={index}>
-              <ListItem disablePadding>
-                <ListItemButton>
-                  <ListItemText
-                    sx={{
-                      display: "flex",
-                      justifyContent: "end",
-                    }}
-                    primaryTypographyProps={{
-                      fontSize: "14px",
-                      fontWeight: 500,
-                    }}
-                    primary={item.label}
-                  />
-                  <ListItemIcon
-                    sx={{
-                      display: "flex",
-                      minWidth: 40,
-                      justifyContent: "end",
-                    }}
-                  >
-                    <UiIcon iconName={item.iconName} />
-                  </ListItemIcon>
-                </ListItemButton>
-              </ListItem>
-              <Divider />
-            </Box>
-          ))}
+          {buttonList?.length > 0 &&
+            buttonList.map((item, index) => (
+              <Box key={index}>
+                <ListItem disablePadding>
+                  <ListItemButton>
+                    <ListItemText
+                      sx={{
+                        display: "flex",
+                        justifyContent: "end",
+                      }}
+                      primaryTypographyProps={{
+                        fontSize: "14px",
+                        fontWeight: 500,
+                      }}
+                      primary={item.label}
+                    />
+                    <ListItemIcon
+                      sx={{
+                        display: "flex",
+                        minWidth: 40,
+                        justifyContent: "end",
+                      }}
+                    >
+                      {/* <UiIcon iconName={item.iconName} /> */}
+                      <img
+                        className="w-6 object-contain"
+                        src={item?.icon?.url}
+                      />
+                    </ListItemIcon>
+                  </ListItemButton>
+                </ListItem>
+                <Divider />
+              </Box>
+            ))}
         </List>
         <Divider />
       </Drawer>

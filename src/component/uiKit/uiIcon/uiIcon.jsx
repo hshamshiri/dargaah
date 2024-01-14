@@ -17,6 +17,7 @@ import CorporateFareIcon from "@mui/icons-material/CorporateFare";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import AddBoxIcon from "@mui/icons-material/AddBox";
 
 const UiIcon = ({ iconType, iconName, classes }) => {
   const theme = [
@@ -55,6 +56,7 @@ const UiIcon = ({ iconType, iconName, classes }) => {
     dots: <MoreVertIcon sx={theme} />,
     power: <PowerSettingsNewIcon sx={theme} />,
     people: <PeopleAltIcon sx={theme} />,
+    add: <AddBoxIcon sx={theme} />,
   };
 
   return icons[iconName];

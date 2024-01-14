@@ -1,5 +1,6 @@
 import { Box, Grid, Paper, Typography } from "@mui/material";
-import UiButton from "../../uiKit/uiButton/uiButton";
+import UiButton from "../uiButton/uiButton";
+import { Link } from "react-router-dom";
 
 const Item = ({ item }) => {
   return (
@@ -10,32 +11,34 @@ const Item = ({ item }) => {
         //padding:
       }}
     >
-      <img className="w-full h-full object-contain" src={item.src} />
-      <Box
-        display={"flex"}
-        width={"100%"}
-        height={"100%"}
-        justifyContent={"center"}
-      >
-        {/* <Typography width={"90%"} color={"white"}>
+      <Link reloadDocument>
+        <img className="w-full h-full object-contain" src={item.url} />
+        <Box
+          display={"flex"}
+          width={"100%"}
+          height={"100%"}
+          justifyContent={"center"}
+        >
+          {/* <Typography width={"90%"} color={"white"}>
           {item.description}
         </Typography> */}
-      </Box>
-      {item.app && (
-        <UiButton
-          type="submit"
-          label={item.appButtonTitle}
-          onclick={<a href="#" />}
-          variant="contained"
-          iconName={"download"}
-          iconType={"button"}
-          sx={{
-            borderColor: "white",
-            border: 1,
-            backgroundColor: "transparent",
-          }}
-        />
-      )}
+        </Box>
+        {item.app && (
+          <UiButton
+            type="submit"
+            label={item.appButtonTitle}
+            onclick={<a href="#" />}
+            variant="contained"
+            iconName={"download"}
+            iconType={"button"}
+            sx={{
+              borderColor: "white",
+              border: 1,
+              backgroundColor: "transparent",
+            }}
+          />
+        )}
+      </Link>
     </Grid>
   );
 };
