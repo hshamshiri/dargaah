@@ -39,7 +39,7 @@
     "dashBoxes": [
       {
         "id": "1",
-        "label": "خدمات الکترونیکی عمومی",
+        "label": "خدمات",
         "buttons": [
           {
             "id": "1",
@@ -62,7 +62,7 @@
         ]
       },
       {
-        "id": "1",
+        "id": "2",
         "label": "خدمات الکترونیکی عمومی",
         "buttons": [
           {
@@ -139,7 +139,7 @@
         ]
       },
       {
-        "id": "1",
+        "id": "3",
         "label": "خدمات الکترونیکی عمومی",
         "buttons": [
           {
@@ -151,7 +151,7 @@
             "label": "خدمات الکترونیکی عمومی"
           },
           {
-            "id": "1",
+            "id": "4",
             "image": {
               "id": "1",
               "url": "https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"
@@ -159,7 +159,7 @@
             "label": "ویرانه"
           },
           {
-            "id": "1",
+            "id": "5",
             "image": {
               "id": "1",
               "url": "https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"
@@ -167,7 +167,7 @@
             "label": "خانه"
           },
           {
-            "id": "1",
+            "id": "6",
             "image": {
               "id": "1",
               "url": "https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"
@@ -177,7 +177,7 @@
         ]
       },
       {
-        "id": "1",
+        "id": "4",
         "label": "خدمات الکترونیکی عمومی",
         "buttons": [
           {
@@ -199,7 +199,7 @@
         ]
       },
       {
-        "id": "1",
+        "id": "5",
         "label": "خدمات الکترونیکی عمومی",
         "buttons": [
           {

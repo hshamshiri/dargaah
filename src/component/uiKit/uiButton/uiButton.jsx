@@ -30,7 +30,7 @@ const UiButton = ({
   return (
     <Button
       type={type}
-      onClick={() => onclick()}
+      onClick={onclick || null}
       disabled={disable || false}
       variant={variant || "filled"}
       className={`w-60 ${classes}`}

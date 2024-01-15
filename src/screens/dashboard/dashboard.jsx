@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";

@@ -7,6 +7,7 @@ import { useTheme } from "@mui/material";
 
 const UiInputText = ({
   id = "outlined-basic", //outlined-basic
+  name,
   label,
   variant = "outlined", //outlined
   error = false, //Bool
@@ -29,6 +30,7 @@ const UiInputText = ({
     <RtlDirection>
       <TextField
         id={id}
+        name={name}
         label={label}
         variant={variant}
         error={error}

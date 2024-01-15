@@ -8,6 +8,7 @@ import i18n from "./i18n";
 import i18next from "i18next";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utils/theme"
+import { Provider } from "react-redux";
 
 
 

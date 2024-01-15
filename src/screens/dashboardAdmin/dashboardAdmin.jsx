@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
-import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
 import { Box, Paper, Typography, Button, Stack } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
@@ -15,59 +14,62 @@ import Grid from "@mui/material/Unstable_Grid2";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
 import UiInputText from "../../component/uiKit/uiInput/uiInput";
+import addDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
+import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
+  const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
-  const [boxName, setBoxName] = useState("");
 
   const toggleShowModal = () => setActiveModal(!activeModal);
-  const handleAddBox = () => {
-    console.log("ddd");
-    if (boxName !== "") {
-      toggleShowModal();
-    }
-  };
+
+  // const handleAddBoxButton = (boxId) => {
+  //   if (inputs["buttonName"] !== "") {
+  //     let boxList = interfaceUI?.dashedBorderContainers?.dashBoxes;
+  //     let currenBox = boxList.find((box) => box?.id === boxId);
+  //     console.log("kk", currenBox);
+
+  //     if (currenBox) {
+  //       let repeatButtonName = currenBox?.buttons.filter(
+  //         (el) => el?.label === inputs["boxName"]
+  //       );
+  //       if (repeatButtonName.length === 0) {
+  //         currenBox.buttons.unshift({
+  //           id: uuidv4(),
+  //           label: inputs["boxName"],
+  //           image: {
+  //             id: 1,
+  //             url: "https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png",
+  //           },
+  //         });
+  //         setInterfaceUI(interfaceUI);
+  //       } else {
+  //         console.log("repeated");
+  //       }
+  //     } else {
+  //       //input required
+  //     }
+
+  //     toggleShowModal();
+  //   }
+  // };
 
   return (
-    <MiniDrawer buttonList={interfaceConfige?.drawerButtons?.buttons}>
+    <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons}>
       {/* add Box */}
       <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
-        <form onSubmit={formik.handleSubmit}>
-          <Stack
-            spacing={3}
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <UiInputText
-              formik={formik}
-              //onChange={(e) => setBoxName(e?.target?.value)}
-              id="boxName"
-              name="boxName"
-              label={t("dashboard.main.boxName")}
-              value={formik.values.boxName}
-              onChange={formik.handleChange}
-              error={formik.touched.boxName && Boolean(formik.errors.boxName)}
-              helperText={formik.touched.boxName && formik.errors.boxName}
-            />
-            <UiButton
-              type="submit"
-              label={"افزودن"}
-              variant={"contained"}
-              sx={{ width: "50%" }}
-              onclick={handleAddBox}
-              //disabled={true}
-            />
-          </Stack>
-        </form>
+        <AddDashedBoxForm
+          interfaceUI={interfaceUI}
+          setInterfaceUI={setInterfaceUI}
+          toggleShowModal={toggleShowModal}
+        />
       </UiModal>
 
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
-        <UiTopSlider images={interfaceConfige?.topSlider?.images} />
+        <UiTopSlider images={interfaceUI?.topSlider?.images} />
         {/* search */}
         <Box sx={{ marginTop: 2 }}>
           <Grid
@@ -87,51 +89,9 @@ const DashboardAdmin = ({ formik }) => {
             display={"felx"}
             justifyContent={"center"}
           >
-            <Grid xs={8} sm={6} md={3}>
-              <SearchInputBase placeholder={t("dashboard.main.search")} />
-            </Grid>
+            <Grid xs={8} sm={6} md={3}></Grid>
             <Grid container xs={6} sm={3} md={3}>
-              <Grid
-                xs={12}
-                sm={12}
-                md={8}
-                position={"relative"}
-                borderRadius={2}
-                height={40}
-                display={"flex"}
-                alignItems={"center"}
-                bgcolor={"orange"}
-                padding={0}
-              >
-                <UiIcon
-                  iconName={"people"}
-                  classes={{
-                    width: "20%",
-                    height: "100%",
-                    backgroundColor: "base.main",
-                    color: "white",
-                    //borderRadius: 0,
-                    borderTopLeftRadius: 8,
-                    borderBottomLeftRadius: 8,
-                  }}
-                />
-                <Button
-                  sx={{
-                    width: "80%",
-                    height: "100%",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    overflow: "hidden",
-                    textAlign: "center",
-                    display: "block",
-                    direction: "rtl",
-                    fontWeight: 600,
-                    fontSize: 14,
-                  }}
-                >
-                  {t("dashboard.main.change")}
-                </Button>
-              </Grid>
+              <Grid xs={12} sm={12} md={8}></Grid>
             </Grid>
             <Grid
               xs={12}
@@ -191,8 +151,8 @@ const DashboardAdmin = ({ formik }) => {
                 {t("dashboard.main.journals")}
               </Typography>
               <UiSlider
-                images={interfaceConfige?.journals?.images}
-                label={interfaceConfige?.journals?.label}
+                images={interfaceUI?.journals?.images}
+                label={interfaceUI?.journals?.label}
               />
             </Grid>
           </Grid>
@@ -205,19 +165,24 @@ const DashboardAdmin = ({ formik }) => {
             md={8}
             display={"flex"}
             flexDirection={"column"}
-            alignItems={"end"}
             rowGap={5}
           >
             <Button onClick={toggleShowModal}>add</Button>
-            {/* {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
-              (DashedBox) => (
+            {interfaceUI?.dashedBorderContainers?.dashBoxes.map((DashedBox) => (
+              <Box key={uuidv4()} sx={{}}>
+                {/* <UiButton
+                  sx={{ width: 100 }}
+                  label={"add button"}
+                  variant={"contained"}
+                  onclick={() => handleAddBoxButton(DashedBox?.id)}
+                /> */}
                 <UiDashedBox
-                  key={uuidv4()}
-                  buttons={DashedBox.buttons}
-                  label={DashedBox.label}
+                  id={DashedBox?.id}
+                  buttons={DashedBox?.buttons}
+                  label={DashedBox?.label}
                 />
-              )
-            )} */}
+              </Box>
+            ))}
           </Grid>
         </Grid>
       </Box>
