@@ -53,10 +53,13 @@
       "graduates": "فارغ التحصیلان",
       "organizational": "سامانه های سازمانی",
       "face": "چهره های ماندگار",
-      "boxName": "نام مجموعه"
+      "boxName": "نام مجموعه",
+      "buttonName": "نام",
+      "link": "آدرس"
     }
   },
   "helperText": {
-    "requiredField": "پر کردن فیلد الزامی است"
+    "requiredField": "پر کردن فیلد الزامی است",
+    "duplicate": "این مورد قبلا انتخاب شده"
   }
 }

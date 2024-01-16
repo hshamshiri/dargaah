@@ -2,13 +2,27 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
 
 const WithAddDashedBoxFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
     const validationSchema = yup.object({
-      boxName: yup.string().required(t("helperText.requiredField")),
+      boxName: yup
+        .string()
+        .min(2, "Too Short!")
+        .max(20, "Too Long!")
+        .required(t("helperText.requiredField"))
+        .test("Unique", t("helperText.duplicate"), (value) => {
+          return checkDuplicateName(value);
+        }),
     });
+
+    const checkDuplicateName = (value) => {
+      let boxNameList = props.interfaceUI?.dashedBorderContainers?.dashBoxes;
+      let duplicateName = boxNameList.filter((el) => el?.label === value);
+      return duplicateName.length > 0 ? false : true;
+    };
 
     const formik = useFormik({
       initialValues: {
@@ -16,7 +30,14 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
+        let obj = props.interfaceUI?.dashedBorderContainers?.dashBoxes;
+        if (obj) {
+          obj.unshift({ id: uuidv4(), label: values.boxName, buttons: [] });
+          props.setInterfaceUI(props.interfaceUI);
+          props.toggleShowModal();
+        } else {
+          //input required
+        }
       },
     });
     return (

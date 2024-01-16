@@ -13,28 +13,6 @@ const AddDashedBoxForm = ({
   toggleShowModal,
 }) => {
   const [t] = useTranslation();
-  const [boxName, setBoxName] = useState("uu");
-  console.log("uuu", interfaceUI);
-  const handleAddBox = () => {
-    console.log("uuu", toggleShowModal);
-
-    // if (boxName !== "") {
-    //   let obj = interfaceConfige?.dashedBorderContainers?.dashBoxes;
-    //   if (obj) {
-    //     let repeatName = obj.filter((el) => el?.label === boxName);
-    //     if (repeatName.length === 0) {
-    //       obj.unshift({ id: uuidv4(), label: boxName, buttons: [] });
-    //       //setInterfaceUI(interfaceConfige);
-    //     } else {
-    //       console.log("repeated");
-    //     }
-    //   } else {
-    //     //input required
-    //   }
-
-    toggleShowModal();
-    // }
-  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -61,9 +39,6 @@ const AddDashedBoxForm = ({
           label={"افزودن"}
           variant={"contained"}
           sx={{ width: "50%" }}
-          //onclick={handleAddBox}
-          onSubmit={() => console.log("ggggggg")}
-          //disabled={true}
         />
       </Stack>
     </form>

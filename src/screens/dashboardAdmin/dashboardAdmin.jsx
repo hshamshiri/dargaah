@@ -16,14 +16,32 @@ import UiButton from "../../component/uiKit/uiButton/uiButton";
 import UiInputText from "../../component/uiKit/uiInput/uiInput";
 import addDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
 import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
+import AddButtonOfDashedBox from "../../component/forms/addButtonDashedBox/addButtonOfDashedBoxForm";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
   const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
+  const [activeAddDashedForm, setActiveDashedForm] = useState(false);
+  const [activeAddButtonDashedForm, setActiveButtonDashedForm] =
+    useState(false);
+  const [chosenBoxId, setChosenBoxID] = useState(0);
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
+  const handleForms = (type, id) => {
+    setActiveModal(true);
+    if (type === "dashedBox") {
+      setActiveDashedForm(true);
+      setActiveButtonDashedForm(false);
+    }
+    if (type === "buttonBox") {
+      setActiveDashedForm(false);
+      setActiveButtonDashedForm(true);
+    }
+  };
+
+  const handleShowForm = () => {};
   // const handleAddBoxButton = (boxId) => {
   //   if (inputs["buttonName"] !== "") {
   //     let boxList = interfaceUI?.dashedBorderContainers?.dashBoxes;
@@ -59,11 +77,24 @@ const DashboardAdmin = ({ formik }) => {
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons}>
       {/* add Box */}
       <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
-        <AddDashedBoxForm
-          interfaceUI={interfaceUI}
-          setInterfaceUI={setInterfaceUI}
-          toggleShowModal={toggleShowModal}
-        />
+        {activeAddDashedForm && (
+          <AddDashedBoxForm
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
+            activeAddDashedForm={activeAddDashedForm}
+          />
+        )}
+
+        {activeAddButtonDashedForm && (
+          <AddButtonOfDashedBox
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
+            activeAddButtonDashedForm={activeAddButtonDashedForm}
+            boxId={chosenBoxId}
+          />
+        )}
       </UiModal>
 
       {/* content */}
@@ -165,21 +196,25 @@ const DashboardAdmin = ({ formik }) => {
             md={8}
             display={"flex"}
             flexDirection={"column"}
+            justifyContent={"end"}
             rowGap={5}
           >
-            <Button onClick={toggleShowModal}>add</Button>
-            {interfaceUI?.dashedBorderContainers?.dashBoxes.map((DashedBox) => (
+            <UiButton
+              onclick={() => handleForms("dashedBox")}
+              label={"ppp"}
+            ></UiButton>
+            {interfaceUI?.dashedBorderContainers?.dashBoxes.map((dashedBox) => (
               <Box key={uuidv4()} sx={{}}>
-                {/* <UiButton
+                <UiButton
                   sx={{ width: 100 }}
                   label={"add button"}
                   variant={"contained"}
-                  onclick={() => handleAddBoxButton(DashedBox?.id)}
-                /> */}
+                  onclick={() => handleForms("buttonBox", dashedBox?.id)}
+                />
                 <UiDashedBox
-                  id={DashedBox?.id}
-                  buttons={DashedBox?.buttons}
-                  label={DashedBox?.label}
+                  id={dashedBox?.id}
+                  buttons={dashedBox?.buttons}
+                  label={dashedBox?.label}
                 />
               </Box>
             ))}
