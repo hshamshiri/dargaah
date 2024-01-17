@@ -47,6 +47,13 @@ const UiInputText = ({
         inputProps={{
           maxLength: maxLength,
         }}
+        FormHelperTextProps={{
+          style: {
+            backgroundColor: "orange",
+            width: "100%",
+            fontFamily: "",
+          },
+        }}
         InputProps={{
           sx: {
             borderRadius: 10,

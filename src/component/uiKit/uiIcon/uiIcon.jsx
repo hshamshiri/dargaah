@@ -18,6 +18,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 
 const UiIcon = ({ iconType, iconName, classes }) => {
   const theme = [
@@ -57,6 +58,7 @@ const UiIcon = ({ iconType, iconName, classes }) => {
     power: <PowerSettingsNewIcon sx={theme} />,
     people: <PeopleAltIcon sx={theme} />,
     add: <AddBoxIcon sx={theme} />,
+    addFolder: <CreateNewFolderIcon sx={theme} />,
   };
 
   return icons[iconName];

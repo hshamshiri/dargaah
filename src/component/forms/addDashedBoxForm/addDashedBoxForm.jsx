@@ -19,13 +19,16 @@ const AddDashedBoxForm = ({
       <Stack
         spacing={3}
         display={"flex"}
+        flexWrap={"wrap"}
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
+        backgroundColor={"yellow"}
       >
         <UiInputText
           formik={formik}
           //onChange={(e) => setBoxName(e?.target?.value)}
+          sx={{ alignSelf: "center" }}
           id="boxName"
           name="boxName"
           label={t("dashboard.main.boxName")}

@@ -10,8 +10,8 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
     const validationSchema = yup.object({
       boxName: yup
         .string()
-        .min(2, "Too Short!")
-        .max(20, "Too Long!")
+        .min(2, t("helperText.short"))
+        .max(20, t("helperText.long"))
         .required(t("helperText.requiredField"))
         .test("Unique", t("helperText.duplicate"), (value) => {
           return checkDuplicateName(value);

@@ -23,9 +23,9 @@ const DashboardAdmin = ({ formik }) => {
   const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
   const [activeAddDashedForm, setActiveDashedForm] = useState(false);
-  const [activeAddButtonDashedForm, setActiveButtonDashedForm] =
+  const [activeAddButtonDashedForm, setActiveAddButtonDashedForm] =
     useState(false);
-  const [chosenBoxId, setChosenBoxID] = useState(0);
+  const [chosenBoxId, setChosenBoxId] = useState(0);
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
@@ -33,11 +33,12 @@ const DashboardAdmin = ({ formik }) => {
     setActiveModal(true);
     if (type === "dashedBox") {
       setActiveDashedForm(true);
-      setActiveButtonDashedForm(false);
+      setActiveAddButtonDashedForm(false);
     }
     if (type === "buttonBox") {
       setActiveDashedForm(false);
-      setActiveButtonDashedForm(true);
+      setActiveAddButtonDashedForm(true);
+      setChosenBoxId(id);
     }
   };
 
@@ -83,6 +84,7 @@ const DashboardAdmin = ({ formik }) => {
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
             activeAddDashedForm={activeAddDashedForm}
+            setActiveAddButtonDashedForm={setActiveAddButtonDashedForm}
           />
         )}
 
@@ -92,6 +94,7 @@ const DashboardAdmin = ({ formik }) => {
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
             activeAddButtonDashedForm={activeAddButtonDashedForm}
+            setActiveAddButtonDashedForm={setActiveAddButtonDashedForm}
             boxId={chosenBoxId}
           />
         )}
@@ -199,17 +202,57 @@ const DashboardAdmin = ({ formik }) => {
             justifyContent={"end"}
             rowGap={5}
           >
-            <UiButton
-              onclick={() => handleForms("dashedBox")}
-              label={"ppp"}
-            ></UiButton>
+            <Grid display={"flex"} justifyContent={"center"}>
+              <UiButton
+                onclick={() => handleForms("dashedBox")}
+                label={t("dashboard.main.addBox")}
+                variant={"contained"}
+                iconName={"addFolder"}
+                iconType={"button"}
+                sx={{
+                  background: (theme) => theme.palette.gradient.main,
+                }}
+              />
+            </Grid>
             {interfaceUI?.dashedBorderContainers?.dashBoxes.map((dashedBox) => (
-              <Box key={uuidv4()} sx={{}}>
+              <Box position={"relative"} key={uuidv4()} sx={{}}>
+                {/* <Box
+                  height={55}
+                  minWidth={100}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  color={"white"}
+                  padding={2}
+                  position={"absolute"}
+                  top={-30}
+                  //right={100}
+                  zIndex={-1}
+                  variant={"filled"}
+                  sx={{
+                    borderTopLeftRadius: 15,
+                    borderTopRightRadius: 15,
+                    // background:
+                    //"linear-gradient(to right bottom, #430089, #82ffa1)",
+                    backgroundColor: "base.main",
+                  }}
+                >
+                  {"افزودن دکمه"}
+                </Box> */}
                 <UiButton
-                  sx={{ width: 100 }}
-                  label={"add button"}
-                  variant={"contained"}
                   onclick={() => handleForms("buttonBox", dashedBox?.id)}
+                  label={t("dashboard.main.addBtn")}
+                  variant={"contained"}
+                  iconName={"add"}
+                  iconType={"button"}
+                  sx={{
+                    width: 150,
+                    position: "absolute",
+                    zIndex: 1,
+                    top: -30,
+                    left: 4,
+                    background: (theme) => theme.palette.gradient.main,
+                  }}
                 />
                 <UiDashedBox
                   id={dashedBox?.id}

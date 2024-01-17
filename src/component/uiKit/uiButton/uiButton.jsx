@@ -34,7 +34,7 @@ const UiButton = ({
       disabled={disable || false}
       variant={variant || "filled"}
       className={`w-60 ${classes}`}
-      startIcon={<UiIcon iconType={iconType} iconName={iconName} />}
+      endIcon={<UiIcon iconType={iconType} iconName={iconName} />}
       sx={[
         {
           borderRadius: 30,
@@ -43,13 +43,13 @@ const UiButton = ({
           backgroundColor: palette.darkBlue,
           height: 40,
           width: 300,
-          "@media only screen and (min-width: 980px)": {},
-          "@media only screen and (min-width: 420px) and (max-width: 980px)": {
-            width: 300,
-          },
-          "@media screen and (max-width: 420px)": {
-            width: 200,
-          },
+          // "@media only screen and (min-width: 980px)": {},
+          // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
+          //   width: 300,
+          // },
+          // "@media screen and (max-width: 420px)": {
+          //   width: 200,
+          // },
         },
         sx,
       ]}

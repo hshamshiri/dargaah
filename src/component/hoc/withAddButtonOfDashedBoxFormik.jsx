@@ -10,8 +10,8 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
     const validationSchema = yup.object({
       btnName: yup
         .string()
-        .min(2, "Too Short!")
-        .max(15, "Too Long!")
+        .min(2, t("helperText.short"))
+        .max(15, t("helperText.long"))
         .required(t("helperText.requiredField"))
         .test("Unique", t("helperText.duplicate"), (value) => {
           return checkDuplicateName(value);
@@ -27,7 +27,6 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
     });
 
     const checkDuplicateName = (value) => {
-      console.log("ddd", value);
       let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
       let currenBox = boxList.find((box) => box?.id === props.boxId);
       let btnNameList = currenBox?.buttons;
@@ -35,12 +34,16 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       return duplicateName?.length > 0 ? false : true;
     };
     const checkDuplicateLink = (value) => {
-      console.log("www", value);
       let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      let currenBox = boxList.find((box) => box?.id === props.boxId);
-      let btnNameList = currenBox?.buttons;
-      let duplicateLink = btnNameList?.filter((el) => el?.link === value);
-      return duplicateLink?.length > 0 ? false : true;
+      let checkDuplicate = 0;
+      for (const i in boxList) {
+        const btnList = boxList[i]?.buttons;
+        if (btnList.length > 0) {
+          let duplicatedList = btnList.find((btn) => btn?.link === value);
+          duplicatedList && checkDuplicate++;
+        }
+      }
+      return checkDuplicate > 0 ? false : true;
     };
 
     const formik = useFormik({
@@ -57,13 +60,14 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
           currenBox.buttons.unshift({
             id: uuidv4(),
             label: values["btnName"],
+            link: values["btnLink"],
             image: {
               id: 1,
               url: "https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png",
             },
           });
           props.setInterfaceUI(props?.interfaceUI);
-          props.setActiveAddButtonDashedForm();
+          props.toggleShowModal(false);
         } else {
           //input required
         }
