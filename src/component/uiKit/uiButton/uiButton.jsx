@@ -14,7 +14,7 @@ import UiIcon from "../uiIcon/uiIcon";
  * @param {object} props classes
  * @param {string} props send/download
  * @param {string} props send/mobile/...
- *
+ * @param {string} porps component:label/...
  */
 const UiButton = ({
   type,
@@ -25,6 +25,7 @@ const UiButton = ({
   classes,
   iconType,
   iconName,
+  component,
   sx,
 }) => {
   return (
@@ -35,6 +36,7 @@ const UiButton = ({
       variant={variant || "filled"}
       className={`w-60 ${classes}`}
       endIcon={<UiIcon iconType={iconType} iconName={iconName} />}
+      component={component}
       sx={[
         {
           borderRadius: 30,

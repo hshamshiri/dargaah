@@ -23,7 +23,7 @@ const AddDashedBoxForm = ({
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
-        backgroundColor={"yellow"}
+      
       >
         <UiInputText
           formik={formik}

@@ -17,6 +17,7 @@ import UiInputText from "../../component/uiKit/uiInput/uiInput";
 import addDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
 import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
 import AddButtonOfDashedBox from "../../component/forms/addButtonDashedBox/addButtonOfDashedBoxForm";
+import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/addSliderImageForm";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
@@ -25,7 +26,10 @@ const DashboardAdmin = ({ formik }) => {
   const [activeAddDashedForm, setActiveDashedForm] = useState(false);
   const [activeAddButtonDashedForm, setActiveAddButtonDashedForm] =
     useState(false);
+  const [activeAddSliderImageForm, setActiveAddSliderImageForm] =
+    useState(false);
   const [chosenBoxId, setChosenBoxId] = useState(0);
+  const [sideSlideImage, setSideSlideImage] = useState(null);
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
@@ -34,45 +38,21 @@ const DashboardAdmin = ({ formik }) => {
     if (type === "dashedBox") {
       setActiveDashedForm(true);
       setActiveAddButtonDashedForm(false);
+      setActiveAddSliderImageForm(false);
     }
     if (type === "buttonBox") {
       setActiveDashedForm(false);
       setActiveAddButtonDashedForm(true);
+      setActiveAddSliderImageForm(false);
+      setChosenBoxId(id);
+    }
+    if (type === "leftImageSlider") {
+      setActiveDashedForm(false);
+      setActiveAddButtonDashedForm(false);
+      setActiveAddSliderImageForm(true);
       setChosenBoxId(id);
     }
   };
-
-  const handleShowForm = () => {};
-  // const handleAddBoxButton = (boxId) => {
-  //   if (inputs["buttonName"] !== "") {
-  //     let boxList = interfaceUI?.dashedBorderContainers?.dashBoxes;
-  //     let currenBox = boxList.find((box) => box?.id === boxId);
-  //     console.log("kk", currenBox);
-
-  //     if (currenBox) {
-  //       let repeatButtonName = currenBox?.buttons.filter(
-  //         (el) => el?.label === inputs["boxName"]
-  //       );
-  //       if (repeatButtonName.length === 0) {
-  //         currenBox.buttons.unshift({
-  //           id: uuidv4(),
-  //           label: inputs["boxName"],
-  //           image: {
-  //             id: 1,
-  //             url: "https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png",
-  //           },
-  //         });
-  //         setInterfaceUI(interfaceUI);
-  //       } else {
-  //         console.log("repeated");
-  //       }
-  //     } else {
-  //       //input required
-  //     }
-
-  //     toggleShowModal();
-  //   }
-  // };
 
   return (
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons}>
@@ -96,6 +76,18 @@ const DashboardAdmin = ({ formik }) => {
             activeAddButtonDashedForm={activeAddButtonDashedForm}
             setActiveAddButtonDashedForm={setActiveAddButtonDashedForm}
             boxId={chosenBoxId}
+          />
+        )}
+
+        {activeAddSliderImageForm && (
+          <AddSliderImageForm
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
+            activeAddSliderImageForm={activeAddSliderImageForm}
+            setActiveAddSliderImageForm={setActiveAddSliderImageForm}
+            sideSlideImage={sideSlideImage}
+            setSideSlideImage={setSideSlideImage}
           />
         )}
       </UiModal>
@@ -159,6 +151,19 @@ const DashboardAdmin = ({ formik }) => {
             sm={12}
             md={4}
           >
+            <UiButton
+              onclick={() => handleForms("leftImageSlider")}
+              label={t("dashboard.main.addBtn")}
+              variant={"contained"}
+              iconName={"add"}
+              iconType={"button"}
+              sx={{
+                width: 150,
+
+                background: (theme) => theme.palette.gradient.main,
+              }}
+            />
+
             <Grid
               boxShadow={3}
               sx={{
