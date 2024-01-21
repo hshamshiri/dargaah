@@ -4,17 +4,16 @@ import WithAddSliderImageFormik from "../../hoc/WithAddSliderImageFormik";
 import { Stack, Box, Button } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
-import sampleImage from "../../../images/avatar.png";
+import sampleImage from "../../../images/album.png";
 
 const AddSliderImageForm = ({
   formik,
   interfaceUI,
   setInterfaceUI,
   toggleShowModal,
-  sideSlideImage,
-  setSideSlideImage,
 }) => {
   const [t] = useTranslation();
+  const [sideSlideImage, setSideSlideImage] = useState();
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -27,17 +26,32 @@ const AddSliderImageForm = ({
         alignItems={"center"}
       >
         <Box>
-          <Button variant="contained" component="label" sx={{ padding: 2 }}>
-            <input
+          <Button component="label" sx={{ padding: 0 }}>
+            {/* <input
               type="file"
+              name="file"
+              id="file"
               component={"label"}
               onChange={(event) => {
-                console.log(event.target.files[0]);
+                formik.handleChange(event);
+                //console.log(event.target.files[0]);
                 setSideSlideImage(event.target.files[0]);
               }}
-              hidden
+              hidden={true}
+            /> */}
+            <UiInputText
+              type="file"
+              name="file"
+              id="file"
+              onChange={(event) => {
+                formik.setFieldValue("file", event.target.files[0]);
+                setSideSlideImage(event?.target?.files[0]);
+              }}
+              hidden={true}
+              error={formik.touched.file && Boolean(formik.errors.file)}
+              helperText={formik.touched.file && formik.errors.file}
+              // sx={{ display: "none" }}
             />
-
             <Box>
               <img
                 className="w-40"

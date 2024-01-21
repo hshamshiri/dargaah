@@ -19,7 +19,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import useWindowSize from "../../hooks/useWindowSize";
 //icons
-import UiIcon from "../../uiKit/uiIcon/uiIcon";
+import UiIcon from "../uiIcon/uiIcon";
 import godlogo from "../../../images/godlogo.png";
 //
 import avatarImg from "../../../images/avatar.png";

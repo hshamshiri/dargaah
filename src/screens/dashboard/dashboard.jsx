@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
 import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
 import { Box, Paper, Typography, Button } from "@mui/material";
-import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
+import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
@@ -56,7 +56,7 @@ const Dashboard = () => {
                 height={40}
                 display={"flex"}
                 alignItems={"center"}
-                bgcolor={"orange"}
+                bgcolor={""}
                 padding={0}
               >
                 <UiIcon

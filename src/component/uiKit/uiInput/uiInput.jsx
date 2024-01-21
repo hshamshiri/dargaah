@@ -7,6 +7,7 @@ import { useTheme } from "@mui/material";
 
 const UiInputText = ({
   id = "outlined-basic", //outlined-basic
+  type,
   name,
   label,
   variant = "outlined", //outlined
@@ -23,6 +24,7 @@ const UiInputText = ({
   captcha,
   captchaView: CaptchaView,
   maxLength,
+  hidden,
   sx,
 }) => {
   const theme = useTheme("theme");
@@ -30,6 +32,7 @@ const UiInputText = ({
     <RtlDirection>
       <TextField
         id={id}
+        type={type}
         name={name}
         label={label}
         variant={variant}
@@ -39,6 +42,7 @@ const UiInputText = ({
         defaultValue={defaultValue}
         onChange={onChange}
         required={required}
+        hidden={hidden}
         size="small"
         sx={sx}
         InputLabelProps={{
@@ -49,9 +53,7 @@ const UiInputText = ({
         }}
         FormHelperTextProps={{
           style: {
-            backgroundColor: "orange",
-            width: "100%",
-            fontFamily: "",
+            fontFamily: theme.typography.fontFamily,
           },
         }}
         InputProps={{

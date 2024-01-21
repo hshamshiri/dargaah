@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import { Box, Paper, Typography, Button, Stack } from "@mui/material";
-import MiniDrawer from "../../component/uiKit/Uidrawer/uiDrawer";
+import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
@@ -153,7 +153,7 @@ const DashboardAdmin = ({ formik }) => {
           >
             <UiButton
               onclick={() => handleForms("leftImageSlider")}
-              label={t("dashboard.main.addBtn")}
+              label={t("dashboard.main.addImage")}
               variant={"contained"}
               iconName={"add"}
               iconType={"button"}

@@ -3,6 +3,7 @@ import UiButton from "../uiButton/uiButton";
 import { Link } from "react-router-dom";
 
 const Item = ({ item }) => {
+  console.log(item?.localUrl);
   return (
     <Grid
       height={{ xs: 200, sm: 400, md: "100%" }}
@@ -12,7 +13,10 @@ const Item = ({ item }) => {
       }}
     >
       <Link reloadDocument>
-        <img className="w-full h-full object-contain" src={item.url} />
+        <img
+          className="w-full h-full object-contain"
+          src={item?.url ? item.url : URL.createObjectURL(item?.localUrl)}
+        />
         <Box
           display={"flex"}
           width={"100%"}
