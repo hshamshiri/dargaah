@@ -13,7 +13,7 @@ const AddSliderImageForm = ({
   toggleShowModal,
 }) => {
   const [t] = useTranslation();
-  const [sideSlideImage, setSideSlideImage] = useState();
+  const [sideSlideImage, setSideSlideImage] = useState(null);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -43,14 +43,14 @@ const AddSliderImageForm = ({
               type="file"
               name="file"
               id="file"
+              accept="image/jpeg,image/png,image/tiff,image/webp"
               onChange={(event) => {
                 formik.setFieldValue("file", event.target.files[0]);
                 setSideSlideImage(event?.target?.files[0]);
               }}
-              hidden={true}
+              sx={{ display: "none" }}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
-              // sx={{ display: "none" }}
             />
             <Box>
               <img
@@ -78,9 +78,12 @@ const AddSliderImageForm = ({
         />
         <UiButton
           type="submit"
-          label={"افزودن"}
+          label={t("dashboard.main.add")}
           variant={"contained"}
-          sx={{ width: "50%" }}
+          sx={{
+            width: "50%",
+            background: (theme) => theme.palette.gradient.main,
+          }}
         />
       </Stack>
     </form>

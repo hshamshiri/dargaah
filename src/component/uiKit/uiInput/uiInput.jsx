@@ -10,6 +10,7 @@ const UiInputText = ({
   type,
   name,
   label,
+  accept,
   variant = "outlined", //outlined
   error = false, //Bool
   helperText, //like error description
@@ -50,6 +51,7 @@ const UiInputText = ({
         }}
         inputProps={{
           maxLength: maxLength,
+          accept: accept,
         }}
         FormHelperTextProps={{
           style: {

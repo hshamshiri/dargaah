@@ -1,9 +1,19 @@
 import { Grid } from "@mui/material";
+import { Link } from "react-router-dom";
 
-const Item = ({ image }) => {
+const Item = ({ item }) => {
   return (
     <Grid>
-      <img className="object-contain " src={image.url} />
+      <Link reloadDocument>
+        <img
+          src={item?.url ? item.url : URL.createObjectURL(item?.localUrl)}
+          style={{
+            flex: 1,
+            resizeMode: "contain",
+            maxHeight: 150,
+          }}
+        />
+      </Link>
     </Grid>
   );
 };

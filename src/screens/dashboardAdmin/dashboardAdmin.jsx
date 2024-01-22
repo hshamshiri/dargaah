@@ -1,32 +1,33 @@
 import React, { useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
-import { Box, Paper, Typography, Button, Stack } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
+import WithMaterialUI from "../../component/hoc/withLoginFormik";
+import { v4 as uuidv4 } from "uuid";
+
+import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
+import AddButtonOfDashedBox from "../../component/forms/addButtonDashedBox/addButtonOfDashedBoxForm";
+import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/addSliderImageForm";
+import AddTopSliderImageForm from "../../component/forms/addDashboardTopSliderImage/addTopSliderImageForm";
+// -------
+import { Box, Paper, Typography, Button, Stack } from "@mui/material";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
-import WithMaterialUI from "../../component/hoc/withLoginFormik";
-import { v4 as uuidv4 } from "uuid";
-// -------
 import Grid from "@mui/material/Unstable_Grid2";
-import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
-import UiInputText from "../../component/uiKit/uiInput/uiInput";
-import addDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
-import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
-import AddButtonOfDashedBox from "../../component/forms/addButtonDashedBox/addButtonOfDashedBoxForm";
-import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/addSliderImageForm";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
   const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
-  const [activeAddDashedForm, setActiveDashedForm] = useState(false);
+  const [activeAddDashedForm, setActiveAddDashedForm] = useState(false);
   const [activeAddButtonDashedForm, setActiveAddButtonDashedForm] =
     useState(false);
   const [activeAddSliderImageForm, setActiveAddSliderImageForm] =
+    useState(false);
+  const [activeAddTopSliderImageForm, setActiveAddTopSliderImageForm] =
     useState(false);
   const [chosenBoxId, setChosenBoxId] = useState(0);
   const [sideSlideImage, setSideSlideImage] = useState(null);
@@ -35,23 +36,39 @@ const DashboardAdmin = ({ formik }) => {
 
   const handleForms = (type, id) => {
     setActiveModal(true);
-    if (type === "dashedBox") {
-      setActiveDashedForm(true);
-      setActiveAddButtonDashedForm(false);
-      setActiveAddSliderImageForm(false);
-    }
-    if (type === "buttonBox") {
-      setActiveDashedForm(false);
-      setActiveAddButtonDashedForm(true);
-      setActiveAddSliderImageForm(false);
-      setChosenBoxId(id);
-    }
-    if (type === "leftImageSlider") {
-      setActiveDashedForm(false);
-      setActiveAddButtonDashedForm(false);
-      setActiveAddSliderImageForm(true);
-      setChosenBoxId(id);
-    }
+    let obj = {};
+    obj[type] = true;
+    setActiveAddDashedForm(obj["dashedBox"]);
+    setActiveAddButtonDashedForm(obj["buttonBox"]);
+    setActiveAddSliderImageForm(obj["leftImageSlider"]);
+    setActiveAddTopSliderImageForm(obj["topImageSlider"]);
+    id && setChosenBoxId(id);
+
+    // if (type === "dashedBox") {
+    //   setActiveAddDashedForm(true);
+    //   setActiveAddButtonDashedForm(false);
+    //   setActiveAddSliderImageForm(false);
+    //   setActiveAddTopSliderImageForm(false);
+    // }
+    // if (type === "buttonBox") {
+    //   setActiveAddDashedForm(false);
+    //   setActiveAddButtonDashedForm(true);
+    //   setActiveAddSliderImageForm(false);
+    //   setActiveAddTopSliderImageForm(false);
+    // }
+    // if (type === "leftImageSlider") {
+    //   setActiveAddDashedForm(false);
+    //   setActiveAddButtonDashedForm(false);
+    //   setActiveAddSliderImageForm(true);
+    //   setActiveAddTopSliderImageForm(false);
+    //   setChosenBoxId(id);
+    // }
+    // if (type === "topImageSlider") {
+    //   setActiveDashedForm(false);
+    //   setActiveAddButtonDashedForm(false);
+    //   setActiveAddSliderImageForm(false);
+    //   setActiveAddTopSliderImageForm(true);
+    // }
   };
 
   return (
@@ -63,8 +80,6 @@ const DashboardAdmin = ({ formik }) => {
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            activeAddDashedForm={activeAddDashedForm}
-            setActiveAddButtonDashedForm={setActiveAddButtonDashedForm}
           />
         )}
 
@@ -73,8 +88,6 @@ const DashboardAdmin = ({ formik }) => {
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            activeAddButtonDashedForm={activeAddButtonDashedForm}
-            setActiveAddButtonDashedForm={setActiveAddButtonDashedForm}
             boxId={chosenBoxId}
           />
         )}
@@ -84,8 +97,15 @@ const DashboardAdmin = ({ formik }) => {
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            activeAddSliderImageForm={activeAddSliderImageForm}
-            setActiveAddSliderImageForm={setActiveAddSliderImageForm}
+            sideSlideImage={sideSlideImage}
+            setSideSlideImage={setSideSlideImage}
+          />
+        )}
+        {activeAddTopSliderImageForm && (
+          <AddTopSliderImageForm
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
             sideSlideImage={sideSlideImage}
             setSideSlideImage={setSideSlideImage}
           />
@@ -95,7 +115,22 @@ const DashboardAdmin = ({ formik }) => {
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
-        <UiTopSlider images={interfaceUI?.topSlider?.images} />
+        <UiButton
+          onclick={() => handleForms("topImageSlider")}
+          label={t("dashboard.main.addImage")}
+          variant={"contained"}
+          iconName={"addImage"}
+          iconType={"button"}
+          sx={{
+            width: 150,
+            marginBottom: 2,
+            background: (theme) => theme.palette.gradient.main,
+          }}
+        />
+        <UiTopSlider
+          images={interfaceUI?.topSlider?.images}
+          sx={{ maxHeight: 150, height: 150 }}
+        />
         {/* search */}
         <Box sx={{ marginTop: 2 }}>
           <Grid
@@ -155,11 +190,11 @@ const DashboardAdmin = ({ formik }) => {
               onclick={() => handleForms("leftImageSlider")}
               label={t("dashboard.main.addImage")}
               variant={"contained"}
-              iconName={"add"}
+              iconName={"addImage"}
               iconType={"button"}
               sx={{
                 width: 150,
-
+                marginBottom: 2,
                 background: (theme) => theme.palette.gradient.main,
               }}
             />

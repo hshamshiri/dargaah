@@ -22,7 +22,11 @@ const LinkButton = ({ buttonDetalis }) => {
             className="w-96 p-2 object-contain "
             style={{ maxWidth: 100, maxHeight: 150 }}
             value
-            src={buttonDetalis?.image?.url}
+            src={
+              buttonDetalis?.image?.url
+                ? buttonDetalis?.image?.url
+                : URL.createObjectURL(buttonDetalis?.image?.localUrl)
+            }
           />
           <Typography sx={{ width: "100%", height: "100%", marginTop: 1 }}>
             {buttonDetalis?.label}

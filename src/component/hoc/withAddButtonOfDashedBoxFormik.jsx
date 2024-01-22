@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
+    const MAX_FILE_SIZE = 102400; //100KB
     const validationSchema = yup.object({
       btnName: yup
         .string()
@@ -18,12 +19,20 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
         }),
       btnLink: yup
         .string()
-        .min(2, "Too Short!")
-        .max(30, "Too Long!")
+        .min(2, t("helperText.short"))
+        .max(30, t("helperText.long"))
         .required(t("helperText.requiredField"))
         .test("Unique", t("helperText.duplicate"), (value) => {
           return checkDuplicateLink(value);
         }),
+      file: yup
+        .mixed()
+        .required("Required")
+        .test(
+          "is-valid-size",
+          t("helperText.max-size-50"),
+          (value) => value && value.size <= MAX_FILE_SIZE
+        ),
     });
 
     const checkDuplicateName = (value) => {
@@ -50,9 +59,11 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       initialValues: {
         btnName: "",
         btnLink: "",
+        file: {},
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
+        console.log("tttt");
         let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
         let currenBox = boxList.find((box) => box?.id === props.boxId);
         let btnNameList = currenBox?.buttons;
@@ -62,8 +73,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
             label: values["btnName"],
             link: values["btnLink"],
             image: {
-              id: 1,
-              url: "https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png",
+              localUrl: values?.file,
             },
           });
           props.setInterfaceUI(props?.interfaceUI);

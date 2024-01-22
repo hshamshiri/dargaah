@@ -4,21 +4,24 @@ import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 
-const WithAddSliderImageFormik = (WrappedComponent) => {
+const WithAddTopSliderImageFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
     const MAX_FILE_SIZE = 102400; //100KB
+    const validFileExtensions = {
+      image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
+    };
 
     const validationSchema = yup.object({
-      file: yup
-        .mixed()
-        .required("Required")
-        .test(
-          "is-valid-size",
-          t("helperText.max-size-50"),
-          (value) => value && value.size <= MAX_FILE_SIZE
-        ),
-
+      file: yup.mixed().required("Required"),
+      // .test("is-valid-type", "Not a valid image type", (value) =>
+      //   isValidFileType(value && value?.name.toLowerCase(), "image")
+      // )
+      // .test(
+      //   "is-valid-size",
+      //   "Max allowed size is 100KB",
+      //   (value) => value && value.size <= MAX_FILE_SIZE
+      // )
       imageLink: yup
         .string()
         .min(2, t("helperText.short"))
@@ -27,6 +30,12 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       // .test("Unique", t("helperText.duplicate"), (value) => {  return checkDuplicateLink(value);}),
     });
 
+    function isValidFileType(fileName, fileType) {
+      return (
+        fileName &&
+        validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1
+      );
+    }
     // const checkDuplicateLink = (value) => {
     //   let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
     //   let checkDuplicate = 0;
@@ -48,7 +57,7 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       validationSchema: validationSchema,
       onSubmit: (values) => {
         console.log(values.file.name);
-        let images = props?.interfaceUI?.journals?.images;
+        let images = props?.interfaceUI?.topSlider?.images;
         if (images) {
           images.unshift({
             id: uuidv4(),
@@ -74,4 +83,4 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
   return FormikChecked;
 };
 
-export default WithAddSliderImageFormik;
+export default WithAddTopSliderImageFormik;

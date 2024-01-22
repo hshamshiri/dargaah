@@ -19,15 +19,16 @@ import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 
 const UiIcon = ({ iconType, iconName, classes }) => {
-  const theme = [
+  const iconStyle = [
     {
       borderRadius: 15,
       width: 30,
       height: 30,
       padding: 0.5,
-      color: palette.darkBlue,
+      color: (theme) => theme.palette.base.main,
     },
     iconType === "button" && {
       right: 5,
@@ -39,26 +40,27 @@ const UiIcon = ({ iconType, iconName, classes }) => {
   ];
   const icons = {
     //DownloadSharp: <DownloadSharp sx={{ sx }} />,
-    send: <Send sx={theme} />,
-    mobile: <PhoneAndroidIcon sx={theme} />,
-    volumeUp: <VolumeUpOutlinedIcon sx={theme} />,
-    refresh: <RefreshOutlinedIcon sx={theme} />,
-    download: <DownloadIcon sx={theme} />,
-    contact: <ContactSupportIcon sx={theme} />,
-    phone: <LocalPhoneIcon sx={theme} />,
-    info: <InfoIcon sx={theme} />,
+    send: <Send sx={iconStyle} />,
+    mobile: <PhoneAndroidIcon sx={iconStyle} />,
+    volumeUp: <VolumeUpOutlinedIcon sx={iconStyle} />,
+    refresh: <RefreshOutlinedIcon sx={iconStyle} />,
+    download: <DownloadIcon sx={iconStyle} />,
+    contact: <ContactSupportIcon sx={iconStyle} />,
+    phone: <LocalPhoneIcon sx={iconStyle} />,
+    info: <InfoIcon sx={iconStyle} />,
     //side menu
-    home: <HomeIcon sx={theme} />,
-    notification: <NotificationsActiveIcon sx={theme} />,
-    mychild: <Diversity3Icon sx={theme} />,
-    servieces: <DevicesIcon sx={theme} />,
-    graduates: <SchoolIcon sx={theme} />,
-    organizational: <CorporateFareIcon sx={theme} />,
-    dots: <MoreVertIcon sx={theme} />,
-    power: <PowerSettingsNewIcon sx={theme} />,
-    people: <PeopleAltIcon sx={theme} />,
-    add: <AddBoxIcon sx={theme} />,
-    addFolder: <CreateNewFolderIcon sx={theme} />,
+    home: <HomeIcon sx={iconStyle} />,
+    notification: <NotificationsActiveIcon sx={iconStyle} />,
+    mychild: <Diversity3Icon sx={iconStyle} />,
+    servieces: <DevicesIcon sx={iconStyle} />,
+    graduates: <SchoolIcon sx={iconStyle} />,
+    organizational: <CorporateFareIcon sx={iconStyle} />,
+    dots: <MoreVertIcon sx={iconStyle} />,
+    power: <PowerSettingsNewIcon sx={iconStyle} />,
+    people: <PeopleAltIcon sx={iconStyle} />,
+    add: <AddBoxIcon sx={iconStyle} />,
+    addFolder: <CreateNewFolderIcon sx={iconStyle} />,
+    addImage: <AddPhotoAlternateIcon sx={iconStyle} />,
   };
 
   return icons[iconName];
