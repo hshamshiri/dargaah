@@ -14,20 +14,18 @@ const ShakingView = ({ children, sx }) => {
   };
 
   return (
-    <Grid
+    <Box
       onMouseEnter={inZoom}
       onMouseLeave={outZoom}
       sx={[
-        shake
-          ? {
-              animation: `${shakeAnime} 1s infinite ease`,
-            }
-          : {},
+        shake && {
+          animation: `${shakeAnime} 1s infinite ease`,
+        },
         sx,
       ]}
     >
       {children}
-    </Grid>
+    </Box>
   );
 };
 

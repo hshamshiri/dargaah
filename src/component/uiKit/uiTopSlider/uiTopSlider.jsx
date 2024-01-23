@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const UiTopSlider = ({
   images,
-  interval = 10000,
+  interval = 7000,
   duration = 3000,
   animation = "slide",
   swipe = "true",

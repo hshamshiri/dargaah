@@ -10,7 +10,7 @@ import AddButtonOfDashedBox from "../../component/forms/addButtonDashedBox/addBu
 import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/addSliderImageForm";
 import AddTopSliderImageForm from "../../component/forms/addDashboardTopSliderImage/addTopSliderImageForm";
 // -------
-import { Box, Paper, Typography, Button, Stack } from "@mui/material";
+import { Box, Paper, Typography, Button, Stack, Divider } from "@mui/material";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
@@ -115,24 +115,29 @@ const DashboardAdmin = ({ formik }) => {
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
-        <UiButton
-          onclick={() => handleForms("topImageSlider")}
-          label={t("dashboard.main.addImage")}
-          variant={"contained"}
-          iconName={"addImage"}
-          iconType={"button"}
-          sx={{
-            width: 150,
-            marginBottom: 2,
-            background: (theme) => theme.palette.gradient.main,
-          }}
-        />
-        <UiTopSlider
-          images={interfaceUI?.topSlider?.images}
-          sx={{ maxHeight: 150, height: 150 }}
-        />
+
+        <Stack spacing={2}>
+          <Box width={"100%"} display={"flex"} justifyContent={"end"}>
+            <UiButton
+              onclick={() => handleForms("topImageSlider")}
+              label={t("dashboard.main.addImage")}
+              variant={"contained"}
+              iconName={"addImage"}
+              iconType={"button"}
+              sx={{
+                width: 150,
+                background: (theme) => theme.palette.gradient.main,
+              }}
+            />
+          </Box>
+          <Divider />
+          <UiTopSlider
+            images={interfaceUI?.topSlider?.images}
+            sx={{ minWidth: 150, marginTop: 0 }}
+          />
+        </Stack>
         {/* search */}
-        <Box sx={{ marginTop: 2 }}>
+        {/* <Box sx={{ marginTop: 2 }}>
           <Grid
             container
             direction={{
@@ -162,7 +167,7 @@ const DashboardAdmin = ({ formik }) => {
               justifyContent={"end"}
             ></Grid>
           </Grid>
-        </Box>
+        </Box> */}
 
         {/* content */}
         <Grid
@@ -179,26 +184,31 @@ const DashboardAdmin = ({ formik }) => {
         >
           {/* left side */}
           <Grid
-            rowSpacing={3}
             columnSpacing={{ xs: 1, sm: 2, md: 2 }}
-            paddingTop={2}
+            position={"relative"}
             xs={12}
             sm={12}
             md={4}
           >
-            <UiButton
-              onclick={() => handleForms("leftImageSlider")}
-              label={t("dashboard.main.addImage")}
-              variant={"contained"}
-              iconName={"addImage"}
-              iconType={"button"}
-              sx={{
-                width: 150,
-                marginBottom: 2,
-                background: (theme) => theme.palette.gradient.main,
-              }}
-            />
-
+            <Box
+              width={"100%"}
+              display={"flex"}
+              justifyContent={"end"}
+              marginY={1}
+            >
+              <UiButton
+                onclick={() => handleForms("leftImageSlider")}
+                label={t("dashboard.main.addImage")}
+                variant={"contained"}
+                iconName={"addImage"}
+                iconType={"button"}
+                sx={{
+                  width: 150,
+                  right: 10,
+                  background: (theme) => theme.palette.gradient.main,
+                }}
+              />
+            </Box>
             <Grid
               boxShadow={3}
               sx={{
@@ -240,9 +250,10 @@ const DashboardAdmin = ({ formik }) => {
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"end"}
-            rowGap={5}
+            rowGap={1}
           >
-            <Grid display={"flex"} justifyContent={"center"}>
+            <Divider>افزودن مجموعه</Divider>
+            <Grid display={"flex"} justifyContent={"center"} width={"100%"}>
               <UiButton
                 onclick={() => handleForms("dashedBox")}
                 label={t("dashboard.main.addBox")}
@@ -254,31 +265,18 @@ const DashboardAdmin = ({ formik }) => {
                 }}
               />
             </Grid>
+
+            <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
+
             {interfaceUI?.dashedBorderContainers?.dashBoxes.map((dashedBox) => (
-              <Box position={"relative"} key={uuidv4()} sx={{}}>
-                {/* <Box
-                  height={55}
-                  minWidth={100}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  color={"white"}
-                  padding={2}
-                  position={"absolute"}
-                  top={-30}
-                  //right={100}
-                  zIndex={-1}
-                  variant={"filled"}
-                  sx={{
-                    borderTopLeftRadius: 15,
-                    borderTopRightRadius: 15,
-                    // background:
-                    //"linear-gradient(to right bottom, #430089, #82ffa1)",
-                    backgroundColor: "base.main",
-                  }}
-                >
-                  {"افزودن دکمه"}
-                </Box> */}
+              <Grid
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"end"}
+                //width={"100%"}
+                key={uuidv4()}
+                sx={{ marginTop: 3 }}
+              >
                 <UiButton
                   onclick={() => handleForms("buttonBox", dashedBox?.id)}
                   label={t("dashboard.main.addBtn")}
@@ -287,10 +285,6 @@ const DashboardAdmin = ({ formik }) => {
                   iconType={"button"}
                   sx={{
                     width: 150,
-                    position: "absolute",
-                    zIndex: 1,
-                    top: -30,
-                    left: 4,
                     background: (theme) => theme.palette.gradient.main,
                   }}
                 />
@@ -298,8 +292,9 @@ const DashboardAdmin = ({ formik }) => {
                   id={dashedBox?.id}
                   buttons={dashedBox?.buttons}
                   label={dashedBox?.label}
+                  hideLabel={true}
                 />
-              </Box>
+              </Grid>
             ))}
           </Grid>
         </Grid>

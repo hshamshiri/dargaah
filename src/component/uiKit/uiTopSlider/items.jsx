@@ -10,7 +10,8 @@ const Item = ({ item }) => {
           style={{
             flex: 1,
             resizeMode: "contain",
-            maxHeight: 150,
+            maxHeight: 200,
+            minHeight: 100,
           }}
         />
       </Link>

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
 
-const UiDashedBox = ({ buttons, label }) => {
+const UiDashedBox = ({ buttons, label, hideLabel }) => {
   return (
     <Grid
       container
@@ -16,6 +16,9 @@ const UiDashedBox = ({ buttons, label }) => {
       marginTop={2}
       border={`2px dashed ${purple[500]}`}
       backgroundColor={"white"}
+      xs={12}
+      sm={12}
+      md={12}
     >
       <Box
         height={55}
@@ -29,6 +32,7 @@ const UiDashedBox = ({ buttons, label }) => {
         top={-50}
         right={0}
         zIndex={-1}
+        display={hideLabel && "none"}
         sx={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
@@ -37,21 +41,22 @@ const UiDashedBox = ({ buttons, label }) => {
       >
         {label}
       </Box>
-      <Grid
-        xs={12}
-        sm={12}
-        md={12}
-        container
-        height={"100%"}
-        display={"flex"}
-        flexWrap={"wrap"}
-        justifyContent={"end"}
-        direction={"rtl"}
+      <Box
+        sx={{
+          display: "grid",
+          gridTemplateColumns: {
+            xs: "repeat(3, 1fr)",
+            sm: "repeat(4, 4fr)",
+            md: "repeat(5, 2fr)",
+            lg: "repeat(6, 2fr)",
+          },
+          direction: "rtl",
+        }}
       >
         {buttons.map((button) => {
           return <LinkButton key={uuidv4()} buttonDetalis={button} />;
         })}
-      </Grid>
+      </Box>
     </Grid>
   );
 };
