@@ -37,24 +37,22 @@ const UiButton = ({
       className={`w-60 ${classes}`}
       endIcon={<UiIcon iconType={iconType} iconName={iconName} />}
       component={component}
-      sx={[
-        {
-          borderRadius: 30,
-          padding: 1,
-          margin: 0,
-          backgroundColor: palette.darkBlue,
-          height: 40,
-          width: 300,
-          // "@media only screen and (min-width: 980px)": {},
-          // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
-          //   width: 300,
-          // },
-          // "@media screen and (max-width: 420px)": {
-          //   width: 200,
-          // },
-        },
-        sx,
-      ]}
+      sx={{
+        borderRadius: "30px",
+        padding: 1,
+        margin: 0,
+        backgroundColor: palette.darkBlue,
+        height: 40,
+        width: 300,
+        ...sx,
+        // "@media only screen and (min-width: 980px)": {},
+        // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
+        //   width: 300,
+        // },
+        // "@media screen and (max-width: 420px)": {
+        //   width: 200,
+        // },
+      }}
     >
       {label}
     </Button>

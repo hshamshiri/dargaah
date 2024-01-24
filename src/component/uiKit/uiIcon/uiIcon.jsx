@@ -20,6 +20,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 
 const UiIcon = ({ iconType, iconName, classes }) => {
   const iconStyle = [
@@ -31,9 +32,9 @@ const UiIcon = ({ iconType, iconName, classes }) => {
       color: (theme) => theme.palette.base.main,
     },
     iconType === "button" && {
+      position: "absolute",
       right: 5,
       top: 5,
-      position: "absolute",
       backgroundColor: "white",
     },
     classes,
@@ -61,6 +62,7 @@ const UiIcon = ({ iconType, iconName, classes }) => {
     add: <AddBoxIcon sx={iconStyle} />,
     addFolder: <CreateNewFolderIcon sx={iconStyle} />,
     addImage: <AddPhotoAlternateIcon sx={iconStyle} />,
+    edit: <EditCalendarIcon sx={iconStyle} />,
   };
 
   return icons[iconName];

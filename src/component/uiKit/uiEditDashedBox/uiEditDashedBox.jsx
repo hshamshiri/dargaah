@@ -4,7 +4,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
 
-const UiDashedBox = ({ buttons, label, hideLabel }) => {
+const UiEditDashedBox = ({ buttons, label, hideLabel }) => {
   return (
     <Grid
       container
@@ -61,4 +61,4 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
   );
 };
 
-export default UiDashedBox;
+export default UiEditDashedBox;

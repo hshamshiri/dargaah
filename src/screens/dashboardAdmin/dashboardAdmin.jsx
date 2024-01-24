@@ -17,12 +17,14 @@ import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
+import EditDahedForm from "../../component/forms/editDashBox/editDashedForm";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
   const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
   const [activeAddDashedForm, setActiveAddDashedForm] = useState(false);
+  const [activeEditDashedForm, setActiveEditDashedForm] = useState(false);
   const [activeAddButtonDashedForm, setActiveAddButtonDashedForm] =
     useState(false);
   const [activeAddSliderImageForm, setActiveAddSliderImageForm] =
@@ -39,7 +41,8 @@ const DashboardAdmin = ({ formik }) => {
     let obj = {};
     obj[type] = true;
     setActiveAddDashedForm(obj["dashedBox"]);
-    setActiveAddButtonDashedForm(obj["buttonBox"]);
+    setActiveEditDashedForm(obj["editDashedBox"]);
+    setActiveAddButtonDashedForm(obj["buttonOfDashedBox"]);
     setActiveAddSliderImageForm(obj["leftImageSlider"]);
     setActiveAddTopSliderImageForm(obj["topImageSlider"]);
     id && setChosenBoxId(id);
@@ -80,6 +83,15 @@ const DashboardAdmin = ({ formik }) => {
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
+          />
+        )}
+
+        {activeEditDashedForm && (
+          <EditDahedForm
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
+            boxId={chosenBoxId}
           />
         )}
 
@@ -278,7 +290,9 @@ const DashboardAdmin = ({ formik }) => {
                 sx={{ marginTop: 3 }}
               >
                 <UiButton
-                  onclick={() => handleForms("buttonBox", dashedBox?.id)}
+                  onclick={() =>
+                    handleForms("buttonOfDashedBox", dashedBox?.id)
+                  }
                   label={t("dashboard.main.addBtn")}
                   variant={"contained"}
                   iconName={"add"}
@@ -286,6 +300,18 @@ const DashboardAdmin = ({ formik }) => {
                   sx={{
                     width: 150,
                     background: (theme) => theme.palette.gradient.main,
+                  }}
+                />
+                <UiButton
+                  onclick={() => handleForms("editDashedBox", dashedBox?.id)}
+                  label={t("dashboard.main.edit")}
+                  variant={"contained"}
+                  iconName={"edit"}
+                  iconType={"button"}
+                  sx={{
+                    width: 150,
+                    background: (theme) => theme.palette.gradient.main,
+                    marginTop: 1,
                   }}
                 />
                 <UiDashedBox
