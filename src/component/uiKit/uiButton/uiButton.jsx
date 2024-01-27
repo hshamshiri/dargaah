@@ -26,6 +26,7 @@ const UiButton = ({
   iconType,
   iconName,
   component,
+  iconColor,
   sx,
 }) => {
   return (
@@ -35,12 +36,13 @@ const UiButton = ({
       disabled={disable || false}
       variant={variant || "filled"}
       className={`w-60 ${classes}`}
-      endIcon={<UiIcon iconType={iconType} iconName={iconName} />}
+      endIcon={
+        <UiIcon iconType={iconType} iconName={iconName} iconColor={iconColor} />
+      }
       component={component}
       sx={{
         borderRadius: "30px",
         padding: 1,
-        margin: 0,
         backgroundColor: palette.darkBlue,
         height: 40,
         width: 300,

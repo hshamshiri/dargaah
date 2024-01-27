@@ -1,6 +1,6 @@
 import React from "react";
 import { Box } from "@mui/material";
-import UiDashedBox from "../../uiKit/uiDashedBox/uidDashedBox";
+import UiEditDashedBox from "../../uiKit/uiEditDashedBox/uiEditDashedBox";
 
 const EditDahedForm = ({
   interfaceUI,
@@ -14,7 +14,7 @@ const EditDahedForm = ({
 
   return (
     <Box>
-      <UiDashedBox buttons={currentBox?.buttons} />
+      <UiEditDashedBox buttons={currentBox?.buttons} />
     </Box>
   );
 };

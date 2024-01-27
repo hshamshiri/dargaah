@@ -1,10 +1,31 @@
-import LinkButton from "./LinkButton";
+import EditDashedButton from "./editDashedButton";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
+import UiButton from "../uiButton/uiButton";
+import { object } from "yup";
 
-const UiEditDashedBox = ({ buttons, label, hideLabel }) => {
+const UiEditDashedBox = ({
+  interfaceUI,
+  setInterfaceUI,
+  boxId,
+  handleForms,
+  buttons,
+  label,
+  hideLabel,
+}) => {
+  const interfaceUiCopy = interfaceUI;
+  const deleteForm = () => {
+    let filterBoxes = [];
+    if (interfaceUiCopy?.dashedBorderContainers?.dashBoxes) {
+      filterBoxes = interfaceUiCopy?.dashedBorderContainers?.dashBoxes.filter(
+        (box) => box.id != boxId
+      );
+    }
+    interfaceUiCopy.dashedBorderContainers.dashBoxes = filterBoxes;
+    setInterfaceUI({ ...interfaceUiCopy });
+  };
   return (
     <Grid
       container
@@ -23,7 +44,7 @@ const UiEditDashedBox = ({ buttons, label, hideLabel }) => {
       <Box
         height={55}
         minWidth={100}
-        display={"flex"}
+        display={hideLabel ? "flex" : "none"}
         justifyContent={"center"}
         alignItems={"center"}
         color={"white"}
@@ -32,7 +53,6 @@ const UiEditDashedBox = ({ buttons, label, hideLabel }) => {
         top={-50}
         right={0}
         zIndex={-1}
-        display={hideLabel && "none"}
         sx={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
@@ -40,6 +60,48 @@ const UiEditDashedBox = ({ buttons, label, hideLabel }) => {
         }}
       >
         {label}
+      </Box>
+      <Box display={"flex"} position={"absolute"} left={10} top={-50}>
+        <UiButton
+          onclick={deleteForm}
+          //label={t("dashboard.main.addBtn")}
+          variant={"contained"}
+          iconName={"delete"}
+          iconType={"button"}
+          iconColor={"red"}
+          sx={{
+            width: 20,
+            minWidth: 40,
+            margin: 0.1,
+            background: (theme) => theme.palette.gradient.main,
+          }}
+        />
+        <UiButton
+          onclick={() => handleForms("editDashedBox", boxId)}
+          //label={t("dashboard.main.edit")}
+          variant={"contained"}
+          iconName={"edit"}
+          iconType={"button"}
+          sx={{
+            width: 20,
+            minWidth: 40,
+            margin: 0.1,
+            background: (theme) => theme.palette.gradient.main,
+          }}
+        />
+        <UiButton
+          onclick={() => handleForms("addButtonOfDashedBox", boxId)}
+          //label={t("dashboard.main.edit")}
+          variant={"contained"}
+          iconName={"add"}
+          iconType={"button"}
+          sx={{
+            width: 20,
+            minWidth: 40,
+            margin: 0.1,
+            background: (theme) => theme.palette.gradient.main,
+          }}
+        />
       </Box>
       <Box
         sx={{
@@ -54,7 +116,7 @@ const UiEditDashedBox = ({ buttons, label, hideLabel }) => {
         }}
       >
         {buttons.map((button) => {
-          return <LinkButton key={uuidv4()} buttonDetalis={button} />;
+          return <EditDashedButton key={uuidv4()} buttonDetalis={button} />;
         })}
       </Box>
     </Grid>

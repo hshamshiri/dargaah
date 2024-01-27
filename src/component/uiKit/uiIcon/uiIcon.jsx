@@ -21,15 +21,16 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-const UiIcon = ({ iconType, iconName, classes }) => {
+const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
   const iconStyle = [
     {
       borderRadius: 15,
       width: 30,
       height: 30,
       padding: 0.5,
-      color: (theme) => theme.palette.base.main,
+      color: iconColor ? iconColor : (theme) => theme.palette.base.main,
     },
     iconType === "button" && {
       position: "absolute",
@@ -63,6 +64,7 @@ const UiIcon = ({ iconType, iconName, classes }) => {
     addFolder: <CreateNewFolderIcon sx={iconStyle} />,
     addImage: <AddPhotoAlternateIcon sx={iconStyle} />,
     edit: <EditCalendarIcon sx={iconStyle} />,
+    delete: <DeleteForeverIcon sx={iconStyle} />,
   };
 
   return icons[iconName];

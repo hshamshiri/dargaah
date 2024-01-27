@@ -32,7 +32,7 @@ const AddButtonOfDashedBox = ({ formik, interfaceUI, setInterfaceUI, id }) => {
               }}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
-              //sx={{ display: "none" }}
+              sx={{ display: "none" }}
             />
             <Box>
               <img

@@ -4,7 +4,7 @@ import ShakingView from "../uiTransitions/uiShake/uiShake";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
-const editDashedButton = ({ buttonDetalis }) => {
+const EditDashedButton = ({ buttonDetalis }) => {
   return (
     <Fragment>
       <ShakingView>
@@ -32,4 +32,4 @@ const editDashedButton = ({ buttonDetalis }) => {
   );
 };
 
-export default editDashedButton;
+export default EditDashedButton;

@@ -14,6 +14,7 @@ import { Box, Paper, Typography, Button, Stack, Divider } from "@mui/material";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
+import UiEditDashedBox from "../../component/uiKit/uiEditDashedBox/uiEditDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
@@ -34,6 +35,8 @@ const DashboardAdmin = ({ formik }) => {
   const [chosenBoxId, setChosenBoxId] = useState(0);
   const [sideSlideImage, setSideSlideImage] = useState(null);
 
+  const [activeEditBoxMode, setActiveEditBoxMode] = useState(true);
+
   const toggleShowModal = () => setActiveModal(!activeModal);
 
   const handleForms = (type, id) => {
@@ -42,7 +45,7 @@ const DashboardAdmin = ({ formik }) => {
     obj[type] = true;
     setActiveAddDashedForm(obj["dashedBox"]);
     setActiveEditDashedForm(obj["editDashedBox"]);
-    setActiveAddButtonDashedForm(obj["buttonOfDashedBox"]);
+    setActiveAddButtonDashedForm(obj["addButtonOfDashedBox"]);
     setActiveAddSliderImageForm(obj["leftImageSlider"]);
     setActiveAddTopSliderImageForm(obj["topImageSlider"]);
     id && setChosenBoxId(id);
@@ -286,40 +289,28 @@ const DashboardAdmin = ({ formik }) => {
                 flexDirection={"column"}
                 alignItems={"end"}
                 //width={"100%"}
+                position={"relative"}
                 key={uuidv4()}
                 sx={{ marginTop: 3 }}
               >
-                <UiButton
-                  onclick={() =>
-                    handleForms("buttonOfDashedBox", dashedBox?.id)
-                  }
-                  label={t("dashboard.main.addBtn")}
-                  variant={"contained"}
-                  iconName={"add"}
-                  iconType={"button"}
-                  sx={{
-                    width: 150,
-                    background: (theme) => theme.palette.gradient.main,
-                  }}
-                />
-                <UiButton
-                  onclick={() => handleForms("editDashedBox", dashedBox?.id)}
-                  label={t("dashboard.main.edit")}
-                  variant={"contained"}
-                  iconName={"edit"}
-                  iconType={"button"}
-                  sx={{
-                    width: 150,
-                    background: (theme) => theme.palette.gradient.main,
-                    marginTop: 1,
-                  }}
-                />
-                <UiDashedBox
-                  id={dashedBox?.id}
-                  buttons={dashedBox?.buttons}
-                  label={dashedBox?.label}
-                  hideLabel={true}
-                />
+                {activeEditBoxMode ? (
+                  <UiEditDashedBox
+                    interfaceUI={interfaceUI}
+                    setInterfaceUI={setInterfaceUI}
+                    handleForms={handleForms}
+                    boxId={dashedBox?.id}
+                    buttons={dashedBox?.buttons}
+                    label={dashedBox?.label}
+                    hideLabel={true}
+                  />
+                ) : (
+                  <UiDashedBox
+                    id={dashedBox?.id}
+                    buttons={dashedBox?.buttons}
+                    label={dashedBox?.label}
+                    hideLabel={true}
+                  />
+                )}
               </Grid>
             ))}
           </Grid>
