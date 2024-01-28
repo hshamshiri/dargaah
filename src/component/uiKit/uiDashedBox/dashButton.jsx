@@ -4,18 +4,25 @@ import ShakingView from "../uiTransitions/uiShake/uiShake";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 
-const EditDashedButton = ({ buttonDetalis }) => {
+const DashedButton = ({ buttonDetalis }) => {
   return (
     <Fragment>
-      <ShakingView>
-        <Grid container justifyContent={"center"} margin={1}>
+      <ShakingView sx={{ margin: 0.2 }}>
+        <Grid
+          container
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+        >
           {/* <Link to={buttonDetalis?.link || "#"}> */}
 
-          <Box sx={{ width: { xs: "50%", sm: "50%", md: "70%", lg: "60%" } }}>
+          <Box display={"flex"}>
             <img
               style={{
-                width: "100%",
-                resize: "contain",
+                maxWidth: "100%",
+                maxHeight: 80,
+                heightL: 80,
               }}
               src={
                 buttonDetalis?.image?.url
@@ -24,7 +31,9 @@ const EditDashedButton = ({ buttonDetalis }) => {
               }
             />
           </Box>
-          <Typography sx={{ width: "100%" }}>{buttonDetalis?.label}</Typography>
+          <Typography display={"flex"} margin={1}>
+            {buttonDetalis?.label}
+          </Typography>
           {/* </Link> */}
         </Grid>
       </ShakingView>
@@ -32,4 +41,4 @@ const EditDashedButton = ({ buttonDetalis }) => {
   );
 };
 
-export default EditDashedButton;
+export default DashedButton;

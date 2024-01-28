@@ -14,67 +14,38 @@ import { Box, Paper, Typography, Button, Stack, Divider } from "@mui/material";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
 import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
-import UiEditDashedBox from "../../component/uiKit/uiEditDashedBox/uiEditDashedBox";
+import UiAdminDashedBox from "../../component/uiKit/uiAdminDashedBox/uiAdminDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
-import EditDahedForm from "../../component/forms/editDashBox/editDashedForm";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
   const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
   const [activeAddDashedForm, setActiveAddDashedForm] = useState(false);
-  const [activeEditDashedForm, setActiveEditDashedForm] = useState(false);
+  const [activeAdminDashedForm, setActiveAdminDashedForm] = useState(true);
   const [activeAddButtonDashedForm, setActiveAddButtonDashedForm] =
     useState(false);
   const [activeAddSliderImageForm, setActiveAddSliderImageForm] =
     useState(false);
   const [activeAddTopSliderImageForm, setActiveAddTopSliderImageForm] =
     useState(false);
-  const [chosenBoxId, setChosenBoxId] = useState(0);
   const [sideSlideImage, setSideSlideImage] = useState(null);
-
-  const [activeEditBoxMode, setActiveEditBoxMode] = useState(true);
+  const [chosenBoxInfo, setChosenBoxInfo] = useState(null);
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
-  const handleForms = (type, id) => {
+  const handleForms = (type, boxInfo) => {
     setActiveModal(true);
     let obj = {};
     obj[type] = true;
     setActiveAddDashedForm(obj["dashedBox"]);
-    setActiveEditDashedForm(obj["editDashedBox"]);
     setActiveAddButtonDashedForm(obj["addButtonOfDashedBox"]);
     setActiveAddSliderImageForm(obj["leftImageSlider"]);
     setActiveAddTopSliderImageForm(obj["topImageSlider"]);
-    id && setChosenBoxId(id);
-
-    // if (type === "dashedBox") {
-    //   setActiveAddDashedForm(true);
-    //   setActiveAddButtonDashedForm(false);
-    //   setActiveAddSliderImageForm(false);
-    //   setActiveAddTopSliderImageForm(false);
-    // }
-    // if (type === "buttonBox") {
-    //   setActiveAddDashedForm(false);
-    //   setActiveAddButtonDashedForm(true);
-    //   setActiveAddSliderImageForm(false);
-    //   setActiveAddTopSliderImageForm(false);
-    // }
-    // if (type === "leftImageSlider") {
-    //   setActiveAddDashedForm(false);
-    //   setActiveAddButtonDashedForm(false);
-    //   setActiveAddSliderImageForm(true);
-    //   setActiveAddTopSliderImageForm(false);
-    //   setChosenBoxId(id);
-    // }
-    // if (type === "topImageSlider") {
-    //   setActiveDashedForm(false);
-    //   setActiveAddButtonDashedForm(false);
-    //   setActiveAddSliderImageForm(false);
-    //   setActiveAddTopSliderImageForm(true);
-    // }
+    setChosenBoxInfo(null);
+    boxInfo && setChosenBoxInfo(boxInfo);
   };
 
   return (
@@ -86,24 +57,25 @@ const DashboardAdmin = ({ formik }) => {
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
+            chosenBoxInfo={chosenBoxInfo}
           />
         )}
 
-        {activeEditDashedForm && (
-          <EditDahedForm
+        {/* {activeEditAdminDashedBoxNameForm && (
+          <activeEditAdminDashedBoxNameForm
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            boxId={chosenBoxId}
+            value={boxName}
           />
-        )}
+        )} */}
 
         {activeAddButtonDashedForm && (
           <AddButtonOfDashedBox
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            boxId={chosenBoxId}
+            boxInfo={chosenBoxInfo}
           />
         )}
 
@@ -264,7 +236,7 @@ const DashboardAdmin = ({ formik }) => {
             md={8}
             display={"flex"}
             flexDirection={"column"}
-            justifyContent={"end"}
+            justifyContent={"start"}
             rowGap={1}
           >
             <Divider>افزودن مجموعه</Divider>
@@ -293,12 +265,12 @@ const DashboardAdmin = ({ formik }) => {
                 key={uuidv4()}
                 sx={{ marginTop: 3 }}
               >
-                {activeEditBoxMode ? (
-                  <UiEditDashedBox
+                {activeAdminDashedForm ? (
+                  <UiAdminDashedBox
                     interfaceUI={interfaceUI}
                     setInterfaceUI={setInterfaceUI}
                     handleForms={handleForms}
-                    boxId={dashedBox?.id}
+                    boxInfo={dashedBox}
                     buttons={dashedBox?.buttons}
                     label={dashedBox?.label}
                     hideLabel={true}

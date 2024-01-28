@@ -32,7 +32,18 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
       onSubmit: (values) => {
         let obj = props.interfaceUI?.dashedBorderContainers?.dashBoxes;
         if (obj) {
-          obj.unshift({ id: uuidv4(), label: values.boxName, buttons: [] });
+          if (props.chosenBoxInfo) {
+            //edit boxName
+            let boxNameList =
+              props.interfaceUI?.dashedBorderContainers?.dashBoxes;
+            let findBox = boxNameList.find(
+              (el) => el?.id === props.chosenBoxInfo.id
+            );
+            findBox.label = values.boxName;
+          } else {
+            //add new
+            obj.unshift({ id: uuidv4(), label: values.boxName, buttons: [] });
+          }
           props.setInterfaceUI(props.interfaceUI);
           props.toggleShowModal();
         } else {

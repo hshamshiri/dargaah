@@ -1,4 +1,4 @@
-import LinkButton from "./LinkButton";
+import DashedButton from "./dashButton";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
@@ -13,7 +13,7 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
       position={"relative"}
       borderRadius={5}
       boxShadow={3}
-      marginTop={5}
+      marginTop={4}
       border={`2px dashed ${purple[500]}`}
       backgroundColor={"white"}
       xs={12}
@@ -22,7 +22,7 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
     >
       <Box
         height={55}
-        minWidth={100}
+        minWidth={150}
         display={"flex"}
         justifyContent={"center"}
         alignItems={"center"}
@@ -32,7 +32,6 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
         top={-50}
         right={0}
         zIndex={-1}
-        display={hideLabel && "none"}
         sx={{
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
@@ -44,6 +43,7 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
       <Box
         sx={{
           display: "grid",
+          padding: 3,
           gridTemplateColumns: {
             xs: "repeat(3, 1fr)",
             sm: "repeat(4, 4fr)",
@@ -54,7 +54,7 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
         }}
       >
         {buttons.map((button) => {
-          return <LinkButton key={uuidv4()} buttonDetalis={button} />;
+          return <DashedButton key={uuidv4()} buttonDetalis={button} />;
         })}
       </Box>
     </Grid>

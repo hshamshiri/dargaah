@@ -9,6 +9,7 @@ const UiInputText = ({
   id = "outlined-basic", //outlined-basic
   type,
   name,
+  value,
   label,
   accept,
   variant = "outlined", //outlined
@@ -35,6 +36,7 @@ const UiInputText = ({
         id={id}
         type={type}
         name={name}
+        value={value}
         label={label}
         variant={variant}
         error={error}

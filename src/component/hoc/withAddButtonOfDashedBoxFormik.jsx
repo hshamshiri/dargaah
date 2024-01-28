@@ -37,7 +37,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
 
     const checkDuplicateName = (value) => {
       let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      let currenBox = boxList.find((box) => box?.id === props.boxId);
+      let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
       let btnNameList = currenBox?.buttons;
       let duplicateName = btnNameList?.filter((el) => el?.label === value);
       return duplicateName?.length > 0 ? false : true;
@@ -63,9 +63,8 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log("tttt");
         let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-        let currenBox = boxList.find((box) => box?.id === props.boxId);
+        let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
         let btnNameList = currenBox?.buttons;
         if (btnNameList) {
           currenBox.buttons.unshift({
