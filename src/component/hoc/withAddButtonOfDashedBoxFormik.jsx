@@ -12,10 +12,12 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       btnName: yup
         .string()
         .min(2, t("helperText.short"))
-        .max(15, t("helperText.long"))
+        .max(25, t("helperText.long"))
         .required(t("helperText.requiredField"))
         .test("Unique", t("helperText.duplicate"), (value) => {
-          return checkDuplicateName(value);
+          return props["buttonInfo"]["label"] && value != null
+            ? true
+            : checkDuplicateName(value);
         }),
       btnLink: yup
         .string()
@@ -36,6 +38,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
     });
 
     const checkDuplicateName = (value) => {
+      console.log("dddddd:", value);
       let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
       let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
       let btnNameList = currenBox?.buttons;
@@ -57,29 +60,42 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
 
     const formik = useFormik({
       initialValues: {
-        btnName: "",
-        btnLink: "",
+        btnName: props["buttonInfo"] ? props["buttonInfo"]["label"] : null,
+        btnLink: props["buttonInfo"] ? props["buttonInfo"]["link"] : null,
         file: {},
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
         let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
         let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
-        let btnNameList = currenBox?.buttons;
-        if (btnNameList) {
-          currenBox.buttons.unshift({
-            id: uuidv4(),
-            label: values["btnName"],
-            link: values["btnLink"],
-            image: {
-              localUrl: values?.file,
-            },
-          });
-          props.setInterfaceUI(props?.interfaceUI);
-          props.toggleShowModal(false);
+
+        if (props.buttonInfo) {
+          //edit buttonlable
+          let currentButton = currenBox?.buttons.find(
+            (btn) => btn?.id === props.buttonInfo.id
+          );
+          currentButton.label = values["btnName"];
+          currentButton.link = values["btnLink"];
+          currentButton.image = {
+            localUrl: values?.file,
+          };
         } else {
-          //input required
+          //new button
+          if (currenBox?.buttons) {
+            currenBox.buttons.unshift({
+              id: uuidv4(),
+              label: values["btnName"],
+              link: values["btnLink"],
+              image: {
+                localUrl: values?.file,
+              },
+            });
+          } else {
+            //input required
+          }
         }
+        props.setInterfaceUI(props?.interfaceUI);
+        props.toggleShowModal(false);
       },
     });
     return (

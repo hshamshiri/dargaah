@@ -11,7 +11,7 @@ const AddDashedBoxForm = ({
   interfaceUI,
   setInterfaceUI,
   toggleShowModal,
-  chosenBoxInfo,
+  boxInfo,
 }) => {
   const [t] = useTranslation();
 
@@ -33,14 +33,14 @@ const AddDashedBoxForm = ({
           name="boxName"
           label={t("dashboard.main.boxName")}
           value={formik.values.boxName}
-          placeHolder={chosenBoxInfo && chosenBoxInfo.label}
+          placeHolder={boxInfo && boxInfo.label}
           onChange={formik.handleChange}
           error={formik.touched.boxName && Boolean(formik.errors.boxName)}
           helperText={formik.touched.boxName && formik.errors.boxName}
         />
         <UiButton
           type="submit"
-          label={chosenBoxInfo ? "ویرایش" : "افزودن"}
+          label={boxInfo ? "ویرایش" : "افزودن"}
           variant={"contained"}
           sx={{ width: "50%" }}
         />

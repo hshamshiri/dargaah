@@ -1,10 +1,11 @@
+import { Fragment } from "react";
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import ShakingView from "../uiTransitions/uiShake/uiShake";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
 
-const AdminDashedButton = ({ buttonDetalis }) => {
+const AdminDashedButton = ({ handleForms, boxInfo, buttonDetalis }) => {
   return (
     <Fragment>
       <ShakingView sx={{ margin: 0.2 }}>
@@ -16,9 +17,13 @@ const AdminDashedButton = ({ buttonDetalis }) => {
           alignItems={"center"}
         >
           {/* <Link to={buttonDetalis?.link || "#"}> */}
-
-          <Box display={"flex"}>
-            <img
+          <Box
+            display={"flex"}
+            onClick={() =>
+              handleForms("addButtonOfDashedBox", boxInfo, buttonDetalis)
+            }
+          >
+            <LazyLoadImage
               style={{
                 maxWidth: "100%",
                 maxHeight: 80,

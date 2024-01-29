@@ -15,7 +15,6 @@ const UiAdminDashedBox = ({
   buttons,
   label,
   hideLabel,
-  setChosenBoxInfo,
 }) => {
   const [t] = useTranslation();
   const interfaceUiCopy = interfaceUI;
@@ -32,7 +31,7 @@ const UiAdminDashedBox = ({
   return (
     <Grid
       container
-      minHeight={10}
+      minHeight={200}
       display={"flex"}
       position={"relative"}
       borderRadius={5}
@@ -65,10 +64,12 @@ const UiAdminDashedBox = ({
         {label}
       </Box>
       <Box display={"flex"} position={"absolute"} left={10} top={-50}>
-        <Tooltip title="Add" arrow>
-          <Button>Arrow</Button>
-        </Tooltip>
-        <Tooltip title="" arrow>
+        <Tooltip
+          title={t("dashboard.main.deleteBox")}
+          placement="top"
+          arrow
+          TransitionComponent={Zoom}
+        >
           <Box>
             <UiButton
               onclick={deleteForm}
@@ -86,11 +87,7 @@ const UiAdminDashedBox = ({
             />
           </Box>
         </Tooltip>
-        <Tooltip
-          title={t("dashboard.main.editBoxName")}
-          TransitionComponent={Zoom}
-          arrow
-        >
+        <Tooltip title={t("dashboard.main.editBoxName")} placement="top" arrow>
           <Box>
             <UiButton
               onclick={() => handleForms("dashedBox", boxInfo)}
@@ -107,11 +104,10 @@ const UiAdminDashedBox = ({
             />
           </Box>
         </Tooltip>
-        <Tooltip title="" arrow>
+        <Tooltip title={t("dashboard.main.addBtn")} placement="top" arrow>
           <Box>
             <UiButton
               onclick={() => handleForms("addButtonOfDashedBox", boxInfo)}
-              //label={t("dashboard.main.edit")}
               variant={"contained"}
               iconName={"add"}
               iconType={"button"}
@@ -140,7 +136,14 @@ const UiAdminDashedBox = ({
         }}
       >
         {buttons.map((button) => {
-          return <AdminDashedButton key={uuidv4()} buttonDetalis={button} />;
+          return (
+            <AdminDashedButton
+              key={uuidv4()}
+              boxInfo={boxInfo}
+              buttonDetalis={button}
+              handleForms={handleForms}
+            />
+          );
         })}
       </Box>
     </Grid>

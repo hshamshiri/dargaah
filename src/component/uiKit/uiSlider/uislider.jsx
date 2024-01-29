@@ -45,8 +45,7 @@ const UiSlider = ({
         }
       }
     >
-      {images.length > 0 &&
-        images.map((image, i) => <Item key={uuidv4()} item={image} />)}
+      {images && images.map((image, i) => <Item key={uuidv4()} item={image} />)}
     </Carousel>
   );
 };

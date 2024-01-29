@@ -56,12 +56,13 @@
       "boxName": "نام مجموعه",
       "buttonName": "نام",
       "link": "آدرس",
+      "add": "افزودن",
+      "edit": "ویرایش",
       "addBox": "افزودن گروه",
       "addBtn": "افزودن دکمه",
       "addImage": "افزودن تصویر",
-      "add": "افزودن",
-      "edit": "ویرایش",
-      "editBoxName": "ویرایش نام مجموعه"
+      "editBoxName": "ویرایش نام مجموعه",
+      "deleteBox": "حذف مجموعه"
     }
   },
   "helperText": {

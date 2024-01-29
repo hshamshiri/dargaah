@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
@@ -23,55 +23,36 @@ const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
   const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
-  const [activeAddDashedForm, setActiveAddDashedForm] = useState(false);
-  const [activeAdminDashedForm, setActiveAdminDashedForm] = useState(true);
-  const [activeAddButtonDashedForm, setActiveAddButtonDashedForm] =
-    useState(false);
-  const [activeAddSliderImageForm, setActiveAddSliderImageForm] =
-    useState(false);
-  const [activeAddTopSliderImageForm, setActiveAddTopSliderImageForm] =
-    useState(false);
-  const [sideSlideImage, setSideSlideImage] = useState(null);
   const [chosenBoxInfo, setChosenBoxInfo] = useState(null);
+  const [chosenButton, setChosenButton] = useState(null);
+  const [activeForms, setActiveForms] = useState({
+    dashedBox: false,
+    addButtonOfDashedBox: false,
+    leftImageSlider: false,
+    topImageSlider: false,
+  });
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
-  const handleForms = (type, boxInfo) => {
+  const handleForms = (formName, boxInfo, buttonInfo) => {
     setActiveModal(true);
-    let obj = {};
-    obj[type] = true;
-    setActiveAddDashedForm(obj["dashedBox"]);
-    setActiveAddButtonDashedForm(obj["addButtonOfDashedBox"]);
-    setActiveAddSliderImageForm(obj["leftImageSlider"]);
-    setActiveAddTopSliderImageForm(obj["topImageSlider"]);
-    setChosenBoxInfo(null);
-    boxInfo && setChosenBoxInfo(boxInfo);
+    setActiveForms((prevState) => {
+      const nextState = {};
+      Object.keys(prevState).forEach(() => {
+        nextState[formName] = true;
+      });
+      return nextState;
+    });
+    setChosenBoxInfo(boxInfo);
+    setChosenButton(buttonInfo);
   };
 
   return (
-    <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons}>
+    <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
       {/* add Box */}
       <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
-        {activeAddDashedForm && (
+        {activeForms["dashedBox"] && (
           <AddDashedBoxForm
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
-            toggleShowModal={toggleShowModal}
-            chosenBoxInfo={chosenBoxInfo}
-          />
-        )}
-
-        {/* {activeEditAdminDashedBoxNameForm && (
-          <activeEditAdminDashedBoxNameForm
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
-            toggleShowModal={toggleShowModal}
-            value={boxName}
-          />
-        )} */}
-
-        {activeAddButtonDashedForm && (
-          <AddButtonOfDashedBox
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
@@ -79,22 +60,28 @@ const DashboardAdmin = ({ formik }) => {
           />
         )}
 
-        {activeAddSliderImageForm && (
+        {activeForms["addButtonOfDashedBox"] && (
+          <AddButtonOfDashedBox
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
+            boxInfo={chosenBoxInfo}
+            buttonInfo={chosenButton}
+          />
+        )}
+
+        {activeForms["leftImageSlider"] && (
           <AddSliderImageForm
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            sideSlideImage={sideSlideImage}
-            setSideSlideImage={setSideSlideImage}
           />
         )}
-        {activeAddTopSliderImageForm && (
+        {activeForms["topImageSlider"] && (
           <AddTopSliderImageForm
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
-            sideSlideImage={sideSlideImage}
-            setSideSlideImage={setSideSlideImage}
           />
         )}
       </UiModal>
@@ -265,24 +252,15 @@ const DashboardAdmin = ({ formik }) => {
                 key={uuidv4()}
                 sx={{ marginTop: 3 }}
               >
-                {activeAdminDashedForm ? (
-                  <UiAdminDashedBox
-                    interfaceUI={interfaceUI}
-                    setInterfaceUI={setInterfaceUI}
-                    handleForms={handleForms}
-                    boxInfo={dashedBox}
-                    buttons={dashedBox?.buttons}
-                    label={dashedBox?.label}
-                    hideLabel={true}
-                  />
-                ) : (
-                  <UiDashedBox
-                    id={dashedBox?.id}
-                    buttons={dashedBox?.buttons}
-                    label={dashedBox?.label}
-                    hideLabel={true}
-                  />
-                )}
+                <UiAdminDashedBox
+                  interfaceUI={interfaceUI}
+                  setInterfaceUI={setInterfaceUI}
+                  handleForms={handleForms}
+                  boxInfo={dashedBox}
+                  buttons={dashedBox?.buttons}
+                  label={dashedBox?.label}
+                  hideLabel={true}
+                />
               </Grid>
             ))}
           </Grid>

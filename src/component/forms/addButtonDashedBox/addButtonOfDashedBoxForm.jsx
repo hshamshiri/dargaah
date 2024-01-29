@@ -5,11 +5,19 @@ import { Stack, Box, Button } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
 import sampleImage from "../../../images/album.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const AddButtonOfDashedBox = ({ formik, interfaceUI, setInterfaceUI, id }) => {
+const AddButtonOfDashedBox = ({
+  formik,
+  interfaceUI,
+  setInterfaceUI,
+  boxInfo,
+  buttonInfo,
+}) => {
   const [t] = useTranslation();
   const [topSlideImage, setTopSlideImage] = React.useState(null);
 
+  console.log(buttonInfo);
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack
@@ -20,7 +28,7 @@ const AddButtonOfDashedBox = ({ formik, interfaceUI, setInterfaceUI, id }) => {
         alignItems={"center"}
       >
         <Box>
-          <Button component="label" sx={{ padding: 0 }}>
+          <Button component="label">
             <UiInputText
               type="file"
               name="file"
@@ -35,11 +43,13 @@ const AddButtonOfDashedBox = ({ formik, interfaceUI, setInterfaceUI, id }) => {
               sx={{ display: "none" }}
             />
             <Box>
-              <img
+              <LazyLoadImage
                 className="w-40"
                 src={
                   topSlideImage
                     ? URL.createObjectURL(topSlideImage)
+                    : buttonInfo?.image?.url
+                    ? buttonInfo.image.url
                     : sampleImage
                 }
               />
@@ -53,7 +63,12 @@ const AddButtonOfDashedBox = ({ formik, interfaceUI, setInterfaceUI, id }) => {
           id="btnName"
           name="btnName"
           label={t("dashboard.main.buttonName")}
-          value={formik.values.btnName}
+          value={
+            buttonInfo && formik.values.btnName === null
+              ? buttonInfo.label
+              : formik.values.btnName
+          }
+          placeHolder={buttonInfo && buttonInfo.label}
           onChange={formik.handleChange}
           error={formik.touched.btnName && Boolean(formik.errors.btnName)}
           helperText={formik.touched.btnName && formik.errors.btnName}
@@ -64,7 +79,12 @@ const AddButtonOfDashedBox = ({ formik, interfaceUI, setInterfaceUI, id }) => {
           id="btnLink"
           name="btnLink"
           label={t("dashboard.main.link")}
-          value={formik.values.btnLink}
+          value={
+            buttonInfo && formik.values.btnLink === null
+              ? buttonInfo.link
+              : formik.values.btnLink
+          }
+          placeHolder={buttonInfo && buttonInfo.link}
           onChange={formik.handleChange}
           error={formik.touched.btnLink && Boolean(formik.errors.btnLink)}
           helperText={formik.touched.btnLink && formik.errors.btnLink}
