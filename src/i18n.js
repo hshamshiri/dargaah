@@ -21,9 +21,7 @@ i18n
     resources,
     lng: "fa",
     fallbackLng: "fa",
-
     keySeparator: ".",
-
     interpolation: {
       escapeValue: false, // react already safes from xss
     },

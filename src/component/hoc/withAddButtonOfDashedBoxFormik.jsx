@@ -15,9 +15,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
         .max(25, t("helperText.long"))
         .required(t("helperText.requiredField"))
         .test("Unique", t("helperText.duplicate"), (value) => {
-          return props["buttonInfo"]["label"] && value != null
-            ? true
-            : checkDuplicateName(value);
+          return checkDuplicateName(value);
         }),
       btnLink: yup
         .string()
@@ -30,55 +28,72 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       file: yup
         .mixed()
         .required("Required")
-        .test(
-          "is-valid-size",
-          t("helperText.max-size-50"),
-          (value) => value && value.size <= MAX_FILE_SIZE
+        .test("is-valid-size", t("helperText.max-size-50"), (value) =>
+          props?.buttonInfo?.image ? true : value && value.size <= MAX_FILE_SIZE
         ),
     });
 
     const checkDuplicateName = (value) => {
-      console.log("dddddd:", value);
       let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
       let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
       let btnNameList = currenBox?.buttons;
-      let duplicateName = btnNameList?.filter((el) => el?.label === value);
+      let duplicateName = btnNameList?.filter((el) => {
+        if (props?.buttonInfo) {
+          return el?.id !== props?.buttonInfo?.id && el?.label === value;
+        } else {
+          return el?.label === value;
+        }
+      });
       return duplicateName?.length > 0 ? false : true;
     };
     const checkDuplicateLink = (value) => {
       let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      let checkDuplicate = 0;
-      for (const i in boxList) {
-        const btnList = boxList[i]?.buttons;
-        if (btnList.length > 0) {
-          let duplicatedList = btnList.find((btn) => btn?.link === value);
-          duplicatedList && checkDuplicate++;
+      let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
+      let btnNameList = currenBox?.buttons;
+      let duplicateName = btnNameList?.filter((el) => {
+        if (props?.buttonInfo) {
+          return el?.id !== props?.buttonInfo?.id && el?.link === value;
+        } else {
+          return el?.link === value;
         }
-      }
-      return checkDuplicate > 0 ? false : true;
+      });
+      return duplicateName?.length > 0 ? false : true;
+
+      // <--check buttons of all box-->
+      // let checkDuplicate = 0;
+      // for (const i in boxList) {
+      //   const btnList = boxList[i]?.buttons;
+      //   if (btnList.length > 0) {
+      //     let duplicatedList = btnList.find((btn) => btn?.link === value);
+      //     duplicatedList && checkDuplicate++;
+      //   }
+      // }
+      // return checkDuplicate > 0 ? false : true;
     };
 
     const formik = useFormik({
       initialValues: {
-        btnName: props["buttonInfo"] ? props["buttonInfo"]["label"] : null,
-        btnLink: props["buttonInfo"] ? props["buttonInfo"]["link"] : null,
+        btnName: props["buttonInfo"] ? props["buttonInfo"]["label"] : "",
+        btnLink: props["buttonInfo"] ? props["buttonInfo"]["link"] : "",
         file: {},
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
         let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-        let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
+        let currenBox = boxList.find((box) => box?.id === props?.boxInfo?.id);
 
-        if (props.buttonInfo) {
+        if (props?.buttonInfo) {
           //edit buttonlable
           let currentButton = currenBox?.buttons.find(
-            (btn) => btn?.id === props.buttonInfo.id
+            (btn) => btn?.id === props?.buttonInfo?.id
           );
           currentButton.label = values["btnName"];
           currentButton.link = values["btnLink"];
-          currentButton.image = {
-            localUrl: values?.file,
-          };
+
+          currentButton.image =
+            values?.file.length > 0
+              ? { localUrl: values.file }
+              : props?.buttonInfo?.image;
         } else {
           //new button
           if (currenBox?.buttons) {

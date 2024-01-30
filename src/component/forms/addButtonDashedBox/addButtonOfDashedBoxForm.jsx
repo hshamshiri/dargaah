@@ -17,7 +17,7 @@ const AddButtonOfDashedBox = ({
   const [t] = useTranslation();
   const [topSlideImage, setTopSlideImage] = React.useState(null);
 
-  console.log(buttonInfo);
+  //console.log(buttonInfo);
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack

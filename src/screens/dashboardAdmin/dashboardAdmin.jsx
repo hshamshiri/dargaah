@@ -9,6 +9,7 @@ import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBo
 import AddButtonOfDashedBox from "../../component/forms/addButtonDashedBox/addButtonOfDashedBoxForm";
 import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/addSliderImageForm";
 import AddTopSliderImageForm from "../../component/forms/addDashboardTopSliderImage/addTopSliderImageForm";
+import EditSliderImagesForm from "../../component/forms/editSliderImages/editSliderImagesForm";
 // -------
 import { Box, Paper, Typography, Button, Stack, Divider } from "@mui/material";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
@@ -18,6 +19,7 @@ import UiAdminDashedBox from "../../component/uiKit/uiAdminDashedBox/uiAdminDash
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
+import { Tooltip } from "@mui/material";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
@@ -25,11 +27,12 @@ const DashboardAdmin = ({ formik }) => {
   const [activeModal, setActiveModal] = useState(false);
   const [chosenBoxInfo, setChosenBoxInfo] = useState(null);
   const [chosenButton, setChosenButton] = useState(null);
+  const [chosenSlider, setChosenSlider] = useState();
   const [activeForms, setActiveForms] = useState({
     dashedBox: false,
     addButtonOfDashedBox: false,
-    leftImageSlider: false,
-    topImageSlider: false,
+    addLeftImageSlider: false,
+    addTopImageSlider: false,
   });
 
   const toggleShowModal = () => setActiveModal(!activeModal);
@@ -70,18 +73,27 @@ const DashboardAdmin = ({ formik }) => {
           />
         )}
 
-        {activeForms["leftImageSlider"] && (
+        {activeForms["addLeftImageSlider"] && (
           <AddSliderImageForm
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
           />
         )}
-        {activeForms["topImageSlider"] && (
+        {activeForms["addTopImageSlider"] && (
           <AddTopSliderImageForm
             interfaceUI={interfaceUI}
             setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
+          />
+        )}
+
+        {activeForms["editSliderImages"] && (
+          <EditSliderImagesForm
+            interfaceUI={interfaceUI}
+            setInterfaceUI={setInterfaceUI}
+            toggleShowModal={toggleShowModal}
+            sliderName={chosenSlider}
           />
         )}
       </UiModal>
@@ -92,18 +104,42 @@ const DashboardAdmin = ({ formik }) => {
 
         <Stack spacing={2}>
           <Box width={"100%"} display={"flex"} justifyContent={"end"}>
-            <UiButton
-              onclick={() => handleForms("topImageSlider")}
-              label={t("dashboard.main.addImage")}
-              variant={"contained"}
-              iconName={"addImage"}
-              iconType={"button"}
-              sx={{
-                width: 150,
-                background: (theme) => theme.palette.gradient.main,
-              }}
-            />
+            <Tooltip title={t("dashboard.main.editImages")} placement="top">
+              <Box>
+                <UiButton
+                  onclick={() => handleForms("editSliderImages")}
+                  //label={t("dashboard.main.edit")}
+                  variant={"contained"}
+                  iconName={"edit"}
+                  iconType={"button"}
+                  sx={{
+                    width: 20,
+                    minWidth: 40,
+                    margin: 0.1,
+                    background: (theme) => theme.palette.gradient.main,
+                  }}
+                />
+              </Box>
+            </Tooltip>
+            <Tooltip title={t("dashboard.main.addImage")} placement="top">
+              <Box>
+                <UiButton
+                  onclick={() => handleForms("addTopImageSlider")}
+                  //label={t("dashboard.main.edit")}
+                  variant={"contained"}
+                  iconName={"addImage"}
+                  iconType={"button"}
+                  sx={{
+                    width: 20,
+                    minWidth: 40,
+                    margin: 0.1,
+                    background: (theme) => theme.palette.gradient.main,
+                  }}
+                />
+              </Box>
+            </Tooltip>
           </Box>
+
           <Divider />
           <UiTopSlider
             images={interfaceUI?.topSlider?.images}
@@ -170,18 +206,43 @@ const DashboardAdmin = ({ formik }) => {
               justifyContent={"end"}
               marginY={1}
             >
-              <UiButton
-                onclick={() => handleForms("leftImageSlider")}
-                label={t("dashboard.main.addImage")}
-                variant={"contained"}
-                iconName={"addImage"}
-                iconType={"button"}
-                sx={{
-                  width: 150,
-                  right: 10,
-                  background: (theme) => theme.palette.gradient.main,
-                }}
-              />
+              <Tooltip title={t("dashboard.main.editImages")} placement="top">
+                <Box>
+                  <UiButton
+                    onclick={() => {
+                      handleForms("addTopImageSlider");
+                      setChosenSlider("topSlider");
+                    }}
+                    //label={t("dashboard.main.edit")}
+                    variant={"contained"}
+                    iconName={"edit"}
+                    iconType={"button"}
+                    sx={{
+                      width: 20,
+                      minWidth: 40,
+                      margin: 0.1,
+                      background: (theme) => theme.palette.gradient.main,
+                    }}
+                  />
+                </Box>
+              </Tooltip>
+              <Tooltip title={t("dashboard.main.addImage")} placement="top">
+                <Box>
+                  <UiButton
+                    onclick={() => handleForms("addLeftImageSlider")}
+                    //label={t("dashboard.main.edit")}
+                    variant={"contained"}
+                    iconName={"addImage"}
+                    iconType={"button"}
+                    sx={{
+                      width: 20,
+                      minWidth: 40,
+                      margin: 0.1,
+                      background: (theme) => theme.palette.gradient.main,
+                    }}
+                  />
+                </Box>
+              </Tooltip>
             </Box>
             <Grid
               boxShadow={3}
