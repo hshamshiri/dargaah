@@ -15,7 +15,7 @@ const AddButtonOfDashedBox = ({
   buttonInfo,
 }) => {
   const [t] = useTranslation();
-  const [topSlideImage, setTopSlideImage] = React.useState(null);
+  const [buttonImage, setButtonImage] = React.useState(null);
 
   //console.log(buttonInfo);
   return (
@@ -36,7 +36,7 @@ const AddButtonOfDashedBox = ({
               accept="image/jpeg,image/png,image/tiff,image/webp"
               onChange={(event) => {
                 formik.setFieldValue("file", event.target.files[0]);
-                setTopSlideImage(event?.target?.files[0]);
+                setButtonImage(event?.target?.files[0]);
               }}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
@@ -46,8 +46,8 @@ const AddButtonOfDashedBox = ({
               <LazyLoadImage
                 className="w-40"
                 src={
-                  topSlideImage
-                    ? URL.createObjectURL(topSlideImage)
+                  buttonImage
+                    ? URL.createObjectURL(buttonImage)
                     : buttonInfo?.image?.url
                     ? buttonInfo.image.url
                     : sampleImage

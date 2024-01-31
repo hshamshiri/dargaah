@@ -1,6 +1,7 @@
-import { Box, ImageList, ImageListItem } from "@mui/material";
+import { Box, Divider, ImageList, ImageListItem } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import UiIcon from "../../uiKit/uiIcon/uiIcon";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 
 const EditSliderImagesForm = ({
   interfaceUI,
@@ -8,47 +9,78 @@ const EditSliderImagesForm = ({
   toggleShowModal,
   sliderName,
 }) => {
-  console.log(interfaceUI?.topSlider?.images);
+  const isTopSlider = sliderName === "topSlider" ? true : false;
+
+  let imageList = [];
+  imageList = isTopSlider
+    ? interfaceUI?.topSlider?.images
+    : interfaceUI?.journals?.images;
+
+  const removeImage = () => {};
+
+  console.log(imageList);
   return (
     <Box>
-      <ImageList sx={{ maxHeight: 500 }} cols={1}>
-        {interfaceUI?.topSlider?.images.map((image, i) => {
-          return (
-            <Box
-              margin={1}
-              boxShadow={3}
-              display={"flex"}
-              minHeight={50}
-              key={i}
-              sx={{ borderEndEndRadius: 10, borderStartEndRadius: 10 }}
-            >
-              <ImageListItem
-                sx={{
-                  minHeight: 50,
-                  borderEndEndRadius: 10,
-                  borderStartEndRadius: 10,
-                }}
-              >
-                <LazyLoadImage
-                  style={{ minHeight: 50 }}
-                  src={image.url}
-                  loading="lazy"
-                />
-              </ImageListItem>
+      <ImageList sx={{ maxHeight: 500 }} cols={isTopSlider ? 1 : 2}>
+        {imageList &&
+          imageList.map((image, i) => {
+            return (
               <Box
-                height={"100%"}
-                minWidth={40}
+                margin={1}
+                boxShadow={3}
                 display={"flex"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                sx={{ borderEndEndRadius: 10, borderStartEndRadius: 10 }}
-                bgcolor={"orange"}
+                flexDirection={isTopSlider ? "row" : "column"}
+                minHeight={50}
+                key={i}
+                sx={[
+                  isTopSlider && {
+                    borderEndEndRadius: 10,
+                    borderStartEndRadius: 10,
+                  },
+                  { borderRadius: 2 },
+                ]}
               >
-                <UiIcon iconName="delete" iconColor={"white"} />
+                <ImageListItem
+                  sx={{
+                    borderEndEndRadius: 5,
+                    borderStartEndRadius: 5,
+                    minHeight: 40,
+                  }}
+                >
+                  <LazyLoadImage
+                    style={{ minHeight: 50 }}
+                    src={image.url}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+
+                <Box
+                  height={isTopSlider ? "100%" : "20%"}
+                  minWidth={40}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  bgcolor={isTopSlider && "red"}
+                  sx={[
+                    isTopSlider && {
+                      borderEndEndRadius: 5,
+                      borderStartEndRadius: 5,
+                    },
+                  ]}
+                >
+                  <Tooltip title={"حذف"} placement="bottom">
+                    <Box>
+                      <UiIcon
+                        iconName="delete"
+                        iconColor={"white"}
+                        classes={{ backgroundColor: "red" }}
+                      />
+                    </Box>
+                  </Tooltip>
+                </Box>
               </Box>
-            </Box>
-          );
-        })}
+            );
+          })}
       </ImageList>
     </Box>
   );

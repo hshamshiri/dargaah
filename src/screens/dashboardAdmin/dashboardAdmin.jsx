@@ -37,7 +37,8 @@ const DashboardAdmin = ({ formik }) => {
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
-  const handleForms = (formName, boxInfo, buttonInfo) => {
+  const handleForms = (formName, boxInfo, buttonInfo, sliderName) => {
+    console.log(formName, boxInfo, buttonInfo, sliderName);
     setActiveModal(true);
     setActiveForms((prevState) => {
       const nextState = {};
@@ -48,6 +49,7 @@ const DashboardAdmin = ({ formik }) => {
     });
     setChosenBoxInfo(boxInfo);
     setChosenButton(buttonInfo);
+    setChosenSlider(sliderName);
   };
 
   return (
@@ -107,7 +109,9 @@ const DashboardAdmin = ({ formik }) => {
             <Tooltip title={t("dashboard.main.editImages")} placement="top">
               <Box>
                 <UiButton
-                  onclick={() => handleForms("editSliderImages")}
+                  onclick={() =>
+                    handleForms("editSliderImages", "", "", "topSlider")
+                  }
                   //label={t("dashboard.main.edit")}
                   variant={"contained"}
                   iconName={"edit"}
@@ -124,7 +128,7 @@ const DashboardAdmin = ({ formik }) => {
             <Tooltip title={t("dashboard.main.addImage")} placement="top">
               <Box>
                 <UiButton
-                  onclick={() => handleForms("addTopImageSlider")}
+                  onclick={() => handleForms("addButtonOfDashedBox")}
                   //label={t("dashboard.main.edit")}
                   variant={"contained"}
                   iconName={"addImage"}
@@ -210,8 +214,7 @@ const DashboardAdmin = ({ formik }) => {
                 <Box>
                   <UiButton
                     onclick={() => {
-                      handleForms("addTopImageSlider");
-                      setChosenSlider("topSlider");
+                      handleForms("editSliderImages", "", "", "leftSlider");
                     }}
                     //label={t("dashboard.main.edit")}
                     variant={"contained"}
