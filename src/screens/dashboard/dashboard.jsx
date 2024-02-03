@@ -169,11 +169,21 @@ const Dashboard = () => {
           >
             {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
               (DashedBox) => (
-                <UiDashedBox
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  alignItems={"end"}
+                  //width={"100%"}
+                  position={"relative"}
                   key={uuidv4()}
-                  buttons={DashedBox.buttons}
-                  label={DashedBox.label}
-                />
+                  sx={{ marginTop: 1 }}
+                >
+                  <UiDashedBox
+                    key={uuidv4()}
+                    buttons={DashedBox.buttons}
+                    label={DashedBox.label}
+                  />
+                </Box>
               )
             )}
           </Grid>

@@ -3,6 +3,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import ShakingView from "../uiTransitions/uiShake/uiShake";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const DashedButton = ({ buttonDetalis }) => {
   return (
@@ -18,7 +19,8 @@ const DashedButton = ({ buttonDetalis }) => {
           {/* <Link to={buttonDetalis?.link || "#"}> */}
 
           <Box display={"flex"}>
-            <img
+            <LazyLoadImage
+              loading="lazy"
               style={{
                 maxWidth: "100%",
                 maxHeight: 80,

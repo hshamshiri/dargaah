@@ -8,7 +8,9 @@ import i18n from "./i18n";
 import i18next from "i18next";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utils/theme"
+import { ToastContainer,Flip } from "react-toastify";
 import { Provider } from "react-redux";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -19,6 +21,7 @@ root.render(
     <BrowserRouter>
       <I18nextProvider i18n={i18next}>
         <ThemeProvider theme={theme}>
+        <ToastContainer rtl/>
           <App />
         </ThemeProvider>
       </I18nextProvider>

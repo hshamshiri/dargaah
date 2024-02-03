@@ -47,7 +47,6 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log(values.file.name);
         let images = props?.interfaceUI?.journals?.images;
         if (images) {
           images.unshift({

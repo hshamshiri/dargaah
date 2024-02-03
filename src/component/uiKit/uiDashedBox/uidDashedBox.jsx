@@ -8,12 +8,12 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
   return (
     <Grid
       container
-      minHeight={150}
+      minHeight={200}
       display={"flex"}
       position={"relative"}
       borderRadius={5}
-      boxShadow={3}
-      marginTop={4}
+      boxShadow={5}
+      marginTop={5}
       border={`2px dashed ${purple[500]}`}
       backgroundColor={"white"}
       xs={12}

@@ -20,6 +20,9 @@ import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
 import { Tooltip } from "@mui/material";
+//
+import axios, { isCancel, AxiosError } from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
@@ -38,7 +41,6 @@ const DashboardAdmin = ({ formik }) => {
   const toggleShowModal = () => setActiveModal(!activeModal);
 
   const handleForms = (formName, boxInfo, buttonInfo, sliderName) => {
-    console.log(formName, boxInfo, buttonInfo, sliderName);
     setActiveModal(true);
     setActiveForms((prevState) => {
       const nextState = {};
@@ -51,6 +53,18 @@ const DashboardAdmin = ({ formik }) => {
     setChosenButton(buttonInfo);
     setChosenSlider(sliderName);
   };
+
+  useEffect(() => {
+    axios
+      .get("https://658fdd99cbf74b575eca3154.mockapi.io/api/v1/cap")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch(function (err) {
+        console.log("ddddddd", err.response.status);
+        toast.error(err.response.status, {});
+      });
+  }, []);
 
   return (
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
@@ -307,7 +321,7 @@ const DashboardAdmin = ({ formik }) => {
             <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
 
             {interfaceUI?.dashedBorderContainers?.dashBoxes.map((dashedBox) => (
-              <Grid
+              <Box
                 display={"flex"}
                 flexDirection={"column"}
                 alignItems={"end"}
@@ -325,7 +339,7 @@ const DashboardAdmin = ({ formik }) => {
                   label={dashedBox?.label}
                   hideLabel={true}
                 />
-              </Grid>
+              </Box>
             ))}
           </Grid>
         </Grid>

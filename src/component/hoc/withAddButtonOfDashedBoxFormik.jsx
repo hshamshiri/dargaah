@@ -90,16 +90,11 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
           currentButton.label = values["btnName"];
           currentButton.link = values["btnLink"];
 
-          console.log(
-            "ffffff",
-            values?.file && Object.keys(values?.file).length === 0
-          );
-          if (values?.file && Object.keys(values?.file).length === 0) {
+          if (values?.file?.size > 0) {
             currentButton.image = { localUrl: values.file };
           } else {
             currentButton.image = props?.buttonInfo?.image;
           }
-          console.log("after edit", currentButton);
         } else {
           //new button
           if (currenBox?.buttons) {

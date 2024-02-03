@@ -1,11 +1,13 @@
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Item = ({ item }) => {
   return (
     <Grid>
       <Link reloadDocument>
-        <img
+        <LazyLoadImage
+          loading="lazy"
           src={item?.url ? item.url : URL.createObjectURL(item?.localUrl)}
           style={{
             flex: 1,

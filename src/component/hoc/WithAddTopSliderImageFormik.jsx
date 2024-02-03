@@ -56,7 +56,6 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log(values.file.name);
         let images = props?.interfaceUI?.topSlider?.images;
         if (images) {
           images.unshift({

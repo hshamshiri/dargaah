@@ -24,6 +24,7 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonDetalis }) => {
             }
           >
             <LazyLoadImage
+              //loading="lazy"
               style={{
                 maxWidth: "100%",
                 maxHeight: 80,
