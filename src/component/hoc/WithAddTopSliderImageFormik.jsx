@@ -51,7 +51,7 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
 
     const formik = useFormik({
       initialValues: {
-        file: {},
+        file: null,
         imageLink: "",
       },
       validationSchema: validationSchema,

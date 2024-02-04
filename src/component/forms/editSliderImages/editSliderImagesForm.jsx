@@ -18,10 +18,15 @@ const EditSliderImagesForm = ({
 
   const removeImage = () => {};
 
-  console.log(imageList);
   return (
     <Box>
-      <ImageList sx={{ maxHeight: 500 }} cols={isTopSlider ? 1 : 2}>
+      <ImageList
+        sx={{
+          direction: "rtl",
+          maxHeight: 500,
+        }}
+        cols={isTopSlider ? 1 : 2}
+      >
         {imageList &&
           imageList.map((image, i) => {
             return (
@@ -48,7 +53,11 @@ const EditSliderImagesForm = ({
                   }}
                 >
                   <LazyLoadImage
-                    style={{ minHeight: 50 }}
+                    style={{
+                      minHeight: 50,
+                      borderRadius: 10,
+                      margin: 5,
+                    }}
                     src={image.url}
                     loading="lazy"
                   />

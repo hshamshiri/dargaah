@@ -22,7 +22,7 @@ import UiButton from "../../component/uiKit/uiButton/uiButton";
 import { Tooltip } from "@mui/material";
 //
 import axios, { isCancel, AxiosError } from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
@@ -56,9 +56,10 @@ const DashboardAdmin = ({ formik }) => {
 
   useEffect(() => {
     axios
-      .get("https://658fdd99cbf74b575eca3154.mockapi.io/api/v1/cap")
+      .get("https://658fdd99cbf74b575eca3154.mockapi.io/api/v1/capp")
       .then((res) => {
         console.log(res.data);
+        toast.success("دریافت اطلاعات");
       })
       .catch(function (err) {
         console.log("ddddddd", err.response.status);
@@ -128,7 +129,7 @@ const DashboardAdmin = ({ formik }) => {
                   }
                   //label={t("dashboard.main.edit")}
                   variant={"contained"}
-                  iconName={"edit"}
+                  iconName={"editIcon"}
                   iconType={"button"}
                   sx={{
                     width: 20,
@@ -142,7 +143,7 @@ const DashboardAdmin = ({ formik }) => {
             <Tooltip title={t("dashboard.main.addImage")} placement="top">
               <Box>
                 <UiButton
-                  onclick={() => handleForms("addButtonOfDashedBox")}
+                  onclick={() => handleForms("addTopImageSlider")}
                   //label={t("dashboard.main.edit")}
                   variant={"contained"}
                   iconName={"addImage"}
@@ -232,7 +233,7 @@ const DashboardAdmin = ({ formik }) => {
                     }}
                     //label={t("dashboard.main.edit")}
                     variant={"contained"}
-                    iconName={"edit"}
+                    iconName={"editIcon"}
                     iconType={"button"}
                     sx={{
                       width: 20,

@@ -2,6 +2,9 @@ import Carousel from "react-material-ui-carousel";
 import Item from "./items";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import { Box, Hidden } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
+import UiIcon from "../uiIcon/uiIcon";
 
 const UiTopSlider = ({
   images,
@@ -11,6 +14,14 @@ const UiTopSlider = ({
   swipe = "true",
   sx,
 }) => {
+  const [hideDeleteIcon, setHideDeleteIcon] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setHideDeleteIcon(false);
+    }, duration);
+  }, [hideDeleteIcon]);
+
   return (
     <Carousel
       //autoPlay={false}
@@ -19,11 +30,19 @@ const UiTopSlider = ({
       duration={duration}
       animation={animation}
       swipe={swipe}
-      changeOnFirstRender={true}
+      //changeOnFirstRender={true}
+      // onChange={() => setHideDeleteIcon(true)}
       indicators={false}
-      sx={[{}, sx]}
+      sx={[{ position: "relative" }, sx]}
     >
-      {images && images.map((item, i) => <Item key={uuidv4()} item={item} />)}
+      {images &&
+        images.map((item, i) => {
+          return (
+            <Box key={uuidv4()}>
+              <Item item={item} />
+            </Box>
+          );
+        })}
     </Carousel>
   );
 };

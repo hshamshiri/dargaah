@@ -93,7 +93,7 @@ const UiAdminDashedBox = ({
               onclick={() => handleForms("dashedBox", boxInfo)}
               //label={t("dashboard.main.edit")}
               variant={"contained"}
-              iconName={"edit"}
+              iconName={"editIcon"}
               iconType={"button"}
               sx={{
                 width: 20,

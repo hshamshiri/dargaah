@@ -22,6 +22,7 @@ import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import EditIcon from "@mui/icons-material/Edit";
 
 const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
   const iconStyle = [
@@ -63,7 +64,8 @@ const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
     add: <AddBoxIcon sx={iconStyle} />,
     addFolder: <CreateNewFolderIcon sx={iconStyle} />,
     addImage: <AddPhotoAlternateIcon sx={iconStyle} />,
-    edit: <EditCalendarIcon sx={iconStyle} />,
+    editCalender: <EditCalendarIcon sx={iconStyle} />,
+    editIcon: <EditIcon sx={iconStyle} />,
     delete: <DeleteForeverIcon sx={iconStyle} />,
   };
 
