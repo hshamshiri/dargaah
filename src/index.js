@@ -9,17 +9,16 @@ import i18next from "i18next";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utils/theme"
 import { ToastContainer, Flip } from "react-toastify";
+
+import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from "react-redux";
 import store from "./redux/store"
-import 'react-toastify/dist/ReactToastify.css';
-
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-
     <BrowserRouter>
       <I18nextProvider i18n={i18next}>
         <ThemeProvider theme={theme}>
