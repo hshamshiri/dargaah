@@ -165,6 +165,7 @@ const Dashboard = () => {
             md={8}
             display={"flex"}
             flexDirection={"column"}
+            justifyContent={"start"}
             rowGap={5}
           >
             {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
@@ -173,7 +174,6 @@ const Dashboard = () => {
                   display={"flex"}
                   flexDirection={"column"}
                   alignItems={"end"}
-                  //width={"100%"}
                   position={"relative"}
                   key={uuidv4()}
                   sx={{ marginTop: 1 }}

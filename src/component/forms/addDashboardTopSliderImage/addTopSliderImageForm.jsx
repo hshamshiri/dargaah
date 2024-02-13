@@ -43,7 +43,7 @@ const AddTopSliderImageForm = ({
               type="file"
               name="file"
               id="file"
-              accept="image/jpeg,image/png,image/tiff,image/webp"
+              accept="image/jpeg,image/gif,image/png,image/tiff,image/webp"
               onChange={(event) => {
                 formik.setFieldValue("file", event.target.files[0]);
                 setSideSlideImage(event?.target?.files[0]);
@@ -51,7 +51,7 @@ const AddTopSliderImageForm = ({
               hidden={true}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
-              sx={{ display: "none" }}
+              // sx={{ display: "none" }}
             />
             <Box>
               <img

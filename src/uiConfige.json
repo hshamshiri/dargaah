@@ -10,42 +10,9 @@
         "id": "2",
         "url": "https://my.medu.ir/assets/img/pages/headermother.png",
         "link": "#"
-      },
-      {
-        "id": "3",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
-      },
-      {
-        "id": "1",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
-      },
-      {
-        "id": "2",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
-      },
-      {
-        "id": "3",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
-      },
-      {
-        "id": "1",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
-      },
-      {
-        "id": "2",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
-      },
-      {
-        "id": "3",
-        "url": "https://my.medu.ir/assets/img/pages/headermother.png",
-        "link": "#"
       }
+   
+
     ]
   },
   "journals": {
@@ -98,6 +65,24 @@
         "id": "2",
         "label": "خدماات الکترونیکی عمومی خدماات الکترونیکی عمومی",
         "buttons": [
+          {
+            "id": "1",
+            "image": {
+              "id": "1",
+              "url": "https://my.medu.ir/assets/img/pages/student/icons/estelamshahrie.png"
+            },
+            "label": "خدمات الکترونیکی عمومی",
+            "link": "#"
+          },
+          {
+            "id": "2",
+            "image": {
+              "id": "1",
+              "url": "https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"
+            },
+            "label": "خدمات الکترونیکی",
+            "link": "#"
+          },
           {
             "id": "1",
             "image": {

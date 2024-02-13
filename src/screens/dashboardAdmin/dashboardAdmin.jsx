@@ -326,7 +326,6 @@ const DashboardAdmin = ({ formik }) => {
                 display={"flex"}
                 flexDirection={"column"}
                 alignItems={"end"}
-                //width={"100%"}
                 position={"relative"}
                 key={uuidv4()}
                 sx={{ marginTop: 3 }}

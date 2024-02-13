@@ -1,11 +1,10 @@
 import AdminDashedButton from "./adminDashedButton";
-import { Box, Tooltip, Button } from "@mui/material";
+import { Box, Tooltip, Button, Zoom } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
 import UiButton from "../uiButton/uiButton";
 import { useTranslation } from "react-i18next";
-import Zoom from "@mui/material/Zoom";
 
 const UiAdminDashedBox = ({
   interfaceUI,
@@ -124,13 +123,13 @@ const UiAdminDashedBox = ({
       <Box
         sx={{
           width: "100%",
-          padding: 3,
           display: "grid",
+          padding: 3,
           gridTemplateColumns: {
-            xs: "repeat(3, 1fr)",
-            sm: "repeat(4, 4fr)",
-            md: "repeat(5, 2fr)",
-            lg: "repeat(6, 2fr)",
+            xs: "repeat(2, 2fr)",
+            sm: "repeat(3, 2fr)",
+            md: "repeat(4, 2fr)",
+            lg: "repeat(5, 2fr)",
           },
           direction: "rtl",
         }}

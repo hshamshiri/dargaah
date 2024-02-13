@@ -11,7 +11,7 @@ import { useEffect } from "react";
 function App() {
 
   useEffect(() => {
-    axios.get("http://192.168.20.27:7000/docs#/top_slider/update_user_api_slider_all_get", { headers: { 'Access-Control-Allow-Origin': '*' } }).then(res => console.log(res)).catch(function (err) {
+    axios.get("http://192.168.20.101:7000/docs#/top_slider/update_user_api_slider_all_get", { headers: { 'Access-Control-Allow-Origin': '*' } }).then(res => console.log(res)).catch(function (err) {
       console.log("wwwwwwwwwwwwwwwwwwww", err.message)
       toast(err.message)
     })

@@ -13,10 +13,12 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
     };
 
     const validationSchema = yup.object({
-      file: yup.mixed().required("Required"),
-      // .test("is-valid-type", "Not a valid image type", (value) =>
-      //   isValidFileType(value && value?.name.toLowerCase(), "image")
-      // )
+      file: yup
+        .mixed()
+        .required("Required")
+        .test("is-valid-type", "Not a valid image type", (value) =>
+          isValidFileType(value && value?.name.toLowerCase(), "image")
+        ),
       // .test(
       //   "is-valid-size",
       //   "Max allowed size is 100KB",
@@ -58,11 +60,16 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       onSubmit: (values) => {
         let images = props?.interfaceUI?.topSlider?.images;
         if (images) {
-          images.unshift({
-            id: uuidv4(),
-            link: values["imageLink"],
-            localUrl: values?.file,
-          });
+          props.interfaceUI.topSlider.images = [
+            ...images,
+            {
+              id: uuidv4(),
+              link: values["imageLink"],
+              localUrl: values?.file,
+            },
+          ];
+          console.log(images.length);
+
           props.setInterfaceUI(props?.interfaceUI);
           props.toggleShowModal(false);
         } else {

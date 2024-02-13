@@ -3,7 +3,6 @@ import Item from "./items";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 import { Box, Hidden } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
 import UiIcon from "../uiIcon/uiIcon";
 
 const UiTopSlider = ({
@@ -14,14 +13,6 @@ const UiTopSlider = ({
   swipe = "true",
   sx,
 }) => {
-  const [hideDeleteIcon, setHideDeleteIcon] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setHideDeleteIcon(false);
-    }, duration);
-  }, [hideDeleteIcon]);
-
   return (
     <Carousel
       //autoPlay={false}

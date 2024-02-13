@@ -42,6 +42,7 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
       </Box>
       <Box
         sx={{
+          width: "100%",
           display: "grid",
           padding: 3,
           gridTemplateColumns: {
