@@ -13,7 +13,7 @@ const AddTopSliderImageForm = ({
   toggleShowModal,
 }) => {
   const [t] = useTranslation();
-  const [sideSlideImage, setSideSlideImage] = useState();
+  const [topSlideImage, setTopSlideImage] = useState();
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -35,7 +35,7 @@ const AddTopSliderImageForm = ({
               onChange={(event) => {
                 formik.handleChange(event);
                 //console.log(event.target.files[0]);
-                setSideSlideImage(event.target.files[0]);
+                setTopSlideImage(event.target.files[0]);
               }}
               hidden={true}
             /> */}
@@ -46,19 +46,19 @@ const AddTopSliderImageForm = ({
               accept="image/jpeg,image/gif,image/png,image/tiff,image/webp"
               onChange={(event) => {
                 formik.setFieldValue("file", event.target.files[0]);
-                setSideSlideImage(event?.target?.files[0]);
+                setTopSlideImage(event?.target?.files[0]);
               }}
               hidden={true}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
-              // sx={{ display: "none" }}
+            // sx={{ display: "none" }}
             />
             <Box>
               <img
                 className="w-40"
                 src={
-                  sideSlideImage
-                    ? URL.createObjectURL(sideSlideImage)
+                  topSlideImage
+                    ? URL.createObjectURL(topSlideImage)
                     : sampleImage
                 }
               />

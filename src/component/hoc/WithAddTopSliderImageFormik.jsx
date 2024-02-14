@@ -1,12 +1,18 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addTopSliderImage } from "../../redux/uiConfigeReducer";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 
 const WithAddTopSliderImageFormik = (WrappedComponent) => {
+
   const FormikChecked = (props) => {
     const [t] = useTranslation();
+    const dispatch = useDispatch()
+    const images = useSelector((state) => state?.uiConfigeJson?.topSlider?.images);
+
     const MAX_FILE_SIZE = 102400; //100KB
     const validFileExtensions = {
       image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
@@ -58,20 +64,28 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        let images = props?.interfaceUI?.topSlider?.images;
-        if (images) {
-          props.interfaceUI.topSlider.images = [
-            ...images,
-            {
-              id: uuidv4(),
-              link: values["imageLink"],
-              localUrl: values?.file,
-            },
-          ];
-          console.log(images.length);
 
-          props.setInterfaceUI(props?.interfaceUI);
-          props.toggleShowModal(false);
+
+
+        if (images) {
+          // copyImages = [
+          //   ...copyImages,
+          //   {
+          //     id: uuidv4(),
+          //     link: values["imageLink"],
+          //     localUrl: values?.file,
+          //   },
+          // ];
+          console.log(typeof addTopSliderImage)
+          dispatch(addTopSliderImage({
+            id: uuidv4(),
+            link: values["imageLink"],
+            localUrl: values?.file,
+          }))
+
+
+          //props.setInterfaceUI(props?.interfaceUI);
+          //props.toggleShowModal(false);
         } else {
           //input required
         }

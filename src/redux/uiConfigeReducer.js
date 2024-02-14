@@ -1,21 +1,32 @@
 
 import { createSlice } from "@reduxjs/toolkit";
-import uiconfige from "../uiConfige.json"
+import uiConfige from "../uiConfige.json"
 
 
 export const uiConfigeSlice = createSlice({
-    name: "uiConfige",
-    initialState: { value: uiconfige },
-    reducer: {
-        increment: (state) => {
-            // Redux Toolkit allows us to write "mutating" logic in reducers. It
-            // doesn't actually mutate the state because it uses the Immer library,
-            // which detects changes to a "draft state" and produces a brand new
-            // immutable state based off those changes
-            state.value += 1
+    name: "userInterfaceConfige",
+    initialState: {
+        value: uiConfige,
+        topSlider: uiConfige?.topSlider,
+        journals: uiConfige?.journals,
+        dashedBorders: uiConfige?.dashedBorderContainers,
+        drawerButtons: uiConfige?.drawerButtons
+    },
+    reducers: {
+        addTopSliderImage: (state, action) => {
+            state.topSlider.images.push(action.payload)
+        },
+        addJournalsImage: (state, action) => {
+            state.journals.push(action.payload)
+        },
+        addDashedBorders: (state, action) => {
+            state.dashedBorders.push(action.payload)
+        },
+        addDrawerButtons: (state, action) => {
+            state.drawerButtons.push(action.payload)
         }
     }
 })
 
-
+export const { addTopSliderImage, addJournalsImage, addDashedBorders, addDrawerButtons } = uiConfigeSlice.actions;
 export default uiConfigeSlice.reducer

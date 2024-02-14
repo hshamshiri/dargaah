@@ -22,6 +22,7 @@ import UiButton from "../../component/uiKit/uiButton/uiButton";
 import { Tooltip } from "@mui/material";
 //
 import axios, { isCancel, AxiosError } from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const DashboardAdmin = ({ formik }) => {
@@ -37,6 +38,22 @@ const DashboardAdmin = ({ formik }) => {
     addLeftImageSlider: false,
     addTopImageSlider: false,
   });
+
+  const uiconf = useSelector((state) => state.uiConfigeJson.value);
+  const uiTopimage = useSelector((state) => state.uiConfigeJson.topSlider);
+  const journals = useSelector((state) => state.uiConfigeJson.journals);
+  const dashedBorders = useSelector((state) => state.uiConfigeJson.dashedBorders);
+  const drawerButtons = useSelector((state) => state.uiConfigeJson.drawerButtons);
+
+
+
+  console.log("allllll:", uiconf);
+  console.log("uitopimage:", uiTopimage);
+  console.log("journals:", journals);
+  console.log("dashedBorders:", dashedBorders);
+  console.log("drawerButtons:", drawerButtons);
+
+  
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
@@ -161,7 +178,6 @@ const DashboardAdmin = ({ formik }) => {
 
           <Divider />
           <UiTopSlider
-            images={interfaceUI?.topSlider?.images}
             sx={{ minWidth: 150, marginTop: 0 }}
           />
         </Stack>

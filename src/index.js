@@ -29,6 +29,5 @@ root.render(
         </ThemeProvider>
       </I18nextProvider>
     </BrowserRouter>
-
   </React.StrictMode>
 );

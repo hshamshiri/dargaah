@@ -18,8 +18,7 @@ function App() {
 
   }, [])
 
-  const count = useSelector((state) => state.userInterfaceConfige.value)
-  console.log(count)
+
   return (
     <div className="App">
       <Routes>

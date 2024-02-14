@@ -11,8 +11,6 @@
         "url": "https://my.medu.ir/assets/img/pages/headermother.png",
         "link": "#"
       }
-   
-
     ]
   },
   "journals": {
@@ -42,13 +40,13 @@
         "label": "خدمات",
         "buttons": [
           {
-            "id": "1",
+            "id": "2",
             "image": {
               "id": "1",
-              "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png"
+              "url": "https://my.medu.ir/assets/img/pages/student/icons/kart%20shenasai1.png"
             },
-            "label": "خدماات الکترونیکیی",
-            "link": "/"
+            "label": "ویرانه",
+            "link": "#"
           },
           {
             "id": "2",
