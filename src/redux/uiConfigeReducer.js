@@ -6,15 +6,19 @@ import uiConfige from "../uiConfige.json"
 export const uiConfigeSlice = createSlice({
     name: "userInterfaceConfige",
     initialState: {
-        value: uiConfige,
+        generalUIConfige: uiConfige,
         topSlider: uiConfige?.topSlider,
         journals: uiConfige?.journals,
         dashedBorders: uiConfige?.dashedBorderContainers,
         drawerButtons: uiConfige?.drawerButtons
     },
     reducers: {
+        addGeneralUIConfige: (state, action) => {
+            state.generalUIConfige = action.payload
+        },
         addTopSliderImage: (state, action) => {
-            state.topSlider.images.push(action.payload)
+            console.log("kkiiiiiii", action.payload)
+            state.topSlider.images = action.payload
         },
         addJournalsImage: (state, action) => {
             state.journals.push(action.payload)

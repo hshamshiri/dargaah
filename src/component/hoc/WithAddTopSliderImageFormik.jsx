@@ -5,6 +5,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import { postRequest } from "../../utils/network/getRequset/postRequest";
+import { APIs } from "../../utils/network/apiClient";
+import { toast } from "react-toastify"
+
 
 const WithAddTopSliderImageFormik = (WrappedComponent) => {
 
@@ -44,18 +48,7 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
         validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1
       );
     }
-    // const checkDuplicateLink = (value) => {
-    //   let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-    //   let checkDuplicate = 0;
-    //   for (const i in boxList) {
-    //     const btnList = boxList[i]?.buttons;
-    //     if (btnList.length > 0) {
-    //       let duplicatedList = btnList.find((btn) => btn?.link === value);
-    //       duplicatedList && checkDuplicate++;
-    //     }
-    //   }
-    //   return checkDuplicate > 0 ? false : true;
-    // };
+
 
     const formik = useFormik({
       initialValues: {
@@ -65,30 +58,20 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       validationSchema: validationSchema,
       onSubmit: (values) => {
 
+        postRequest(APIs.topSlider.uplode_image, values).then((response) => {
+          if (response.data) {
+            dispatch(addTopSliderImage(response.data))
+            props.toggleShowModal(false);
+          }
+          if (response.error.msg) {
+            toast.error(response.error.msg + "\n" + response.error.status)
+
+          }
+        })
 
 
-        if (images) {
-          // copyImages = [
-          //   ...copyImages,
-          //   {
-          //     id: uuidv4(),
-          //     link: values["imageLink"],
-          //     localUrl: values?.file,
-          //   },
-          // ];
-          console.log(typeof addTopSliderImage)
-          dispatch(addTopSliderImage({
-            id: uuidv4(),
-            link: values["imageLink"],
-            localUrl: values?.file,
-          }))
 
 
-          //props.setInterfaceUI(props?.interfaceUI);
-          //props.toggleShowModal(false);
-        } else {
-          //input required
-        }
       },
     });
     return (

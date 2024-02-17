@@ -10,7 +10,7 @@ const Item = ({ item }) => {
         <LazyLoadImage
           //onClick={() => deleteImage()}
           loading="lazy"
-          src={item?.url ? item.url : URL.createObjectURL(item?.localUrl)}
+          src={item.image_url}
           style={{
             flex: 1,
             resizeMode: "contain",

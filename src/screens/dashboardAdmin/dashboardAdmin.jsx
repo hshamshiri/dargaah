@@ -24,6 +24,11 @@ import { Tooltip } from "@mui/material";
 import axios, { isCancel, AxiosError } from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+//
+import { getRequest } from "../../utils/network/getRequset/getRequest";
+import { APIs } from "../../utils/network/apiClient";
+import { addTopSliderImage } from "../../redux/uiConfigeReducer";
+
 
 const DashboardAdmin = ({ formik }) => {
   const [t] = useTranslation();
@@ -41,19 +46,21 @@ const DashboardAdmin = ({ formik }) => {
 
   const uiconf = useSelector((state) => state.uiConfigeJson.value);
   const uiTopimage = useSelector((state) => state.uiConfigeJson.topSlider);
-  const journals = useSelector((state) => state.uiConfigeJson.journals);
-  const dashedBorders = useSelector((state) => state.uiConfigeJson.dashedBorders);
-  const drawerButtons = useSelector((state) => state.uiConfigeJson.drawerButtons);
+
+  const dispatch = useDispatch()
+  // const journals = useSelector((state) => state.uiConfigeJson.journals);
+  // const dashedBorders = useSelector((state) => state.uiConfigeJson.dashedBorders);
+  // const drawerButtons = useSelector((state) => state.uiConfigeJson.drawerButtons);
 
 
 
-  console.log("allllll:", uiconf);
-  console.log("uitopimage:", uiTopimage);
-  console.log("journals:", journals);
-  console.log("dashedBorders:", dashedBorders);
-  console.log("drawerButtons:", drawerButtons);
+  // console.log("allllll:", uiconf);
+  // console.log("uitopimage:", uiTopimage);
+  // console.log("journals:", journals);
+  // console.log("dashedBorders:", dashedBorders);
+  // console.log("drawerButtons:", drawerButtons);
 
-  
+
 
   const toggleShowModal = () => setActiveModal(!activeModal);
 
@@ -72,16 +79,27 @@ const DashboardAdmin = ({ formik }) => {
   };
 
   useEffect(() => {
-    axios
-      .get("https://658fdd99cbf74b575eca3154.mockapi.io/api/v1/capp")
-      .then((res) => {
-        console.log(res.data);
-        toast.success("دریافت اطلاعات");
-      })
-      .catch(function (err) {
-        console.log("ddddddd", err.response.status);
-        toast.error(err.response.status, {});
-      });
+    getRequest(APIs.topSlider.image_List).then((response) => {
+      if (response.data) {
+        console.log(response.data)
+        dispatch(addTopSliderImage(response.data))
+      }
+      if (response.error.msg) {
+        toast.error(response.error.msg + "\n" + response.error.status)
+      }
+    })
+
+
+    //   axios
+    //     .get("https://658fdd99cbf74b575eca3154.mockapi.io/api/v1/capp")
+    //     .then((res) => {
+    //       console.log(res.data);
+    //       toast.success("دریافت اطلاعات");
+    //     })
+    //     .catch(function (err) {
+    //       console.log("ddddddd", err.response.status);
+    //       toast.error(err.response.status, {});
+    //     });
   }, []);
 
   return (
