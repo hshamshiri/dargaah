@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import Carousel from "react-material-ui-carousel";
 import Item from "./items";
-import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
-import { Box, Hidden } from "@mui/material";
-import UiIcon from "../uiIcon/uiIcon";
+import { Box } from "@mui/material";
+
 
 const UiTopSlider = ({
   interval = 7000,
@@ -13,7 +12,8 @@ const UiTopSlider = ({
   swipe = "true",
   sx,
 }) => {
-  const images = useSelector((state) => state?.uiConfigeJson?.topSlider?.images);
+  const images = useSelector((state) => state?.uiConfigeJson.topSlider?.images);
+  console.log("zzzzz", images)
   return (
     <Carousel
       //autoPlay={false}

@@ -4,9 +4,10 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useEffect } from "react";
 
 const Item = ({ item }) => {
+
   return (
     <Grid>
-      <Link reloadDocument>
+      <Link to={item.link}>
         <LazyLoadImage
           //onClick={() => deleteImage()}
           loading="lazy"

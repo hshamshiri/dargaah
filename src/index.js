@@ -9,7 +9,6 @@ import i18next from "i18next";
 import { ThemeProvider } from "@mui/material";
 import { theme } from "./utils/theme"
 import { ToastContainer, Flip } from "react-toastify";
-
 import 'react-toastify/dist/ReactToastify.css';
 import { Provider } from "react-redux";
 import store from "./redux/store"

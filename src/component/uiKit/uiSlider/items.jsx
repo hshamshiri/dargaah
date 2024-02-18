@@ -12,10 +12,10 @@ const Item = ({ item }) => {
         //padding:
       }}
     >
-      <Link reloadDocument>
+      <Link to={item.link}>
         <LazyLoadImage
           loading="lazy"
-          src={item?.url ? item.url : URL.createObjectURL(item?.localUrl)}
+          src={item?.image_url}
           style={{
             flex: 1,
             resizeMode: "contain",

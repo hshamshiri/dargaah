@@ -4,12 +4,13 @@ const BASE_URL = "http://192.168.20.101:7000/api/"
 const APIs = {
     topSlider: {
         image_List: "slider/all",
-        uplode_image: "slider/image"
+        uplode_image: "slider/image",
+        deleteImage: "slider/"
     }
 }
 
 
-const axiosGetClient = axios.create({
+const axiosClient = axios.create({
     baseURL: BASE_URL,
     headers: {
         'Accept': 'application/json',
@@ -41,4 +42,4 @@ const axiosPostClient = axios.create({
 // )
 
 
-export { APIs, axiosGetClient, axiosPostClient }
+export { APIs, axiosClient, axiosPostClient }

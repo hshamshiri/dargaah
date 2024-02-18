@@ -8,8 +8,6 @@ import sampleImage from "../../../images/album.png";
 
 const AddSliderImageForm = ({
   formik,
-  interfaceUI,
-  setInterfaceUI,
   toggleShowModal,
 }) => {
   const [t] = useTranslation();

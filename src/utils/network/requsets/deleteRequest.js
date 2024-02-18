@@ -1,18 +1,23 @@
 
 
-import { axiosPostClient } from "../apiClient"
+import { axiosClient } from "../apiClient";
+import handlingResponseError from "./handlingError"
 
 
-export async function postRequest(url, data) {
+export async function deleteRequest(url, id) {
+
     const result = {
         data: null,
-        error: { status: null, msg: null }
+        error: {
+            status: null,
+            msg: null
+        }
     }
-    const form_data = createFormData(data)
 
     try {
-        await axiosPostClient.post(url, form_data)
+        await axiosClient.delete(url + id)
             .then(response => {
+
                 if (response.data) {
                     result.data = response.data
                 }
@@ -26,25 +31,7 @@ export async function postRequest(url, data) {
     } catch (error) {
         result.error.msg = error
     }
-
     return result
 }
 
 
-
-const handlingResponseError = (status) => {
-    if (status == "404") {
-        return "paaaaage nooooot found"
-    }
-
-}
-
-const createFormData = (data) => {
-
-    let formData = new FormData()
-    formData.append("link", data.imageLink)
-    formData.append("file", data.file)
-
-
-    return formData
-}

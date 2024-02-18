@@ -21,11 +21,11 @@ import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
 import { Tooltip } from "@mui/material";
 //
-import axios, { isCancel, AxiosError } from "axios";
+
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 //
-import { getRequest } from "../../utils/network/getRequset/getRequest";
+import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage } from "../../redux/uiConfigeReducer";
 
@@ -81,7 +81,6 @@ const DashboardAdmin = ({ formik }) => {
   useEffect(() => {
     getRequest(APIs.topSlider.image_List).then((response) => {
       if (response.data) {
-        console.log(response.data)
         dispatch(addTopSliderImage(response.data))
       }
       if (response.error.msg) {
@@ -89,17 +88,6 @@ const DashboardAdmin = ({ formik }) => {
       }
     })
 
-
-    //   axios
-    //     .get("https://658fdd99cbf74b575eca3154.mockapi.io/api/v1/capp")
-    //     .then((res) => {
-    //       console.log(res.data);
-    //       toast.success("دریافت اطلاعات");
-    //     })
-    //     .catch(function (err) {
-    //       console.log("ddddddd", err.response.status);
-    //       toast.error(err.response.status, {});
-    //     });
   }, []);
 
   return (
@@ -127,15 +115,11 @@ const DashboardAdmin = ({ formik }) => {
 
         {activeForms["addLeftImageSlider"] && (
           <AddSliderImageForm
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
           />
         )}
         {activeForms["addTopImageSlider"] && (
           <AddTopSliderImageForm
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
           />
         )}

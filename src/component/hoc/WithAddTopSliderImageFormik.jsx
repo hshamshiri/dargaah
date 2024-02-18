@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { addTopSliderImage } from "../../redux/uiConfigeReducer";
+import { postRequest } from "../../utils/network/requsets/postRequest";
+import { APIs } from "../../utils/network/apiClient";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from "uuid";
-import { postRequest } from "../../utils/network/getRequset/postRequest";
-import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify"
 
 
@@ -15,7 +14,6 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
     const dispatch = useDispatch()
-    const images = useSelector((state) => state?.uiConfigeJson?.topSlider?.images);
 
     const MAX_FILE_SIZE = 102400; //100KB
     const validFileExtensions = {
@@ -37,7 +35,7 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       imageLink: yup
         .string()
         .min(2, t("helperText.short"))
-        .max(20, t("helperText.long"))
+        .max(30, t("helperText.long"))
         .required(t("helperText.requiredField")),
       // .test("Unique", t("helperText.duplicate"), (value) => {  return checkDuplicateLink(value);}),
     });
@@ -49,7 +47,6 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       );
     }
 
-
     const formik = useFormik({
       initialValues: {
         file: null,
@@ -57,10 +54,11 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-
         postRequest(APIs.topSlider.uplode_image, values).then((response) => {
           if (response.data) {
+            console.log(response.data)
             dispatch(addTopSliderImage(response.data))
+            toast.success(t("helperText.successAdd"))
             props.toggleShowModal(false);
           }
           if (response.error.msg) {
@@ -68,12 +66,9 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
 
           }
         })
-
-
-
-
       },
     });
+
     return (
       <WrappedComponent
         {...props}

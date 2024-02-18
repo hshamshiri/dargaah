@@ -17,18 +17,17 @@ export const uiConfigeSlice = createSlice({
             state.generalUIConfige = action.payload
         },
         addTopSliderImage: (state, action) => {
-            console.log("kkiiiiiii", action.payload)
             state.topSlider.images = action.payload
         },
-        addJournalsImage: (state, action) => {
-            state.journals.push(action.payload)
-        },
-        addDashedBorders: (state, action) => {
-            state.dashedBorders.push(action.payload)
-        },
-        addDrawerButtons: (state, action) => {
-            state.drawerButtons.push(action.payload)
-        }
+        // addJournalsImage: (state, action) => {
+        //     state.journals.push(action.payload)
+        // },
+        // addDashedBorders: (state, action) => {
+        //     state.dashedBorders.push(action.payload)
+        // },
+        // addDrawerButtons: (state, action) => {
+        //     state.drawerButtons.push(action.payload)
+        // }
     }
 })
 

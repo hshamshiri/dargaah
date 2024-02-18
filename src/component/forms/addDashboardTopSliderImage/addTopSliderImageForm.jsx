@@ -8,8 +8,6 @@ import sampleImage from "../../../images/album.png";
 
 const AddTopSliderImageForm = ({
   formik,
-  interfaceUI,
-  setInterfaceUI,
   toggleShowModal,
 }) => {
   const [t] = useTranslation();
@@ -51,7 +49,7 @@ const AddTopSliderImageForm = ({
               hidden={true}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
-            // sx={{ display: "none" }}
+              sx={{ display: "none" }}
             />
             <Box>
               <img

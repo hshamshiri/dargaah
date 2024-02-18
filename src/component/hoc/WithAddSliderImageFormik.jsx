@@ -1,14 +1,20 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTopSliderImage } from "../../redux/uiConfigeReducer";
+import { postRequest } from "../../utils/network/requsets/postRequest";
+import { APIs } from "../../utils/network/apiClient";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify"
 
 const WithAddSliderImageFormik = (WrappedComponent) => {
+
   const FormikChecked = (props) => {
     const [t] = useTranslation();
-    const MAX_FILE_SIZE = 102400; //100KB
+    const dispatch = useDispatch()
 
+    const MAX_FILE_SIZE = 102400; //100KB
     const validationSchema = yup.object({
       file: yup
         .mixed()
@@ -22,7 +28,7 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       imageLink: yup
         .string()
         .min(2, t("helperText.short"))
-        .max(20, t("helperText.long"))
+        .max(30, t("helperText.long"))
         .required(t("helperText.requiredField")),
       // .test("Unique", t("helperText.duplicate"), (value) => {  return checkDuplicateLink(value);}),
     });
@@ -47,20 +53,21 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        let images = props?.interfaceUI?.journals?.images;
-        if (images) {
-          images.unshift({
-            id: uuidv4(),
-            link: values["imageLink"],
-            localUrl: values?.file,
-          });
-          props.setInterfaceUI(props?.interfaceUI);
-          props.toggleShowModal(false);
-        } else {
-          //input required
-        }
+        postRequest(APIs.topSlider.uplode_image, values).then((response) => {
+          if (response.data) {
+            console.log(response.data)
+            dispatch(addTopSliderImage(response.data))
+            toast.success(t("helperText.successAdd"))
+            props.toggleShowModal(false);
+          }
+          if (response.error.msg) {
+            toast.error(response.error.msg + "\n" + response.error.status)
+
+          }
+        })
       },
     });
+
     return (
       <WrappedComponent
         {...props}
