@@ -54,9 +54,8 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        postRequest(APIs.topSlider.uplode_image, values).then((response) => {
+        postRequest(APIs.topSlider.upload_image, values).then((response) => {
           if (response.data) {
-            console.log(response.data)
             dispatch(addTopSliderImage(response.data))
             toast.success(t("helperText.successAdd"))
             props.toggleShowModal(false);

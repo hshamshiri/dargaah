@@ -1,7 +1,6 @@
 import { UseSelector, useSelector } from "react-redux";
 import Carousel from "react-material-ui-carousel";
 import Item from "./items";
-import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
 
 const UiSlider = ({
@@ -11,8 +10,8 @@ const UiSlider = ({
   swipe = "true",
   sx,
 }) => {
-  const [t] = useTranslation();
-  const images = useSelector((state) => state?.uiConfigeJson?.topSlider?.images);
+  const journals = useSelector((state) => state?.uiConfigeJson?.journals);
+
   return (
     <Carousel
       //autoPlay={false}
@@ -44,7 +43,7 @@ const UiSlider = ({
         }
       }
     >
-      {images && images.map((image, i) => <Item key={uuidv4()} item={image} />)}
+      {journals?.images && journals?.images.length > 0 && journals.images.map((image, i) => <Item key={uuidv4()} item={image} />)}
     </Carousel>
   );
 };

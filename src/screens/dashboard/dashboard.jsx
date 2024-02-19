@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
@@ -13,10 +13,32 @@ import { useNavigate } from "react-router-dom";
 // -------
 import Grid from "@mui/material/Unstable_Grid2";
 import UiIcon from "../../component/uiKit/uiIcon/uiIcon";
+//
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+//
+import { getRequest } from "../../utils/network/requsets/getRequest";
+import { APIs } from "../../utils/network/apiClient";
+import { addTopSliderImage } from "../../redux/uiConfigeReducer";
 
 const Dashboard = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [t] = useTranslation();
+
+  useEffect(() => {
+    getRequest(APIs.topSlider.image_List).then((response) => {
+      if (response.data) {
+        dispatch(addTopSliderImage(response.data))
+      }
+      if (response.error.msg) {
+        toast.error(response.error.msg + "\n" + response.error.status)
+      }
+    })
+
+  }, []);
+
+
 
   return (
     <MiniDrawer buttonList={interfaceConfige?.drawerButtons?.buttons}>

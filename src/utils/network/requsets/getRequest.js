@@ -13,7 +13,6 @@ export async function getRequest(url) {
     try {
         await axiosClient.get(url)
             .then(response => {
-                console.log("ppppppp", response)
                 if (response.data) {
                     result.data = response.data
                 }

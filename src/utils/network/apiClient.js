@@ -1,13 +1,7 @@
 import axios from "axios"
 
 const BASE_URL = "http://192.168.20.101:7000/api/"
-const APIs = {
-    topSlider: {
-        image_List: "slider/all",
-        uplode_image: "slider/image",
-        deleteImage: "slider/"
-    }
-}
+
 
 
 const axiosClient = axios.create({
@@ -25,6 +19,20 @@ const axiosPostClient = axios.create({
     }
 })
 
+
+const APIs = {
+    home: "home",
+    topSlider: {
+        image_List: "slider/all",
+        upload_image: "slider/image",
+        deleteImage: "slider/"
+    },
+    journal:{
+        image_List: "journal/all",
+        upload_image: "journal/image",
+        deleteImage: "journal/"
+    }
+}
 
 //check authentication
 // axiosClient.interceptors.response.use(

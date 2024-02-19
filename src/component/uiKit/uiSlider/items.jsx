@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Item = ({ item }) => {
+
   return (
     <Grid
       height={{ xs: 200, sm: 400, md: "100%" }}
@@ -12,7 +13,7 @@ const Item = ({ item }) => {
         //padding:
       }}
     >
-      <Link to={item.link}>
+      <Link to={item.link} target="_blank" >
         <LazyLoadImage
           loading="lazy"
           src={item?.image_url}

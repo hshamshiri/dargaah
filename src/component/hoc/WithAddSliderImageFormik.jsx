@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTopSliderImage } from "../../redux/uiConfigeReducer";
+import { addJournalsImage } from "../../redux/uiConfigeReducer";
 import { postRequest } from "../../utils/network/requsets/postRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { useFormik } from "formik";
@@ -53,10 +53,9 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        postRequest(APIs.topSlider.uplode_image, values).then((response) => {
+        postRequest(APIs.journal.upload_image, values).then((response) => {
           if (response.data) {
-            console.log(response.data)
-            dispatch(addTopSliderImage(response.data))
+            dispatch(addJournalsImage(response.data))
             toast.success(t("helperText.successAdd"))
             props.toggleShowModal(false);
           }

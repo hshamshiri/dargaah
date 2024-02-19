@@ -13,7 +13,6 @@ const UiTopSlider = ({
   sx,
 }) => {
   const images = useSelector((state) => state?.uiConfigeJson.topSlider?.images);
-  console.log("zzzzz", images)
   return (
     <Carousel
       //autoPlay={false}
@@ -27,7 +26,7 @@ const UiTopSlider = ({
       indicators={false}
       sx={[{ position: "relative" }, sx]}
     >
-      {images &&
+      {images && images.length > 0 &&
         images.map((item, i) => {
           return (
             <Box key={uuidv4()}>

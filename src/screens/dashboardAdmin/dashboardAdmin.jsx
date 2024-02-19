@@ -27,7 +27,7 @@ import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
-import { addTopSliderImage } from "../../redux/uiConfigeReducer";
+import { addTopSliderImage, addJournalsImage, addDashedBorders } from "../../redux/uiConfigeReducer";
 
 
 const DashboardAdmin = ({ formik }) => {
@@ -44,11 +44,28 @@ const DashboardAdmin = ({ formik }) => {
     addTopImageSlider: false,
   });
 
-  const uiconf = useSelector((state) => state.uiConfigeJson.value);
-  const uiTopimage = useSelector((state) => state.uiConfigeJson.topSlider);
+
 
   const dispatch = useDispatch()
-  // const journals = useSelector((state) => state.uiConfigeJson.journals);
+
+
+
+  useEffect(() => {
+    getRequest(APIs.home).then((response) => {
+      if (response.data) {
+        response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
+        response.data?.journals && dispatch(addJournalsImage(response.data?.journals))
+        response.data?.dashedBorderContainers && dispatch(addDashedBorders(response.data?.dashedBorderContainers))
+      }
+      if (response.error.msg) {
+        toast.error(response.error.msg + "\n" + response.error.status)
+      }
+    })
+
+  }, []);
+
+  const dashedBoxes = useSelector((state) => state.uiConfigeJson.dashedBoxes);
+  const journals = useSelector((state) => state.uiConfigeJson.journals);
   // const dashedBorders = useSelector((state) => state.uiConfigeJson.dashedBorders);
   // const drawerButtons = useSelector((state) => state.uiConfigeJson.drawerButtons);
 
@@ -78,17 +95,7 @@ const DashboardAdmin = ({ formik }) => {
     setChosenSlider(sliderName);
   };
 
-  useEffect(() => {
-    getRequest(APIs.topSlider.image_List).then((response) => {
-      if (response.data) {
-        dispatch(addTopSliderImage(response.data))
-      }
-      if (response.error.msg) {
-        toast.error(response.error.msg + "\n" + response.error.status)
-      }
-    })
 
-  }, []);
 
   return (
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
@@ -303,12 +310,9 @@ const DashboardAdmin = ({ formik }) => {
                     "linear-gradient(to right bottom, #430089, #82ffa1)",
                 }}
               >
-                {t("dashboard.main.journals")}
+                {journals?.title}
               </Typography>
-              <UiSlider
-                images={interfaceUI?.journals?.images}
-                label={interfaceUI?.journals?.label}
-              />
+              <UiSlider />
             </Grid>
           </Grid>
 
@@ -339,7 +343,7 @@ const DashboardAdmin = ({ formik }) => {
 
             <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
 
-            {interfaceUI?.dashedBorderContainers?.dashBoxes.map((dashedBox) => (
+            {dashedBoxes?.dashBoxes.map((dashedBox) => (
               <Box
                 display={"flex"}
                 flexDirection={"column"}

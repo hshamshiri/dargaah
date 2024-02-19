@@ -6,7 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 //
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { APIs } from "../../../utils/network/apiClient";
-import { addTopSliderImage } from "../../../redux/uiConfigeReducer";
+import { addTopSliderImage, addJournalsImage } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
 
 const EditSliderImagesForm = ({
@@ -16,20 +16,28 @@ const EditSliderImagesForm = ({
 }) => {
   const isTopSlider = sliderName === "topSlider" ? true : false;
   const topImages = useSelector((state) => state?.uiConfigeJson?.topSlider?.images)
+  const journals = useSelector((state) => state?.uiConfigeJson?.journals?.images)
   const dispatch = useDispatch()
 
   let imageList = [];
-  imageList = topImages
+  imageList = isTopSlider ? topImages : journals
 
   const removeImage = (id) => {
-    deleteRequest(APIs.topSlider.deleteImage, id).then((response) => {
-      console.log("tttttttt", response)
-      if (response.data) {
-        dispatch(addTopSliderImage(response.data))
-      } if (response.error.msg) {
-        toast.error(response.error.msg + "\n" + response.error.status)
-      }
-    })
+
+    if (isTopSlider) {
+      deleteRequest(APIs.topSlider.deleteImage, id).then((response) => {
+        response.data && dispatch(addTopSliderImage(response.data))
+        response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
+
+      })
+    } else {
+      deleteRequest(APIs.journal.deleteImage, id).then((response) => {
+        response.data && dispatch(addJournalsImage(response.data))
+        response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
+
+      })
+    }
+
   };
 
   return (
@@ -37,8 +45,8 @@ const EditSliderImagesForm = ({
       <ImageList
         sx={{
           direction: "rtl",
-          maxHeight: isTopSlider && 500,
-          minHeight: isTopSlider ? 50 : 400
+          maxHeight: 500,
+          minHeight: isTopSlider ? 50 : 300
         }}
         cols={isTopSlider ? 1 : 2}
       >

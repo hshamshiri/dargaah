@@ -9,22 +9,23 @@ export const uiConfigeSlice = createSlice({
         generalUIConfige: uiConfige,
         topSlider: uiConfige?.topSlider,
         journals: uiConfige?.journals,
-        dashedBorders: uiConfige?.dashedBorderContainers,
+        dashedBoxes: uiConfige?.dashedBorderContainers,
         drawerButtons: uiConfige?.drawerButtons
     },
     reducers: {
         addGeneralUIConfige: (state, action) => {
             state.generalUIConfige = action.payload
         },
+        addDashedBorders: (state, action) => {
+            state.dashedBox = action.payload
+        },
         addTopSliderImage: (state, action) => {
             state.topSlider.images = action.payload
         },
-        // addJournalsImage: (state, action) => {
-        //     state.journals.push(action.payload)
-        // },
-        // addDashedBorders: (state, action) => {
-        //     state.dashedBorders.push(action.payload)
-        // },
+        addJournalsImage: (state, action) => {
+            state.journals = action.payload
+        },
+  
         // addDrawerButtons: (state, action) => {
         //     state.drawerButtons.push(action.payload)
         // }
