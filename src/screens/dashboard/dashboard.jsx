@@ -27,7 +27,7 @@ const Dashboard = () => {
   const [t] = useTranslation();
 
   useEffect(() => {
-    getRequest(APIs.topSlider.image_List).then((response) => {
+    getRequest(APIs.topSlider.image_list).then((response) => {
       if (response.data) {
         dispatch(addTopSliderImage(response.data))
       }

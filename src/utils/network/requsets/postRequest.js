@@ -1,24 +1,32 @@
 
 
-import { axiosPostClient } from "../apiClient"
+import axios from "axios"
+import { axiosClient } from "../apiClient"
 import handlingResponseError from "./handlingError"
 
 
-export async function postRequest(url, data) {
+
+export async function postRequest(url, data, isFormdata = false) {
+
+
     const result = {
         data: null,
         error: { status: null, msg: null }
     }
-    const form_data = createFormData(data)
+    isFormdata && (axiosClient.defaults.headers.common["Content-Type"] = "multipart/form-data")
+
+    const sendData = isFormdata ? createFormData(data) : data
 
     try {
-        await axiosPostClient.post(url, form_data)
+        await axiosClient.post(url, sendData)
             .then(response => {
+                console.log("okkkkk:", response)
                 if (response.data) {
                     result.data = response.data
                 }
             })
             .catch(function (error) {
+                console.log("error:", error)
                 if (error.response && error.response.status) {
                     result.error.status = error.response.status
                     result.error.msg = handlingResponseError(error.response.status)
@@ -32,15 +40,9 @@ export async function postRequest(url, data) {
 }
 
 
-
-
-
 const createFormData = (data) => {
-
     let formData = new FormData()
     formData.append("link", data.imageLink)
     formData.append("file", data.file)
-
-
     return formData
 }

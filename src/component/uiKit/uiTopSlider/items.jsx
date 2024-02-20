@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { useEffect } from "react";
+
 
 const Item = ({ item }) => {
 

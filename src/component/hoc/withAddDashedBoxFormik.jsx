@@ -2,11 +2,17 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { addDashBox } from "../../redux/uiConfigeReducer";
+import { APIs } from "../../utils/network/apiClient";
+import { toast } from "react-toastify";
+import { postRequest } from "../../utils/network/requsets/postRequest";
+
 
 const WithAddDashedBoxFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
+    const dispatch = useDispatch()
     const validationSchema = yup.object({
       boxName: yup
         .string()
@@ -30,23 +36,19 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        let obj = props.interfaceUI?.dashedBorderContainers?.dashBoxes;
-        if (obj) {
-          if (props.boxInfo) {
-            //edit boxName
-            let boxNameList =
-              props.interfaceUI?.dashedBorderContainers?.dashBoxes;
-            let findBox = boxNameList.find((el) => el?.id === props.boxInfo.id);
-            findBox.label = values.boxName;
-          } else {
-            //add new
-            obj.unshift({ id: uuidv4(), label: values.boxName, buttons: [] });
+        postRequest(APIs.dashBox.new_dashBox, { label: values.boxName }).then((response) => {
+          console.log("reeeeeees", response)
+          if (response.data) {
+            dispatch(addDashBox(response.data))
+            toast.success(t("helperText.successAdd"))
+            props.toggleShowModal(false);
           }
-          props.setInterfaceUI(props.interfaceUI);
-          props.toggleShowModal();
-        } else {
-          //input required
-        }
+          if (response.error.msg) {
+            toast(response.error.msg)
+          }
+        })
+
+
       },
     });
     return (

@@ -53,7 +53,7 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        postRequest(APIs.journal.upload_image, values).then((response) => {
+        postRequest(APIs.journal.upload_image, values, true).then((response) => {
           if (response.data) {
             dispatch(addJournalsImage(response.data))
             toast.success(t("helperText.successAdd"))

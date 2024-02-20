@@ -27,7 +27,7 @@ import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
-import { addTopSliderImage, addJournalsImage, addDashedBorders } from "../../redux/uiConfigeReducer";
+import { addTopSliderImage, addJournalsImage, addDashBox } from "../../redux/uiConfigeReducer";
 
 
 const DashboardAdmin = ({ formik }) => {
@@ -55,7 +55,7 @@ const DashboardAdmin = ({ formik }) => {
       if (response.data) {
         response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
         response.data?.journals && dispatch(addJournalsImage(response.data?.journals))
-        response.data?.dashedBorderContainers && dispatch(addDashedBorders(response.data?.dashedBorderContainers))
+        response.data?.dashedBorderContainers && dispatch(addDashBox(response.data?.dashedBorderContainers))
       }
       if (response.error.msg) {
         toast.error(response.error.msg + "\n" + response.error.status)
