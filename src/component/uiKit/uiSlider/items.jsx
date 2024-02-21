@@ -20,8 +20,8 @@ const Item = ({ item }) => {
           style={{
             flex: 1,
             resizeMode: "contain",
-            minHeight: 300,
-            maxHeight: 400,
+            minHeight: 400,
+            maxHeight: 600,
             width: "100%",
           }}
         />

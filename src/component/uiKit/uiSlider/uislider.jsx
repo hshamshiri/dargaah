@@ -10,7 +10,7 @@ const UiSlider = ({
   swipe = "true",
   sx,
 }) => {
-  const journals = useSelector((state) => state?.uiConfigeJson?.journals);
+  const journals = useSelector((state) => state?.uiConfigeJson?.journal_list?.images);
 
   return (
     <Carousel
@@ -43,7 +43,7 @@ const UiSlider = ({
         }
       }
     >
-      {journals?.images && journals?.images.length > 0 && journals.images.map((image, i) => <Item key={uuidv4()} item={image} />)}
+      {journals && journals.length > 0 && journals.map((image, i) => <Item key={uuidv4()} item={image} />)}
     </Carousel>
   );
 };

@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 import UiIcon from "../uiIcon/uiIcon";
 import { useTranslation } from "react-i18next";
 
-const AdminDashedButton = ({ handleForms, boxInfo, buttonDetalis }) => {
+const AdminDashedButton = ({ handleForms, boxInfo, dashButtonInfo }) => {
+
   return (
     <Fragment>
       <ShakingView sx={{ marginTop: 3 }}>
@@ -21,14 +22,14 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonDetalis }) => {
         >
           <EditButtons
             handleForms={handleForms}
-            buttonDetalis={buttonDetalis}
+            buttonDetalis={dashButtonInfo}
             boxInfo={boxInfo}
           />
           {/* <Link to={buttonDetalis?.link || "#"}> */}
           <Box
             display={"flex"}
             onClick={() =>
-              handleForms("addButtonOfDashedBox", boxInfo, buttonDetalis)
+              handleForms("addButtonOfDashedBox", boxInfo, dashButtonInfo)
             }
           >
             <LazyLoadImage
@@ -39,15 +40,13 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonDetalis }) => {
                 heightL: 80,
               }}
               src={
-                buttonDetalis?.image?.url
-                  ? buttonDetalis?.image?.url
-                  : URL.createObjectURL(buttonDetalis?.image?.localUrl)
+                dashButtonInfo?.image_url && dashButtonInfo?.image_url
               }
             />
           </Box>
           <Box>
             <Typography display={"flex"} margin={1}>
-              {buttonDetalis?.label}
+              {dashButtonInfo?.label}
             </Typography>
           </Box>
 
@@ -58,7 +57,7 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonDetalis }) => {
   );
 };
 
-const EditButtons = ({ handleForms, boxInfo, buttonDetalis }) => {
+const EditButtons = ({ handleForms, boxInfo, dashButtonInfo }) => {
   const [t] = useTranslation();
   return (
     <Box
@@ -68,7 +67,7 @@ const EditButtons = ({ handleForms, boxInfo, buttonDetalis }) => {
       top={10}
       position={"absolute"}
       onClick={() =>
-        handleForms("addButtonOfDashedBox", boxInfo, buttonDetalis)
+        handleForms("addButtonOfDashedBox", boxInfo, dashButtonInfo)
       }
       borderRadius={5}
       sx={{ background: "linear-gradient(to right bottom, #430089, #82ffa1)" }}

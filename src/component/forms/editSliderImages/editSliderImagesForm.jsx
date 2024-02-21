@@ -6,7 +6,7 @@ import Tooltip from "@mui/material/Tooltip";
 //
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { APIs } from "../../../utils/network/apiClient";
-import { addTopSliderImage, addJournalsImage } from "../../../redux/uiConfigeReducer";
+import { addTopSliderImage, addJournalImage } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
 
 const EditSliderImagesForm = ({
@@ -15,8 +15,9 @@ const EditSliderImagesForm = ({
   sliderName,
 }) => {
   const isTopSlider = sliderName === "topSlider" ? true : false;
-  const topImages = useSelector((state) => state?.uiConfigeJson?.topSlider?.images)
-  const journals = useSelector((state) => state?.uiConfigeJson?.journals?.images)
+  const topImages = useSelector((state) => state?.uiConfigeJson?.topSlider_list)
+  const journals = useSelector((state) => state?.uiConfigeJson?.journal_list.images)
+
   const dispatch = useDispatch()
 
   let imageList = [];
@@ -32,7 +33,7 @@ const EditSliderImagesForm = ({
       })
     } else {
       deleteRequest(APIs.journal.deleteImage, id).then((response) => {
-        response.data && dispatch(addJournalsImage(response.data))
+        response.data && dispatch(addJournalImage(response.data))
         response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
 
       })
@@ -50,7 +51,7 @@ const EditSliderImagesForm = ({
         }}
         cols={isTopSlider ? 1 : 2}
       >
-        {imageList &&
+        {imageList && imageList.length > 0 &&
           imageList.map((image, i) => {
 
             return (

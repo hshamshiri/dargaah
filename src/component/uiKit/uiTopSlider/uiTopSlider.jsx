@@ -12,7 +12,8 @@ const UiTopSlider = ({
   swipe = "true",
   sx,
 }) => {
-  const images = useSelector((state) => state?.uiConfigeJson.topSlider?.images);
+  const images = useSelector((state) => state?.uiConfigeJson.topSlider_list);
+
   return (
     <Carousel
       //autoPlay={false}
@@ -24,7 +25,7 @@ const UiTopSlider = ({
       //changeOnFirstRender={true}
       // onChange={() => setHideDeleteIcon(true)}
       indicators={false}
-      sx={[{ position: "relative" }, sx]}
+      sx={[{}, sx]}
     >
       {images && images.length > 0 &&
         images.map((item, i) => {

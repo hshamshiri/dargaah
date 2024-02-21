@@ -5,27 +5,26 @@ import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
 import UiButton from "../uiButton/uiButton";
 import { useTranslation } from "react-i18next";
+import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
+import { useDispatch } from "react-redux";
+import { APIs } from "../../../utils/network/apiClient";
+import { addDashBox } from "../../../redux/uiConfigeReducer";
+import { toast } from "react-toastify"
 
 const UiAdminDashedBox = ({
-  interfaceUI,
-  setInterfaceUI,
-  boxInfo,
+  dashBoxInfo,
   handleForms,
-  buttons,
-  label,
   hideLabel,
 }) => {
+
   const [t] = useTranslation();
-  const interfaceUiCopy = interfaceUI;
+  const dispatch = useDispatch()
+
   const deleteForm = () => {
-    let filterBoxes = [];
-    if (interfaceUiCopy?.dashedBorderContainers?.dashBoxes) {
-      filterBoxes = interfaceUiCopy?.dashedBorderContainers?.dashBoxes.filter(
-        (box) => box.id != boxInfo.id
-      );
-    }
-    interfaceUiCopy.dashedBorderContainers.dashBoxes = filterBoxes;
-    setInterfaceUI({ ...interfaceUiCopy });
+    deleteRequest(APIs.dashBox.delete_dashbox, dashBoxInfo.id).then((response) => {
+      response.data && dispatch(addDashBox(response.data))
+      response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
+    })
   };
   return (
     <Grid
@@ -60,7 +59,7 @@ const UiAdminDashedBox = ({
           background: "linear-gradient(to right bottom, #430089, #82ffa1)",
         }}
       >
-        {label}
+        {dashBoxInfo?.label}
       </Box>
       <Box display={"flex"} position={"absolute"} left={10} top={-50}>
         <Tooltip
@@ -89,7 +88,7 @@ const UiAdminDashedBox = ({
         <Tooltip title={t("dashboard.main.editBoxName")} placement="top" arrow>
           <Box>
             <UiButton
-              onclick={() => handleForms("dashedBox", boxInfo)}
+              onclick={() => handleForms("dashedBox", dashBoxInfo)}
               //label={t("dashboard.main.edit")}
               variant={"contained"}
               iconName={"editIcon"}
@@ -106,7 +105,7 @@ const UiAdminDashedBox = ({
         <Tooltip title={t("dashboard.main.addBtn")} placement="top" arrow>
           <Box>
             <UiButton
-              onclick={() => handleForms("addButtonOfDashedBox", boxInfo)}
+              onclick={() => handleForms("addButtonOfDashedBox", dashBoxInfo)}
               variant={"contained"}
               iconName={"add"}
               iconType={"button"}
@@ -134,12 +133,12 @@ const UiAdminDashedBox = ({
           direction: "rtl",
         }}
       >
-        {buttons.map((button) => {
+        {dashBoxInfo.buttons.map((button) => {
           return (
             <AdminDashedButton
               key={uuidv4()}
-              boxInfo={boxInfo}
-              buttonDetalis={button}
+              dashBoxInfo={dashBoxInfo}
+              dashButtonInfo={button}
               handleForms={handleForms}
             />
           );

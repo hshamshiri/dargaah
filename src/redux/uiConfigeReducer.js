@@ -7,23 +7,23 @@ export const uiConfigeSlice = createSlice({
     name: "interfaceConfige",
     initialState: {
         generalUIConfige: uiConfige,
-        topSlider: uiConfige?.topSlider,
-        journals: uiConfige?.journals,
-        dashBox: uiConfige?.dashedBorderContainers,
-        drawerButtons: uiConfige?.drawerButtons
+        topSlider_list: null, //uiConfige?.topSlider,
+        journal_list: null,//uiConfige?.journals,
+        dashBox_list: null,//uiConfige?.dashedBorderContainers.dashBoxes,
+        drawerButtons_list: uiConfige?.drawerButtons
     },
     reducers: {
         addGeneralUIConfige: (state, action) => {
             state.generalUIConfige = action.payload
         },
         addDashBox: (state, action) => {
-            state.dashBox = action.payload
+            state.dashBox_list = action.payload
         },
         addTopSliderImage: (state, action) => {
-            state.topSlider.images = action.payload
+            state.topSlider_list = action.payload
         },
-        addJournalsImage: (state, action) => {
-            state.journals = action.payload
+        addJournalImage: (state, action) => {
+            state.journal_list = action.payload
         },
 
         // addDrawerButtons: (state, action) => {
@@ -32,5 +32,5 @@ export const uiConfigeSlice = createSlice({
     }
 })
 
-export const { addTopSliderImage, addJournalsImage, addDashBox, addDrawerButtons } = uiConfigeSlice.actions;
+export const { addTopSliderImage, addJournalImage, addDashBox, addDrawerButtons } = uiConfigeSlice.actions;
 export default uiConfigeSlice.reducer

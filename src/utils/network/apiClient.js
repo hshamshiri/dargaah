@@ -9,10 +9,8 @@ axios.defaults.headers.common["Content-Type"] = "application/json"
 const APIs = {
     home: "home",
     dashBox: {
-        create_box: "dashboard/new-dashboard"
-    },
-    dashBox: {
-        new_dashBox: "dashbox/new-dashbox"
+        new_dashBox: "dashbox/new-dashbox",
+        delete_dashbox: "dashbox/dashbox/"
     },
     topSlider: {
         image_list: "slider/all",

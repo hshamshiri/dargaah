@@ -5,17 +5,15 @@ import handlingResponseError from "./handlingError"
 
 
 
-export async function postRequest(url, data, isFormdata = false) {
+export async function putRequest(url, data) {
 
     const result = {
         data: null,
         error: { status: null, msg: null }
     }
-    isFormdata && (axiosClient.defaults.headers.common["Content-Type"] = "multipart/form-data")
 
-    const sendData = isFormdata ? createFormData(data) : data
     try {
-        await axiosClient.post(url, sendData)
+        await axiosClient.post(url, data)
             .then(response => {
                 if (response.data) {
                     result.data = response.data
@@ -32,12 +30,4 @@ export async function postRequest(url, data, isFormdata = false) {
     }
 
     return result
-}
-
-
-const createFormData = (data) => {
-    let formData = new FormData()
-    formData.append("link", data.imageLink)
-    formData.append("file", data.file)
-    return formData
 }

@@ -7,16 +7,16 @@ const Item = ({ item }) => {
 
   return (
     <Grid>
-      <Link to={item.link}>
+      <Link to={item.link} target="_blank" >
         <LazyLoadImage
           //onClick={() => deleteImage()}
           loading="lazy"
-          src={item.image_url}
+          src={item?.image_url}
           style={{
-            flex: 1,
-            resizeMode: "contain",
-            maxHeight: 250,
-            minHeight: 150,
+
+            //resizeMode: "contain",
+            maxHeight: 500,
+            minHeight: 200,
           }}
         />
       </Link>

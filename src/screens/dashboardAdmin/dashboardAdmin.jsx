@@ -27,7 +27,7 @@ import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
-import { addTopSliderImage, addJournalsImage, addDashBox } from "../../redux/uiConfigeReducer";
+import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
 
 
 const DashboardAdmin = ({ formik }) => {
@@ -53,9 +53,10 @@ const DashboardAdmin = ({ formik }) => {
   useEffect(() => {
     getRequest(APIs.home).then((response) => {
       if (response.data) {
+
+        response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
         response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
-        response.data?.journals && dispatch(addJournalsImage(response.data?.journals))
-        response.data?.dashedBorderContainers && dispatch(addDashBox(response.data?.dashedBorderContainers))
+        response.data?.journals && dispatch(addJournalImage(response.data?.journals))
       }
       if (response.error.msg) {
         toast.error(response.error.msg + "\n" + response.error.status)
@@ -64,19 +65,10 @@ const DashboardAdmin = ({ formik }) => {
 
   }, []);
 
-  const dashedBoxes = useSelector((state) => state.uiConfigeJson.dashedBoxes);
-  const journals = useSelector((state) => state.uiConfigeJson.journals);
+  const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
+  const journal = useSelector((state) => state.uiConfigeJson.journal_list);
   // const dashedBorders = useSelector((state) => state.uiConfigeJson.dashedBorders);
   // const drawerButtons = useSelector((state) => state.uiConfigeJson.drawerButtons);
-
-
-
-  // console.log("allllll:", uiconf);
-  // console.log("uitopimage:", uiTopimage);
-  // console.log("journals:", journals);
-  // console.log("dashedBorders:", dashedBorders);
-  // console.log("drawerButtons:", drawerButtons);
-
 
 
   const toggleShowModal = () => setActiveModal(!activeModal);
@@ -186,9 +178,7 @@ const DashboardAdmin = ({ formik }) => {
           </Box>
 
           <Divider />
-          <UiTopSlider
-            sx={{ minWidth: 150, marginTop: 0 }}
-          />
+          <UiTopSlider />
         </Stack>
         {/* search */}
         {/* <Box sx={{ marginTop: 2 }}>
@@ -310,7 +300,7 @@ const DashboardAdmin = ({ formik }) => {
                     "linear-gradient(to right bottom, #430089, #82ffa1)",
                 }}
               >
-                {journals?.title}
+                {journal?.title}
               </Typography>
               <UiSlider />
             </Grid>
@@ -343,7 +333,7 @@ const DashboardAdmin = ({ formik }) => {
 
             <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
 
-            {dashedBoxes?.dashBoxes.map((dashedBox) => (
+            {dashBoxList && dashBoxList.map((dashBox) => (
               <Box
                 display={"flex"}
                 flexDirection={"column"}
@@ -353,12 +343,8 @@ const DashboardAdmin = ({ formik }) => {
                 sx={{ marginTop: 3 }}
               >
                 <UiAdminDashedBox
-                  interfaceUI={interfaceUI}
-                  setInterfaceUI={setInterfaceUI}
                   handleForms={handleForms}
-                  boxInfo={dashedBox}
-                  buttons={dashedBox?.buttons}
-                  label={dashedBox?.label}
+                  dashBoxInfo={dashBox}
                   hideLabel={true}
                 />
               </Box>

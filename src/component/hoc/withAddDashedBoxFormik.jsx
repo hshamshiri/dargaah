@@ -37,7 +37,6 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
       validationSchema: validationSchema,
       onSubmit: (values) => {
         postRequest(APIs.dashBox.new_dashBox, { label: values.boxName }).then((response) => {
-          console.log("reeeeeees", response)
           if (response.data) {
             dispatch(addDashBox(response.data))
             toast.success(t("helperText.successAdd"))
