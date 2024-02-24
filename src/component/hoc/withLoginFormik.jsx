@@ -12,17 +12,20 @@ const WithMaterialUI = (WrappedComponent) => {
         .string()
         .required(t("login.form.mobileRequired"))
         .matches(regexList.mobile, t("login.form.mobileInvalid")),
+      captcha: yup
+        .string()
+        .required(t("login.form.mobileRequired"))
       //boxName: yup.string().required(t("helperText.requiredField")),
     });
 
     const formik = useFormik({
       initialValues: {
         mobile: "",
-        //boxName: "",
+        captcha: "",
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        alert(JSON.stringify(values, null, 2));
+        //alert(JSON.stringify(values, null, 2));
       },
     });
     return <WrappedComponent formik={formik} onSubmit={formik.handleSubmit} />;

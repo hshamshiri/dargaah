@@ -133,7 +133,7 @@ const UiAdminDashedBox = ({
           direction: "rtl",
         }}
       >
-        {dashBoxInfo.buttons.map((button) => {
+        {dashBoxInfo && dashBoxInfo?.buttons.map((button) => {
           return (
             <AdminDashedButton
               key={uuidv4()}

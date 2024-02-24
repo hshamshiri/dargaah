@@ -4,7 +4,8 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
 
-const UiDashedBox = ({ buttons, label, hideLabel }) => {
+const UiDashedBox = ({ dashBoxInfo,
+  hideLabel, }) => {
   return (
     <Grid
       container
@@ -38,7 +39,7 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
           background: "linear-gradient(to right bottom, #430089, #82ffa1)",
         }}
       >
-        {label}
+        {dashBoxInfo?.label}
       </Box>
       <Box
         sx={{
@@ -54,8 +55,8 @@ const UiDashedBox = ({ buttons, label, hideLabel }) => {
           direction: "rtl",
         }}
       >
-        {buttons.map((button) => {
-          return <DashedButton key={uuidv4()} buttonDetalis={button} />;
+        {dashBoxInfo && dashBoxInfo?.buttons.map((button) => {
+          return <DashedButton key={uuidv4()} dashButtonInfo={button} />;
         })}
       </Box>
     </Grid>

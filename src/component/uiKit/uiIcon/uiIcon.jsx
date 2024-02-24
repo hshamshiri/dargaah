@@ -23,15 +23,19 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import { useTheme } from "@mui/material";
+
 
 const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
+  const theme = useTheme();
+
   const iconStyle = [
     {
       borderRadius: 15,
       width: 30,
       height: 30,
       padding: 0.5,
-      color: iconColor ? iconColor : (theme) => theme.palette.base.main,
+      color: iconColor ? iconColor : theme.palette.base?.main,
     },
     iconType === "button" && {
       position: "absolute",

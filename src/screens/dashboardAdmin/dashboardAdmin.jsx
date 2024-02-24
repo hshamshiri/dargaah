@@ -53,7 +53,6 @@ const DashboardAdmin = ({ formik }) => {
   useEffect(() => {
     getRequest(APIs.home).then((response) => {
       if (response.data) {
-
         response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
         response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
         response.data?.journals && dispatch(addJournalImage(response.data?.journals))

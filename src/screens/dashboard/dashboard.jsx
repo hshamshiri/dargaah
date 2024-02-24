@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
-import { addTopSliderImage } from "../../redux/uiConfigeReducer";
+import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -27,9 +27,11 @@ const Dashboard = () => {
   const [t] = useTranslation();
 
   useEffect(() => {
-    getRequest(APIs.topSlider.image_list).then((response) => {
+    getRequest(APIs.home).then((response) => {
       if (response.data) {
-        dispatch(addTopSliderImage(response.data))
+        response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
+        response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
+        response.data?.journals && dispatch(addJournalImage(response.data?.journals))
       }
       if (response.error.msg) {
         toast.error(response.error.msg + "\n" + response.error.status)
@@ -38,12 +40,15 @@ const Dashboard = () => {
 
   }, []);
 
+  const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
+  const journal = useSelector((state) => state.uiConfigeJson.journal_list);
+
 
 
   return (
     <MiniDrawer buttonList={interfaceConfige?.drawerButtons?.buttons}>
       {/* content */}
-      <Box width={"100%"}>
+      <Box width={"100%"} >
         {/* banner */}
         <UiTopSlider images={interfaceConfige?.topSlider?.images} />
         {/* search */}
@@ -95,7 +100,7 @@ const Dashboard = () => {
                 />
 
                 <Button
-                  onClick={() => navigate("dashboardAdmin")}
+                  onClick={() => navigate("/dashboardAdmin")}
                   sx={{
                     width: "80%",
                     height: "100%",
@@ -190,23 +195,21 @@ const Dashboard = () => {
             justifyContent={"start"}
             rowGap={5}
           >
-            {interfaceConfige?.dashedBorderContainers?.dashBoxes.map(
-              (DashedBox) => (
-                <Box
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"end"}
-                  position={"relative"}
-                  key={uuidv4()}
-                  sx={{ marginTop: 1 }}
-                >
-                  <UiDashedBox
-                    key={uuidv4()}
-                    buttons={DashedBox.buttons}
-                    label={DashedBox.label}
-                  />
-                </Box>
-              )
+            {dashBoxList && dashBoxList.map((dashBox) => (
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"end"}
+                position={"relative"}
+                key={uuidv4()}
+                sx={{ marginTop: 1 }}
+              >
+                <UiDashedBox
+                  dashBoxInfo={dashBox}
+                  hideLabel={true}
+                />
+              </Box>
+            )
             )}
           </Grid>
         </Grid>

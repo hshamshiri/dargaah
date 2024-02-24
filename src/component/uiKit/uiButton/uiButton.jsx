@@ -19,7 +19,7 @@ import UiIcon from "../uiIcon/uiIcon";
 const UiButton = ({
   type,
   label,
-  onclick,
+  onclick = () => { },
   disable,
   variant,
   classes,
@@ -32,7 +32,7 @@ const UiButton = ({
   return (
     <Button
       type={type}
-      onClick={onclick || null}
+      onClick={() => onclick()}
       disabled={disable || false}
       variant={variant || "filled"}
       className={`w-60 ${classes}`}

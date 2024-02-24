@@ -2,11 +2,16 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useTranslation } from "react-i18next";
-import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { addDashBox } from "../../redux/uiConfigeReducer";
+import { APIs } from "../../utils/network/apiClient";
+import { toast } from "react-toastify";
+import { postRequest } from "../../utils/network/requsets/postRequest";
 
 const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
+    const dispatch = useDispatch()
     const MAX_FILE_SIZE = 102400; //100KB
     const validationSchema = yup.object({
       btnName: yup
@@ -79,39 +84,16 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-        let currenBox = boxList.find((box) => box?.id === props?.boxInfo?.id);
-
-        if (props?.buttonInfo) {
-          //edit buttonlable
-          let currentButton = currenBox?.buttons.find(
-            (btn) => btn?.id === props?.buttonInfo?.id
-          );
-          currentButton.label = values["btnName"];
-          currentButton.link = values["btnLink"];
-
-          if (values?.file?.size > 0) {
-            currentButton.image = { localUrl: values.file };
-          } else {
-            currentButton.image = props?.buttonInfo?.image;
+        postRequest(APIs.dashButton.new_dashbutton + `{id}?dashbox_id=${1}`, values, true).then((response) => {
+          if (response.data) {
+            dispatch(addDashBox(response.data))
+            toast.success(t("helperText.successAdd"))
+            props.toggleShowModal(false);
           }
-        } else {
-          //new button
-          if (currenBox?.buttons) {
-            currenBox.buttons.unshift({
-              id: uuidv4(),
-              label: values["btnName"],
-              link: values["btnLink"],
-              image: {
-                localUrl: values?.file,
-              },
-            });
-          } else {
-            //input required
+          if (response.error.msg) {
+            toast(response.error.msg)
           }
-        }
-        props.setInterfaceUI(props?.interfaceUI);
-        props.toggleShowModal(false);
+        })
       },
     });
     return (

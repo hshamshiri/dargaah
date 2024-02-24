@@ -17,16 +17,16 @@ import store from "./redux/store"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <I18nextProvider i18n={i18next}>
-        <ThemeProvider theme={theme}>
-          <ToastContainer rtl />
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </ThemeProvider>
-      </I18nextProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+
+  <BrowserRouter>
+    <I18nextProvider i18n={i18next}>
+      <ThemeProvider theme={theme}>
+        <ToastContainer rtl />
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ThemeProvider>
+    </I18nextProvider>
+  </BrowserRouter>
+
 );

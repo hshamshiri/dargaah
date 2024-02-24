@@ -11,9 +11,17 @@ export async function postRequest(url, data, isFormdata = false) {
         data: null,
         error: { status: null, msg: null }
     }
-    isFormdata && (axiosClient.defaults.headers.common["Content-Type"] = "multipart/form-data")
+    if (isFormdata) {
+        console.log("ooooo")
+        axiosClient.defaults.headers.common["Content-Type"] = "multipart/form-data"
+    } else {
+        console.log("pppppp")
+        axiosClient.defaults.headers.common["Content-Type"] = "application/json"
+    }
+
 
     const sendData = isFormdata ? createFormData(data) : data
+
     try {
         await axiosClient.post(url, sendData)
             .then(response => {
@@ -36,8 +44,14 @@ export async function postRequest(url, data, isFormdata = false) {
 
 
 const createFormData = (data) => {
+    console.log(data)
     let formData = new FormData()
-    formData.append("link", data.imageLink)
-    formData.append("file", data.file)
+    data?.file && formData.append("file", data.file)
+    //image
+    data?.imageLink && formData.append("link", data.imageLink)
+    data?.lable && formData.append("lable", data.lable)
+    //button
+    data?.btnLink && formData.append("link", data.btnLink)
+    data?.btnName && formData.append("lable", data.btnName)
     return formData
 }

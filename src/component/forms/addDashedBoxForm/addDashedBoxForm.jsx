@@ -8,8 +8,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const AddDashedBoxForm = ({
   formik,
-  interfaceUI,
-  setInterfaceUI,
   toggleShowModal,
   boxInfo,
 }) => {

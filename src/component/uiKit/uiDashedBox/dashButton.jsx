@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const DashedButton = ({ buttonDetalis }) => {
+const DashedButton = ({ dashButtonInfo }) => {
   return (
     <Fragment>
       <ShakingView sx={{ margin: 0.2 }}>
@@ -27,14 +27,12 @@ const DashedButton = ({ buttonDetalis }) => {
                 heightL: 80,
               }}
               src={
-                buttonDetalis?.image?.url
-                  ? buttonDetalis?.image?.url
-                  : URL.createObjectURL(buttonDetalis?.image?.localUrl)
+                dashButtonInfo?.image_url && dashButtonInfo?.image_url
               }
             />
           </Box>
           <Typography display={"flex"} margin={1}>
-            {buttonDetalis?.label}
+            {dashButtonInfo?.label}
           </Typography>
           {/* </Link> */}
         </Grid>

@@ -2,15 +2,24 @@ import axios from "axios"
 
 const BASE_URL = "http://192.168.20.101:7000/api/"
 
-const axiosClient = axios.create({ baseURL: BASE_URL, })
-axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers.common["Content-Type"] = "application/json"
+const defaultOptions = {
+    baseURL: BASE_URL,
+};
+
+const axiosClient = axios.create(defaultOptions)
+
+// axios.defaults.headers.common['Accept'] = 'application/json';
+// axios.defaults.headers.common["Content-Type"] = "application/json"
+
 
 const APIs = {
     home: "home",
     dashBox: {
         new_dashBox: "dashbox/new-dashbox",
         delete_dashbox: "dashbox/dashbox/"
+    },
+    dashButton: {
+        new_dashbutton: "dashbox/new-button/"
     },
     topSlider: {
         image_list: "slider/all",
