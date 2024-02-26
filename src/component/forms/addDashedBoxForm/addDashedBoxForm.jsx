@@ -4,7 +4,6 @@ import WithAddDashedBoxFormik from "../../hoc/withAddDashedBoxFormik";
 import { Stack } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
-import { v4 as uuidv4 } from "uuid";
 
 const AddDashedBoxForm = ({
   formik,

@@ -13,7 +13,7 @@ export async function putRequest(url, data) {
     }
 
     try {
-        await axiosClient.post(url, data)
+        await axiosClient.put(url, data)
             .then(response => {
                 if (response.data) {
                     result.data = response.data

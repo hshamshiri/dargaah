@@ -85,7 +85,7 @@ const UiAdminDashedBox = ({
             />
           </Box>
         </Tooltip>
-        <Tooltip title={t("dashboard.main.editBoxName")} placement="top" arrow>
+        <Tooltip title={t("dashboard.main.updateBoxName")} placement="top" arrow>
           <Box>
             <UiButton
               onclick={() => handleForms("dashedBox", dashBoxInfo)}

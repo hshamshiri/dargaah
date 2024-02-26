@@ -37,7 +37,7 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
           variant="contained"
           iconType={"button"}
           iconName={"send"}
-          sx={{ marginTop: 10, background: (theme) => theme.palette.gradient.dark }}
+          sx={{ marginTop: 5, background: (theme) => theme.palette.gradient.dark }}
         />
       </Container>
     </form>

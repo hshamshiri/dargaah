@@ -7,6 +7,7 @@ import { addDashBox } from "../../redux/uiConfigeReducer";
 import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify";
 import { postRequest } from "../../utils/network/requsets/postRequest";
+import { putRequest } from "../../utils/network/requsets/putRequest";
 
 const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
@@ -39,61 +40,67 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
     });
 
     const checkDuplicateName = (value) => {
-      let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
-      let btnNameList = currenBox?.buttons;
-      let duplicateName = btnNameList?.filter((el) => {
-        if (props?.buttonInfo) {
-          return el?.id !== props?.buttonInfo?.id && el?.label === value;
-        } else {
-          return el?.label === value;
-        }
-      });
-      return duplicateName?.length > 0 ? false : true;
+      return true
+      // let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
+      // let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
+      // let btnNameList = currenBox?.buttons;
+      // let duplicateName = btnNameList?.filter((el) => {
+      //   if (props?.buttonInfo) {
+      //     return el?.id !== props?.buttonInfo?.id && el?.label === value;
+      //   } else {
+      //     return el?.label === value;
+      //   }
+      // });
+      // return duplicateName?.length > 0 ? false : true;
     };
     const checkDuplicateLink = (value) => {
-      let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
-      let btnNameList = currenBox?.buttons;
-      let duplicateName = btnNameList?.filter((el) => {
-        if (props?.buttonInfo) {
-          return el?.id !== props?.buttonInfo?.id && el?.link === value;
-        } else {
-          return el?.link === value;
-        }
-      });
-      return duplicateName?.length > 0 ? false : true;
-
-      // <--check buttons of all box-->
-      // let checkDuplicate = 0;
-      // for (const i in boxList) {
-      //   const btnList = boxList[i]?.buttons;
-      //   if (btnList.length > 0) {
-      //     let duplicatedList = btnList.find((btn) => btn?.link === value);
-      //     duplicatedList && checkDuplicate++;
+      return true
+      // let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
+      // let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
+      // let btnNameList = currenBox?.buttons;
+      // let duplicateName = btnNameList?.filter((el) => {
+      //   if (props?.buttonInfo) {
+      //     return el?.id !== props?.buttonInfo?.id && el?.link === value;
+      //   } else {
+      //     return el?.link === value;
       //   }
-      // }
-      // return checkDuplicate > 0 ? false : true;
+      // });
+      // return duplicateName?.length > 0 ? false : true;
+
+
     };
 
     const formik = useFormik({
       initialValues: {
-        btnName: props["buttonInfo"] ? props["buttonInfo"]["label"] : "",
-        btnLink: props["buttonInfo"] ? props["buttonInfo"]["link"] : "",
+        btnName: props?.buttonInfo ? props?.buttonInfo?.label : "",
+        btnLink: props?.buttonInfo ? props?.buttonInfo?.link : "",
         file: {},
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        postRequest(APIs.dashButton.new_dashbutton + `{id}?dashbox_id=${1}`, values, true).then((response) => {
+
+        if (props.buttonInfo) {
+          //update boxName
+          // putRequest(APIs.dashBox.update_dashbox + props?.boxInfo?.id, { "new_label": values.boxName }).then((response) => {
+          //   handleReponse(response, true)
+          // })
+          toast("این امکان به زودی افزوده می شود")
+        } else {
+          postRequest(APIs.dashButton.new_dashbutton + 1, { file: values.file, label: values.btnName, link: values.btnLink }, true).then((response) => {
+            handleReponse(response)
+          })
+        }
+
+        const handleReponse = (response, isUpdate) => {
           if (response.data) {
             dispatch(addDashBox(response.data))
-            toast.success(t("helperText.successAdd"))
+            toast.success(t(`helperText.${isUpdate ? "successUpdate" : "successAdd"}`))
             props.toggleShowModal(false);
           }
           if (response.error.msg) {
             toast(response.error.msg)
           }
-        })
+        }
       },
     });
     return (

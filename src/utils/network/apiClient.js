@@ -1,5 +1,7 @@
 import axios from "axios"
 
+
+
 const BASE_URL = "http://192.168.20.101:7000/api/"
 
 const defaultOptions = {
@@ -16,7 +18,8 @@ const APIs = {
     home: "home",
     dashBox: {
         new_dashBox: "dashbox/new-dashbox",
-        delete_dashbox: "dashbox/dashbox/"
+        delete_dashbox: "dashbox/dashbox/",
+        update_dashbox: "dashbox/title/"
     },
     dashButton: {
         new_dashbutton: "dashbox/new-button/"

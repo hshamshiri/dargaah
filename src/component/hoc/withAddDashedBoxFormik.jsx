@@ -7,6 +7,7 @@ import { addDashBox } from "../../redux/uiConfigeReducer";
 import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify";
 import { postRequest } from "../../utils/network/requsets/postRequest";
+import { putRequest } from "../../utils/network/requsets/putRequest";
 
 
 const WithAddDashedBoxFormik = (WrappedComponent) => {
@@ -36,17 +37,30 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        postRequest(APIs.dashBox.new_dashBox, { label: values.boxName }).then((response) => {
+
+        if (props.boxInfo) {
+          //update boxName
+          putRequest(APIs.dashBox.update_dashbox + props?.boxInfo?.id, { "new_label": values.boxName }).then((response) => {
+            handleReponse(response, true)
+          })
+
+        } else {
+          //create new 
+          postRequest(APIs.dashBox.new_dashBox, { label: values.boxName }).then((response) => {
+            handleReponse(response)
+          })
+        }
+
+        const handleReponse = (response, isUpdate) => {
           if (response.data) {
             dispatch(addDashBox(response.data))
-            toast.success(t("helperText.successAdd"))
+            toast.success(t(`helperText.${isUpdate ? "successUpdate" : "successAdd"}`))
             props.toggleShowModal(false);
           }
           if (response.error.msg) {
             toast(response.error.msg)
           }
-        })
-
+        }
 
       },
     });

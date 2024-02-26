@@ -43,7 +43,7 @@ const UiSlider = ({
         }
       }
     >
-      {journals && journals.length > 0 && journals.map((image, i) => <Item key={uuidv4()} item={image} />)}
+      {journals && journals?.length > 0 && journals.map((image, i) => <Item key={uuidv4()} item={image} />)}
     </Carousel>
   );
 };

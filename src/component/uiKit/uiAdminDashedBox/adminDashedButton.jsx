@@ -6,9 +6,9 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Link } from "react-router-dom";
 import UiIcon from "../uiIcon/uiIcon";
 import { useTranslation } from "react-i18next";
+import { useTheme } from "@mui/material";
 
 const AdminDashedButton = ({ handleForms, boxInfo, dashButtonInfo }) => {
-
   return (
     <Fragment>
       <ShakingView sx={{ marginTop: 3 }}>
@@ -27,10 +27,7 @@ const AdminDashedButton = ({ handleForms, boxInfo, dashButtonInfo }) => {
           />
           {/* <Link to={buttonDetalis?.link || "#"}> */}
           <Box
-            display={"flex"}
-            onClick={() =>
-              handleForms("addButtonOfDashedBox", boxInfo, dashButtonInfo)
-            }
+
           >
             <LazyLoadImage
               //loading="lazy"
@@ -59,6 +56,8 @@ const AdminDashedButton = ({ handleForms, boxInfo, dashButtonInfo }) => {
 
 const EditButtons = ({ handleForms, boxInfo, dashButtonInfo }) => {
   const [t] = useTranslation();
+  const theme = useTheme("theme")
+
   return (
     <Box
       display={"flex"}
@@ -66,11 +65,7 @@ const EditButtons = ({ handleForms, boxInfo, dashButtonInfo }) => {
       right={-5}
       top={10}
       position={"absolute"}
-      onClick={() =>
-        handleForms("addButtonOfDashedBox", boxInfo, dashButtonInfo)
-      }
-      borderRadius={5}
-      sx={{ background: "linear-gradient(to right bottom, #430089, #82ffa1)" }}
+
     >
       <Tooltip
         title={t("dashboard.main.editBtn")}
@@ -78,7 +73,14 @@ const EditButtons = ({ handleForms, boxInfo, dashButtonInfo }) => {
         arrow
         TransitionComponent={Zoom}
       >
-        <Box>
+        <Box
+          sx={{ borderTopLeftRadius: 5, borderTopRightRadius: 5, background: theme.palette.gradient.light, }}
+          onClick={(e) => {
+            e.preventDefault()
+            handleForms("addButtonOfDashedBox", boxInfo, dashButtonInfo)
+          }
+          }
+        >
           <UiIcon iconName={"editIcon"} iconColor={"white"} />
         </Box>
       </Tooltip>
@@ -89,7 +91,12 @@ const EditButtons = ({ handleForms, boxInfo, dashButtonInfo }) => {
         arrow
         TransitionComponent={Zoom}
       >
-        <Box>
+        <Box
+          sx={{ borderBottomLeftRadius: 5, borderBottomRightRadius: 5, background: theme.palette.gradient.red, }}
+          onClick={(e) => {
+            e.preventDefault()
+            console.log("deeeelte")
+          }}>
           <UiIcon iconName={"delete"} iconColor={"white"} />
         </Box>
       </Tooltip>

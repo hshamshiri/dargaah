@@ -20,7 +20,8 @@ import Avatar from "@mui/material/Avatar";
 import useWindowSize from "../../hooks/useWindowSize";
 //icons
 import UiIcon from "../uiIcon/uiIcon";
-import godlogo from "../../../images/godlogo.png";
+import seplogo from "../../../images/seplogo.jpg"
+
 //
 import avatarImg from "../../../images/avatar.png";
 //translation
@@ -219,12 +220,12 @@ const TopView = () => {
         }}
       >
         <div className="w-full h-1/2">
-          <img className=" h-full object-contain" src={godlogo} />
+          <img className=" h-full object-contain" src={seplogo} />
         </div>
         <div className="w-full flex p-1 justify-between items-center h-1/2  s">
           <UiIcon iconName={"dots"} classes={{ color: "white" }} />
           <Typography variant="body1" sx={{ color: "white", fontWeight: 700 }}>
-            حسن شیرازی
+            کاربر مهمان
           </Typography>
         </div>
         <Avatar
@@ -302,8 +303,7 @@ const LogoutView = () => {
           {t("dashboard.drawer.lastEnter")}
         </Typography>
         <Typography variant="button" borderRadius={5} backgroundColor={"white"}>
-          {"دقیقه قبل"}
-          {"28"}
+          {"لحظاتی قبل"}
         </Typography>
       </Box>
     </Box>

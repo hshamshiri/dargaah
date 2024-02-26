@@ -27,7 +27,7 @@ const UiTopSlider = ({
       indicators={false}
       sx={[{}, sx]}
     >
-      {images && images.length > 0 &&
+      {images && images?.length > 0 &&
         images.map((item, i) => {
           return (
             <Box key={uuidv4()}>

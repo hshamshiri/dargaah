@@ -2,8 +2,7 @@ import "./../css/login.css";
 import "./../scss/login.scss";
 import { useTranslation } from "react-i18next";
 import swipDownImage from "./../images/swipeDown.png";
-import iriLogo from "./../images/iriLogo.png";
-import ssoTitle from "./../images/ssoTitle.png";
+import seplogo from "./../images/sepaah.png";
 import { Box, Typography } from "@mui/material";
 
 const SwipUpButton = ({ swipUp, setSwipUp }) => {
@@ -24,9 +23,8 @@ const SwipUpButton = ({ swipUp, setSwipUp }) => {
 };
 const TopView = () => {
   return (
-    <Box className="flex flex-col justify-center items-center w-full h-1/4 ">
-      <img className="w-1/6 mt-2 object-contain" src={iriLogo} />
-      <img className="w-1/4 m-1 object-contain" src={ssoTitle} />
+    <Box className="flex flex-col justify-center items-center w-full h-1/3">
+      <img className="w-1/6 mt-5 object-contain" src={seplogo} />
     </Box>
   );
 };

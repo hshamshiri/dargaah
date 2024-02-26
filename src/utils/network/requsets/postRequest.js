@@ -44,14 +44,10 @@ export async function postRequest(url, data, isFormdata = false) {
 
 
 const createFormData = (data) => {
-    console.log(data)
     let formData = new FormData()
     data?.file && formData.append("file", data.file)
-    //image
-    data?.imageLink && formData.append("link", data.imageLink)
-    data?.lable && formData.append("lable", data.lable)
-    //button
-    data?.btnLink && formData.append("link", data.btnLink)
-    data?.btnName && formData.append("lable", data.btnName)
+    data?.link && formData.append("link", data.link)
+    data?.label && formData.append("label", data.label)
+
     return formData
 }

@@ -73,9 +73,11 @@ const theme = createTheme({
   palette: {
     gradient: {
       main: "linear-gradient(to right, #4880EC, #019CAD)",
-      light: "linear-gradient(to right, #4aaffd 0%, #4992f8 100%)",
+      light: "linear-gradient(to right, #4aaffd 0%, #B8CFBC 100%)",
       dark: "linear-gradient(to right, #18429B 0%, #515AAF 100%)",
+      red: "linear-gradient(to right, #E61717, #F29F9F)",
     },
+
     base: {
       main: "#0E3151",
       light: "#0277bd", // indigo[400],
