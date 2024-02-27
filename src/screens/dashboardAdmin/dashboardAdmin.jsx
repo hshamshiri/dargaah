@@ -94,8 +94,6 @@ const DashboardAdmin = ({ formik }) => {
       <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
         {activeForms["dashedBox"] && (
           <AddDashedBoxForm
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
             boxInfo={chosenBoxInfo}
           />
@@ -103,8 +101,6 @@ const DashboardAdmin = ({ formik }) => {
 
         {activeForms["addButtonOfDashedBox"] && (
           <AddButtonOfDashedBox
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
             toggleShowModal={toggleShowModal}
             boxInfo={chosenBoxInfo}
             buttonInfo={chosenButton}
@@ -343,7 +339,7 @@ const DashboardAdmin = ({ formik }) => {
               >
                 <UiAdminDashedBox
                   handleForms={handleForms}
-                  dashBoxInfo={dashBox}
+                  boxInfo={dashBox}
                   hideLabel={true}
                 />
               </Box>

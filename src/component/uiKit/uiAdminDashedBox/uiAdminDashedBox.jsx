@@ -12,7 +12,7 @@ import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
 
 const UiAdminDashedBox = ({
-  dashBoxInfo,
+  boxInfo,
   handleForms,
   hideLabel,
 }) => {
@@ -21,7 +21,7 @@ const UiAdminDashedBox = ({
   const dispatch = useDispatch()
 
   const deleteForm = () => {
-    deleteRequest(APIs.dashBox.delete_dashbox, dashBoxInfo.id).then((response) => {
+    deleteRequest(APIs.dashBox.delete_dashbox + boxInfo.id).then((response) => {
       response.data && dispatch(addDashBox(response.data))
       response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
     })
@@ -59,7 +59,7 @@ const UiAdminDashedBox = ({
           background: "linear-gradient(to right bottom, #430089, #82ffa1)",
         }}
       >
-        {dashBoxInfo?.label}
+        {boxInfo?.label}
       </Box>
       <Box display={"flex"} position={"absolute"} left={10} top={-50}>
         <Tooltip
@@ -88,7 +88,7 @@ const UiAdminDashedBox = ({
         <Tooltip title={t("dashboard.main.updateBoxName")} placement="top" arrow>
           <Box>
             <UiButton
-              onclick={() => handleForms("dashedBox", dashBoxInfo)}
+              onclick={() => handleForms("dashedBox", boxInfo)}
               //label={t("dashboard.main.edit")}
               variant={"contained"}
               iconName={"editIcon"}
@@ -105,7 +105,7 @@ const UiAdminDashedBox = ({
         <Tooltip title={t("dashboard.main.addBtn")} placement="top" arrow>
           <Box>
             <UiButton
-              onclick={() => handleForms("addButtonOfDashedBox", dashBoxInfo)}
+              onclick={() => handleForms("addButtonOfDashedBox", boxInfo)}
               variant={"contained"}
               iconName={"add"}
               iconType={"button"}
@@ -133,12 +133,12 @@ const UiAdminDashedBox = ({
           direction: "rtl",
         }}
       >
-        {dashBoxInfo && dashBoxInfo?.buttons.map((button) => {
+        {boxInfo && boxInfo?.buttons.map((button) => {
           return (
             <AdminDashedButton
               key={uuidv4()}
-              dashBoxInfo={dashBoxInfo}
-              dashButtonInfo={button}
+              boxInfo={boxInfo}
+              buttonInfo={button}
               handleForms={handleForms}
             />
           );

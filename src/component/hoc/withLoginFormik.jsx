@@ -14,7 +14,7 @@ const WithMaterialUI = (WrappedComponent) => {
         .matches(regexList.mobile, t("login.form.mobileInvalid")),
       captcha: yup
         .string()
-        .required(t("login.form.mobileRequired"))
+        .required(t("login.form.codeRequired"))
       //boxName: yup.string().required(t("helperText.requiredField")),
     });
 

@@ -15,14 +15,16 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
     const dispatch = useDispatch()
 
     const MAX_FILE_SIZE = 102400; //100KB
+    const validFileExtensions = {
+      image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
+    };
+
     const validationSchema = yup.object({
       file: yup
         .mixed()
         .required("Required")
-        .test(
-          "is-valid-size",
-          t("helperText.max-size-50"),
-          (value) => value && value.size <= MAX_FILE_SIZE
+        .test("is-valid-type", "Not a valid image type", (value) =>
+          isValidFileType(value && value?.name.toLowerCase(), "image")
         ),
 
       imageLink: yup
@@ -45,15 +47,20 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
     //   }
     //   return checkDuplicate > 0 ? false : true;
     // };
+    function isValidFileType(fileName, fileType) {
+      return (
+        fileName &&
+        validFileExtensions[fileType].indexOf(fileName.split(".").pop()) > -1
+      );
+    }
 
     const formik = useFormik({
       initialValues: {
-        file: {},
+        file: null,
         imageLink: "",
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log("pppppp", values)
         postRequest(APIs.journal.upload_image, { file: values.file, link: values.imageLink }, true).then((response) => {
           if (response.data) {
             dispatch(addJournalImage(response.data))

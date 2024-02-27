@@ -46,7 +46,6 @@ const AddTopSliderImageForm = ({
                 formik.setFieldValue("file", event.target.files[0]);
                 setTopSlideImage(event?.target?.files[0]);
               }}
-              hidden={true}
               error={formik.touched.file && Boolean(formik.errors.file)}
               helperText={formik.touched.file && formik.errors.file}
               sx={{ display: "none" }}

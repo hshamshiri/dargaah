@@ -19,20 +19,22 @@ const APIs = {
     dashBox: {
         new_dashBox: "dashbox/new-dashbox",
         delete_dashbox: "dashbox/dashbox/",
-        update_dashbox: "dashbox/title/"
+        update_dashbox: "dashbox/title/",
     },
     dashButton: {
-        new_dashbutton: "dashbox/new-button/"
+        new_dashbutton: "dashbox/new-button/",
+        delete_button:"dashbox/button/",
+        update_button:"dashbox/update-button/"
     },
     topSlider: {
         image_list: "slider/all",
         upload_image: "slider/image",
-        deleteImage: "slider/"
+        delete_Image: "slider/"
     },
     journal: {
         image_list: "journal/all",
         upload_image: "journal/image",
-        deleteImage: "journal/"
+        delete_Image: "journal/"
     }
 }
 

@@ -74,19 +74,20 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       initialValues: {
         btnName: props?.buttonInfo ? props?.buttonInfo?.label : "",
         btnLink: props?.buttonInfo ? props?.buttonInfo?.link : "",
-        file: {},
+        file: null,
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
 
+        console.log("buttonnnnn", props.boxInfo)
         if (props.buttonInfo) {
           //update boxName
-          // putRequest(APIs.dashBox.update_dashbox + props?.boxInfo?.id, { "new_label": values.boxName }).then((response) => {
-          //   handleReponse(response, true)
-          // })
+          putRequest(APIs.dashButton.update_button + props?.boxInfo?.id + `/${props.buttonInfo?.id}`, { file: values.file, label: values.btnName, link: values.btnLink }, true).then((response) => {
+            handleReponse(response, true)
+          })
           toast("این امکان به زودی افزوده می شود")
         } else {
-          postRequest(APIs.dashButton.new_dashbutton + 1, { file: values.file, label: values.btnName, link: values.btnLink }, true).then((response) => {
+          postRequest(APIs.dashButton.new_dashbutton + props?.boxInfo?.id, { file: values.file, label: values.btnName, link: values.btnLink }, true).then((response) => {
             handleReponse(response)
           })
         }

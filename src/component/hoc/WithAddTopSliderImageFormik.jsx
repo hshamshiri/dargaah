@@ -27,11 +27,6 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
         .test("is-valid-type", "Not a valid image type", (value) =>
           isValidFileType(value && value?.name.toLowerCase(), "image")
         ),
-      // .test(
-      //   "is-valid-size",
-      //   "Max allowed size is 100KB",
-      //   (value) => value && value.size <= MAX_FILE_SIZE
-      // )
       imageLink: yup
         .string()
         .min(2, t("helperText.short"))
@@ -39,6 +34,11 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
         .required(t("helperText.requiredField")),
       // .test("Unique", t("helperText.duplicate"), (value) => {  return checkDuplicateLink(value);}),
     });
+    // .test(
+    //   "is-valid-size",
+    //   "Max allowed size is 100KB",
+    //   (value) => value && value.size <= MAX_FILE_SIZE
+    // )
 
     function isValidFileType(fileName, fileType) {
       return (

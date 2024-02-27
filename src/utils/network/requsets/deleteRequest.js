@@ -4,7 +4,7 @@ import { axiosClient } from "../apiClient";
 import handlingResponseError from "./handlingError"
 
 
-export async function deleteRequest(url, id) {
+export async function deleteRequest(url) {
 
     const result = {
         data: null,
@@ -15,7 +15,7 @@ export async function deleteRequest(url, id) {
     }
 
     try {
-        await axiosClient.delete(url + id)
+        await axiosClient.delete(url)
             .then(response => {
 
                 if (response.data) {
