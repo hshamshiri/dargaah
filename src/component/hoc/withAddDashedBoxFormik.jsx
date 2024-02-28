@@ -26,9 +26,9 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
     });
 
     const checkDuplicateName = (value) => {
-      let boxNameList = props.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      let duplicateName = boxNameList.filter((el) => el?.label === value);
-      return duplicateName.length > 0 ? false : true;
+      // let boxNameList = props.interfaceUI?.dashedBorderContainers?.dashBoxes;
+      // let duplicateName = boxNameList.filter((el) => el?.label === value);
+      return true;
     };
 
     const formik = useFormik({

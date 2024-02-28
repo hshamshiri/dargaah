@@ -35,7 +35,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
         .mixed()
         .required("Required")
         .test("is-valid-size", t("helperText.max-size-50"), (value) =>
-          props?.buttonInfo?.image ? true : value && value.size <= MAX_FILE_SIZE
+          props?.buttonInfo?.image_url ? true : value && value.size <= MAX_FILE_SIZE
         ),
     });
 
@@ -78,14 +78,11 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-
-        console.log("buttonnnnn", props.boxInfo)
         if (props.buttonInfo) {
           //update boxName
           putRequest(APIs.dashButton.update_button + props?.boxInfo?.id + `/${props.buttonInfo?.id}`, { file: values.file, label: values.btnName, link: values.btnLink }, true).then((response) => {
             handleReponse(response, true)
           })
-          toast("این امکان به زودی افزوده می شود")
         } else {
           postRequest(APIs.dashButton.new_dashbutton + props?.boxInfo?.id, { file: values.file, label: values.btnName, link: values.btnLink }, true).then((response) => {
             handleReponse(response)

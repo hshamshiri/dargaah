@@ -30,7 +30,7 @@ const EditSliderImagesForm = ({
         response.data && dispatch(addTopSliderImage(response.data))
         response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
       })
-      topImages.length === 0 && console.log("eeemmmmmmmpty")
+
     } else {
       deleteRequest(APIs.journal.delete_Image + id).then((response) => {
         response.data && dispatch(addJournalImage(response.data))

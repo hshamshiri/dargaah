@@ -32,7 +32,6 @@ const AddSliderImageForm = ({
               component={"label"}
               onChange={(event) => {
                 formik.handleChange(event);
-                //console.log(event.target.files[0]);
                 setSideSlideImage(event.target.files[0]);
               }}
               hidden={true}

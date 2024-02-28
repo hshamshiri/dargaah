@@ -17,7 +17,6 @@ const AddButtonOfDashedBox = ({
   const [t] = useTranslation();
   const [buttonImage, setButtonImage] = React.useState(null);
 
-  //console.log(buttonInfo);
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack
@@ -48,9 +47,9 @@ const AddButtonOfDashedBox = ({
                 src={
                   buttonImage
                     ? URL.createObjectURL(buttonImage)
-                    : buttonInfo?.image?.url
-                    ? buttonInfo.image.url
-                    : sampleImage
+                    : buttonInfo?.image_url
+                      ? buttonInfo.image_url
+                      : sampleImage
                 }
               />
             </Box>

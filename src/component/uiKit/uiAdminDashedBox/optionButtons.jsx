@@ -11,16 +11,14 @@ import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
 
 const OptionButtons = ({ handleForms, boxInfo, buttonInfo }) => {
-  console.log(APIs.dashButton.delete_button + boxInfo?.id + `/${buttonInfo.id}`)
   const [t] = useTranslation();
   const theme = useTheme("theme")
   const dispatch = useDispatch()
 
   const remove = () => {
     deleteRequest(APIs.dashButton.delete_button + boxInfo?.id + `/${buttonInfo.id}`).then(response => {
-      console.log(response)
       if (response.data) {
-        dispatch(addDashBox, response?.data)
+        dispatch(addDashBox(response.data))
         toast(t("helperText.successDelete"))
       }
       if (response.error.msg) {

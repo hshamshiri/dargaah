@@ -41,8 +41,6 @@ const Dashboard = () => {
   }, []);
 
   const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
-  const journal = useSelector((state) => state.uiConfigeJson.journal_list);
-
 
 
   return (
@@ -177,10 +175,7 @@ const Dashboard = () => {
               >
                 {t("dashboard.main.journals")}
               </Typography>
-              <UiSlider
-                images={interfaceConfige?.journals?.images}
-                label={interfaceConfige?.journals?.label}
-              />
+              <UiSlider />
             </Grid>
           </Grid>
 
