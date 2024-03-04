@@ -22,17 +22,16 @@ const UiTopSlider = ({
       duration={duration}
       animation={animation}
       swipe={swipe}
-      //changeOnFirstRender={true}
-      // onChange={() => setHideDeleteIcon(true)}
-      indicators={false}
+      indicators={true}
+      height={200}
       sx={[{}, sx]}
+    //changeOnFirstRender={true}
+    // onChange={() => setHideDeleteIcon(true)}
     >
       {images && images?.length > 0 &&
         images.map((item, i) => {
           return (
-            <Box key={uuidv4()}>
-              <Item item={item} />
-            </Box>
+            <Item item={item} />
           );
         })}
     </Carousel>

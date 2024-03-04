@@ -7,11 +7,7 @@ const Item = ({ item }) => {
 
   return (
     <Grid
-      height={{ xs: 200, sm: 400, md: "100%" }}
-      sx={{
-        backgroundColor: "transparent",
-        //padding:
-      }}
+      height={{ xs: 200, sm: 400, md: 400, lg: 500 }}
     >
       <Link to={item.link} target="_blank" >
         <LazyLoadImage
@@ -20,36 +16,10 @@ const Item = ({ item }) => {
           style={{
             flex: 1,
             resizeMode: "contain",
-            minHeight: 400,
-            maxHeight: 600,
+            height: "100%",
             width: "100%",
           }}
         />
-        <Box
-          display={"flex"}
-          width={"100%"}
-          height={"100%"}
-          justifyContent={"center"}
-        >
-          {/* <Typography width={"90%"} color={"white"}>
-          {item.description}
-        </Typography> */}
-        </Box>
-        {item.app && (
-          <UiButton
-            type="submit"
-            label={item.appButtonTitle}
-            onclick={<a href="#" />}
-            variant="contained"
-            iconName={"download"}
-            iconType={"button"}
-            sx={{
-              borderColor: "white",
-              border: 1,
-              backgroundColor: "transparent",
-            }}
-          />
-        )}
       </Link>
     </Grid>
   );

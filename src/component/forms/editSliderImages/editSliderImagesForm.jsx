@@ -1,14 +1,18 @@
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Divider, ImageList, ImageListItem } from "@mui/material";
+import { Box, Divider, ImageList, ImageListItem, Zoom } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import UiIcon from "../../uiKit/uiIcon/uiIcon";
 import Tooltip from "@mui/material/Tooltip";
+import UiButton from "../../uiKit/uiButton/uiButton";
 //
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { APIs } from "../../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
-import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+
+
+
 
 const EditSliderImagesForm = ({
   toggleShowModal,
@@ -17,8 +21,8 @@ const EditSliderImagesForm = ({
   const isTopSlider = sliderName === "topSlider" ? true : false;
   const topImages = useSelector((state) => state?.uiConfigeJson?.topSlider_list)
   const journals = useSelector((state) => state?.uiConfigeJson?.journal_list.images)
-
   const dispatch = useDispatch()
+  const [t] = useTranslation()
 
   let imageList = [];
   imageList = isTopSlider ? topImages : journals
@@ -61,80 +65,89 @@ const EditSliderImagesForm = ({
 
   return (
     <Box>
+      {/* container */}
       <ImageList
         sx={{
           direction: "rtl",
-          maxHeight: 500,
-          minHeight: isTopSlider ? 50 : 300
+          height: 500
         }}
-        cols={isTopSlider ? 1 : 2}
+        cols={isTopSlider ? 2 : 3}
+        rowHeight={isTopSlider ? 200 : 300}
       >
         {imageList && imageList.length > 0 &&
           imageList.map((image, i) => {
-
             return (
-              <Box
-                margin={1}
-                boxShadow={3}
-                display={"flex"}
-                flexDirection={isTopSlider ? "row" : "column"}
-                justifyContent={"space-between"}
+              <ImageListItem
                 key={i}
-                sx={[
-                  isTopSlider && {
-                    borderEndEndRadius: 10,
-                    borderStartEndRadius: 10,
-                  },
-                  { borderRadius: 2 },
-                ]}
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: 2,
+                  margin: 1,
+                  boxShadow: 3,
+                  borderRadius: 2
+                }}
               >
-                <Box
-                  height={isTopSlider ? "100%" : "20%"}
-                  minWidth={40}
-                  display={"flex"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                  bgcolor={isTopSlider && "red"}
-                  sx={[
-                    isTopSlider && {
-                      borderEndEndRadius: 5,
-                      borderStartEndRadius: 5,
-                    },
-                  ]}
 
+                <LazyLoadImage
+                  style={{
+                    height: "100%",
+                    width: "100%",
+                    margin: 1,
+                  }}
 
-                  onClick={() => removeImage(image?.id)}
-                >
-                  <Tooltip title={"حذف"} placement="bottom">
+                  src={image.image_url}
+                  loading="lazy"
+                />
+
+                <Box sx={{ display: "flex", marginTop: 2 }}>
+                  <Tooltip
+                    title={t("dashboard.main.deleteBox")}
+                    placement="top"
+                    arrow
+                    TransitionComponent={Zoom}
+                  >
                     <Box>
-                      <UiIcon
-                        iconName="delete"
-                        iconColor={"white"}
-                        classes={{ backgroundColor: "red" }}
+                      <UiButton
+                        onClick={() => removeImage(image?.id)}
+                        //label={t("dashboard.main.addBtn")}
+                        variant={"contained"}
+                        iconName={"delete"}
+                        iconType={"button"}
+                        iconColor={"red"}
+                        sx={{
+                          width: 20,
+                          minWidth: 40,
+                          margin: 0.1,
+                          background: (theme) => theme.palette.gradient.main,
+                        }}
+                      />
+                    </Box>
+                  </Tooltip>
+
+
+                  <Tooltip title={t("dashboard.main.updateBoxName")} placement="top" arrow>
+                    <Box>
+                      <UiButton
+                        onclick={() => toast("به زودی فعال می شود")}
+                        //label={t("dashboard.main.edit")}
+                        variant={"contained"}
+                        iconName={"editIcon"}
+                        iconType={"button"}
+                        sx={{
+                          width: 20,
+                          minWidth: 40,
+                          margin: 0.1,
+                          background: (theme) => theme.palette.gradient.main,
+                        }}
                       />
                     </Box>
                   </Tooltip>
                 </Box>
-                <ImageListItem
-                  sx={{
-                    borderEndEndRadius: 5,
-                    borderStartEndRadius: 5,
-                    minHeight: 40,
-                  }}
-                >
-                  <LazyLoadImage
-                    style={{
-                      minHeight: 50,
-                      borderRadius: 10,
-                      margin: 5,
-                    }}
-                    src={image.image_url}
-                    loading="lazy"
-                  />
-                </ImageListItem>
+              </ImageListItem>
 
 
-              </Box>
+
             );
           })}
       </ImageList>

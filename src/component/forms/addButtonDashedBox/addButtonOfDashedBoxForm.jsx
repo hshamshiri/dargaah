@@ -1,21 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import withAddButtonOfDashedBoxFormik from "../../hoc/withAddButtonOfDashedBoxFormik";
-import { Stack, Box, Button } from "@mui/material";
+import { Stack, Box, Button, FormHelperText } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
 import sampleImage from "../../../images/album.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { getRequest } from "../../../utils/network/requsets/getRequest";
 
 const AddButtonOfDashedBox = ({
   formik,
-  interfaceUI,
-  setInterfaceUI,
   boxInfo,
   buttonInfo,
 }) => {
   const [t] = useTranslation();
   const [buttonImage, setButtonImage] = React.useState(null);
+
+
+
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -26,35 +28,40 @@ const AddButtonOfDashedBox = ({
         justifyContent={"center"}
         alignItems={"center"}
       >
-        <Box>
-          <Button component="label">
-            <UiInputText
-              type="file"
-              name="file"
-              id="file"
-              accept="image/jpeg,image/png,image/tiff,image/webp"
-              onChange={(event) => {
-                formik.setFieldValue("file", event.target.files[0]);
-                setButtonImage(event?.target?.files[0]);
-              }}
-              error={formik.touched.file && Boolean(formik.errors.file)}
-              helperText={formik.touched.file && formik.errors.file}
-              sx={{ display: "none" }}
-            />
-            <Box>
-              <LazyLoadImage
-                className="w-40"
-                src={
-                  buttonImage
-                    ? URL.createObjectURL(buttonImage)
-                    : buttonInfo?.image_url
-                      ? buttonInfo.image_url
-                      : sampleImage
-                }
-              />
-            </Box>
-          </Button>
-        </Box>
+
+
+        <Button sx={{ display: "flex", flexDirection: "column" }} component="label">
+          <LazyLoadImage
+            className="w-40"
+            src={
+              buttonImage
+                ? URL.createObjectURL(buttonImage)
+                : buttonInfo?.image_url
+                  ? buttonInfo.image_url
+                  : sampleImage
+            }
+          />
+          <UiInputText
+            type="file"
+            name="file"
+            id="file"
+            accept="image/jpeg,image/png,image/tiff,image/webp"
+            onChange={(event) => {
+              formik.setFieldValue("file", event.target.files[0]);
+              setButtonImage(event?.target?.files[0]);
+            }}
+            error={formik.touched.file && Boolean(formik.errors.file)}
+            helperText={formik.touched.file && formik.errors.file}
+            sx={{ display: "none" }}
+          />
+          <FormHelperText
+            type="file"
+            name="file"
+            id="file"
+            error={formik.touched.file && Boolean(formik.errors.file)}
+          >{formik.touched.file && formik.errors.file}
+          </FormHelperText>
+        </Button>
 
         <UiInputText
           formik={formik}

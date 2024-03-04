@@ -9,14 +9,11 @@ const Item = ({ item }) => {
     <Grid>
       <Link to={item.link} target="_blank" >
         <LazyLoadImage
-          //onClick={() => deleteImage()}
           loading="lazy"
           src={item?.image_url}
           style={{
-
-            //resizeMode: "contain",
-            maxHeight: 500,
-            minHeight: 200,
+            width: "100%",
+            height: 200,
           }}
         />
       </Link>
