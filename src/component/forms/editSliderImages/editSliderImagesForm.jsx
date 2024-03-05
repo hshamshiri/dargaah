@@ -28,7 +28,6 @@ const EditSliderImagesForm = ({
   imageList = isTopSlider ? topImages : journals
 
   const removeImage = (id) => {
-
     if (isTopSlider) {
       deleteRequest(APIs.topSlider.delete_Image + id).then((response) => {
         response.data && dispatch(addTopSliderImage(response.data))
@@ -66,41 +65,45 @@ const EditSliderImagesForm = ({
   return (
     <Box>
       {/* container */}
+
       <ImageList
         sx={{
           direction: "rtl",
           height: 500
         }}
-        cols={isTopSlider ? 2 : 3}
+        cols={isTopSlider ? 1 : 2}
         rowHeight={isTopSlider ? 200 : 300}
       >
         {imageList && imageList.length > 0 &&
           imageList.map((image, i) => {
             return (
-              <ImageListItem
-                key={i}
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: 2,
-                  margin: 1,
-                  boxShadow: 3,
-                  borderRadius: 2
-                }}
-              >
-
-                <LazyLoadImage
-                  style={{
-                    height: "100%",
-                    width: "100%",
+              <Box key={i}>
+                <ImageListItem
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: 2,
                     margin: 1,
+                    boxShadow: 3,
+                    borderRadius: 2,
                   }}
+                >
 
-                  src={image.image_url}
-                  loading="lazy"
-                />
+                  <LazyLoadImage
+                    style={{
+                      height: "100%",
+                      width: "100%",
+                      margin: 1,
+                    }}
 
-                <Box sx={{ display: "flex", marginTop: 2 }}>
+                    src={image.image_url}
+                    loading="lazy"
+                  />
+
+
+                </ImageListItem>
+
+                <Box sx={{ display: "flex", margin: 1, marginBottom: 2 }}>
                   <Tooltip
                     title={t("dashboard.main.deleteBox")}
                     placement="top"
@@ -109,7 +112,7 @@ const EditSliderImagesForm = ({
                   >
                     <Box>
                       <UiButton
-                        onClick={() => removeImage(image?.id)}
+                        onclick={() => removeImage(image?.id)}
                         //label={t("dashboard.main.addBtn")}
                         variant={"contained"}
                         iconName={"delete"}
@@ -144,8 +147,7 @@ const EditSliderImagesForm = ({
                     </Box>
                   </Tooltip>
                 </Box>
-              </ImageListItem>
-
+              </Box>
 
 
             );

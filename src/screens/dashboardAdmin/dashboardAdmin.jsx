@@ -92,6 +92,7 @@ const DashboardAdmin = ({ formik }) => {
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
       {/* add Box */}
       <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
+
         {activeForms["dashedBox"] && (
           <AddDashedBoxForm
             toggleShowModal={toggleShowModal}
@@ -126,6 +127,8 @@ const DashboardAdmin = ({ formik }) => {
             sliderName={chosenSlider}
           />
         )}
+
+        {/* <UiButton label="ssss" onclick={() => toggleShowModal()} /> */}
       </UiModal>
 
       {/* content */}

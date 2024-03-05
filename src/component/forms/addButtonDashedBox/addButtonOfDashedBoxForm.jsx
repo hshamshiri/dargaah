@@ -55,9 +55,6 @@ const AddButtonOfDashedBox = ({
             sx={{ display: "none" }}
           />
           <FormHelperText
-            type="file"
-            name="file"
-            id="file"
             error={formik.touched.file && Boolean(formik.errors.file)}
           >{formik.touched.file && formik.errors.file}
           </FormHelperText>

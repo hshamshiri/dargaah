@@ -37,59 +37,36 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
         .test(
           "is-valid-size",
           t("helperText.max-size-50"),
-          (value) =>
-            function () {
-              if (props?.buttonInfo?.image_url) {
-                console.log("dddd");
-                return true;
-              } else {
-                return value.size <= MAX_FILE_SIZE;
-              }
+          (value) => {
+            if (props?.buttonInfo) {
+              return true;
+            } else {
+              return value.size <= MAX_FILE_SIZE;
             }
+          }
         ),
     });
 
     const checkDuplicateName = (value) => {
       return true;
-      // let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      // let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
-      // let btnNameList = currenBox?.buttons;
-      // let duplicateName = btnNameList?.filter((el) => {
-      //   if (props?.buttonInfo) {
-      //     return el?.id !== props?.buttonInfo?.id && el?.label === value;
-      //   } else {
-      //     return el?.label === value;
-      //   }
-      // });
-      // return duplicateName?.length > 0 ? false : true;
+
     };
     const checkDuplicateLink = (value) => {
       return true;
-      // let boxList = props?.interfaceUI?.dashedBorderContainers?.dashBoxes;
-      // let currenBox = boxList.find((box) => box?.id === props.boxInfo.id);
-      // let btnNameList = currenBox?.buttons;
-      // let duplicateName = btnNameList?.filter((el) => {
-      //   if (props?.buttonInfo) {
-      //     return el?.id !== props?.buttonInfo?.id && el?.link === value;
-      //   } else {
-      //     return el?.link === value;
-      //   }
-      // });
-      // return duplicateName?.length > 0 ? false : true;
+
     };
 
     const formik = useFormik({
       initialValues: {
         btnName: props?.buttonInfo ? props?.buttonInfo?.label : "",
         btnLink: props?.buttonInfo ? props?.buttonInfo?.link : "",
-        file: props?.buttonInfo?.image_url
-          ? props?.buttonInfo?.image_url
-          : null,
+        file: !props?.buttonInfo && null,
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
+
         if (props.buttonInfo) {
-          //update boxName
+          //update button
           putRequest(
             APIs.dashButton.update_button +
             props?.boxInfo?.id +
@@ -100,6 +77,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
             handleReponse(response, true);
           });
         } else {
+          //create new button
           postRequest(
             APIs.dashButton.new_dashbutton + props?.boxInfo?.id,
             { file: values.file, label: values.btnName, link: values.btnLink },

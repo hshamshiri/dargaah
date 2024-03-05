@@ -31,7 +31,7 @@ const UiTopSlider = ({
       {images && images?.length > 0 &&
         images.map((item, i) => {
           return (
-            <Item item={item} />
+            <Item item={item} key={i} />
           );
         })}
     </Carousel>
