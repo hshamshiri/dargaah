@@ -122,7 +122,6 @@ const EditSliderImagesForm = ({
                           width: 20,
                           minWidth: 40,
                           margin: 0.1,
-                          background: (theme) => theme.palette.gradient.main,
                         }}
                       />
                     </Box>
@@ -141,7 +140,6 @@ const EditSliderImagesForm = ({
                           width: 20,
                           minWidth: 40,
                           margin: 0.1,
-                          background: (theme) => theme.palette.gradient.main,
                         }}
                       />
                     </Box>

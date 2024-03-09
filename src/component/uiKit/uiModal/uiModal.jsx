@@ -3,6 +3,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
+import UiButton from "../uiButton/uiButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
@@ -19,6 +20,7 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: 5,
+  paddingTop: 7
 };
 
 export default function UiModal({ children, activeModal, toggleShowModal }) {
@@ -31,6 +33,7 @@ export default function UiModal({ children, activeModal, toggleShowModal }) {
         onClose={toggleShowModal}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
+        // sx={{ position: "relative" }}
         slotProps={{
           backdrop: {
             timeout: 500,
@@ -38,7 +41,25 @@ export default function UiModal({ children, activeModal, toggleShowModal }) {
         }}
       >
         <Fade in={activeModal}>
-          <Box sx={style}>{children}</Box>
+          <Box sx={style}>
+            <UiButton
+              //label={t("dashboard.main.addBtn")}
+              variant={"contained"}
+              iconName={"close"}
+              iconType={"button"}
+              iconColor={"red"}
+              sx={{
+                width: 20,
+                minWidth: 40,
+                margin: 0.1,
+                position: "fixed",
+                top: 5,
+                left: 5,
+                borderRadius: 5,
+
+              }}
+              onclick={() => toggleShowModal()} />
+            {children}</Box>
         </Fade>
       </Modal>
     </div>

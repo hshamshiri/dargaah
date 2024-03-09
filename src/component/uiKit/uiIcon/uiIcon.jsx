@@ -1,6 +1,5 @@
-import { DownloadSharp } from "@mui/icons-material";
-import { Send } from "@mui/icons-material";
-import palette from "../../../utils/colors";
+
+import Send from "@mui/icons-material/Send";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
 import RefreshOutlinedIcon from "@mui/icons-material/RefreshOutlined";
@@ -23,6 +22,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import CloseIcon from '@mui/icons-material/Close';
 import { useTheme } from "@mui/material";
 
 
@@ -71,6 +71,7 @@ const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
     editCalender: <EditCalendarIcon sx={iconStyle} />,
     editIcon: <EditIcon sx={iconStyle} />,
     delete: <DeleteForeverIcon sx={iconStyle} />,
+    close: <CloseIcon sx={iconStyle} />
   };
 
   return icons[iconName];

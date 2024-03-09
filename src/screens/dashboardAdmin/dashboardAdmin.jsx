@@ -99,7 +99,6 @@ const DashboardAdmin = ({ formik }) => {
             boxInfo={chosenBoxInfo}
           />
         )}
-
         {activeForms["addButtonOfDashedBox"] && (
           <AddButtonOfDashedBox
             toggleShowModal={toggleShowModal}
@@ -107,7 +106,6 @@ const DashboardAdmin = ({ formik }) => {
             buttonInfo={chosenButton}
           />
         )}
-
         {activeForms["addLeftImageSlider"] && (
           <AddSliderImageForm
             toggleShowModal={toggleShowModal}
@@ -118,7 +116,6 @@ const DashboardAdmin = ({ formik }) => {
             toggleShowModal={toggleShowModal}
           />
         )}
-
         {activeForms["editSliderImages"] && (
           <EditSliderImagesForm
             interfaceUI={interfaceUI}
@@ -128,7 +125,7 @@ const DashboardAdmin = ({ formik }) => {
           />
         )}
 
-        {/* <UiButton label="ssss" onclick={() => toggleShowModal()} /> */}
+
       </UiModal>
 
       {/* content */}
@@ -151,7 +148,6 @@ const DashboardAdmin = ({ formik }) => {
                     width: 20,
                     minWidth: 40,
                     margin: 0.1,
-                    background: (theme) => theme.palette.gradient.main,
                   }}
                 />
               </Box>
@@ -168,7 +164,6 @@ const DashboardAdmin = ({ formik }) => {
                     width: 20,
                     minWidth: 40,
                     margin: 0.1,
-                    background: (theme) => theme.palette.gradient.main,
                   }}
                 />
               </Box>
@@ -252,7 +247,6 @@ const DashboardAdmin = ({ formik }) => {
                       width: 20,
                       minWidth: 40,
                       margin: 0.1,
-                      background: (theme) => theme.palette.gradient.main,
                     }}
                   />
                 </Box>
@@ -269,7 +263,6 @@ const DashboardAdmin = ({ formik }) => {
                       width: 20,
                       minWidth: 40,
                       margin: 0.1,
-                      background: (theme) => theme.palette.gradient.main,
                     }}
                   />
                 </Box>
@@ -323,9 +316,6 @@ const DashboardAdmin = ({ formik }) => {
                 variant={"contained"}
                 iconName={"addFolder"}
                 iconType={"button"}
-                sx={{
-                  background: (theme) => theme.palette.gradient.main,
-                }}
               />
             </Grid>
 

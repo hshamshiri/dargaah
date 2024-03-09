@@ -79,7 +79,6 @@ const AddSliderImageForm = ({
           variant={"contained"}
           sx={{
             width: "50%",
-            background: (theme) => theme.palette.gradient.main,
           }}
         />
       </Stack>

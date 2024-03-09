@@ -41,12 +41,13 @@ const UiButton = ({
       }
       component={component}
       sx={{
-        borderRadius: "30px",
+        borderRadius: "10px",
         padding: 1,
-        backgroundColor: palette.darkBlue,
+        background: (theme) => theme.palette.gradient.light,
         height: 40,
         width: 300,
         ...sx,
+        marginRight: 0.3,
         // "@media only screen and (min-width: 980px)": {},
         // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
         //   width: 300,
