@@ -3,7 +3,7 @@ import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
 import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
-import { Box, Paper, Typography, Button } from "@mui/material";
+import { Box, Paper, Typography, Button, makeStyles } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
@@ -20,13 +20,20 @@ import { toast } from "react-toastify";
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
+import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
 
 const Dashboard = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [t] = useTranslation();
+  const dashBoxes = useSelector((state) => state.uiConfigeJson.dashBox_list);
+
 
   useEffect(() => {
+    getAllDashboardInformation()
+  }, []);
+
+  const getAllDashboardInformation = () => {
     getRequest(APIs.home).then((response) => {
       if (response.data) {
         response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
@@ -37,10 +44,7 @@ const Dashboard = () => {
         toast.error(response.error.msg + "\n" + response.error.status)
       }
     })
-
-  }, []);
-
-  const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
+  }
 
 
   return (
@@ -190,20 +194,21 @@ const Dashboard = () => {
             justifyContent={"start"}
             rowGap={5}
           >
-            {dashBoxList && dashBoxList.map((dashBox) => (
-              <Box
-                display={"flex"}
-                flexDirection={"column"}
-                alignItems={"end"}
-                position={"relative"}
-                key={uuidv4()}
-                sx={{ marginTop: 1 }}
-              >
-                <UiDashedBox
-                  dashBoxInfo={dashBox}
-                  hideLabel={true}
-                />
-              </Box>
+            {dashBoxes && dashBoxes.map((dashBox, i) => (
+              <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  alignItems={"end"}
+                  position={"relative"}
+                  sx={{ marginTop: 1 }}
+                >
+                  <UiDashedBox
+                    dashBoxInfo={dashBox}
+                    hideLabel={true}
+                  />
+                </Box>
+              </UiSlide>
             )
             )}
           </Grid>
@@ -222,5 +227,7 @@ const Dashboard = () => {
 // {arr.map((icon, i) => (
 //     <UiSlide timeout={1000 * ((i + 1) / 2)} key={i}>{icon}</UiSlide>
 //   ))}
+
+
 
 export default Dashboard;

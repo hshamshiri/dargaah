@@ -10,6 +10,9 @@ import { useDispatch } from "react-redux";
 import { APIs } from "../../../utils/network/apiClient";
 import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
+import UiSlide from "../uiTransitions/uiSlide/uiSlide"
+
+
 
 const UiAdminDashedBox = ({
   boxInfo,
@@ -132,16 +135,19 @@ const UiAdminDashedBox = ({
           direction: "rtl",
         }}
       >
-        {boxInfo && boxInfo?.buttons.map((button) => {
-          return (
-            <AdminDashedButton
-              key={uuidv4()}
-              boxInfo={boxInfo}
-              buttonInfo={button}
-              handleForms={handleForms}
-            />
-          );
-        })}
+        {boxInfo && boxInfo?.buttons.map((button, i) => (
+          // <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
+          // <Box >
+          <AdminDashedButton
+            key={uuidv4()}
+            boxInfo={boxInfo}
+            buttonInfo={button}
+            handleForms={handleForms}
+          />
+          // </Box>
+          // </UiSlide>
+        )
+        )}
       </Box>
     </Grid>
   );

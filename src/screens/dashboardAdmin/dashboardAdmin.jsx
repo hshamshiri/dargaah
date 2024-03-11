@@ -21,13 +21,13 @@ import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
 import { Tooltip } from "@mui/material";
 //
-
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
+import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
 
 
 const DashboardAdmin = ({ formik }) => {
@@ -44,10 +44,9 @@ const DashboardAdmin = ({ formik }) => {
     addTopImageSlider: false,
   });
 
-
-
   const dispatch = useDispatch()
-
+  const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
+  const journal = useSelector((state) => state.uiConfigeJson.journal_list);
 
 
   useEffect(() => {
@@ -64,10 +63,8 @@ const DashboardAdmin = ({ formik }) => {
 
   }, []);
 
-  const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
-  const journal = useSelector((state) => state.uiConfigeJson.journal_list);
-  // const dashedBorders = useSelector((state) => state.uiConfigeJson.dashedBorders);
-  // const drawerButtons = useSelector((state) => state.uiConfigeJson.drawerButtons);
+
+
 
 
   const toggleShowModal = () => setActiveModal(!activeModal);
@@ -92,7 +89,6 @@ const DashboardAdmin = ({ formik }) => {
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
       {/* add Box */}
       <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
-
         {activeForms["dashedBox"] && (
           <AddDashedBoxForm
             toggleShowModal={toggleShowModal}
@@ -124,8 +120,6 @@ const DashboardAdmin = ({ formik }) => {
             sliderName={chosenSlider}
           />
         )}
-
-
       </UiModal>
 
       {/* content */}
@@ -321,21 +315,22 @@ const DashboardAdmin = ({ formik }) => {
 
             <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
 
-            {dashBoxList && dashBoxList.map((dashBox) => (
-              <Box
-                display={"flex"}
-                flexDirection={"column"}
-                alignItems={"end"}
-                position={"relative"}
-                key={uuidv4()}
-                sx={{ marginTop: 3 }}
-              >
-                <UiAdminDashedBox
-                  handleForms={handleForms}
-                  boxInfo={dashBox}
-                  hideLabel={true}
-                />
-              </Box>
+            {dashBoxList && dashBoxList.map((dashBox, i) => (
+              <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  alignItems={"end"}
+                  position={"relative"}
+                  sx={{ marginTop: 3 }}
+                >
+                  <UiAdminDashedBox
+                    handleForms={handleForms}
+                    boxInfo={dashBox}
+                    hideLabel={true}
+                  />
+                </Box>
+              </UiSlide>
             ))}
           </Grid>
         </Grid>
@@ -344,14 +339,6 @@ const DashboardAdmin = ({ formik }) => {
   );
 };
 
-// const icon = (
-//   <Paper sx={{ m: 1, width: 100, height: 100 }} elevation={5}>
-//     hi
-//   </Paper>
-// );
-// const arr = [icon, icon, icon];
-// {arr.map((icon, i) => (
-//     <UiSlide timeout={1000 * ((i + 1) / 2)} key={i}>{icon}</UiSlide>
-//   ))}
+
 
 export default WithMaterialUI(DashboardAdmin);
