@@ -1,14 +1,15 @@
 
 
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import UiIcon from "../uiIcon/uiIcon";
 import { useTranslation } from "react-i18next";
-import { Box, Tooltip, Zoom, Divider, useTheme } from "@mui/material";
+import { Box, Divider, useTheme } from "@mui/material";
 import { APIs } from "../../../utils/network/apiClient";
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { useDispatch } from "react-redux";
 import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
+import UiTooltip from "../uiTooltip/uiTooltip"
 
 const OptionButtons = ({ handleForms, boxInfo, buttonInfo }) => {
   const [t] = useTranslation();
@@ -37,11 +38,9 @@ const OptionButtons = ({ handleForms, boxInfo, buttonInfo }) => {
       position={"absolute"}
 
     >
-      <Tooltip
+      <UiTooltip
         title={t("dashboard.main.editBtn")}
         placement="top"
-        arrow
-        TransitionComponent={Zoom}
       >
         <Box
           sx={{ borderTopLeftRadius: 5, borderTopRightRadius: 5, background: theme.palette.gradient.light, }}
@@ -52,13 +51,13 @@ const OptionButtons = ({ handleForms, boxInfo, buttonInfo }) => {
         >
           <UiIcon iconName={"editIcon"} iconColor={"white"} />
         </Box>
-      </Tooltip>
+      </UiTooltip>
+
       <Divider sx={{ backgroundColor: "white" }} />
-      <Tooltip
+
+      <UiTooltip
         title={t("dashboard.main.deleteBtn")}
         placement="bottom"
-        arrow
-        TransitionComponent={Zoom}
       >
         <Box
           sx={{ borderBottomLeftRadius: 5, borderBottomRightRadius: 5, background: theme.palette.gradient.red, }}
@@ -67,7 +66,7 @@ const OptionButtons = ({ handleForms, boxInfo, buttonInfo }) => {
           }}>
           <UiIcon iconName={"delete"} iconColor={"white"} />
         </Box>
-      </Tooltip>
+      </UiTooltip>
     </Box>
   );
 };

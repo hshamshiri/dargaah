@@ -3,7 +3,7 @@ import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import UiBreadcrumbs from "../../component/uiKit/uiBreadcrumbs/uiBreadcrumbs";
 import SearchInputBase from "../../component/uiKit/uiSearchTextField/uiSearchTextField";
-import { Box, Paper, Typography, Button, makeStyles } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
@@ -30,21 +30,22 @@ const Dashboard = () => {
 
 
   useEffect(() => {
-    getAllDashboardInformation()
-  }, []);
+    const getAllData = () => {
+      getRequest(APIs.home).then((response) => {
+        if (response.data) {
+          response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
+          response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
+          response.data?.journals && dispatch(addJournalImage(response.data?.journals))
+        }
+        if (response.error.msg) {
+          toast.error(response.error.msg + "\n" + response.error.status)
+        }
+      })
+    }
+    getAllData()
+  }, [dispatch]);
 
-  const getAllDashboardInformation = () => {
-    getRequest(APIs.home).then((response) => {
-      if (response.data) {
-        response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
-        response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
-        response.data?.journals && dispatch(addJournalImage(response.data?.journals))
-      }
-      if (response.error.msg) {
-        toast.error(response.error.msg + "\n" + response.error.status)
-      }
-    })
-  }
+
 
 
   return (

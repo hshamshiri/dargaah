@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
-import palette from "../../../utils/colors";
 import UiIcon from "../uiIcon/uiIcon";
+import UiTooltip from "../uiTooltip/uiTooltip";
 
 /**
  * Button info
@@ -28,37 +28,41 @@ const UiButton = ({
   component,
   iconColor,
   sx,
+  tooltipTitle,
+  toolTipPlacement
 }) => {
   return (
-    <Button
-      type={type}
-      onClick={() => onclick()}
-      disabled={disable || false}
-      variant={variant || "filled"}
-      className={`w-60 ${classes}`}
-      endIcon={
-        <UiIcon iconType={iconType} iconName={iconName} iconColor={iconColor} />
-      }
-      component={component}
-      sx={{
-        borderRadius: "10px",
-        padding: 1,
-        background: (theme) => theme.palette.gradient.light,
-        height: 40,
-        width: 300,
-        ...sx,
-        marginRight: 0.3,
-        // "@media only screen and (min-width: 980px)": {},
-        // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
-        //   width: 300,
-        // },
-        // "@media screen and (max-width: 420px)": {
-        //   width: 200,
-        // },
-      }}
-    >
-      {label}
-    </Button>
+    <UiTooltip title={tooltipTitle} placement={toolTipPlacement} >
+      <Button
+        type={type}
+        onClick={() => onclick()}
+        disabled={disable || false}
+        variant={variant || "filled"}
+        className={`w-60 ${classes}`}
+        endIcon={
+          <UiIcon iconType={iconType} iconName={iconName} iconColor={iconColor} />
+        }
+        component={component}
+        sx={{
+          borderRadius: "10px",
+          padding: 1,
+          background: (theme) => theme.palette.gradient.light,
+          height: 40,
+          width: 300,
+          ...sx,
+          marginRight: 0.3,
+          // "@media only screen and (min-width: 980px)": {},
+          // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
+          //   width: 300,
+          // },
+          // "@media screen and (max-width: 420px)": {
+          //   width: 200,
+          // },
+        }}
+      >
+        {label}
+      </Button>
+    </UiTooltip>
   );
 };
 

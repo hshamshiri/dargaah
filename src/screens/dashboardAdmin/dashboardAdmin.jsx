@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
-import WithMaterialUI from "../../component/hoc/withLoginFormik";
 import { v4 as uuidv4 } from "uuid";
 
 import AddDashedBoxForm from "../../component/forms/addDashedBoxForm/addDashedBoxForm";
@@ -11,15 +10,13 @@ import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/ad
 import AddTopSliderImageForm from "../../component/forms/addDashboardTopSliderImage/addTopSliderImageForm";
 import EditSliderImagesForm from "../../component/forms/editSliderImages/editSliderImagesForm";
 // -------
-import { Box, Paper, Typography, Button, Stack, Divider } from "@mui/material";
+import { Box, Typography, Stack, Divider } from "@mui/material";
 import UiSlider from "../../component/uiKit/uiSlider/uislider";
 import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
-import UiDashedBox from "../../component/uiKit/uiDashedBox/uidDashedBox";
 import UiAdminDashedBox from "../../component/uiKit/uiAdminDashedBox/uiAdminDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
-import { Tooltip } from "@mui/material";
 //
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -29,10 +26,57 @@ import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
 import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
 
+const ManagerModalForm = ({
+  toggleShowModal,
+  activeModal,
+  chosenBoxInfo,
+  chosenButton,
+  chosenSlider,
+  activeForms, }) => {
 
-const DashboardAdmin = ({ formik }) => {
+  return (
+    <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
+      {activeForms["dashedBox"] && (
+        <AddDashedBoxForm
+          toggleShowModal={toggleShowModal}
+          boxInfo={chosenBoxInfo}
+        />
+      )}
+      {activeForms["addButtonOfDashedBox"] && (
+        <AddButtonOfDashedBox
+          toggleShowModal={toggleShowModal}
+          boxInfo={chosenBoxInfo}
+          buttonInfo={chosenButton}
+        />
+      )}
+      {activeForms["addLeftImageSlider"] && (
+        <AddSliderImageForm
+          toggleShowModal={toggleShowModal}
+        />
+      )}
+      {activeForms["addTopImageSlider"] && (
+        <AddTopSliderImageForm
+          toggleShowModal={toggleShowModal}
+        />
+      )}
+      {activeForms["editSliderImages"] && (
+        <EditSliderImagesForm
+          toggleShowModal={toggleShowModal}
+          sliderName={chosenSlider}
+        />
+      )}
+    </UiModal>
+  )
+
+}
+
+
+
+
+const DashboardAdmin = () => {
+
   const [t] = useTranslation();
-  const [interfaceUI, setInterfaceUI] = useState(interfaceConfige);
+  const [interfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
   const [chosenBoxInfo, setChosenBoxInfo] = useState(null);
   const [chosenButton, setChosenButton] = useState(null);
@@ -43,34 +87,37 @@ const DashboardAdmin = ({ formik }) => {
     addLeftImageSlider: false,
     addTopImageSlider: false,
   });
-
+  const toggleShowModal = () => setActiveModal(!activeModal);
   const dispatch = useDispatch()
-  const dashBoxList = useSelector((state) => state.uiConfigeJson.dashBox_list);
-  const journal = useSelector((state) => state.uiConfigeJson.journal_list);
+
+  const dashBoxes = useSelector((state) => state.uiConfigeJson.dashBox_list);
+  const journals = useSelector((state) => state.uiConfigeJson.journal_list);
 
 
   useEffect(() => {
-    getRequest(APIs.home).then((response) => {
-      if (response.data) {
-        response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
-        response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
-        response.data?.journals && dispatch(addJournalImage(response.data?.journals))
-      }
-      if (response.error.msg) {
-        toast.error(response.error.msg + "\n" + response.error.status)
-      }
-    })
+    const getAllData = () => {
+      getRequest(APIs.home).then((response) => {
+        if (response.data) {
+          response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
+          response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
+          response.data?.journals && dispatch(addJournalImage(response.data?.journals))
+        }
+        if (response.error.msg) {
+          toast.error(response.error.msg + "\n" + response.error.status)
+        }
+      })
+    }
+    getAllData()
 
-  }, []);
+  }, [dispatch]);
 
 
-
-
-
-  const toggleShowModal = () => setActiveModal(!activeModal);
 
   const handleForms = (formName, boxInfo, buttonInfo, sliderName) => {
     setActiveModal(true);
+    setChosenBoxInfo(boxInfo);
+    setChosenButton(buttonInfo);
+    setChosenSlider(sliderName);
     setActiveForms((prevState) => {
       const nextState = {};
       Object.keys(prevState).forEach(() => {
@@ -78,92 +125,53 @@ const DashboardAdmin = ({ formik }) => {
       });
       return nextState;
     });
-    setChosenBoxInfo(boxInfo);
-    setChosenButton(buttonInfo);
-    setChosenSlider(sliderName);
-  };
 
+  };
 
 
   return (
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
-      {/* add Box */}
-      <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
-        {activeForms["dashedBox"] && (
-          <AddDashedBoxForm
-            toggleShowModal={toggleShowModal}
-            boxInfo={chosenBoxInfo}
-          />
-        )}
-        {activeForms["addButtonOfDashedBox"] && (
-          <AddButtonOfDashedBox
-            toggleShowModal={toggleShowModal}
-            boxInfo={chosenBoxInfo}
-            buttonInfo={chosenButton}
-          />
-        )}
-        {activeForms["addLeftImageSlider"] && (
-          <AddSliderImageForm
-            toggleShowModal={toggleShowModal}
-          />
-        )}
-        {activeForms["addTopImageSlider"] && (
-          <AddTopSliderImageForm
-            toggleShowModal={toggleShowModal}
-          />
-        )}
-        {activeForms["editSliderImages"] && (
-          <EditSliderImagesForm
-            interfaceUI={interfaceUI}
-            setInterfaceUI={setInterfaceUI}
-            toggleShowModal={toggleShowModal}
-            sliderName={chosenSlider}
-          />
-        )}
-      </UiModal>
+      <ManagerModalForm
+        toggleShowModal={toggleShowModal}
+        activeModal={activeModal}
+        chosenBoxInfo={chosenBoxInfo}
+        chosenButton={chosenButton}
+        chosenSlider={chosenSlider}
+        activeForms={activeForms} />
 
       {/* content */}
       <Box width={"100%"}>
         {/* banner */}
-
         <Stack spacing={2}>
           <Box width={"100%"} display={"flex"} justifyContent={"end"}>
-            <Tooltip title={t("dashboard.main.editImages")} placement="top">
-              <Box>
-                <UiButton
-                  onclick={() =>
-                    handleForms("editSliderImages", "", "", "topSlider")
-                  }
-                  //label={t("dashboard.main.edit")}
-                  variant={"contained"}
-                  iconName={"editIcon"}
-                  iconType={"button"}
-                  sx={{
-                    width: 20,
-                    minWidth: 40,
-                    margin: 0.1,
-                  }}
-                />
-              </Box>
-            </Tooltip>
-            <Tooltip title={t("dashboard.main.addImage")} placement="top">
-              <Box>
-                <UiButton
-                  onclick={() => handleForms("addTopImageSlider")}
-                  //label={t("dashboard.main.edit")}
-                  variant={"contained"}
-                  iconName={"addImage"}
-                  iconType={"button"}
-                  sx={{
-                    width: 20,
-                    minWidth: 40,
-                    margin: 0.1,
-                  }}
-                />
-              </Box>
-            </Tooltip>
-          </Box>
+            <UiButton
+              onclick={() =>
+                handleForms("editSliderImages", "", "", "topSlider")
+              }
+              variant={"contained"}
+              iconName={"editIcon"}
+              iconType={"button"}
+              tooltipTitle={t("dashboard.main.editImages")}
+              sx={{
+                width: 20,
+                minWidth: 40,
+                margin: 0.1,
+              }}
+            />
 
+            <UiButton
+              onclick={() => handleForms("addTopImageSlider")}
+              variant={"contained"}
+              iconName={"addImage"}
+              iconType={"button"}
+              tooltipTitle={t("dashboard.main.addImage")}
+              sx={{
+                width: 20,
+                minWidth: 40,
+                margin: 0.1,
+              }}
+            />
+          </Box>
           <Divider />
           <UiTopSlider />
         </Stack>
@@ -227,41 +235,40 @@ const DashboardAdmin = ({ formik }) => {
               justifyContent={"end"}
               marginY={1}
             >
-              <Tooltip title={t("dashboard.main.editImages")} placement="top">
-                <Box>
-                  <UiButton
-                    onclick={() => {
-                      handleForms("editSliderImages", "", "", "leftSlider");
-                    }}
-                    //label={t("dashboard.main.edit")}
-                    variant={"contained"}
-                    iconName={"editIcon"}
-                    iconType={"button"}
-                    sx={{
-                      width: 20,
-                      minWidth: 40,
-                      margin: 0.1,
-                    }}
-                  />
-                </Box>
-              </Tooltip>
-              <Tooltip title={t("dashboard.main.addImage")} placement="top">
-                <Box>
-                  <UiButton
-                    onclick={() => handleForms("addLeftImageSlider")}
-                    //label={t("dashboard.main.edit")}
-                    variant={"contained"}
-                    iconName={"addImage"}
-                    iconType={"button"}
-                    sx={{
-                      width: 20,
-                      minWidth: 40,
-                      margin: 0.1,
-                    }}
-                  />
-                </Box>
-              </Tooltip>
+
+              <UiButton
+                onclick={() => {
+                  handleForms("editSliderImages", "", "", "leftSlider");
+                }}
+                //label={t("dashboard.main.edit")}
+                variant={"contained"}
+                iconName={"editIcon"}
+                iconType={"button"}
+                tooltipTitle={t("dashboard.main.editImages")}
+                sx={{
+                  width: 20,
+                  minWidth: 40,
+                  margin: 0.1,
+                }}
+              />
+
+
+              <UiButton
+                onclick={() => handleForms("addLeftImageSlider")}
+                //label={t("dashboard.main.edit")}
+                variant={"contained"}
+                iconName={"addImage"}
+                iconType={"button"}
+                tooltipTitle={t("dashboard.main.addImage")}
+                sx={{
+                  width: 20,
+                  minWidth: 40,
+                  margin: 0.1,
+                }}
+              />
+
             </Box>
+
             <Grid
               boxShadow={3}
               sx={{
@@ -285,7 +292,7 @@ const DashboardAdmin = ({ formik }) => {
                     "linear-gradient(to right bottom, #430089, #82ffa1)",
                 }}
               >
-                {journal?.title}
+                {journals?.title}
               </Typography>
               <UiSlider />
             </Grid>
@@ -315,7 +322,7 @@ const DashboardAdmin = ({ formik }) => {
 
             <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
 
-            {dashBoxList && dashBoxList.map((dashBox, i) => (
+            {dashBoxes && dashBoxes.map((dashBox, i) => (
               <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
                 <Box
                   display={"flex"}
@@ -341,4 +348,4 @@ const DashboardAdmin = ({ formik }) => {
 
 
 
-export default WithMaterialUI(DashboardAdmin);
+export default DashboardAdmin

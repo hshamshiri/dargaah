@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Box, Divider, ImageList, ImageListItem, Zoom } from "@mui/material";
+import { Box, ImageList, ImageListItem } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import Tooltip from "@mui/material/Tooltip";
 import UiButton from "../../uiKit/uiButton/uiButton";
 //
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
@@ -27,6 +26,23 @@ const EditSliderImagesForm = ({
   let imageList = [];
   imageList = isTopSlider ? topImages : journals
 
+
+
+
+  useEffect(() => {
+    const checkImageListLength = () => {
+      if (imageList.length === 0) {
+        toast("تصویری برای نمایش وجود ندارد")
+        toggleShowModal(false)
+      }
+    }
+    checkImageListLength()
+
+  }, [imageList])
+
+
+
+
   const removeImage = (id) => {
     if (isTopSlider) {
       deleteRequest(APIs.topSlider.delete_Image + id).then((response) => {
@@ -44,22 +60,7 @@ const EditSliderImagesForm = ({
 
   };
 
-  useEffect(() => {
-    if (isTopSlider) {
-      if (topImages.length === 0) {
-        emptyImageList()
-      }
-    } else {
-      if (journals.length === 0) {
-        emptyImageList()
-      }
-    }
-  }, [topImages, journals])
 
-  const emptyImageList = () => {
-    toast("تصویری برای نمایش وجود ندارد")
-    toggleShowModal(false)
-  }
 
 
   return (
@@ -104,54 +105,43 @@ const EditSliderImagesForm = ({
                 </ImageListItem>
 
                 <Box sx={{ display: "flex", margin: 1, marginBottom: 2 }}>
-                  <Tooltip
-                    title={t("dashboard.main.deleteBox")}
-                    placement="top"
-                    arrow
-                    TransitionComponent={Zoom}
-                  >
-                    <Box>
-                      <UiButton
-                        onclick={() => removeImage(image?.id)}
-                        //label={t("dashboard.main.addBtn")}
-                        variant={"contained"}
-                        iconName={"delete"}
-                        iconType={"button"}
-                        iconColor={"red"}
-                        sx={{
-                          width: 20,
-                          minWidth: 40,
-                          margin: 0.1,
-                        }}
-                      />
-                    </Box>
-                  </Tooltip>
+
+                  <UiButton
+                    onclick={() => removeImage(image?.id)}
+                    //label={t("dashboard.main.addBtn")}
+                    variant={"contained"}
+                    iconName={"delete"}
+                    iconType={"button"}
+                    iconColor={"red"}
+                    tooltipTitle={t("dashboard.main.deleteBox")}
+                    sx={{
+                      width: 20,
+                      minWidth: 40,
+                      margin: 0.1,
+                    }}
+                  />
 
 
-                  <Tooltip title={t("dashboard.main.updateBoxName")} placement="top" arrow>
-                    <Box>
-                      <UiButton
-                        onclick={() => toast("به زودی فعال می شود")}
-                        //label={t("dashboard.main.edit")}
-                        variant={"contained"}
-                        iconName={"editIcon"}
-                        iconType={"button"}
-                        sx={{
-                          width: 20,
-                          minWidth: 40,
-                          margin: 0.1,
-                        }}
-                      />
-                    </Box>
-                  </Tooltip>
+                  <UiButton
+                    onclick={() => toast("به زودی فعال می شود")}
+                    variant={"contained"}
+                    iconName={"editIcon"}
+                    iconType={"button"}
+                    tooltipTitle={t("dashboard.main.updateBoxName")}
+                    sx={{
+                      width: 20,
+                      minWidth: 40,
+                      margin: 0.1,
+                    }}
+                  />
                 </Box>
-              </Box>
+              </Box >
 
 
             );
           })}
-      </ImageList>
-    </Box>
+      </ImageList >
+    </Box >
   );
 };
 

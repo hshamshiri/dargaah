@@ -1,5 +1,5 @@
 import AdminDashedButton from "./adminDashedButton";
-import { Box, Tooltip, Button, Zoom } from "@mui/material";
+import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import { APIs } from "../../../utils/network/apiClient";
 import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
-import UiSlide from "../uiTransitions/uiSlide/uiSlide"
+
 
 
 
@@ -65,61 +65,50 @@ const UiAdminDashedBox = ({
         {boxInfo?.label}
       </Box>
       <Box display={"flex"} position={"absolute"} left={10} top={-50}>
-        <Tooltip
-          title={t("dashboard.main.deleteBox")}
-          placement="top"
-          arrow
-          TransitionComponent={Zoom}
-        >
-          <Box>
-            <UiButton
-              onclick={deleteForm}
-              //label={t("dashboard.main.addBtn")}
-              variant={"contained"}
-              iconName={"delete"}
-              iconType={"button"}
-              iconColor={"red"}
-              sx={{
-                width: 20,
-                minWidth: 40,
-                margin: 0.1,
-              }}
-            />
-          </Box>
-        </Tooltip>
-        <Tooltip title={t("dashboard.main.updateBoxName")} placement="top" arrow>
-          <Box>
-            <UiButton
-              onclick={() => handleForms("dashedBox", boxInfo)}
-              //label={t("dashboard.main.edit")}
-              variant={"contained"}
-              iconName={"editIcon"}
-              iconType={"button"}
-              sx={{
-                width: 20,
-                minWidth: 40,
-                margin: 0.1,
 
-              }}
-            />
-          </Box>
-        </Tooltip>
-        <Tooltip title={t("dashboard.main.addBtn")} placement="top" arrow>
-          <Box>
-            <UiButton
-              onclick={() => handleForms("addButtonOfDashedBox", boxInfo)}
-              variant={"contained"}
-              iconName={"add"}
-              iconType={"button"}
-              sx={{
-                width: 20,
-                minWidth: 40,
-                margin: 0.1,
+        <UiButton
+          onclick={deleteForm}
+          variant={"contained"}
+          iconName={"delete"}
+          iconType={"button"}
+          iconColor={"red"}
+          tooltipTitle={t("dashboard.main.deleteBox")}
+          sx={{
+            width: 20,
+            minWidth: 40,
+            margin: 0.1,
+          }}
+        />
 
-              }}
-            />
-          </Box>
-        </Tooltip>
+        <UiButton
+          onclick={() => handleForms("dashedBox", boxInfo)}
+          //label={t("dashboard.main.edit")}
+          variant={"contained"}
+          iconName={"editIcon"}
+          iconType={"button"}
+          tooltipTitle={t("dashboard.main.updateBoxName")}
+          sx={{
+            width: 20,
+            minWidth: 40,
+            margin: 0.1,
+
+          }}
+        />
+
+        <UiButton
+          onclick={() => handleForms("addButtonOfDashedBox", boxInfo)}
+          variant={"contained"}
+          iconName={"add"}
+          iconType={"button"}
+          tooltipTitle={t("dashboard.main.addBtn")}
+          sx={{
+            width: 20,
+            minWidth: 40,
+            margin: 0.1,
+
+          }}
+        />
+
       </Box>
       <Box
         sx={{
@@ -136,16 +125,14 @@ const UiAdminDashedBox = ({
         }}
       >
         {boxInfo && boxInfo?.buttons.map((button, i) => (
-          // <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
-          // <Box >
+
           <AdminDashedButton
             key={uuidv4()}
             boxInfo={boxInfo}
             buttonInfo={button}
             handleForms={handleForms}
           />
-          // </Box>
-          // </UiSlide>
+
         )
         )}
       </Box>
