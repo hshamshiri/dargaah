@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import WithMaterialUI from "../../../component/hoc/withLoginFormik";
 import { useTranslation } from "react-i18next";
 import UiMobileInput from "../../../component/uiKit/uiInput/mobile/uiMobileInput";
@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 
 const PasswordLoginView = ({ onSubmit, formik }) => {
-  const theme = useTheme()
   const navigate = useNavigate()
   const [t] = useTranslation();
 

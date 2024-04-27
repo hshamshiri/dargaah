@@ -1,5 +1,5 @@
-import { createTheme, responsiveFontSizes } from "@mui/material";
-import { indigo, purple, blueGrey } from "@mui/material/colors";
+import { createTheme } from "@mui/material";
+import { purple, blueGrey } from "@mui/material/colors";
 
 const theme = createTheme({
   typography: {

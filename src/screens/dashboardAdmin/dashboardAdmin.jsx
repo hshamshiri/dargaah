@@ -24,7 +24,7 @@ import { toast } from "react-toastify";
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
-import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
+
 
 const ManagerModalForm = ({
   toggleShowModal,
@@ -87,6 +87,9 @@ const DashboardAdmin = () => {
     addLeftImageSlider: false,
     addTopImageSlider: false,
   });
+
+
+
   const toggleShowModal = () => setActiveModal(!activeModal);
   const dispatch = useDispatch()
 
@@ -138,6 +141,9 @@ const DashboardAdmin = () => {
         chosenButton={chosenButton}
         chosenSlider={chosenSlider}
         activeForms={activeForms} />
+
+
+
 
       {/* content */}
       <Box width={"100%"}>
@@ -323,21 +329,12 @@ const DashboardAdmin = () => {
             <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
 
             {dashBoxes && dashBoxes.map((dashBox, i) => (
-              <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
-                <Box
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"end"}
-                  position={"relative"}
-                  sx={{ marginTop: 3 }}
-                >
-                  <UiAdminDashedBox
-                    handleForms={handleForms}
-                    boxInfo={dashBox}
-                    hideLabel={true}
-                  />
-                </Box>
-              </UiSlide>
+              <UiAdminDashedBox
+                key={uuidv4()}
+                handleForms={handleForms}
+                boxInfo={dashBox}
+                hideLabel={true}
+              />
             ))}
           </Grid>
         </Grid>

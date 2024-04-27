@@ -4,7 +4,7 @@ import UiButton from "../../uiKit/uiButton/uiButton";
 const Item = ({ item }) => {
   return (
     <Paper style={{ backgroundColor: "transparent", boxShadow: "none" }}>
-      <img className="w-80 h-96 object-contain" src={item.src} />
+      <img alt="sliderItemImage" className="w-80 h-96 object-contain" src={item.src} />
       <Box className="flex w-full justify-center">
         <Typography className="w-96 text-white">{item.description}</Typography>
       </Box>
@@ -12,7 +12,7 @@ const Item = ({ item }) => {
         <UiButton
           type="submit"
           label={item.appButtonTitle}
-          onclick={<a href="#" />}
+          onclick={<a href="/#" />}
           variant="contained"
           iconName={"download"}
           iconType={"button"}

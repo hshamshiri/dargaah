@@ -1,4 +1,4 @@
-import { Breadcrumbs, Link, Typography } from "@mui/material";
+import { Breadcrumbs, Link } from "@mui/material";
 
 const UiBreadcrumbs = ({ items }) => {
   function handleClick(event) {

@@ -15,7 +15,7 @@ const WithAddTopSliderImageFormik = (WrappedComponent) => {
     const [t] = useTranslation();
     const dispatch = useDispatch()
 
-    const MAX_FILE_SIZE = 102400; //100KB
+    //const MAX_FILE_SIZE = 102400; //100KB
     const validFileExtensions = {
       image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
     };

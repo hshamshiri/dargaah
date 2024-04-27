@@ -87,15 +87,7 @@ export default function PersistentDrawerRight({ children, buttonList }) {
     size > 992 && handleDrawerOpen();
     size < 768 && handleDrawerClose();
   }, [size]);
-  //const sideItems= [{t("dashboard.home")},{},{},{},{}]
-  const sideItems = [
-    { label: t("dashboard.drawer.home"), iconName: "home" },
-    { label: t("dashboard.drawer.notifications"), iconName: "notification" },
-    { label: t("dashboard.drawer.mychild"), iconName: "mychild" },
-    { label: t("dashboard.drawer.servieces"), iconName: "servieces" },
-    { label: t("dashboard.drawer.graduates"), iconName: "graduates" },
-    { label: t("dashboard.drawer.organizational"), iconName: "organizational" },
-  ];
+
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -189,6 +181,7 @@ export default function PersistentDrawerRight({ children, buttonList }) {
                     >
                       {/* <UiIcon iconName={item.iconName} /> */}
                       <img
+                        alt="menuIcon"
                         className="w-6 object-contain"
                         src={item?.icon?.url}
                       />
@@ -220,7 +213,7 @@ const TopView = () => {
         }}
       >
         <div className="w-full h-1/2">
-          <img className=" h-full object-contain" src={seplogo} />
+          <img alt="sepLogo" className=" h-full object-contain" src={seplogo} />
         </div>
         <div className="w-full flex p-1 justify-between items-center h-1/2  s">
           <UiIcon iconName={"dots"} classes={{ color: "white" }} />
@@ -229,7 +222,7 @@ const TopView = () => {
           </Typography>
         </div>
         <Avatar
-          alt="hassan"
+          alt="avatar"
           src={avatarImg}
           sx={{
             width: 90,

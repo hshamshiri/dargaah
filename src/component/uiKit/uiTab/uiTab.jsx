@@ -5,7 +5,7 @@ import { TabsList as BaseTabsList } from "@mui/base/TabsList";
 import { TabPanel as BaseTabPanel } from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
 import { Tab as BaseTab, tabClasses } from "@mui/base/Tab";
-import { useTheme, Typography, Box, Button, Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function TabComp({ tabViews, tabLabels }) {
   return (

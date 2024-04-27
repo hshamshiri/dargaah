@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import withAddButtonOfDashedBoxFormik from "../../hoc/withAddButtonOfDashedBoxFormik";
-import { Stack, Box, Button, FormHelperText } from "@mui/material";
+import { Stack, Button, FormHelperText } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
 import sampleImage from "../../../images/album.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { getRequest } from "../../../utils/network/requsets/getRequest";
+
 
 const AddButtonOfDashedBox = ({
   formik,

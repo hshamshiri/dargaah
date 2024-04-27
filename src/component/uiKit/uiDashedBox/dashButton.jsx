@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import ShakingView from "../uiTransitions/uiShake/uiShake";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 

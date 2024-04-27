@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { addJournalImage } from "../../redux/uiConfigeReducer";
 import { postRequest } from "../../utils/network/requsets/postRequest";
@@ -14,7 +14,7 @@ const WithAddSliderImageFormik = (WrappedComponent) => {
     const [t] = useTranslation();
     const dispatch = useDispatch()
 
-    const MAX_FILE_SIZE = 102400; //100KB
+    //const MAX_FILE_SIZE = 102400; //100KB
     const validFileExtensions = {
       image: ["jpg", "gif", "png", "jpeg", "svg", "webp"],
     };

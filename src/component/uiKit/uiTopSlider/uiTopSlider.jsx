@@ -1,8 +1,7 @@
 import { useSelector } from "react-redux";
 import Carousel from "react-material-ui-carousel";
 import Item from "./items";
-import { v4 as uuidv4 } from "uuid";
-import { Box } from "@mui/material";
+
 
 
 const UiTopSlider = ({

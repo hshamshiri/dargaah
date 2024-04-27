@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
-import { Typography, keyframes, Grid, Box } from "@mui/material";
+import { keyframes, Box } from "@mui/material";
 
 const ShakingView = ({ children, sx }) => {
   const [shake, setShake] = useState(false);
@@ -29,14 +28,14 @@ const ShakingView = ({ children, sx }) => {
   );
 };
 
-const zoomIn = keyframes({
-  from: {
-    transition: `transform 1s`,
-  },
-  to: {
-    transform: `scale(1.2)`,
-  },
-});
+// const zoomIn = keyframes({
+//   from: {
+//     transition: `transform 1s`,
+//   },
+//   to: {
+//     transform: `scale(1.2)`,
+//   },
+// });
 
 const shakeAnime = keyframes({
   "0% ": { transform: `translate(2px, 1px)   rotate(0deg)` },

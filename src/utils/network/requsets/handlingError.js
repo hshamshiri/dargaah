@@ -2,10 +2,10 @@
 
 
 const handlingResponseError = (status) => {
-    if (status == "404") {
+    if (status === "404") {
         return "page not found"
     }
-    if (status == "422") {
+    if (status === "422") {
         return "Unprocessable Entity"
     }
 

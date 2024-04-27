@@ -1,5 +1,4 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import "./../scss/login.scss";
 import "./../css/login.css";
 import { clsx } from "clsx";
@@ -13,14 +12,14 @@ const LandingFrame = ({ swipUp, setSwipUp }) => {
     <div id="landing" className={`landing ${clsx({ open: swipUp })}`}>
       <div id="swipeDownloadAppClose" onClick={() => setSwipUp(!swipUp)}>
         <p>{t("login.landing.enter")}</p>
-        <img src={swipeUpImage} alt="Login" />
+        <img src={swipeUpImage} alt="swipImage" />
       </div>
-      <img className="appPreview" src={AppPreview} alt="" />
+      <img className="appPreview" src={AppPreview} alt="previewImage" />
       <h3>{t("login.landing.downloadLine1")}</h3>
       <h4>{t("login.landing.downloadLine2")}</h4>
       <div className="downloads">
-        <a href="#" className="downloadApp">
-          <img src={directLink} />
+        <a href="/#" className="downloadApp">
+          <img src={directLink} alt="downloadImage" />
         </a>
       </div>
       <p></p>

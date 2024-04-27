@@ -14,6 +14,7 @@ const SwipUpButton = ({ swipUp, setSwipUp }) => {
         {t("login.rightSection.appDownload")}
       </Typography>
       <img
+        alt="swip"
         className="w-20"
         src={swipDownImage}
         onClick={() => setSwipUp(true)}
@@ -24,7 +25,7 @@ const SwipUpButton = ({ swipUp, setSwipUp }) => {
 const TopView = () => {
   return (
     <Box className="flex flex-col justify-center items-center w-full h-1/3">
-      <img className="w-1/6 mt-5 object-contain" src={seplogo} />
+      <img alt="sepLogo" className="w-1/6 mt-5 object-contain" src={seplogo} />
     </Box>
   );
 };

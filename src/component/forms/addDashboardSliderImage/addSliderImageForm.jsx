@@ -51,6 +51,7 @@ const AddSliderImageForm = ({
             />
             <Box>
               <img
+                alt="sideSlideImage"
                 className="w-40"
                 src={
                   sideSlideImage

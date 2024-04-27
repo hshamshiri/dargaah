@@ -1,3 +1,4 @@
+import { useRef } from "react"
 import AdminDashedButton from "./adminDashedButton";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -10,6 +11,7 @@ import { useDispatch } from "react-redux";
 import { APIs } from "../../../utils/network/apiClient";
 import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
+import AlertDialog from "../uiDialog/uiDialog";
 
 
 
@@ -22,6 +24,9 @@ const UiAdminDashedBox = ({
 
   const [t] = useTranslation();
   const dispatch = useDispatch()
+
+  const dialogRef = useRef()
+  const deleteAlarm = () => dialogRef.current()
 
   const deleteForm = () => {
     deleteRequest(APIs.dashBox.delete_dashbox + boxInfo.id).then((response) => {
@@ -37,13 +42,15 @@ const UiAdminDashedBox = ({
       position={"relative"}
       borderRadius={5}
       boxShadow={5}
-      marginTop={5}
+      marginTop={10}
       border={`2px dashed ${purple[500]}`}
       backgroundColor={"white"}
       xs={12}
       sm={12}
       md={12}
+
     >
+      <AlertDialog myRef={dialogRef} deleteAction={deleteForm} />
       <Box
         height={55}
         minWidth={100}
@@ -67,7 +74,7 @@ const UiAdminDashedBox = ({
       <Box display={"flex"} position={"absolute"} left={10} top={-50}>
 
         <UiButton
-          onclick={deleteForm}
+          onclick={deleteAlarm}
           variant={"contained"}
           iconName={"delete"}
           iconType={"button"}

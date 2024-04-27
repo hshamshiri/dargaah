@@ -1,5 +1,4 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
-import UiButton from "../uiButton/uiButton";
+import { Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 

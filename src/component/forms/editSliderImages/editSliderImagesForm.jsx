@@ -27,18 +27,16 @@ const EditSliderImagesForm = ({
   imageList = isTopSlider ? topImages : journals
 
 
+  const emptyListAlert = () => {
+    toast("تصویری برای نمایش وجود ندارد")
+    toggleShowModal(false)
+  }
 
 
   useEffect(() => {
-    const checkImageListLength = () => {
-      if (imageList.length === 0) {
-        toast("تصویری برای نمایش وجود ندارد")
-        toggleShowModal(false)
-      }
-    }
+    const checkImageListLength = () => imageList.length === 0 && emptyListAlert()
     checkImageListLength()
-
-  }, [imageList])
+  }, [imageList, emptyListAlert])
 
 
 

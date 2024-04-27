@@ -20,7 +20,7 @@ import { toast } from "react-toastify";
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
-import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
+// import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
 
 const Dashboard = () => {
   const dispatch = useDispatch()
@@ -196,20 +196,21 @@ const Dashboard = () => {
             rowGap={5}
           >
             {dashBoxes && dashBoxes.map((dashBox, i) => (
-              <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
-                <Box
-                  display={"flex"}
-                  flexDirection={"column"}
-                  alignItems={"end"}
-                  position={"relative"}
-                  sx={{ marginTop: 1 }}
-                >
-                  <UiDashedBox
-                    dashBoxInfo={dashBox}
-                    hideLabel={true}
-                  />
-                </Box>
-              </UiSlide>
+              // <UiSlide key={uuidv4()} timeout={1000 * ((i + 1) / 2)}>
+              //   <Box
+              //     display={"flex"}
+              //     flexDirection={"column"}
+              //     alignItems={"end"}
+              //     position={"relative"}
+              //     sx={{ marginTop: 1 }}
+              //   >
+              <UiDashedBox
+                key={uuidv4()}
+                dashBoxInfo={dashBox}
+                hideLabel={true}
+              />
+              //   </Box>
+              // </UiSlide>
             )
             )}
           </Grid>

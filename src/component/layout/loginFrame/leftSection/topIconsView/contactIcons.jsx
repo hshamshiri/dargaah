@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 import infoIcon from "../../images/icons/InfoIcon.png";
 import phoneIcon from "../../images/icons/PhoneIcon.png";
 import messageIcon from "../../images/icons/messageQuestionIcon.png";
-import UiIcon from "../../../../uiKit/uiIcon/uiIcon";
 
 
 
@@ -16,6 +15,7 @@ const SingleIcon = ({ route, onclick, imageSrc }) => {
     return (
         <Link to={route} target="_blank">
             <img
+                alt="contact"
                 src={imageSrc}
                 onClick={() => onclick()}
                 className="mx-4 cursor-pointer"
