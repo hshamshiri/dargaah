@@ -81,9 +81,7 @@ const UiAdminDashedBox = ({
           iconColor={"red"}
           tooltipTitle={t("dashboard.main.deleteBox")}
           sx={{
-            width: 20,
-            minWidth: 40,
-            margin: 0.1,
+            width: 0
           }}
         />
 
@@ -95,10 +93,7 @@ const UiAdminDashedBox = ({
           iconType={"button"}
           tooltipTitle={t("dashboard.main.updateBoxName")}
           sx={{
-            width: 20,
-            minWidth: 40,
-            margin: 0.1,
-
+            width: 0
           }}
         />
 
@@ -108,12 +103,6 @@ const UiAdminDashedBox = ({
           iconName={"add"}
           iconType={"button"}
           tooltipTitle={t("dashboard.main.addBtn")}
-          sx={{
-            width: 20,
-            minWidth: 40,
-            margin: 0.1,
-
-          }}
         />
 
       </Box>
@@ -132,7 +121,6 @@ const UiAdminDashedBox = ({
         }}
       >
         {boxInfo && boxInfo?.buttons.map((button, i) => (
-
           <AdminDashedButton
             key={uuidv4()}
             boxInfo={boxInfo}

@@ -12,135 +12,127 @@ import { useTranslation } from "react-i18next";
 
 
 
-
 const EditSliderImagesForm = ({
   toggleShowModal,
   sliderName,
 }) => {
+
   const isTopSlider = sliderName === "topSlider" ? true : false;
   const topImages = useSelector((state) => state?.uiConfigeJson?.topSlider_list)
-  const journals = useSelector((state) => state?.uiConfigeJson?.journal_list.images)
+  const journals = useSelector((state) => state?.uiConfigeJson?.journal_list?.images)
   const dispatch = useDispatch()
   const [t] = useTranslation()
-
-  let imageList = [];
-  imageList = isTopSlider ? topImages : journals
+  let images = isTopSlider ? topImages : journals
 
 
-  const emptyListAlert = () => {
-    toast("تصویری برای نمایش وجود ندارد")
-    toggleShowModal(false)
-  }
 
 
   useEffect(() => {
-    const checkImageListLength = () => imageList.length === 0 && emptyListAlert()
-    checkImageListLength()
-  }, [imageList, emptyListAlert])
+
+    const checkImagesIsEmpty = () => {
+      if (!images || images.length === 0) {
+        toast("تصویری برای نمایش وجود ندارد")
+        toggleShowModal(false)
+      }
+    }
+    checkImagesIsEmpty()
+  }, [images])
 
 
 
 
   const removeImage = (id) => {
-    if (isTopSlider) {
-      deleteRequest(APIs.topSlider.delete_Image + id).then((response) => {
-        response.data && dispatch(addTopSliderImage(response.data))
-        response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
-      })
+    let url = isTopSlider ? APIs.topSlider.delete_Image : APIs.journal.delete_Image
 
-    } else {
-      deleteRequest(APIs.journal.delete_Image + id).then((response) => {
-        response.data && dispatch(addJournalImage(response.data))
-        response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
-
-      })
-    }
+    deleteRequest(url + id).then((response) => {
+      if (response.data) {
+        isTopSlider ? dispatch(addTopSliderImage(response.data)) : dispatch(addJournalImage(response.data))
+      }
+      response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
+    })
 
   };
-
-
 
 
   return (
     <Box>
       {/* container */}
 
-      <ImageList
-        sx={{
-          direction: "rtl",
-          height: 500
-        }}
-        cols={isTopSlider ? 1 : 2}
-        rowHeight={isTopSlider ? 200 : 300}
-      >
-        {imageList && imageList.length > 0 &&
-          imageList.map((image, i) => {
-            return (
-              <Box key={i}>
-                <ImageListItem
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    padding: 2,
-                    margin: 1,
-                    boxShadow: 3,
-                    borderRadius: 2,
-                  }}
-                >
-
-                  <LazyLoadImage
-                    style={{
-                      height: "100%",
-                      width: "100%",
-                      margin: 1,
-                    }}
-
-                    src={image.image_url}
-                    loading="lazy"
-                  />
-
-
-                </ImageListItem>
-
-                <Box sx={{ display: "flex", margin: 1, marginBottom: 2 }}>
-
-                  <UiButton
-                    onclick={() => removeImage(image?.id)}
-                    //label={t("dashboard.main.addBtn")}
-                    variant={"contained"}
-                    iconName={"delete"}
-                    iconType={"button"}
-                    iconColor={"red"}
-                    tooltipTitle={t("dashboard.main.deleteBox")}
-                    sx={{
-                      width: 20,
-                      minWidth: 40,
-                      margin: 0.1,
-                    }}
-                  />
+      {images && images.length > 0 && (
+        <ImageList
+          sx={styles.imageListStyle}
+          cols={isTopSlider ? 1 : 2}
+          rowHeight={isTopSlider ? 200 : 300}
+        >
+          {
+            images.map((image, i) => {
+              return (
+                <Box key={i}>
+                  <ImageListItem
+                    sx={styles.imageListItem}
+                  >
+                    <LazyLoadImage
+                      style={styles.lazyLoadImage}
+                      src={image.image_url}
+                      loading="lazy"
+                    />
+                  </ImageListItem>
+                  <Box sx={styles.optionButtonBox}>
+                    <UiButton
+                      onclick={() => removeImage(image?.id)}
+                      //label={t("dashboard.main.addBtn")}
+                      variant={"contained"}
+                      iconName={"delete"}
+                      iconType={"button"}
+                      iconColor={"red"}
+                      tooltipTitle={t("dashboard.main.deleteBox")}
+                    />
+                    <UiButton
+                      onclick={() => toast("به زودی فعال می شود")}
+                      variant={"contained"}
+                      iconName={"editIcon"}
+                      iconType={"button"}
+                      tooltipTitle={t("dashboard.main.updateBoxName")}
+                    />
+                  </Box>
+                </Box >
 
 
-                  <UiButton
-                    onclick={() => toast("به زودی فعال می شود")}
-                    variant={"contained"}
-                    iconName={"editIcon"}
-                    iconType={"button"}
-                    tooltipTitle={t("dashboard.main.updateBoxName")}
-                    sx={{
-                      width: 20,
-                      minWidth: 40,
-                      margin: 0.1,
-                    }}
-                  />
-                </Box>
-              </Box >
-
-
-            );
-          })}
-      </ImageList >
+              );
+            })}
+        </ImageList >
+      )}
     </Box >
   );
 };
+
+
+const styles = {
+
+  imageListStyle: {
+    direction: "rtl",
+    height: 500
+  },
+  imageListItem: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: 2,
+    margin: 1,
+    boxShadow: 3,
+    borderRadius: 2,
+  },
+  lazyLoadImage: {
+    height: "100%",
+    width: "100%",
+    margin: 1,
+    ImageList
+  },
+  optionButtonBox: {
+    display: "flex", margin: 1, marginBottom: 1
+  },
+
+
+}
+
 
 export default EditSliderImagesForm;

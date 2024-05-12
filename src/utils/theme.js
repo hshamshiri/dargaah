@@ -74,6 +74,7 @@ const theme = createTheme({
     gradient: {
       main: "linear-gradient(to right, #4880EC, #019CAD)",
       light: "linear-gradient(to right, #4aaffd 0%, #B8CFBC 100%)",
+      medium:"linear-gradient(to right, #0e3151 0%, #515AAF 100%)",
       dark: "linear-gradient(to right, #18429B 0%, #515AAF 100%)",
       red: "linear-gradient(to right, #E61717, #F29F9F)",
     },
@@ -100,6 +101,8 @@ const theme = createTheme({
       xl: 1536,
     },
   },
+
+  
 });
 
 export { theme };

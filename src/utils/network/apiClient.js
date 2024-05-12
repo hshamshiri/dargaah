@@ -2,7 +2,7 @@ import axios from "axios"
 
 
 
-const BASE_URL = "http://192.168.20.101:7000/api/"
+const BASE_URL = "http://192.168.8.187:7000/api/"
 
 const defaultOptions = {
     baseURL: BASE_URL,

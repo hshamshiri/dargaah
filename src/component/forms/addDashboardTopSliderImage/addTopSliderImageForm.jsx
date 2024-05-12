@@ -78,9 +78,7 @@ const AddTopSliderImageForm = ({
           type="submit"
           label={t("dashboard.main.add")}
           variant={"contained"}
-          sx={{
-            width: "50%",
-          }}
+          sx={{ width: 200 }}
         />
       </Stack>
     </form>

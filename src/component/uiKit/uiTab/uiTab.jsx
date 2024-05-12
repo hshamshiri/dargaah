@@ -1,6 +1,6 @@
 import * as React from "react";
 import { styled } from "@mui/system";
-import { Tabs } from "@mui/base/Tabs";
+import { Tabs as BaseTabs } from "@mui/base/Tabs";
 import { TabsList as BaseTabsList } from "@mui/base/TabsList";
 import { TabPanel as BaseTabPanel } from "@mui/base/TabPanel";
 import { buttonClasses } from "@mui/base/Button";
@@ -9,10 +9,10 @@ import { Typography } from "@mui/material";
 
 export default function TabComp({ tabViews, tabLabels }) {
   return (
-    <Tabs defaultValue={0} className=" w-full flex flex-col  items-center pt-5">
+    <Tabs defaultValue={0} >
       <TabsList>
         {tabLabels.map((label, i) => (
-          <Tab sx={{ width: "100%" }} key={i} value={i}>
+          <Tab key={i} value={i}>
             <Typography variant="button">{label}</Typography>
           </Tab>
         ))}
@@ -27,6 +27,15 @@ export default function TabComp({ tabViews, tabLabels }) {
     </Tabs>
   );
 }
+
+
+const Tabs = styled(BaseTabs)({
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  paddingTop: 10,
+})
 
 const Tab = styled(BaseTab)(
   ({ theme }) => `
@@ -50,11 +59,11 @@ const Tab = styled(BaseTab)(
   }
   &:focus {
     color: ${theme.palette.base.light};
-    outline: 0px solid ${theme.palette.base.main};
+    outline: 0px solid ${theme.palette.gradient.main};
   }
 
   &.${tabClasses.selected} {
-    background:${theme.palette.gradient.dark} ;
+    background:${theme.palette.gradient.medium} ;
     color: #fff;
   }
 
@@ -66,9 +75,6 @@ const Tab = styled(BaseTab)(
 );
 
 const TabPanel = styled(BaseTabPanel)`
-  width: 100%;
-  font-family: "IBM Plex Sans", sans-serif;
-  font-size: 0.875rem;
 `;
 
 const TabsList = styled(BaseTabsList)(

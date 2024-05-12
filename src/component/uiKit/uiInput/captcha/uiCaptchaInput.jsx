@@ -14,7 +14,7 @@ const CaptchaView = () => {
             flexDirection: "row",
             alignItems: "center"
         }} >
-            <div className="w-15 h-full p-1 "><image />sadfs</div>
+            <div className="w-15 h-full p-1 ">sadfs</div>
             <div> <Icon iconType={"refresh"} iconName={"refresh"} classes={{ right: 0, backgroundColor: "transparent" }} /></div>
             <div><Icon iconType={"volumeUp"} iconName={"volumeUp"} classes={{ backgroundColor: "transparent" }} /></div>
         </Box>

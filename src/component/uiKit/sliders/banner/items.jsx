@@ -4,7 +4,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const Item = ({ item }) => {
-
   return (
     <Grid>
       <Link to={item.link} target="_blank" >

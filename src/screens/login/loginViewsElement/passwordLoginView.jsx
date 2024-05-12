@@ -4,15 +4,16 @@ import { useTranslation } from "react-i18next";
 import UiMobileInput from "../../../component/uiKit/uiInput/mobile/uiMobileInput";
 import UiCaptchaInput from "../../../component/uiKit/uiInput/captcha/uiCaptchaInput";
 import UiButton from "../../../component/uiKit/uiButton/uiButton";
-import { Container, Stack, Link, useTheme } from "@mui/material";
+import { Stack, Link, Box } from "@mui/material";
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
+import { useTheme } from '@mui/material/styles';
 
 
 const PasswordLoginView = ({ onSubmit, formik }) => {
   const navigate = useNavigate()
   const [t] = useTranslation();
-
+  const theme = useTheme()
 
   const submitAction = () => {
     toast("خوش آمدید")
@@ -21,7 +22,12 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Container sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Stack spacing={4} sx={{ marginTop: 3 }}>
           <UiMobileInput formik={formik} />
           <UiCaptchaInput formik={formik} />
@@ -36,9 +42,9 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
           variant="contained"
           iconType={"button"}
           iconName={"send"}
-          sx={{ marginTop: 5, background: (theme) => theme.palette.gradient.dark }}
+          sx={{ width: 200, marginTop: 5, background: theme.palette.gradient.medium }}
         />
-      </Container>
+      </Box>
     </form>
 
   );

@@ -2,11 +2,12 @@
 
 
 const handlingResponseError = (status) => {
-    if (status === "404") {
-        return "page not found"
+
+    if (status === 404) {
+        return "صفحه مورد نظر وجود ندارد"
     }
-    if (status === "422") {
-        return "Unprocessable Entity"
+    if (status === 422) {
+        return "آدرس مورد نظر یافت نشد"
     }
 
 }

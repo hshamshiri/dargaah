@@ -17,8 +17,6 @@ const AddButtonOfDashedBox = ({
   const [buttonImage, setButtonImage] = React.useState(null);
 
 
-
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack
@@ -97,7 +95,7 @@ const AddButtonOfDashedBox = ({
           type="submit"
           label={t("dashboard.main.add")}
           variant={"contained"}
-          sx={{ width: "50%" }}
+          sx={{ width: 200 }}
         />
       </Stack>
     </form>

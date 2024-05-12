@@ -12,6 +12,7 @@ import { toast } from "react-toastify"
 import UiTooltip from "../uiTooltip/uiTooltip"
 
 const OptionButtons = ({ handleForms, boxInfo, buttonInfo }) => {
+
   const [t] = useTranslation();
   const theme = useTheme("theme")
   const dispatch = useDispatch()

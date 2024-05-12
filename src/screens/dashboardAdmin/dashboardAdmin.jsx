@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import interfaceConfige from "../../uiConfige.json";
 import { useTranslation } from "react-i18next";
 import MiniDrawer from "../../component/uiKit/uiDrawer/uiDrawer";
@@ -10,9 +10,9 @@ import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/ad
 import AddTopSliderImageForm from "../../component/forms/addDashboardTopSliderImage/addTopSliderImageForm";
 import EditSliderImagesForm from "../../component/forms/editSliderImages/editSliderImagesForm";
 // -------
-import { Box, Typography, Stack, Divider } from "@mui/material";
-import UiSlider from "../../component/uiKit/uiSlider/uislider";
-import UiTopSlider from "../../component/uiKit/uiTopSlider/uiTopSlider";
+import { Stack, Divider } from "@mui/material";
+import JournalSlider from "../../component/uiKit/sliders/journal/journalSlider";
+import BannerSlider from "../../component/uiKit/sliders/banner/bannerSlider";
 import UiAdminDashedBox from "../../component/uiKit/uiAdminDashedBox/uiAdminDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -24,29 +24,30 @@ import { toast } from "react-toastify";
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
-
+import BannerEditButtons from "../../component/uiKit/editButtons/bannerEditButtons/bannerEditButtons";
+import JournalEditButtons from "../../component/uiKit/editButtons/journalEditButtons/journalEditButtons";
 
 const ManagerModalForm = ({
   toggleShowModal,
   activeModal,
-  chosenBoxInfo,
-  chosenButton,
+  selectedBox,
+  selectedButton,
   chosenSlider,
   activeForms, }) => {
-
   return (
     <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
+
       {activeForms["dashedBox"] && (
         <AddDashedBoxForm
           toggleShowModal={toggleShowModal}
-          boxInfo={chosenBoxInfo}
+          box={selectedBox}
         />
       )}
       {activeForms["addButtonOfDashedBox"] && (
         <AddButtonOfDashedBox
           toggleShowModal={toggleShowModal}
-          boxInfo={chosenBoxInfo}
-          buttonInfo={chosenButton}
+          boxInfo={selectedBox}
+          buttonInfo={selectedButton}
         />
       )}
       {activeForms["addLeftImageSlider"] && (
@@ -78,8 +79,8 @@ const DashboardAdmin = () => {
   const [t] = useTranslation();
   const [interfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
-  const [chosenBoxInfo, setChosenBoxInfo] = useState(null);
-  const [chosenButton, setChosenButton] = useState(null);
+  const [selectedBox, setSelectedBox] = useState(null);
+  const [selectedButton, setSelectedButton] = useState(null);
   const [chosenSlider, setChosenSlider] = useState();
   const [activeForms, setActiveForms] = useState({
     dashedBox: false,
@@ -90,11 +91,11 @@ const DashboardAdmin = () => {
 
 
 
-  const toggleShowModal = () => setActiveModal(!activeModal);
   const dispatch = useDispatch()
-
+  const toggleShowModal = useCallback(() => setActiveModal(!activeModal), [activeModal])
   const dashBoxes = useSelector((state) => state.uiConfigeJson.dashBox_list);
-  const journals = useSelector((state) => state.uiConfigeJson.journal_list);
+  const journals = useSelector((state) => state?.uiConfigeJson?.journal_list);
+  const banners = useSelector((state) => state?.uiConfigeJson?.topSlider_list)
 
 
   useEffect(() => {
@@ -118,8 +119,8 @@ const DashboardAdmin = () => {
 
   const handleForms = (formName, boxInfo, buttonInfo, sliderName) => {
     setActiveModal(true);
-    setChosenBoxInfo(boxInfo);
-    setChosenButton(buttonInfo);
+    setSelectedBox(boxInfo);
+    setSelectedButton(buttonInfo);
     setChosenSlider(sliderName);
     setActiveForms((prevState) => {
       const nextState = {};
@@ -137,208 +138,78 @@ const DashboardAdmin = () => {
       <ManagerModalForm
         toggleShowModal={toggleShowModal}
         activeModal={activeModal}
-        chosenBoxInfo={chosenBoxInfo}
-        chosenButton={chosenButton}
+        selectedBox={selectedBox}
+        selectedButton={selectedButton}
         chosenSlider={chosenSlider}
         activeForms={activeForms} />
 
-
-
+      {/* banner */}
+      <Stack spacing={2}>
+        <BannerEditButtons handleForms={handleForms} />
+        <Divider />
+        <BannerSlider banners={banners} />
+      </Stack>
 
       {/* content */}
-      <Box width={"100%"}>
-        {/* banner */}
-        <Stack spacing={2}>
-          <Box width={"100%"} display={"flex"} justifyContent={"end"}>
-            <UiButton
-              onclick={() =>
-                handleForms("editSliderImages", "", "", "topSlider")
-              }
-              variant={"contained"}
-              iconName={"editIcon"}
-              iconType={"button"}
-              tooltipTitle={t("dashboard.main.editImages")}
-              sx={{
-                width: 20,
-                minWidth: 40,
-                margin: 0.1,
-              }}
-            />
+      <Grid
+        container
+        direction={{
+          xs: "column-reverse",
+          sm: "column-reverse",
+          md: "row",
+        }}
+        rowSpacing={1}
+        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        padding={1}
+        marginTop={5}
+      >
+        {/* left side */}
+        <Grid
+          columnSpacing={{ xs: 1, sm: 2, md: 2 }}
+          position={"relative"}
+          xs={12}
+          sm={12}
+          md={4}
+        >
+          <JournalEditButtons handleForms={handleForms} />
+          <JournalSlider journals={journals} />
+        </Grid>
 
-            <UiButton
-              onclick={() => handleForms("addTopImageSlider")}
-              variant={"contained"}
-              iconName={"addImage"}
-              iconType={"button"}
-              tooltipTitle={t("dashboard.main.addImage")}
-              sx={{
-                width: 20,
-                minWidth: 40,
-                margin: 0.1,
-              }}
-            />
-          </Box>
-          <Divider />
-          <UiTopSlider />
-        </Stack>
-        {/* search */}
-        {/* <Box sx={{ marginTop: 2 }}>
-          <Grid
-            container
-            direction={{
-              xs: "column-reverse",
-              sm: "column-reverse",
-              md: "row",
-            }}
-            alignItems={{
-              xs: "end",
-              sm: "end",
-              md: "center",
-            }}
-            rowSpacing={1}
-            columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-            display={"felx"}
-            justifyContent={"center"}
-          >
-            <Grid xs={8} sm={6} md={3}></Grid>
-            <Grid container xs={6} sm={3} md={3}>
-              <Grid xs={12} sm={12} md={8}></Grid>
-            </Grid>
-            <Grid
-              xs={12}
-              sm={8}
-              md={6}
-              display={"flex"}
-              justifyContent={"end"}
-            ></Grid>
-          </Grid>
-        </Box> */}
-
-        {/* content */}
+        {/* right side */}
         <Grid
           container
-          direction={{
-            xs: "column-reverse",
-            sm: "column-reverse",
-            md: "row",
-          }}
-          rowSpacing={1}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          padding={1}
-          marginTop={5}
+          xs={12}
+          sm={12}
+          md={8}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"start"}
+          rowGap={1}
         >
-          {/* left side */}
-          <Grid
-            columnSpacing={{ xs: 1, sm: 2, md: 2 }}
-            position={"relative"}
-            xs={12}
-            sm={12}
-            md={4}
-          >
-            <Box
-              width={"100%"}
-              display={"flex"}
-              justifyContent={"end"}
-              marginY={1}
-            >
+          <Divider>افزودن مجموعه</Divider>
 
-              <UiButton
-                onclick={() => {
-                  handleForms("editSliderImages", "", "", "leftSlider");
-                }}
-                //label={t("dashboard.main.edit")}
-                variant={"contained"}
-                iconName={"editIcon"}
-                iconType={"button"}
-                tooltipTitle={t("dashboard.main.editImages")}
-                sx={{
-                  width: 20,
-                  minWidth: 40,
-                  margin: 0.1,
-                }}
-              />
+          <UiButton
+            onclick={() => handleForms("dashedBox")}
+            label={t("dashboard.main.addBox")}
+            variant={"contained"}
+            iconName={"addFolder"}
+            iconType={"button"}
+            sx={{ width: 200 }}
+          />
 
+          <Divider sx={{ marginTop: 2 }}>مجموعه ها</Divider>
 
-              <UiButton
-                onclick={() => handleForms("addLeftImageSlider")}
-                //label={t("dashboard.main.edit")}
-                variant={"contained"}
-                iconName={"addImage"}
-                iconType={"button"}
-                tooltipTitle={t("dashboard.main.addImage")}
-                sx={{
-                  width: 20,
-                  minWidth: 40,
-                  margin: 0.1,
-                }}
-              />
-
-            </Box>
-
-            <Grid
-              boxShadow={3}
-              sx={{
-                borderTopLeftRadius: 20,
-                borderTopRightRadius: 20,
-                borderRadius: 5,
-              }}
-            >
-              <Typography
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  height: 60,
-                  borderTopLeftRadius: 20,
-                  borderTopRightRadius: 20,
-                  color: "white",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  background:
-                    "linear-gradient(to right bottom, #430089, #82ffa1)",
-                }}
-              >
-                {journals?.title}
-              </Typography>
-              <UiSlider />
-            </Grid>
-          </Grid>
-
-          {/* right side */}
-          <Grid
-            container
-            xs={12}
-            sm={12}
-            md={8}
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"start"}
-            rowGap={1}
-          >
-            <Divider>افزودن مجموعه</Divider>
-            <Grid display={"flex"} justifyContent={"center"} width={"100%"}>
-              <UiButton
-                onclick={() => handleForms("dashedBox")}
-                label={t("dashboard.main.addBox")}
-                variant={"contained"}
-                iconName={"addFolder"}
-                iconType={"button"}
-              />
-            </Grid>
-
-            <Divider sx={{ marginTop: 3 }}>مجموعه ها</Divider>
-
-            {dashBoxes && dashBoxes.map((dashBox, i) => (
-              <UiAdminDashedBox
-                key={uuidv4()}
-                handleForms={handleForms}
-                boxInfo={dashBox}
-                hideLabel={true}
-              />
-            ))}
-          </Grid>
+          {dashBoxes && dashBoxes.map((dashBox, i) => (
+            <UiAdminDashedBox
+              key={uuidv4()}
+              handleForms={handleForms}
+              boxInfo={dashBox}
+              hideLabel={true}
+            />
+          ))}
         </Grid>
-      </Box>
+      </Grid>
+
     </MiniDrawer>
   );
 };

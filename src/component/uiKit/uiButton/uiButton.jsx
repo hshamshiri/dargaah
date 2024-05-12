@@ -6,7 +6,7 @@ import UiTooltip from "../uiTooltip/uiTooltip";
  * Button info
  * @param {string} props type:submit,standard
  * @param {string} props lable
- * @param {function} props
+ * @param {function} props onclick
  * @param {boolean} props disable
  * @param {string} props variant:filled,outlined,standard,text,contained
  * @param {object} props classes
@@ -48,9 +48,10 @@ const UiButton = ({
           padding: 1,
           background: (theme) => theme.palette.gradient.light,
           height: 40,
-          width: 300,
-          ...sx,
+          width: 40,
           marginRight: 0.3,
+          minWidth: 40,
+          ...sx,
           // "@media only screen and (min-width: 980px)": {},
           // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
           //   width: 300,

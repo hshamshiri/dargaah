@@ -1,17 +1,17 @@
-import { useSelector } from "react-redux";
+
 import Carousel from "react-material-ui-carousel";
 import Item from "./items";
 
 
 
-const UiTopSlider = ({
+const BannerSlider = ({
   interval = 7000,
   duration = 3000,
   animation = "slide",
   swipe = "true",
   sx,
+  banners
 }) => {
-  const images = useSelector((state) => state?.uiConfigeJson.topSlider_list);
 
   return (
     <Carousel
@@ -27,8 +27,8 @@ const UiTopSlider = ({
     //changeOnFirstRender={true}
     // onChange={() => setHideDeleteIcon(true)}
     >
-      {images && images?.length > 0 &&
-        images.map((item, i) => {
+      {banners && banners?.length > 0 &&
+        banners.map((item, i) => {
           return (
             <Item item={item} key={i} />
           );
@@ -37,4 +37,4 @@ const UiTopSlider = ({
   );
 };
 
-export default UiTopSlider;
+export default BannerSlider;

@@ -23,6 +23,7 @@ import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import CloseIcon from '@mui/icons-material/Close';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useTheme } from "@mui/material";
 
 
@@ -71,7 +72,8 @@ const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
     editCalender: <EditCalendarIcon sx={iconStyle} />,
     editIcon: <EditIcon sx={iconStyle} />,
     delete: <DeleteForeverIcon sx={iconStyle} />,
-    close: <CloseIcon sx={iconStyle} />
+    close: <CloseIcon sx={iconStyle} />,
+    manager: <ManageAccountsIcon sx={iconStyle} />
   };
 
   return icons[iconName];
