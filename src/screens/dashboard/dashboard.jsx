@@ -106,6 +106,7 @@ const Dashboard = () => {
           justifyContent={"start"}
           rowGap={5}
         >
+
           {dashBoxes && dashBoxes.map((dashBox, i) => (
             <UiDashedBox
               key={uuidv4()}
@@ -114,6 +115,7 @@ const Dashboard = () => {
             />
           )
           )}
+
         </Grid>
       </Grid>
 

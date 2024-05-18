@@ -80,7 +80,11 @@ const theme = createTheme({
     },
 
     base: {
-      main: "#0E3151",
+      success:"#28a745",
+      error:"#dc3545",
+      edit:"#007bff",
+
+      main: "#515AAF",
       light: "#0277bd", // indigo[400],
       mid: "#01579b",
     },

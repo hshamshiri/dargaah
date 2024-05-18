@@ -69,7 +69,7 @@ const UiInputText = ({
             },
             "@media only screen and (min-width: 420px) and (max-width: 980px)":
             {
-              width: 300,
+              width: 250,
             },
             "@media screen and (max-width: 420px)": {
               width: 200,

@@ -5,7 +5,6 @@ const UiMobileInput = ({ formik }) => {
   const [t] = useTranslation();
   return (
     <UiInputText
-      fullWidth
       id="mobile"
       name="mobile"
       label={t("login.form.mobileNum")}
@@ -15,7 +14,7 @@ const UiMobileInput = ({ formik }) => {
       error={formik.touched.mobile && Boolean(formik.errors.mobile)}
       helperText={formik.touched.mobile && formik.errors.mobile}
       required={true}
-      iconType="button"
+      //iconType="button"
       iconName="mobile"
       //startAdornment
       endAdornment

@@ -17,34 +17,40 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import AddIcon from '@mui/icons-material/Add';
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
+import EditNoteIcon from '@mui/icons-material/EditNote';
 import CloseIcon from '@mui/icons-material/Close';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import { useTheme } from "@mui/material";
 
 
-const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
+const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
   const theme = useTheme();
-
   const iconStyle = [
     {
       borderRadius: 15,
-      width: 30,
-      height: 30,
-      padding: 0.5,
+      width: 40,
+      height: 40,
+      padding: 0.8,
       color: iconColor ? iconColor : theme.palette.base?.main,
+      ':hover': {
+        bgcolor: iconHoverColor,
+        color: iconHoverColor && 'white',
+      },
     },
     iconType === "button" && {
       position: "absolute",
-      right: 5,
-      top: 5,
+      right: 0,
+      top: 0,
       backgroundColor: "white",
+      //border: 1,
     },
-    classes,
+
+    sx,
   ];
   const icons = {
     //DownloadSharp: <DownloadSharp sx={{ sx }} />,
@@ -67,10 +73,11 @@ const UiIcon = ({ iconType, iconName, iconColor, classes }) => {
     power: <PowerSettingsNewIcon sx={iconStyle} />,
     people: <PeopleAltIcon sx={iconStyle} />,
     add: <AddBoxIcon sx={iconStyle} />,
+    addIcon: <AddIcon sx={iconStyle} />,
     addFolder: <CreateNewFolderIcon sx={iconStyle} />,
     addImage: <AddPhotoAlternateIcon sx={iconStyle} />,
     editCalender: <EditCalendarIcon sx={iconStyle} />,
-    editIcon: <EditIcon sx={iconStyle} />,
+    editIcon: <EditNoteIcon sx={iconStyle} />,
     delete: <DeleteForeverIcon sx={iconStyle} />,
     close: <CloseIcon sx={iconStyle} />,
     manager: <ManageAccountsIcon sx={iconStyle} />

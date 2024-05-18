@@ -8,7 +8,7 @@ import UiButton from "../../uiKit/uiButton/uiButton";
 const AddDashedBoxForm = ({
   formik,
   toggleShowModal,
-  box,
+  boxInfo,
 }) => {
   const [t] = useTranslation();
 
@@ -30,14 +30,14 @@ const AddDashedBoxForm = ({
           name="boxName"
           label={t("dashboard.main.boxName")}
           value={formik.values.boxName}
-          placeHolder={box && box.label}
+          placeHolder={boxInfo && boxInfo.label}
           onChange={formik.handleChange}
           error={formik.touched.boxName && Boolean(formik.errors.boxName)}
           helperText={formik.touched.boxName && formik.errors.boxName}
         />
         <UiButton
           type="submit"
-          label={box ? "ویرایش" : "افزودن"}
+          label={boxInfo ? "ویرایش" : "افزودن"}
           variant={"contained"}
           sx={{ width: 200 }}
         />

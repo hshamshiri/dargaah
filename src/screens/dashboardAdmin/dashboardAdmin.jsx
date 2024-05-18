@@ -16,7 +16,7 @@ import BannerSlider from "../../component/uiKit/sliders/banner/bannerSlider";
 import UiAdminDashedBox from "../../component/uiKit/uiAdminDashedBox/uiAdminDashedBox";
 import UiModal from "../../component/uiKit/uiModal/uiModal";
 import Grid from "@mui/material/Unstable_Grid2";
-import UiButton from "../../component/uiKit/uiButton/uiButton";
+import AddNewboxButton from "../../component/uiKit/uiButton/addNewBoxButton.jsx";
 //
 import { useSelector, useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -26,6 +26,10 @@ import { APIs } from "../../utils/network/apiClient";
 import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
 import BannerEditButtons from "../../component/uiKit/editButtons/bannerEditButtons/bannerEditButtons";
 import JournalEditButtons from "../../component/uiKit/editButtons/journalEditButtons/journalEditButtons";
+
+
+
+
 
 const ManagerModalForm = ({
   toggleShowModal,
@@ -40,7 +44,7 @@ const ManagerModalForm = ({
       {activeForms["dashedBox"] && (
         <AddDashedBoxForm
           toggleShowModal={toggleShowModal}
-          box={selectedBox}
+          boxInfo={selectedBox}
         />
       )}
       {activeForms["addButtonOfDashedBox"] && (
@@ -161,7 +165,7 @@ const DashboardAdmin = () => {
         rowSpacing={1}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         padding={1}
-        marginTop={5}
+        marginTop={0}
       >
         {/* left side */}
         <Grid
@@ -182,22 +186,13 @@ const DashboardAdmin = () => {
           sm={12}
           md={8}
           display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"start"}
+          flexDirection={"row"}
+          justifyContent={"end"}
           rowGap={1}
+          marginTop={7}
         >
-          <Divider>افزودن مجموعه</Divider>
-
-          <UiButton
-            onclick={() => handleForms("dashedBox")}
-            label={t("dashboard.main.addBox")}
-            variant={"contained"}
-            iconName={"addFolder"}
-            iconType={"button"}
-            sx={{ width: 200 }}
-          />
-
-          <Divider sx={{ marginTop: 2 }}>مجموعه ها</Divider>
+          {/* <Divider>افزودن مجموعه</Divider> */}
+          <AddNewboxButton onClick={() => handleForms("dashedBox")} />
 
           {dashBoxes && dashBoxes.map((dashBox, i) => (
             <UiAdminDashedBox

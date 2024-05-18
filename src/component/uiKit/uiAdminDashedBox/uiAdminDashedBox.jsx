@@ -2,9 +2,7 @@ import { useRef } from "react"
 import AdminDashedButton from "./adminDashedButton";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import { purple } from "@mui/material/colors";
 import { v4 as uuidv4 } from "uuid";
-import UiButton from "../uiButton/uiButton";
 import { useTranslation } from "react-i18next";
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { useDispatch } from "react-redux";
@@ -12,8 +10,9 @@ import { APIs } from "../../../utils/network/apiClient";
 import { addDashBox } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify"
 import AlertDialog from "../uiDialog/uiDialog";
-
-
+import EditButton from "../uiButton/editButton"
+import DeleteButton from "../uiButton/deleteButton";
+import AddNewButton from "../uiButton/addNewButton";
 
 
 const UiAdminDashedBox = ({
@@ -40,84 +39,61 @@ const UiAdminDashedBox = ({
       minHeight={200}
       display={"flex"}
       position={"relative"}
-      borderRadius={5}
-      boxShadow={5}
+      borderRadius={2}
+      boxShadow={2}
       marginTop={10}
-      border={`2px dashed ${purple[500]}`}
+      borderColor={"lightgray"}
       backgroundColor={"white"}
+      sx={{ borderWidth: 1 }}
       xs={12}
       sm={12}
       md={12}
 
     >
+
       <AlertDialog myRef={dialogRef} deleteAction={deleteForm} />
       <Box
-        height={55}
+        height={35}
         minWidth={100}
         display={hideLabel ? "flex" : "none"}
         justifyContent={"center"}
         alignItems={"center"}
-        color={"white"}
-        padding={2}
+        color={"#555"}
+        paddingX={1}
         position={"absolute"}
-        top={-50}
-        right={0}
-        zIndex={-1}
+        top={-20}
+        right={10}
+        zIndex={1}
+        border={0}
+        borderColor={"gray"}
         sx={{
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          background: "linear-gradient(to right bottom, #430089, #82ffa1)",
+          borderTopLeftRadius: 10,
+          borderTopRightRadius: 10,
+          //background: "#fcfcfc",
+          fontSize: "140%",
+          fontWeight: "bold",
+          color: "gray",
+          background: "white"
         }}
       >
         {boxInfo?.label}
       </Box>
-      <Box display={"flex"} position={"absolute"} left={10} top={-50}>
-
-        <UiButton
-          onclick={deleteAlarm}
-          variant={"contained"}
-          iconName={"delete"}
-          iconType={"button"}
-          iconColor={"red"}
-          tooltipTitle={t("dashboard.main.deleteBox")}
-          sx={{
-            width: 0
-          }}
-        />
-
-        <UiButton
-          onclick={() => handleForms("dashedBox", boxInfo)}
-          //label={t("dashboard.main.edit")}
-          variant={"contained"}
-          iconName={"editIcon"}
-          iconType={"button"}
-          tooltipTitle={t("dashboard.main.updateBoxName")}
-          sx={{
-            width: 0
-          }}
-        />
-
-        <UiButton
-          onclick={() => handleForms("addButtonOfDashedBox", boxInfo)}
-          variant={"contained"}
-          iconName={"add"}
-          iconType={"button"}
-          tooltipTitle={t("dashboard.main.addBtn")}
-        />
-
+      <Box display={"flex"} position={"absolute"} backgroundColor={"white"} left={1} top={-25}>
+        <DeleteButton onClick={deleteAlarm} />
+        <EditButton onClick={() => handleForms("dashedBox", boxInfo)} />
       </Box>
       <Box
         sx={{
           width: "100%",
           display: "grid",
-          padding: 3,
+          padding: 2,
           gridTemplateColumns: {
             xs: "repeat(2, 2fr)",
             sm: "repeat(3, 2fr)",
             md: "repeat(4, 2fr)",
-            lg: "repeat(5, 2fr)",
+            lg: "repeat(6, 2fr)",
           },
-          direction: "rtl",
+          direction: "rtl"
         }}
       >
         {boxInfo && boxInfo?.buttons.map((button, i) => (
@@ -130,8 +106,19 @@ const UiAdminDashedBox = ({
 
         )
         )}
+
+        <Box sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          paddingLeft: 0,
+          paddingBottom: 0,
+          '& > :not(style)': { m: 5 }
+        }}>
+          <AddNewButton onClick={() => handleForms("addButtonOfDashedBox", boxInfo)} />
+        </Box>
       </Box>
-    </Grid>
+    </Grid >
   );
 };
 

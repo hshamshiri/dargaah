@@ -1,7 +1,9 @@
 import { Box, Paper, Typography } from "@mui/material";
 import UiButton from "../../uiKit/uiButton/uiButton";
+import { useNavigate } from "react-router-dom";
 
 const Item = ({ item }) => {
+  const navigate = useNavigate()
   return (
     <Paper style={{ backgroundColor: "transparent", boxShadow: "none" }}>
       <img alt="sliderItemImage" className="w-80 h-96 object-contain" src={item.src} />
@@ -12,11 +14,13 @@ const Item = ({ item }) => {
         <UiButton
           type="submit"
           label={item.appButtonTitle}
-          onclick={<a href="/#" />}
+          onclick={() => navigate("#")}
           variant="contained"
           iconName={"download"}
-          iconType={"button"}
+          iconColor={"white"}
           sx={{
+            width: 200,
+            margin: 2,
             borderColor: "white",
             border: 1,
             backgroundColor: "transparent",

@@ -24,7 +24,6 @@ const DashedButton = ({ dashButtonInfo }) => {
               style={{
                 maxWidth: "100%",
                 maxHeight: 80,
-                heightL: 80,
               }}
               src={
                 dashButtonInfo?.image_url && dashButtonInfo?.image_url

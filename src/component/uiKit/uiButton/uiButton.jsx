@@ -22,35 +22,53 @@ const UiButton = ({
   onclick = () => { },
   disable,
   variant,
-  classes,
+  //classes,
   iconType,
   iconName,
   component,
+  backgroundColor = "white",
+  color = "white",
+  hoverColor = "white",
   iconColor,
-  sx,
+  iconHoverColor,
   tooltipTitle,
-  toolTipPlacement
+  toolTipPlacement,
+  iconSx,
+  sx
 }) => {
+
   return (
     <UiTooltip title={tooltipTitle} placement={toolTipPlacement} >
       <Button
         type={type}
-        onClick={() => onclick()}
+        onClick={onclick}
         disabled={disable || false}
         variant={variant || "filled"}
-        className={`w-60 ${classes}`}
+        //className={`${classes}`}
         endIcon={
-          <UiIcon iconType={iconType} iconName={iconName} iconColor={iconColor} />
+          <UiIcon
+            iconType={iconType}
+            iconName={iconName}
+            iconColor={iconColor}
+            iconHoverColor={iconHoverColor}
+            sx={iconSx}
+          />
         }
         component={component}
         sx={{
-          borderRadius: "10px",
+          //borderRadius: "20px",
           padding: 1,
-          background: (theme) => theme.palette.gradient.light,
+          background: backgroundColor, //(theme) => theme.palette.gradient.medium,
           height: 40,
+          boxShadow: 0,
           width: 40,
-          marginRight: 0.3,
+          marginRight: 0.5,
           minWidth: 40,
+          ':hover': {
+            bgcolor: hoverColor,// HoverColor, // theme.palette.primary.main
+            color: color,
+            boxShadow: 0,
+          },
           ...sx,
           // "@media only screen and (min-width: 980px)": {},
           // "@media only screen and (min-width: 420px) and (max-width: 980px)": {
@@ -66,5 +84,6 @@ const UiButton = ({
     </UiTooltip>
   );
 };
+
 
 export default UiButton;

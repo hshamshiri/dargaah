@@ -1,53 +1,21 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import UiButton from "../../uiButton/uiButton"
 import { Box } from "@mui/material"
-import { useTranslation } from "react-i18next"
+import EditButton from "../../uiButton/editButton"
+import AddImageButton from "../../uiButton/addImageButton"
 
 const JournalEditButtons = ({ handleForms }) => {
-    const [t] = useTranslation()
     return (
-        <Box width={"100%"} display={"flex"} justifyContent={"end"} marginY={1}>
-            <UiButton
-                onclick={() => {
-                    handleForms("editSliderImages", "", "", "leftSlider");
-                }}
-                variant={"contained"}
-                iconName={"editIcon"}
-                iconType={"button"}
-                tooltipTitle={t("dashboard.main.editImages")}
-            />
-
-            <UiButton
-                onclick={() => handleForms("addLeftImageSlider")}
-                variant={"contained"}
-                iconName={"addImage"}
-                iconType={"button"}
-                tooltipTitle={t("dashboard.main.addImage")}
-            />
+        <Box width={"100%"} display={"flex"} justifyContent={"start"} marginY={1}>
+            <EditButton onClick={() =>
+                handleForms("editSliderImages", "", "", "leftSlider")
+            } />
+            <AddImageButton onClick={() => handleForms("addLeftImageSlider")} />
         </Box>
+
     )
 }
-
 
 export default JournalEditButtons
 

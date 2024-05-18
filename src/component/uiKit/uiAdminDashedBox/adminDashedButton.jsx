@@ -1,54 +1,56 @@
 import OptionButtons from "./optionButtons"
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
-import ShakingView from "../uiTransitions/uiShake/uiShake";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 
 const AdminDashedButton = ({ handleForms, boxInfo, buttonInfo }) => {
+  const [showOption, setShowOption] = useState(false)
+
   return (
     <Fragment>
-      <ShakingView sx={{ marginTop: 3 }}>
-        <Grid
-          container
+      {/* <ShakingView sx={{ marginTop: 3, backgroundColor: "red" }}> */}
+      <Grid
+        marginTop={5}
+        onMouseOver={() => setShowOption(true)}
+        onMouseLeave={() => setShowOption(false)}
+      >
+        <Box
           display={"flex"}
-          flexDirection={"column"}
-          justifyContent={"center"}
-          position={"relative"}
-          alignItems={"center"}
         >
-          <OptionButtons
-            handleForms={handleForms}
-            boxInfo={boxInfo}
-            buttonInfo={buttonInfo}
-          />
-          {/* <Link to={buttonDetalis?.link || "#"}> */}
-          <Box
 
+          {/* <Link to={buttonDetalis?.link || "#"}> */}
+          <Box width={"100%"}
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"center"}
           >
-            <LazyLoadImage
-              //loading="lazy"
-              style={{
-                maxWidth: "100%",
+            <Box
+              component="img"
+              sx={{
                 maxHeight: 80,
-                heightL: 80,
               }}
-              src={
-                buttonInfo?.image_url && buttonInfo?.image_url
-              }
+              alt="button image"
+              src={buttonInfo?.image_url && buttonInfo?.image_url}
             />
-          </Box>
-          <Box>
-            <Typography display={"flex"} margin={1}>
+            <Typography width={"80%"} whiteSpace={"wrap"} overflow={"hidden"} textOverflow={"ellipsis"} marginTop={1}  >
               {buttonInfo?.label}
             </Typography>
           </Box>
 
-          {/* </Link> */}
-        </Grid>
-      </ShakingView>
-    </Fragment>
+          {showOption && <OptionButtons
+            handleForms={handleForms}
+            boxInfo={boxInfo}
+            buttonInfo={buttonInfo}
+          />}
+
+        </Box>
+
+        {/* </Link> */}
+      </Grid>
+      {/* </ShakingView> */}
+    </Fragment >
   );
 };
 
