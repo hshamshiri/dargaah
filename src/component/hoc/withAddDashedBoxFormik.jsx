@@ -14,6 +14,7 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
   const FormikChecked = (props) => {
     const [t] = useTranslation();
     const dispatch = useDispatch()
+
     const validationSchema = yup.object({
       boxName: yup
         .string()
@@ -37,7 +38,6 @@ const WithAddDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log("ffffff", props.boxInfo)
         if (props.boxInfo) {
           //update boxName
           putRequest(APIs.dashBox.update_dashbox + props?.boxInfo?.id, { "new_label": values.boxName }).then((response) => {

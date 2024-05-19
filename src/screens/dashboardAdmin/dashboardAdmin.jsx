@@ -190,6 +190,7 @@ const DashboardAdmin = () => {
           justifyContent={"end"}
           rowGap={1}
           marginTop={7}
+          paddingLeft={5}
         >
           {/* <Divider>افزودن مجموعه</Divider> */}
           <AddNewboxButton onClick={() => handleForms("dashedBox")} />

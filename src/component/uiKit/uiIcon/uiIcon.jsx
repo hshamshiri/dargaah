@@ -36,6 +36,7 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
       width: 40,
       height: 40,
       padding: 0.8,
+      backgroundColor: "white",
       color: iconColor ? iconColor : theme.palette.base?.main,
       ':hover': {
         bgcolor: iconHoverColor,
@@ -46,8 +47,11 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
       position: "absolute",
       right: 0,
       top: 0,
-      backgroundColor: "white",
-      //border: 1,
+    },
+    iconType === "icon" && {
+      position: "absolute",
+      right: 5,
+      top: 5,
     },
 
     sx,

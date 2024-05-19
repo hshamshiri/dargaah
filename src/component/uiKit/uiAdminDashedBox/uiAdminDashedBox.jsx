@@ -41,7 +41,7 @@ const UiAdminDashedBox = ({
       position={"relative"}
       borderRadius={2}
       boxShadow={2}
-      marginTop={10}
+      marginTop={5}
       borderColor={"lightgray"}
       backgroundColor={"white"}
       sx={{ borderWidth: 1 }}
@@ -58,23 +58,18 @@ const UiAdminDashedBox = ({
         display={hideLabel ? "flex" : "none"}
         justifyContent={"center"}
         alignItems={"center"}
-        color={"#555"}
-        paddingX={1}
+        paddingX={3}
         position={"absolute"}
         top={-20}
         right={10}
         zIndex={1}
-        border={0}
-        borderColor={"gray"}
-        sx={{
-          borderTopLeftRadius: 10,
-          borderTopRightRadius: 10,
-          //background: "#fcfcfc",
-          fontSize: "140%",
-          fontWeight: "bold",
-          color: "gray",
-          background: "white"
-        }}
+        border={1}
+        borderRadius={5}
+        borderColor={"LIGHTgray"}
+        fontSize={"110%"}
+        fontWeight={"bold"}
+        color={"#555"} boxShadow={3}
+        backgroundColor={"white"}
       >
         {boxInfo?.label}
       </Box>
@@ -90,8 +85,9 @@ const UiAdminDashedBox = ({
           gridTemplateColumns: {
             xs: "repeat(2, 2fr)",
             sm: "repeat(3, 2fr)",
-            md: "repeat(4, 2fr)",
-            lg: "repeat(6, 2fr)",
+            md: "repeat(3, 2fr)",
+            lg: "repeat(5, 2fr)",
+            xl: "repeat(6,2fr)",
           },
           direction: "rtl"
         }}
@@ -111,8 +107,6 @@ const UiAdminDashedBox = ({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          paddingLeft: 0,
-          paddingBottom: 0,
           '& > :not(style)': { m: 5 }
         }}>
           <AddNewButton onClick={() => handleForms("addButtonOfDashedBox", boxInfo)} />

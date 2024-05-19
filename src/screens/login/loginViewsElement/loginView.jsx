@@ -1,13 +1,15 @@
 
 import WithMaterialUI from "../../../component/hoc/withLoginFormik";
 import { useTranslation } from "react-i18next";
-import UiMobileInput from "../../../component/uiKit/uiInput/mobile/uiMobileInput";
-import UiCaptchaInput from "../../../component/uiKit/uiInput/captcha/uiCaptchaInput";
+import UsernameInput from "../../../component/uiKit/uiInput/username/usernameInput";
+import PasswordInput from "../../../component/uiKit/uiInput/password/passwordInput";
+import CaptchaInput from "../../../component/uiKit/uiInput/captcha/captchaInput";
 import UiButton from "../../../component/uiKit/uiButton/uiButton";
 import { Stack, Link, Box } from "@mui/material";
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
 import { useTheme } from '@mui/material/styles';
+import LoginButton from "../../../component/uiKit/uiButton/loginButton";
 
 
 const PasswordLoginView = ({ onSubmit, formik }) => {
@@ -28,23 +30,15 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
         justifyContent="center"
         alignItems="center"
       >
-        <Stack spacing={4} sx={{ marginTop: 3 }}>
-          <UiMobileInput formik={formik} />
-          <UiCaptchaInput formik={formik} />
+        <Stack spacing={2} sx={{ marginTop: 3 }}>
+          <UsernameInput formik={formik} />
+          <PasswordInput formik={formik} />
+          <CaptchaInput formik={formik} />
           <Link href="#" variant={"body1"} underline="always">
-            {t("login.rightSection.privacy")}
+            {t("login.rightSection.forgetPass")}
           </Link>
         </Stack>
-        <UiButton
-          type="submit"
-          label={t("login.form.sendCode")}
-          onclick={submitAction}
-          variant="contained"
-          iconType={"button"}
-          iconName={"send"}
-          iconColor={theme.palette.base.mid}
-          sx={{ width: 200, marginTop: 5, background: theme.palette.gradient.medium }}
-        />
+        <LoginButton />
       </Box>
     </form>
 

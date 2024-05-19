@@ -7,9 +7,7 @@ const UiTooltip = ({ title, placement = "top", children }) => {
     return (
         <Tooltip title={title} placement={placement} arrow
             TransitionComponent={Zoom}>
-            <Box>
-                {children}
-            </Box>
+            {children}
         </Tooltip>
     )
 }

@@ -1,13 +1,12 @@
 
 
-import { Box } from "@mui/material";
 import UiInputText from "../uiInput";
 import { useTranslation } from "react-i18next";
-import Icon from "../../../uiKit/uiIcon/uiIcon"
+import { Box } from "@mui/material";
 
 
 
-const UiCaptchaInput = ({ formik }) => {
+export default function CaptchaInput({ formik }) {
     const [t] = useTranslation();
     return (
         <UiInputText
@@ -20,7 +19,6 @@ const UiCaptchaInput = ({ formik }) => {
             onBlur={formik.handleBlur}
             error={formik.touched.captcha && Boolean(formik.errors.captcha)}
             helperText={formik.touched.captcha && formik.errors.captcha}
-            required={true}
             iconType={"button"}
             iconName={"send"}
             //startAdornment
@@ -34,4 +32,4 @@ const UiCaptchaInput = ({ formik }) => {
 
 
 
-export default UiCaptchaInput;
+

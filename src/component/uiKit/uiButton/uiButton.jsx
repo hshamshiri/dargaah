@@ -69,6 +69,7 @@ const UiButton = ({
             color: color,
             boxShadow: 0,
           },
+          borderRadius: 5,
           ...sx,
           // "@media only screen and (min-width: 980px)": {},
           // "@media only screen and (min-width: 420px) and (max-width: 980px)": {

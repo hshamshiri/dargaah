@@ -34,7 +34,13 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonInfo }) => {
               alt="button image"
               src={buttonInfo?.image_url && buttonInfo?.image_url}
             />
-            <Typography width={"80%"} whiteSpace={"wrap"} overflow={"hidden"} textOverflow={"ellipsis"} marginTop={1}  >
+            <Typography
+              width={"80%"}
+              whiteSpace={"wrap"}
+              overflow={"hidden"}
+              textOverflow={"ellipsis"}
+              marginTop={1}
+            >
               {buttonInfo?.label}
             </Typography>
           </Box>

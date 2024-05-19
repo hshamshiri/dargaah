@@ -9,6 +9,7 @@ export default function AddNewButton({ onClick }) {
             onclick={onClick}
             variant={"contained"}
             tooltipTitle={t("dashboard.main.addBtn")}
+            toolTipPlacement="top-start"
             sx={{ cursor: "pointer" }}
             iconSx={{
                 width: 80,

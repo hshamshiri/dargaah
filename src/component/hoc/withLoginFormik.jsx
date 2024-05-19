@@ -8,20 +8,28 @@ const WithMaterialUI = (WrappedComponent) => {
   const FormikChecked = () => {
     const [t] = useTranslation();
 
+
     const validationSchema = yup.object({
-      mobile: yup
+      username: yup
         .string()
-        .required(t("login.form.mobileRequired"))
-        .matches(regexList.mobile, t("login.form.mobileInvalid")),
+        .required(t("login.form.usernameRequired"))
+        .matches(regexList.usernameCharacterType, t("login.form.usernameInvalid"))
+      ,
+      password: yup
+        .string()
+        .required(t("login.form.passwordRequired")),
+      //.matches(regexList.password, t("login.form.passwordInvalid")),
       captcha: yup
         .string()
         .required(t("login.form.codeRequired"))
-      //boxName: yup.string().required(t("helperText.requiredField")),
     });
+
+
 
     const formik = useFormik({
       initialValues: {
-        mobile: "",
+        username: "",
+        password: "",
         captcha: "",
       },
       validationSchema: validationSchema,
