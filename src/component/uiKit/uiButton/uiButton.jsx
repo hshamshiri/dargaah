@@ -64,12 +64,12 @@ const UiButton = ({
           width: 40,
           marginRight: 0.5,
           minWidth: 40,
+          borderRadius: 5,
           ':hover': {
             bgcolor: hoverColor,// HoverColor, // theme.palette.primary.main
             color: color,
-            boxShadow: 0,
+            boxShadow: 2,
           },
-          borderRadius: 5,
           ...sx,
           // "@media only screen and (min-width: 980px)": {},
           // "@media only screen and (min-width: 420px) and (max-width: 980px)": {

@@ -1,18 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import uiConfigeReducer from "./uiConfigeReducer";
+import uiConfigeSlice from "./uiConfigeReducer";
+import loginStateSlice from "./loginConfigeReducer";
 
 const store = configureStore({
-    reducer: {
-        uiConfigeJson: uiConfigeReducer,
+  reducer: {
+    uiConfigeJson: uiConfigeSlice,
+    loginState: loginStateSlice,
+  },
 
-    },
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false,
-        }),
-})
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
 
-
-
-
-export default store
+export default store;

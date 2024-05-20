@@ -4,18 +4,18 @@ import { useTranslation } from "react-i18next";
 import UsernameInput from "../../../component/uiKit/uiInput/username/usernameInput";
 import PasswordInput from "../../../component/uiKit/uiInput/password/passwordInput";
 import CaptchaInput from "../../../component/uiKit/uiInput/captcha/captchaInput";
-import UiButton from "../../../component/uiKit/uiButton/uiButton";
 import { Stack, Link, Box } from "@mui/material";
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-import { useTheme } from '@mui/material/styles';
 import LoginButton from "../../../component/uiKit/uiButton/loginButton";
+import { useSelector, useDispatch } from "react-redux";
+import { changeLoginState } from "../../../redux/loginConfigeReducer";
 
 
-const PasswordLoginView = ({ onSubmit, formik }) => {
+const LoginForm = ({ onSubmit, formik }) => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [t] = useTranslation();
-  const theme = useTheme()
 
   const submitAction = () => {
     toast("خوش آمدید")
@@ -34,15 +34,20 @@ const PasswordLoginView = ({ onSubmit, formik }) => {
           <UsernameInput formik={formik} />
           <PasswordInput formik={formik} />
           <CaptchaInput formik={formik} />
-          <Link href="#" variant={"body1"} underline="always">
+
+          <Link
+            onClick={() => dispatch(changeLoginState("forget"))}
+            sx={{ cursor: "pointer" }}
+            variant={"body1"}
+            underline="hover">
             {t("login.rightSection.forgetPass")}
           </Link>
         </Stack>
-        <LoginButton />
+        <LoginButton label={t("login.form.enter")} />
       </Box>
     </form>
 
   );
 };
 
-export default WithMaterialUI(PasswordLoginView);
+export default WithMaterialUI(LoginForm);

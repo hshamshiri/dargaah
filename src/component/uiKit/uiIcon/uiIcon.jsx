@@ -25,6 +25,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import CloseIcon from '@mui/icons-material/Close';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import KeyIcon from '@mui/icons-material/Key';
 import { useTheme } from "@mui/material";
 
 
@@ -84,7 +85,9 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
     editIcon: <EditNoteIcon sx={iconStyle} />,
     delete: <DeleteForeverIcon sx={iconStyle} />,
     close: <CloseIcon sx={iconStyle} />,
-    manager: <ManageAccountsIcon sx={iconStyle} />
+    manager: <ManageAccountsIcon sx={iconStyle} />,
+    key: <KeyIcon sx={iconStyle} />
+
   };
 
   return icons[iconName];

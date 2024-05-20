@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import WithAddTopSliderImageFormik from "../../hoc/WithAddTopSliderImageFormik";
+import WithAddTopSliderImageFormik from "../../hoc/withAddTopSliderImageFormik";
 import { Stack, Box, Button } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";

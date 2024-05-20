@@ -25,7 +25,8 @@
       "username": "نام کاربری",
       "password":"رمز عبور ",
       "captcha": "کد امنیتی",
-      "sendCode": "ارسال رمز یکبار مصرف",
+      "sendCode": "ارسال رمز ",
+      "enter":"ورود",
       "mobileRequired": "شماره موبایل الزامی است",
       "mobileInvalid": "شماره موبایل صحیح نمی باشد ",
       "usernameRequired":"نام کاربری  الزامی است",
@@ -33,7 +34,9 @@
       "usernameIsShort":"نام کاربری کوتاه است",
       "passwordRequired":"رمز عبور الزامی است",
       "passwordInvalid":" رمز عبور صحیح نمی باشد",
-      "codeRequired":"کد امنیتی الزامی است"
+      "codeRequired":"کد امنیتی الزامی است",
+      "mailReqierd":"ایمیل الزامی است",
+      "mailInvalid":" ایمیل صحیح نمی باشد"
     }
   },
   "dashboard": {
@@ -89,5 +92,8 @@
   "netWorkError":{
     "404":"صفحه مورد نظر وجود ندارد",
     "422":"آدرس مورد نظر یافت نشد"
+  },
+  "general":{
+    "back":"بازگشت"
   }
 }
