@@ -7,7 +7,7 @@ import CaptchaInput from "../../../component/uiKit/uiInput/captcha/captchaInput"
 import { Stack, Link, Box } from "@mui/material";
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom";
-import LoginButton from "../../../component/uiKit/uiButton/loginButton";
+import LoginButton from "../../../component/uiKit/uiButton/SubmitButton";
 import { useSelector, useDispatch } from "react-redux";
 import { changeLoginState } from "../../../redux/loginConfigeReducer";
 
@@ -34,7 +34,6 @@ const LoginForm = ({ onSubmit, formik }) => {
           <UsernameInput formik={formik} />
           <PasswordInput formik={formik} />
           <CaptchaInput formik={formik} />
-
           <Link
             onClick={() => dispatch(changeLoginState("forget"))}
             sx={{ cursor: "pointer" }}
@@ -43,7 +42,7 @@ const LoginForm = ({ onSubmit, formik }) => {
             {t("login.rightSection.forgetPass")}
           </Link>
         </Stack>
-        <LoginButton label={t("login.form.enter")} />
+        <LoginButton label={t("login.form.enter")} iconName={"send"} />
       </Box>
     </form>
 

@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 export default function UsernameInput({ formik }) {
   const [t] = useTranslation();
-  console.log(formik)
   return (
     <UiInputText
       id="username"
@@ -18,7 +17,7 @@ export default function UsernameInput({ formik }) {
       iconName="username"
       //startAdornment
       endAdornment
-      maxLength={11}
+      maxLength={20}
     />
   );
 };

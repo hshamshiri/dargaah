@@ -31,8 +31,8 @@ const Slider = ({ props }) => {
       name: "appPreview",
       src: appPreview,
       description: t("login.slider.slide4"),
-      appButtonTitle: t("login.slider.downloadButton"),
-      app: true,
+      // appButtonTitle: t("login.slider.downloadButton"),
+      // app: true,
     },
   ];
 
@@ -41,8 +41,7 @@ const Slider = ({ props }) => {
       //autoPlay={false}
       stopAutoPlayOnHover
       interval={4000}
-      animation="fade"
-
+      animation='fade'
       // stopAutoPlayOnHover
       // interval={5000}
       // duration={2000}

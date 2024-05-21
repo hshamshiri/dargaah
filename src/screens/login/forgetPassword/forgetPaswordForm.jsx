@@ -1,41 +1,45 @@
-
 import WithForgetPasswordFormik from "../../../component/hoc/withForgetPasswordFormik";
 import { useTranslation } from "react-i18next";
-import UsernameInput from "../../../component/uiKit/uiInput/username/usernameInput";
-import PasswordInput from "../../../component/uiKit/uiInput/password/passwordInput";
-import CaptchaInput from "../../../component/uiKit/uiInput/captcha/captchaInput";
+import MailInput from "../../../component/uiKit/uiInput/mail/mailInput";
 import { Stack, Link, Box } from "@mui/material";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import LoginButton from "../../../component/uiKit/uiButton/loginButton";
-
+import SubmitButton from "../../../component/uiKit/uiButton/SubmitButton";
+import BackButton from "../../../component/uiKit/uiButton/backButton";
+import { UseSelector, useDispatch } from "react-redux";
+import { changeLoginState } from "../../../redux/loginConfigeReducer";
 
 const ForgetPasswordForm = ({ onSubmit, formik }) => {
-    const navigate = useNavigate()
-    const [t] = useTranslation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [t] = useTranslation();
 
-    const submitAction = () => {
-        toast("خوش آمدید")
-        navigate("/dashboard")
-    };
+  const submitAction = () => {
+    toast("خوش آمدید");
+    navigate("/dashboard");
+  };
 
-    return (
-        <form onSubmit={formik.handleSubmit}>
-            <Box
-                display="flex"
-                flexDirection="column"
-                justifyContent="center"
-                alignItems="center"
-            >
-                <Stack spacing={2} sx={{ marginTop: 10 }}>
-                    <UsernameInput formik={formik} />
-                </Stack>
-                <LoginButton label={t("login.form.sendCode")} />
-                <LoginButton label={t("general.back")} />
-            </Box>
-        </form>
-
-    );
+  return (
+    <form onSubmit={formik.handleSubmit}>
+      <Stack
+        display='flex'
+        flexDirection='column'
+        alignItems='center'
+        marginTop={5}
+        spacing={3}
+      >
+        <MailInput formik={formik} />
+        <Stack>
+          <SubmitButton label={t("login.form.sendCode")} iconName='send' />
+          <BackButton
+            label={t("general.back")}
+            iconName='back'
+            onClick={() => dispatch(changeLoginState("logout"))}
+          />
+        </Stack>
+      </Stack>
+    </form>
+  );
 };
 
 export default WithForgetPasswordFormik(ForgetPasswordForm);

@@ -4,17 +4,17 @@ import { useTranslation } from "react-i18next"
 import { useTheme } from "@emotion/react"
 
 
-export default function LoginButton({ label }) {
+export default function SubmitButton({ label, iconName }) {
     const { t } = useTranslation()
     const theme = useTheme()
     return (
         <UiButton
-            type="submit"
+            type={"submit"}
             label={label}
-            //onclick={submitAction}
+            //onclick={}
             variant="contained"
             iconType={"icon"}
-            iconName={"key"}
+            iconName={iconName}
             iconColor={theme.palette.base.mid}
             iconSx={{ height: 30, width: 30 }}
             backgroundColor={theme.palette.gradient.medium}

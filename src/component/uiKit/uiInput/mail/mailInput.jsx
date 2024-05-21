@@ -2,11 +2,9 @@
 
 import UiInputText from "../uiInput";
 import { useTranslation } from "react-i18next";
-import { Box } from "@mui/material";
 
 
-
-export default function EmailInput({ formik }) {
+export default function MailInput({ formik }) {
     const [t] = useTranslation();
     return (
         <UiInputText
@@ -24,7 +22,7 @@ export default function EmailInput({ formik }) {
             //startAdornment
             endAdornment
             captcha={false}
-            maxLength={6}
+            maxLength={40}
         />
     );
 };

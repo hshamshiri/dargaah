@@ -45,12 +45,6 @@
   width: 50%;
 }
 
-.swipUpView {
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-
 @media screen and (min-width: 980px) {
   .box {
     flex-direction: row;
@@ -74,10 +68,6 @@
     width: 100%;
     padding-bottom: 3rem;
     padding-top: 2rem;
-  }
-
-  .swipUpView {
-    display: flex;
   }
 }
 

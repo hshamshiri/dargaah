@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 
 export default function PasswordInput({ formik }) {
     const [t] = useTranslation();
-    console.log(formik)
     return (
         <UiInputText
             id="password"
@@ -18,7 +17,7 @@ export default function PasswordInput({ formik }) {
             iconName="password"
             //startAdornment
             endAdornment
-            maxLength={11}
+            maxLength={20}
         />
     );
 };

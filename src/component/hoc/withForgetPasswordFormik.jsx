@@ -11,11 +11,10 @@ export default function WithForgetPasswordFormik(WrappedComponent) {
         const validationSchema = yup.object({
             mail: yup
                 .string()
-                .required(t("login.form.mailRequired"))
+                .required(t("login.form.mailReqierd"))
                 .matches(regexList.mail, t("login.form.mailInvalid"))
             ,
         });
-
 
 
         const formik = useFormik({

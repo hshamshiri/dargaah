@@ -24,6 +24,7 @@
     "form": {
       "username": "نام کاربری",
       "password":"رمز عبور ",
+      "mail":"ایمیل",
       "captcha": "کد امنیتی",
       "sendCode": "ارسال رمز ",
       "enter":"ورود",
