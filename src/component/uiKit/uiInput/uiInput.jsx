@@ -14,7 +14,7 @@ const UiInputText = ({
   accept,
   variant = "outlined", //outlined
   error = false, //Bool
-  helperText, //like error description
+  helperText = "", //like error description
   placeHolder,
   defaultValue,
   onChange,
@@ -46,7 +46,7 @@ const UiInputText = ({
         onChange={onChange}
         required={required}
         hidden={hidden}
-        size="small"
+        size='small'
         sx={sx}
         InputLabelProps={{
           style: { fontFamily: theme.typography.fontFamily, fontSize: 14 },
@@ -68,9 +68,9 @@ const UiInputText = ({
               width: 270,
             },
             "@media only screen and (min-width: 420px) and (max-width: 980px)":
-            {
-              width: 250,
-            },
+              {
+                width: 250,
+              },
             "@media screen and (max-width: 420px)": {
               width: 200,
             },
@@ -78,14 +78,14 @@ const UiInputText = ({
             fontSize: 16,
           },
           startAdornment: startAdornment && (
-            <InputAdornment position="start">
+            <InputAdornment position='start'>
               <UiIcon iconType={iconType} iconName={iconName} />
             </InputAdornment>
           ),
           endAdornment: captcha ? (
             <CaptchaView />
           ) : (
-            <InputAdornment position="end">
+            <InputAdornment position='end'>
               <UiIcon iconType={iconType} iconName={iconName} />
             </InputAdornment>
           ),

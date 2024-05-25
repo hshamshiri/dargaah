@@ -3,11 +3,13 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import regexList from "../../utils/regex";
 import { useTranslation } from "react-i18next";
+import { useSelector, useDispatch } from "react-redux";
+import { changeLoginState } from "../../redux/loginConfigeReducer";
 
 const WithMaterialUI = (WrappedComponent) => {
   const FormikChecked = () => {
     const [t] = useTranslation();
-
+    const dispatch = useDispatch();
     const validationSchema = yup.object({
       username: yup
         .string()
@@ -29,7 +31,7 @@ const WithMaterialUI = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-        console.log("aaa", values);
+        dispatch(changeLoginState("report"));
       },
     });
     return <WrappedComponent formik={formik} onSubmit={formik.handleSubmit} />;

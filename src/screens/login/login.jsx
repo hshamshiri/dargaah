@@ -1,22 +1,24 @@
-
-import LoginFrame from "../../component/layout/loginFrame/loginFrame";
-import LoginForm from "./loginViewsElement/loginForm";
-import ForgetPaswordForm from "./forgetPassword/forgetPaswordForm";
-import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import LoginFrame from "../../component/layout/loginFrame/loginFrame";
+import LoginForm from "./loginform/loginForm";
+import ForgetPaswordForm from "./forgetPassword/forgetPaswordForm";
+import UserReport from "./userReport/userReport";
 import TabComp from "../../component/uiKit/uiTab/uiTab";
-import QRLoginView from "./loginViewsElement/qrLoginView";
+import QRLoginView from "./loginform/qrLoginView";
 import { changeLoginState } from "../../redux/loginConfigeReducer";
 
 const Login = () => {
-  const [t] = useTranslation()
-  const dispatch = useDispatch()
-  const loginState = useSelector((state) => state.loginState.loginState)
+  const [t] = useTranslation();
+  const dispatch = useDispatch();
+  const loginState = useSelector((state) => state.loginState.loginState);
 
   return (
     <LoginFrame>
       {loginState === "logout" && <LoginForm />}
       {loginState === "forget" && <ForgetPaswordForm />}
+      {loginState === "report" && <UserReport />}
+      {loginState === "term" && <UserReport />}
     </LoginFrame>
   );
 };
@@ -26,7 +28,6 @@ const Login = () => {
 // >
 //   <PasswordLoginView />
 //   <QRLoginView />
-// </TabComp> 
-
+// </TabComp>
 
 export default Login;

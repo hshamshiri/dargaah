@@ -5,9 +5,10 @@ import { Stack, Link, Box } from "@mui/material";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "../../../component/uiKit/uiButton/SubmitButton";
-import BackButton from "../../../component/uiKit/uiButton/backButton";
+import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { UseSelector, useDispatch } from "react-redux";
 import { changeLoginState } from "../../../redux/loginConfigeReducer";
+import Logo from "../../../component/uiKit/logo/logo";
 
 const ForgetPasswordForm = ({ onSubmit, formik }) => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const ForgetPasswordForm = ({ onSubmit, formik }) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
+      <Logo />
       <Stack
         display='flex'
         flexDirection='column'
@@ -31,7 +33,7 @@ const ForgetPasswordForm = ({ onSubmit, formik }) => {
         <MailInput formik={formik} />
         <Stack>
           <SubmitButton label={t("login.form.sendCode")} iconName='send' />
-          <BackButton
+          <NavigateButton
             label={t("general.back")}
             iconName='back'
             onClick={() => dispatch(changeLoginState("logout"))}

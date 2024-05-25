@@ -12,7 +12,7 @@ const LoginFrame = ({ children }) => {
   return (
     <Box className='body'>
       <Box className='box' position={"relative"}>
-        <SwipUpButton swipUp={swipUp} setSwipUp={setSwipUp} />
+        {/* <SwipUpButton swipUp={swipUp} setSwipUp={setSwipUp} /> */}
         <RightSection setSwipUp={setSwipUp}>{children}</RightSection>
         <Leftsection />
       </Box>

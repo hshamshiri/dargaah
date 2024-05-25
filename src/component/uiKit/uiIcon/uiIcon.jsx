@@ -1,4 +1,3 @@
-
 import Send from "@mui/icons-material/Send";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import VolumeUpOutlinedIcon from "@mui/icons-material/VolumeUpOutlined";
@@ -17,18 +16,18 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddBoxIcon from "@mui/icons-material/AddBox";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import CloseIcon from '@mui/icons-material/Close';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import KeyIcon from '@mui/icons-material/Key';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import CloseIcon from "@mui/icons-material/Close";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import KeyIcon from "@mui/icons-material/Key";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { useTheme } from "@mui/material";
-
 
 const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
   const theme = useTheme();
@@ -40,9 +39,9 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
       padding: 0.8,
       backgroundColor: "white",
       color: iconColor ? iconColor : theme.palette.base?.main,
-      ':hover': {
+      ":hover": {
         bgcolor: iconHoverColor,
-        color: iconHoverColor && 'white',
+        color: iconHoverColor && "white",
       },
     },
     iconType === "button" && {
@@ -88,8 +87,8 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
     close: <CloseIcon sx={iconStyle} />,
     manager: <ManageAccountsIcon sx={iconStyle} />,
     key: <KeyIcon sx={iconStyle} />,
-    back: <ArrowBackIcon sx={iconStyle} />
-
+    back: <ArrowBackIcon sx={iconStyle} />,
+    next: <ArrowForwardIcon sx={iconStyle} />,
   };
 
   return icons[iconName];
