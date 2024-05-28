@@ -1,42 +1,43 @@
-import axios from "axios"
+import axios from "axios";
 
-
-
-const BASE_URL = "http://192.168.8.187:7000/api/"
+const BASE_URL = "http://192.168.8.187:7000/api/";
 
 const defaultOptions = {
-    baseURL: BASE_URL,
+  baseURL: BASE_URL,
+  Headers,
 };
 
-const axiosClient = axios.create(defaultOptions)
+const axiosClient = axios.create(defaultOptions);
 
 // axios.defaults.headers.common['Accept'] = 'application/json';
 // axios.defaults.headers.common["Content-Type"] = "application/json"
 
-
 const APIs = {
-    home: "home",
-    dashBox: {
-        new_dashBox: "dashbox/new-dashbox",
-        delete_dashbox: "dashbox/dashbox/",
-        update_dashbox: "dashbox/title/",
-    },
-    dashButton: {
-        new_dashbutton: "dashbox/new-button/",
-        delete_button:"dashbox/button/",
-        update_button:"dashbox/update-button/"
-    },
-    topSlider: {
-        image_list: "slider/all",
-        upload_image: "slider/image",
-        delete_Image: "slider/"
-    },
-    journal: {
-        image_list: "journal/all",
-        upload_image: "journal/image",
-        delete_Image: "journal/"
-    }
-}
+  home: "home",
+  login: {
+    login: "oauth2/login",
+  },
+  dashBox: {
+    new_dashBox: "dashbox/new-dashbox",
+    delete_dashbox: "dashbox/dashbox/",
+    update_dashbox: "dashbox/title/",
+  },
+  dashButton: {
+    new_dashbutton: "dashbox/new-button/",
+    delete_button: "dashbox/button/",
+    update_button: "dashbox/update-button/",
+  },
+  topSlider: {
+    image_list: "slider/all",
+    upload_image: "slider/image",
+    delete_Image: "slider/",
+  },
+  journal: {
+    image_list: "journal/all",
+    upload_image: "journal/image",
+    delete_Image: "journal/",
+  },
+};
 
 //check authentication
 // axiosClient.interceptors.response.use(
@@ -53,5 +54,4 @@ const APIs = {
 //     }
 // )
 
-
-export { APIs, axiosClient }
+export { APIs, axiosClient };

@@ -34,26 +34,20 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       file: yup
         .mixed()
         .required(t("helperText.requiredField"))
-        .test(
-          "is-valid-size",
-          t("helperText.max-size-50"),
-          (value) => {
-            if (props?.buttonInfo) {
-              return true;
-            } else {
-              return value.size <= MAX_FILE_SIZE;
-            }
+        .test("is-valid-size", t("helperText.max-size-50"), (value) => {
+          if (props?.buttonInfo) {
+            return true;
+          } else {
+            return value.size <= MAX_FILE_SIZE;
           }
-        ),
+        }),
     });
 
     const checkDuplicateName = (value) => {
       return true;
-
     };
     const checkDuplicateLink = (value) => {
       return true;
-
     };
 
     const formik = useFormik({
@@ -64,13 +58,12 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: (values) => {
-
         if (props.buttonInfo) {
           //update button
           putRequest(
             APIs.dashButton.update_button +
-            props?.boxInfo?.id +
-            `/${props.buttonInfo?.id}`,
+              props?.boxInfo?.id +
+              `/${props.buttonInfo?.id}`,
             { file: values.file, label: values.btnName, link: values.btnLink },
             true
           ).then((response) => {
@@ -96,7 +89,7 @@ const withAddButtonOfDashedBoxFormik = (WrappedComponent) => {
             props.toggleShowModal(false);
           }
           if (response.error.msg) {
-            toast(response.error.msg);
+            toast.error(response.error.msg);
           }
         };
       },

@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef } from "react";
 import AdminDashedButton from "./adminDashedButton";
 import { Box } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -8,30 +8,25 @@ import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { useDispatch } from "react-redux";
 import { APIs } from "../../../utils/network/apiClient";
 import { addDashBox } from "../../../redux/uiConfigeReducer";
-import { toast } from "react-toastify"
+import { toast } from "react-toastify";
 import AlertDialog from "../uiDialog/uiDialog";
-import EditButton from "../uiButton/editButton"
+import EditButton from "../uiButton/editButton";
 import DeleteButton from "../uiButton/deleteButton";
 import AddNewButton from "../uiButton/addNewButton";
 
-
-const UiAdminDashedBox = ({
-  boxInfo,
-  handleForms,
-  hideLabel,
-}) => {
-
+const UiAdminDashedBox = ({ boxInfo, handleForms, hideLabel }) => {
   const [t] = useTranslation();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const dialogRef = useRef()
-  const deleteAlarm = () => dialogRef.current()
+  const dialogRef = useRef();
+  const deleteAlarm = () => dialogRef.current();
 
   const deleteForm = () => {
     deleteRequest(APIs.dashBox.delete_dashbox + boxInfo.id).then((response) => {
-      response.data && dispatch(addDashBox(response.data))
-      response.error.msg && toast.error(response.error.msg + "\n" + response.error.status)
-    })
+      response.data && dispatch(addDashBox(response.data));
+      response.error.msg &&
+        toast.error(response.error.msg + "\n" + response.error.status);
+    });
   };
   return (
     <Grid
@@ -48,9 +43,7 @@ const UiAdminDashedBox = ({
       xs={12}
       sm={12}
       md={12}
-
     >
-
       <AlertDialog myRef={dialogRef} deleteAction={deleteForm} />
       <Box
         height={35}
@@ -68,12 +61,19 @@ const UiAdminDashedBox = ({
         borderColor={"LIGHTgray"}
         fontSize={"110%"}
         fontWeight={"bold"}
-        color={"#555"} boxShadow={3}
+        color={"#555"}
+        boxShadow={4}
         backgroundColor={"white"}
       >
         {boxInfo?.label}
       </Box>
-      <Box display={"flex"} position={"absolute"} backgroundColor={"white"} left={1} top={-25}>
+      <Box
+        display={"flex"}
+        position={"absolute"}
+        backgroundColor={"white"}
+        left={1}
+        top={-25}
+      >
         <DeleteButton onClick={deleteAlarm} />
         <EditButton onClick={() => handleForms("dashedBox", boxInfo)} />
       </Box>
@@ -89,30 +89,33 @@ const UiAdminDashedBox = ({
             lg: "repeat(5, 2fr)",
             xl: "repeat(6,2fr)",
           },
-          direction: "rtl"
+          direction: "rtl",
         }}
       >
-        {boxInfo && boxInfo?.buttons.map((button, i) => (
-          <AdminDashedButton
-            key={uuidv4()}
-            boxInfo={boxInfo}
-            buttonInfo={button}
-            handleForms={handleForms}
+        {boxInfo &&
+          boxInfo?.buttons.map((button, i) => (
+            <AdminDashedButton
+              key={uuidv4()}
+              boxInfo={boxInfo}
+              buttonInfo={button}
+              handleForms={handleForms}
+            />
+          ))}
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            "& > :not(style)": { m: 5 },
+          }}
+        >
+          <AddNewButton
+            onClick={() => handleForms("addButtonOfDashedBox", boxInfo)}
           />
-
-        )
-        )}
-
-        <Box sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          '& > :not(style)': { m: 5 }
-        }}>
-          <AddNewButton onClick={() => handleForms("addButtonOfDashedBox", boxInfo)} />
         </Box>
       </Box>
-    </Grid >
+    </Grid>
   );
 };
 

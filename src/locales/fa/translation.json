@@ -37,7 +37,11 @@
       "passwordInvalid":" رمز عبور صحیح نمی باشد",
       "codeRequired":"کد امنیتی الزامی است",
       "mailReqierd":"ایمیل الزامی است",
-      "mailInvalid":" ایمیل صحیح نمی باشد"
+      "mailInvalid":" ایمیل صحیح نمی باشد",
+      "rules":"قوانین"
+    },
+    "general":{
+      "lastLogin":"ورود های اخیر"
     }
   },
   "dashboard": {
@@ -76,7 +80,9 @@
       "addImage": "افزودن تصویر",
       "updateBoxName": "ویرایش نام مجموعه",
       "editImages": "ویرایش عکس ها",
-      "deleteBox": "حذف مجموعه"
+      "deleteBox": "حذف مجموعه",
+      "delete":"حذف",
+      "update":"ویرایش"
     }
   },
   "helperText": {

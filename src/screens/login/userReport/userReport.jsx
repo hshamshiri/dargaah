@@ -1,13 +1,15 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { changeLoginState } from "../../../redux/loginConfigeReducer";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { useTranslation } from "react-i18next";
 import BasicTable from "../../../component/uiKit/table/table";
+import { useTheme } from "@emotion/react";
 
 export default function UserReport() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   return (
     <Box
@@ -21,10 +23,21 @@ export default function UserReport() {
         height: 450,
       }}
     >
-      <Typography fontSize={20} fontWeight={"bold"}>
-        گزارش ورود و خروج
+      <Typography
+        width={300}
+        fontSize={20}
+        marginBottom={2}
+        fontWeight={"bold"}
+        boxShadow={3}
+        borderRadius={2}
+        padding={1}
+        sx={{ background: theme.palette.gradient.medium, color: "white" }}
+      >
+        {t("login.general.lastLogin")}
       </Typography>
-      <BasicTable />
+      <Stack alignItems={"center"}>
+        <BasicTable />
+      </Stack>
       <NavigateButton
         label={t("general.next")}
         iconName='next'

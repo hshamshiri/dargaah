@@ -4,6 +4,7 @@ import LoginFrame from "../../component/layout/loginFrame/loginFrame";
 import LoginForm from "./loginform/loginForm";
 import ForgetPaswordForm from "./forgetPassword/forgetPaswordForm";
 import UserReport from "./userReport/userReport";
+import Terms from "./terms/terms";
 import TabComp from "../../component/uiKit/uiTab/uiTab";
 import QRLoginView from "./loginform/qrLoginView";
 import { changeLoginState } from "../../redux/loginConfigeReducer";
@@ -18,7 +19,7 @@ const Login = () => {
       {loginState === "logout" && <LoginForm />}
       {loginState === "forget" && <ForgetPaswordForm />}
       {loginState === "report" && <UserReport />}
-      {loginState === "term" && <UserReport />}
+      {loginState === "term" && <Terms />}
     </LoginFrame>
   );
 };

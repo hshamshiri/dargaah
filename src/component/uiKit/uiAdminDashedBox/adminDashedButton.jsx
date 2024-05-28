@@ -1,11 +1,10 @@
-import OptionButtons from "./optionButtons"
+import OptionButtons from "./optionButtons";
 import { Fragment, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 
-
 const AdminDashedButton = ({ handleForms, boxInfo, buttonInfo }) => {
-  const [showOption, setShowOption] = useState(false)
+  const [showOption, setShowOption] = useState(false);
 
   return (
     <Fragment>
@@ -14,24 +13,23 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonInfo }) => {
         marginTop={5}
         onMouseOver={() => setShowOption(true)}
         onMouseLeave={() => setShowOption(false)}
+        sx={{ cursor: "pointer" }}
       >
-        <Box
-          display={"flex"}
-        >
-
+        <Box>
           {/* <Link to={buttonDetalis?.link || "#"}> */}
-          <Box width={"100%"}
+          <Box
+            width={"100%"}
             display={"flex"}
             flexDirection={"column"}
             justifyContent={"center"}
             alignItems={"center"}
           >
             <Box
-              component="img"
+              component='img'
               sx={{
                 maxHeight: 80,
               }}
-              alt="button image"
+              alt='button image'
               src={buttonInfo?.image_url && buttonInfo?.image_url}
             />
             <Typography
@@ -45,21 +43,20 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonInfo }) => {
             </Typography>
           </Box>
 
-          {showOption && <OptionButtons
-            handleForms={handleForms}
-            boxInfo={boxInfo}
-            buttonInfo={buttonInfo}
-          />}
-
+          {showOption && (
+            <OptionButtons
+              handleForms={handleForms}
+              boxInfo={boxInfo}
+              buttonInfo={buttonInfo}
+            />
+          )}
         </Box>
 
         {/* </Link> */}
       </Grid>
       {/* </ShakingView> */}
-    </Fragment >
+    </Fragment>
   );
 };
-
-
 
 export default AdminDashedButton;

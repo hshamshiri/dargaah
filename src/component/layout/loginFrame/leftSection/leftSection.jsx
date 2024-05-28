@@ -3,7 +3,7 @@ import "./../scss/login.scss";
 import Slider from "../../carouselSlider/carouselSlider";
 import TopIconsView from "./topIconsView/topIconsView";
 
-const Leftsection = ({ children }) => {
+const Leftsection = ({}) => {
   return (
     <div className='left-section '>
       <TopIconsView />

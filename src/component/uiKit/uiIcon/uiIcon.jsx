@@ -27,6 +27,10 @@ import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import KeyIcon from "@mui/icons-material/Key";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+
 import { useTheme } from "@mui/material";
 
 const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
@@ -89,6 +93,9 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
     key: <KeyIcon sx={iconStyle} />,
     back: <ArrowBackIcon sx={iconStyle} />,
     next: <ArrowForwardIcon sx={iconStyle} />,
+    check: <CheckCircleIcon sx={iconStyle} />,
+    checkTick: <TaskAltIcon sx={iconStyle} />,
+    close: <CancelIcon sx={iconStyle} />,
   };
 
   return icons[iconName];

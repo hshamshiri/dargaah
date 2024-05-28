@@ -19,7 +19,7 @@ import UiTooltip from "../uiTooltip/uiTooltip";
 const UiButton = ({
   type,
   label,
-  onclick = () => { },
+  onclick = () => {},
   disable,
   variant,
   //classes,
@@ -34,11 +34,10 @@ const UiButton = ({
   tooltipTitle,
   toolTipPlacement,
   iconSx,
-  sx
+  sx,
 }) => {
-
   return (
-    <UiTooltip title={tooltipTitle} placement={toolTipPlacement} >
+    <UiTooltip title={tooltipTitle} placement={toolTipPlacement}>
       <Button
         type={type}
         onClick={onclick}
@@ -65,8 +64,8 @@ const UiButton = ({
           marginRight: 0.5,
           minWidth: 40,
           borderRadius: 5,
-          ':hover': {
-            bgcolor: hoverColor,// HoverColor, // theme.palette.primary.main
+          ":hover": {
+            bgcolor: hoverColor, // HoverColor, // theme.palette.primary.main
             color: color,
             boxShadow: 2,
           },
@@ -85,6 +84,5 @@ const UiButton = ({
     </UiTooltip>
   );
 };
-
 
 export default UiButton;

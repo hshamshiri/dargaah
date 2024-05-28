@@ -25,6 +25,7 @@ export default function AddNewboxButton({ onClick }) {
                 sm={12}
                 md={12}
                 sx={{
+                    cursor:"pointer",
                     ':hover': {
                         boxShadow: 5,
                         borderColor: theme.palette.base.success
