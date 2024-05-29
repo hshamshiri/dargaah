@@ -15,49 +15,45 @@ import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
-import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
+import {
+  addTopSliderImage,
+  addJournalImage,
+  addDashBox,
+} from "../../redux/uiConfigeReducer";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
 // import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
 
-
 const Dashboard = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [t] = useTranslation();
-
 
   useEffect(() => {
     const getAllData = () => {
       getRequest(APIs.home).then((response) => {
         if (response.data) {
-          response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
-          response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
-          response.data?.journals && dispatch(addJournalImage(response.data?.journals))
+          response.data?.dashBoxes &&
+            dispatch(addDashBox(response.data?.dashBoxes));
+          response.data?.top_slider &&
+            dispatch(addTopSliderImage(response.data?.top_slider));
+          response.data?.journals &&
+            dispatch(addJournalImage(response.data?.journals));
         }
         if (response.error.msg) {
-          toast.error(response.error.msg + "\n" + response.error.status)
+          toast.error(response.error.msg + "\n" + response.error.status);
         }
-      })
-    }
-    getAllData()
+      });
+    };
+    getAllData();
   }, [dispatch]);
-
-
 
   const dashBoxes = useSelector((state) => state.uiConfigeJson.dashBox_list);
   const journals = useSelector((state) => state?.uiConfigeJson?.journal_list);
-  const banners = useSelector((state) => state?.uiConfigeJson?.topSlider_list)
-
-
-
+  const banners = useSelector((state) => state?.uiConfigeJson?.topSlider_list);
 
   return (
     <MiniDrawer buttonList={interfaceConfige?.drawerButtons?.buttons}>
-
-      <Grid
-        marginBottom={2}
-        container
-      >
+      <Grid marginBottom={2} container>
         <UiButton
           onclick={() => navigate("/dashboardAdmin")}
           sx={{ width: 200 }}
@@ -106,20 +102,17 @@ const Dashboard = () => {
           justifyContent={"start"}
           rowGap={5}
         >
-
-          {dashBoxes && dashBoxes.map((dashBox, i) => (
-            <UiDashedBox
-              key={uuidv4()}
-              dashBoxInfo={dashBox}
-              hideLabel={true}
-            />
-          )
-          )}
-
+          {dashBoxes &&
+            dashBoxes.map((dashBox, i) => (
+              <UiDashedBox
+                key={uuidv4()}
+                dashBoxInfo={dashBox}
+                hideLabel={true}
+              />
+            ))}
         </Grid>
       </Grid>
-
-    </MiniDrawer >
+    </MiniDrawer>
   );
 };
 
@@ -132,8 +125,5 @@ const Dashboard = () => {
 // {arr.map((icon, i) => (
 //     <UiSlide timeout={1000 * ((i + 1) / 2)} key={i}>{icon}</UiSlide>
 //   ))}
-
-
-
 
 export default Dashboard;

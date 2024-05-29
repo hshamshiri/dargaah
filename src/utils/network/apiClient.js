@@ -1,6 +1,9 @@
 import axios from "axios";
+import retriveData from "../localStoarageMangement/retriveData";
 
 const BASE_URL = "http://192.168.8.187:7000/api/";
+
+let AUTH_TOKEN = await retriveData("token");
 
 const defaultOptions = {
   baseURL: BASE_URL,
@@ -8,7 +11,7 @@ const defaultOptions = {
 };
 
 const axiosClient = axios.create(defaultOptions);
-
+axiosClient.defaults.headers.common["Authorization"] = "Bearer " + AUTH_TOKEN;
 // axios.defaults.headers.common['Accept'] = 'application/json';
 // axios.defaults.headers.common["Content-Type"] = "application/json"
 

@@ -43,10 +43,8 @@ const WithMaterialUI = (WrappedComponent) => {
             { username: values.username, password: values.password },
             true
           ).then((response) => {
-            if (response.data) {
-              if (response.data.access_token) {
-                login(response.data.access_token);
-              }
+            if (response?.data?.access_token) {
+              login(response.data.access_token);
             }
             if (response.error.msg) {
               toast.error(response.error.msg);

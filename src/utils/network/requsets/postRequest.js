@@ -10,7 +10,6 @@ export async function postRequest(url, data, isFormdata = false) {
   axiosClient.defaults.headers.common["Content-Type"] = isFormdata
     ? "multipart/form-data"
     : "application/json";
-  // axiosClient.defaults.headers.common["Authorization"] = "Bearer " + token;
 
   const sendData = isFormdata ? createFormData(data) : data;
 
