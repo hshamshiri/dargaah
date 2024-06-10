@@ -1,3 +1,4 @@
+import { useEffect, useState, useMemo, useCallback } from "react";
 import WithMaterialUI from "../../../component/hoc/withLoginFormik";
 import { useTranslation } from "react-i18next";
 import UsernameInput from "../../../component/uiKit/uiInput/username/usernameInput";
@@ -11,19 +12,33 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeLoginState } from "../../../redux/loginConfigeReducer";
 import Logo from "../../../component/uiKit/logo/logo";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useState } from "react";
+import { getCaptcha } from "../../../utils/network/requsets/getCaptcha";
+import { APIs, BASE_URL } from "../../../utils/network/apiClient";
+import { generateCaptchaToken } from "../../../utils/helper/generateRandomCaptchaToken";
+import RefreshCaptchaButton from "../../../component/uiKit/uiButton/refreshCaptchaButton";
+import CountdownTimer from "../../../component/uiKit/timer/timer";
 
-const LoginForm = ({ onSubmit, formik }) => {
+const LoginForm = ({ onSubmit, formik, tokenapi = "dddd" }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [t] = useTranslation();
-
   const [loading, setLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState();
+  const [captchaUrl, setCaptchaUrl] = useState();
 
+  const generateNewCaptchaUrl = () => {
+    const newCaptchaToken = generateCaptchaToken();
+    tokenapi = newCaptchaToken;
+    setCaptchaUrl(BASE_URL + APIs.captcha.getCaptcha + newCaptchaToken);
+  };
   const submitAction = () => {
     toast("خوش آمدید");
     navigate("/dashboard");
   };
+
+  useEffect(() => {
+    generateNewCaptchaUrl();
+  }, []);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -39,6 +54,38 @@ const LoginForm = ({ onSubmit, formik }) => {
         <Stack spacing={2} sx={{ marginTop: 3 }}>
           <UsernameInput formik={formik} />
           <PasswordInput formik={formik} />
+
+          <Box
+            height={60}
+            display={"flex"}
+            justifyContent={"center"}
+            // border={1}
+            // borderRadius={1}
+            //backgroundColor={"lightGray"}
+          >
+            <Stack
+              width={"20%"}
+              height={"100%"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              spacing={1}
+              padding={1}
+            >
+              <RefreshCaptchaButton onClick={() => generateNewCaptchaUrl()} />
+              {/* <CountdownTimer /> */}
+            </Stack>
+            <Box
+              width={"80%"}
+              height={"100%"}
+              component={"img"}
+              borderRadius={1}
+              border={1}
+              borderColor={"lightgray"}
+              src={captchaUrl}
+            />
+          </Box>
+
           <CaptchaInput formik={formik} />
           <Link
             onClick={() => dispatch(changeLoginState("forget"))}

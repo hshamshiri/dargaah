@@ -14,12 +14,14 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.loginState.loginState);
 
+  console.log(loginState);
   return (
     <LoginFrame>
-      {loginState === "logout" && <LoginForm />}
+      <LoginForm />
+      {/* {loginState === "logout" && <LoginForm />}
       {loginState === "forget" && <ForgetPaswordForm />}
       {loginState === "report" && <UserReport />}
-      {loginState === "term" && <Terms />}
+      {loginState === "term" && <Terms />} */}
     </LoginFrame>
   );
 };

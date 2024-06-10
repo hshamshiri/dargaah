@@ -11,7 +11,8 @@ import { toast } from "react-toastify";
 import { useAuth } from "../../component/hooks/useAuth";
 
 const WithMaterialUI = (WrappedComponent) => {
-  const FormikChecked = () => {
+  const FormikChecked = (props) => {
+    console.log(props.tokenapi);
     const { login } = useAuth();
     const dispatch = useDispatch();
     const [t] = useTranslation();
@@ -64,7 +65,13 @@ const WithMaterialUI = (WrappedComponent) => {
         //}
       },
     });
-    return <WrappedComponent formik={formik} onSubmit={formik.handleSubmit} />;
+    return (
+      <WrappedComponent
+        {...props}
+        formik={formik}
+        onSubmit={formik.handleSubmit}
+      />
+    );
   };
 
   return FormikChecked;

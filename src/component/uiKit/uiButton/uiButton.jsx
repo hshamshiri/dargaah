@@ -67,7 +67,7 @@ const UiButton = ({
           ":hover": {
             bgcolor: hoverColor, // HoverColor, // theme.palette.primary.main
             color: color,
-            boxShadow: 2,
+            boxShadow: 0,
           },
           ...sx,
           // "@media only screen and (min-width: 980px)": {},

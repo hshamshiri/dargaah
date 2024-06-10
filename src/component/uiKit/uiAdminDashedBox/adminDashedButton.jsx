@@ -25,7 +25,7 @@ const AdminDashedButton = ({ handleForms, boxInfo, buttonInfo }) => {
             alignItems={"center"}
           >
             <Box
-              component='img'
+              component={"img"}
               sx={{
                 maxHeight: 80,
               }}

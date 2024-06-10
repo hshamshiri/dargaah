@@ -30,6 +30,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 import { useTheme } from "@mui/material";
 
@@ -96,6 +97,7 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
     check: <CheckCircleIcon sx={iconStyle} />,
     checkTick: <TaskAltIcon sx={iconStyle} />,
     close: <CancelIcon sx={iconStyle} />,
+    refresh: <RefreshIcon sx={iconStyle} />,
   };
 
   return icons[iconName];

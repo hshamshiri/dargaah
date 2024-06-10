@@ -1,7 +1,7 @@
 import axios from "axios";
 import retriveData from "../localStoarageMangement/retriveData";
 
-const BASE_URL = "http://192.168.8.187:7000/api/";
+const BASE_URL = "http://192.168.8.187/dashboard/api/";
 
 let AUTH_TOKEN = await retriveData("token");
 
@@ -11,34 +11,38 @@ const defaultOptions = {
 };
 
 const axiosClient = axios.create(defaultOptions);
-axiosClient.defaults.headers.common["Authorization"] = "Bearer " + AUTH_TOKEN;
-// axios.defaults.headers.common['Accept'] = 'application/json';
-// axios.defaults.headers.common["Content-Type"] = "application/json"
+//axiosClient.defaults.headers.common["Authorization"] = "Bearer " + AUTH_TOKEN;
+axios.defaults.headers.common["Accept"] = "application/json";
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 const APIs = {
   home: "home",
+  captcha: {
+    getCaptcha: `getcaptcha/`,
+    checkCaptcha: `checkcaptcha/3234`,
+  },
   login: {
     login: "oauth2/login",
   },
   dashBox: {
-    new_dashBox: "dashbox/new-dashbox",
-    delete_dashbox: "dashbox/dashbox/",
-    update_dashbox: "dashbox/title/",
+    new_dashBox: `dashbox/new-dashbox`,
+    delete_dashbox: `dashbox/dashbox/`,
+    update_dashbox: `dashbox/title/`,
   },
   dashButton: {
-    new_dashbutton: "dashbox/new-button/",
-    delete_button: "dashbox/button/",
-    update_button: "dashbox/update-button/",
+    new_dashbutton: `dashbox/new-button/`,
+    delete_button: `dashbox/button/`,
+    update_button: `dashbox/update-button/`,
   },
   topSlider: {
-    image_list: "slider/all",
-    upload_image: "slider/image",
-    delete_Image: "slider/",
+    image_list: `slider/all`,
+    upload_image: `slider/image`,
+    delete_Image: `slider/`,
   },
   journal: {
-    image_list: "journal/all",
-    upload_image: "journal/image",
-    delete_Image: "journal/",
+    image_list: `journal/all`,
+    upload_image: `journal/image`,
+    delete_Image: `journal/`,
   },
 };
 
@@ -57,4 +61,4 @@ const APIs = {
 //     }
 // )
 
-export { APIs, axiosClient };
+export { APIs, axiosClient, BASE_URL };

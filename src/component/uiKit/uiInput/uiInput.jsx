@@ -62,7 +62,7 @@ const UiInputText = ({
         }}
         InputProps={{
           sx: {
-            borderRadius: 10,
+            borderRadius: 1,
             width: 300,
             "@media only screen and (min-width: 980px)": {
               width: 270,
