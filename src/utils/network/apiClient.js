@@ -19,7 +19,7 @@ const APIs = {
   home: "home",
   captcha: {
     getCaptcha: `getcaptcha/`,
-    checkCaptcha: `checkcaptcha/3234`,
+    checkCaptcha: `checkcaptcha/`,
   },
   login: {
     login: "oauth2/login",

@@ -9,14 +9,16 @@ import { postRequest } from "../../utils/network/requsets/postRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify";
 import { useAuth } from "../../component/hooks/useAuth";
+import { getRequest } from "../../utils/network/requsets/getRequest";
+import { setCaptchaToken } from "../../redux/captchaTokenReducer";
 
 const WithMaterialUI = (WrappedComponent) => {
   const FormikChecked = (props) => {
-    console.log(props.tokenapi);
     const { login } = useAuth();
     const dispatch = useDispatch();
     const [t] = useTranslation();
-
+    const { captchaToken } = useSelector((state) => state?.captchaToken);
+    console.log(captchaToken);
     const validationSchema = yup.object({
       username: yup
         .string()
@@ -30,6 +32,22 @@ const WithMaterialUI = (WrappedComponent) => {
       captcha: yup.string().required(t("login.form.codeRequired")),
     });
 
+    const loginRequest = (values) => {
+      postRequest(
+        APIs.login.login,
+        { username: values.username, password: values.password },
+        true
+      ).then((response) => {
+        if (response?.data?.access_token) {
+          login(response.data.access_token);
+          toast.success("خوش آمدید");
+        }
+        if (response.error.msg) {
+          toast.error(response.error.msg);
+        }
+      });
+    };
+
     const formik = useFormik({
       initialValues: {
         username: "",
@@ -38,20 +56,22 @@ const WithMaterialUI = (WrappedComponent) => {
       },
       validationSchema: validationSchema,
       onSubmit: async (values) => {
-        if (values.username && values.password) {
-          postRequest(
-            APIs.login.login,
-            { username: values.username, password: values.password },
-            true
-          ).then((response) => {
-            if (response?.data?.access_token) {
-              login(response.data.access_token);
+        getRequest(
+          APIs.captcha.checkCaptcha + captchaToken + "/" + values.captcha
+        ).then((response) => {
+          if (response?.data) {
+            if (response?.data === "correct") {
+              loginRequest(values);
+            } else {
+              toast.error("کد امنیتی وارد شده اشتباه است");
+              values.captcha = "";
+              dispatch(setCaptchaToken(null));
             }
-            if (response.error.msg) {
-              toast.error(response.error.msg);
-            }
-          });
-        }
+          }
+          if (response.error.msg) {
+            toast.error(response.error.msg);
+          }
+        });
 
         // dispatch(changeLoginState("report"));
         // Here you would usually send a request to your backend to authenticate the user

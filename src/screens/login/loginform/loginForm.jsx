@@ -14,36 +14,33 @@ import Logo from "../../../component/uiKit/logo/logo";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getCaptcha } from "../../../utils/network/requsets/getCaptcha";
 import { APIs, BASE_URL } from "../../../utils/network/apiClient";
-import { generateCaptchaToken } from "../../../utils/helper/generateRandomCaptchaToken";
 import RefreshCaptchaButton from "../../../component/uiKit/uiButton/refreshCaptchaButton";
 import CountdownTimer from "../../../component/uiKit/timer/timer";
+import generateCaptchaToken from "../../../utils/helper/generateRandomCaptchaToken";
+import generateNewCaptchaUrl from "../../../utils/helper/generateNewCaptchaUrl";
+import { setCaptchaToken } from "../../../redux/captchaTokenReducer";
 
-const LoginForm = ({ onSubmit, formik, tokenapi = "dddd" }) => {
+const LoginForm = ({ onSubmit, formik }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState();
   const [captchaUrl, setCaptchaUrl] = useState();
 
-  const generateNewCaptchaUrl = () => {
-    const newCaptchaToken = generateCaptchaToken();
-    tokenapi = newCaptchaToken;
-    setCaptchaUrl(BASE_URL + APIs.captcha.getCaptcha + newCaptchaToken);
-  };
-  const submitAction = () => {
-    toast("خوش آمدید");
-    navigate("/dashboard");
+  const getCaptchaUrl = () => {
+    const captchaToken = generateCaptchaToken();
+    dispatch(setCaptchaToken(captchaToken));
+    const captchaUrl = generateNewCaptchaUrl(captchaToken);
+    setCaptchaUrl(captchaUrl);
   };
 
   useEffect(() => {
-    generateNewCaptchaUrl();
+    getCaptchaUrl();
   }, []);
 
   return (
     <form onSubmit={formik.handleSubmit}>
       <Logo />
-
       <Box
         display='flex'
         flexDirection='column'
@@ -55,14 +52,7 @@ const LoginForm = ({ onSubmit, formik, tokenapi = "dddd" }) => {
           <UsernameInput formik={formik} />
           <PasswordInput formik={formik} />
 
-          <Box
-            height={60}
-            display={"flex"}
-            justifyContent={"center"}
-            // border={1}
-            // borderRadius={1}
-            //backgroundColor={"lightGray"}
-          >
+          <Box height={60} display={"flex"} justifyContent={"center"}>
             <Stack
               width={"20%"}
               height={"100%"}
@@ -72,7 +62,7 @@ const LoginForm = ({ onSubmit, formik, tokenapi = "dddd" }) => {
               spacing={1}
               padding={1}
             >
-              <RefreshCaptchaButton onClick={() => generateNewCaptchaUrl()} />
+              <RefreshCaptchaButton onClick={() => getCaptchaUrl()} />
               {/* <CountdownTimer /> */}
             </Stack>
             <Box
