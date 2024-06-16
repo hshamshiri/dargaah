@@ -5,8 +5,8 @@ export default function UsernameInput({ formik }) {
   const [t] = useTranslation();
   return (
     <UiInputText
-      id="username"
-      name="username"
+      id='username'
+      name='username'
       label={t("login.form.username")}
       formik={formik}
       value={formik.values.username}
@@ -14,12 +14,10 @@ export default function UsernameInput({ formik }) {
       onBlur={formik.handleBlur}
       error={formik.touched.username && Boolean(formik.errors.username)}
       helperText={formik.touched.username && formik.errors.username}
-      iconName="username"
+      iconName='username'
       //startAdornment
       endAdornment
       maxLength={20}
     />
   );
-};
-
-
+}

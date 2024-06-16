@@ -1,9 +1,10 @@
 import axios from "axios";
-import retriveData from "../localStoarageMangement/retriveData";
 
-const BASE_URL = "http://192.168.8.187/dashboard/api/";
+const BASE_URL = "http://192.168.8.187/dashboard/api/v1/";
+//v1 without token
+//v2 need token
 
-let AUTH_TOKEN = await retriveData("token");
+let AUTH_TOKEN = localStorage.getItem("token");
 
 const defaultOptions = {
   baseURL: BASE_URL,

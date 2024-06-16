@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { changeLoginState } from "../../../redux/loginConfigeReducer";
+import { setLoginState } from "../../../redux/loginConfigeReducer";
 import { Box, Typography, Stack } from "@mui/material";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { useTheme } from "@emotion/react";
@@ -52,7 +52,7 @@ export default function Terms() {
         <NavigateButton
           label={t("general.back")}
           iconName='back'
-          onClick={() => dispatch(changeLoginState("report"))}
+          onClick={() => dispatch(setLoginState("report"))}
         />
       </Stack>
     </Box>

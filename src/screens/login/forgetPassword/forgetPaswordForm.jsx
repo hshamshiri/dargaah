@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import SubmitButton from "../../../component/uiKit/uiButton/SubmitButton";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { UseSelector, useDispatch } from "react-redux";
-import { changeLoginState } from "../../../redux/loginConfigeReducer";
+import { setLoginState } from "../../../redux/loginConfigeReducer";
 import Logo from "../../../component/uiKit/logo/logo";
 
 const ForgetPasswordForm = ({ onSubmit, formik }) => {
@@ -36,7 +36,7 @@ const ForgetPasswordForm = ({ onSubmit, formik }) => {
           <NavigateButton
             label={t("general.back")}
             iconName='back'
-            onClick={() => dispatch(changeLoginState("logout"))}
+            onClick={() => dispatch(setLoginState("logout"))}
           />
         </Stack>
       </Stack>

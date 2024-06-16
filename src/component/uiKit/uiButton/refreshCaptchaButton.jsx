@@ -6,12 +6,14 @@ export default function RefreshCaptchaButton({
   onClick,
   toolTipPlacement,
   hover = true,
+  id = "ff",
 }) {
   const { t } = useTranslation();
   const theme = useTheme();
 
   return (
     <UiButton
+      id={id}
       onclick={onClick}
       variant={"contained"}
       iconName={"refresh"}

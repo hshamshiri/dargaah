@@ -5,37 +5,35 @@ import UsernameInput from "../../../component/uiKit/uiInput/username/usernameInp
 import PasswordInput from "../../../component/uiKit/uiInput/password/passwordInput";
 import CaptchaInput from "../../../component/uiKit/uiInput/captcha/captchaInput";
 import { Stack, Link, Box } from "@mui/material";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import LoginButton from "../../../component/uiKit/uiButton/SubmitButton";
 import { useSelector, useDispatch } from "react-redux";
-import { changeLoginState } from "../../../redux/loginConfigeReducer";
+import { setLoginState } from "../../../redux/loginConfigeReducer";
 import Logo from "../../../component/uiKit/logo/logo";
 import CircularProgress from "@mui/material/CircularProgress";
-import { getCaptcha } from "../../../utils/network/requsets/getCaptcha";
-import { APIs, BASE_URL } from "../../../utils/network/apiClient";
 import RefreshCaptchaButton from "../../../component/uiKit/uiButton/refreshCaptchaButton";
 import CountdownTimer from "../../../component/uiKit/timer/timer";
-import generateCaptchaToken from "../../../utils/helper/generateRandomCaptchaToken";
-import generateNewCaptchaUrl from "../../../utils/helper/generateNewCaptchaUrl";
+import generateCaptchaToken from "../../../utils/helper/captcha/generateRandomCaptchaToken";
+import generateNewCaptchaUrl from "../../../utils/helper/captcha/generateNewCaptchaUrl";
 import { setCaptchaToken } from "../../../redux/captchaTokenReducer";
+import { setCaptchaUrl } from "../../../redux/captchaUrlReducer";
 
-const LoginForm = ({ onSubmit, formik }) => {
+const LoginForm = ({ formik }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [t] = useTranslation();
   const [loading, setLoading] = useState(false);
-  const [captchaUrl, setCaptchaUrl] = useState();
+  const { captchaUrl } = useSelector((state) => state.captchaUrl);
 
-  const getCaptchaUrl = () => {
+  const createCaptchaUrl = async () => {
     const captchaToken = generateCaptchaToken();
+    const newCaptchaUrl = generateNewCaptchaUrl(captchaToken);
     dispatch(setCaptchaToken(captchaToken));
-    const captchaUrl = generateNewCaptchaUrl(captchaToken);
-    setCaptchaUrl(captchaUrl);
+    dispatch(setCaptchaUrl(newCaptchaUrl));
   };
 
   useEffect(() => {
-    getCaptchaUrl();
+    createCaptchaUrl();
   }, []);
 
   return (
@@ -62,14 +60,17 @@ const LoginForm = ({ onSubmit, formik }) => {
               spacing={1}
               padding={1}
             >
-              <RefreshCaptchaButton onClick={() => getCaptchaUrl()} />
+              <RefreshCaptchaButton
+                id='refreshToken'
+                onClick={() => createCaptchaUrl()}
+              />
               {/* <CountdownTimer /> */}
             </Stack>
             <Box
               width={"80%"}
               height={"100%"}
               component={"img"}
-              borderRadius={1}
+              borderRadius={2}
               border={1}
               borderColor={"lightgray"}
               src={captchaUrl}
@@ -78,7 +79,7 @@ const LoginForm = ({ onSubmit, formik }) => {
 
           <CaptchaInput formik={formik} />
           <Link
-            onClick={() => dispatch(changeLoginState("forget"))}
+            onClick={() => dispatch(setLoginState("forget"))}
             sx={{ cursor: "pointer" }}
             variant={"body1"}
             underline='hover'

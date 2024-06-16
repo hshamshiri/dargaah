@@ -17,6 +17,7 @@ import UiTooltip from "../uiTooltip/uiTooltip";
  * @param {string} porps component:label/...
  */
 const UiButton = ({
+  id,
   type,
   label,
   onclick = () => {},
@@ -39,6 +40,7 @@ const UiButton = ({
   return (
     <UiTooltip title={tooltipTitle} placement={toolTipPlacement}>
       <Button
+        id={id}
         type={type}
         onClick={onclick}
         disabled={disable || false}

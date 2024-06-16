@@ -4,21 +4,26 @@ import * as yup from "yup";
 import regexList from "../../utils/regex";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { changeLoginState } from "../../redux/loginConfigeReducer";
+import { setLoginState } from "../../redux/loginConfigeReducer";
 import { postRequest } from "../../utils/network/requsets/postRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify";
 import { useAuth } from "../../component/hooks/useAuth";
 import { getRequest } from "../../utils/network/requsets/getRequest";
+import { useNavigate } from "react-router-dom";
+import generateCaptchaToken from "../../utils/helper/captcha/generateRandomCaptchaToken";
+import generateNewCaptchaUrl from "../../utils/helper/captcha/generateNewCaptchaUrl";
 import { setCaptchaToken } from "../../redux/captchaTokenReducer";
+import { setCaptchaUrl } from "../../redux/captchaUrlReducer";
 
 const WithMaterialUI = (WrappedComponent) => {
   const FormikChecked = (props) => {
+    const navigate = useNavigate();
     const { login } = useAuth();
     const dispatch = useDispatch();
     const [t] = useTranslation();
     const { captchaToken } = useSelector((state) => state?.captchaToken);
-    console.log(captchaToken);
+
     const validationSchema = yup.object({
       username: yup
         .string()
@@ -39,13 +44,21 @@ const WithMaterialUI = (WrappedComponent) => {
         true
       ).then((response) => {
         if (response?.data?.access_token) {
-          login(response.data.access_token);
-          toast.success("خوش آمدید");
+          login();
         }
         if (response.error.msg) {
           toast.error(response.error.msg);
+          values.captcha = "";
+          refreshCaptchaUrl();
         }
       });
+    };
+
+    const refreshCaptchaUrl = async () => {
+      const captchaToken = generateCaptchaToken();
+      const newCaptchaUrl = generateNewCaptchaUrl(captchaToken);
+      dispatch(setCaptchaToken(captchaToken));
+      dispatch(setCaptchaUrl(newCaptchaUrl));
     };
 
     const formik = useFormik({
@@ -65,7 +78,8 @@ const WithMaterialUI = (WrappedComponent) => {
             } else {
               toast.error("کد امنیتی وارد شده اشتباه است");
               values.captcha = "";
-              dispatch(setCaptchaToken(null));
+              refreshCaptchaUrl();
+              //document.getElementById("refreshToken").click();
             }
           }
           if (response.error.msg) {
@@ -73,7 +87,7 @@ const WithMaterialUI = (WrappedComponent) => {
           }
         });
 
-        // dispatch(changeLoginState("report"));
+        // dispatch(setLoginState("report"));
         // Here you would usually send a request to your backend to authenticate the user
         // For the sake of this example, we're using a mock authentication
         // if (values.username === "user" && values.password === "pass") {

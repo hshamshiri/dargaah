@@ -3,12 +3,8 @@ import UiInputText from "../uiInput";
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
 
-
 export default function CaptchaInput({ formik }) {
   const [t] = useTranslation();
-
-
-
 
   return (
     <UiInputText
@@ -26,19 +22,15 @@ export default function CaptchaInput({ formik }) {
       //startAdornment
       endAdornment
       captcha={true}
-      sx={{ width: 100 }}
       captchaView={() => (
         <Box
           display={"flex"}
           flexDirection={"row"}
           justifyContent={"center"}
           alignItems={"center"}
-        >
-        </Box>
+        ></Box>
       )}
       maxLength={6}
     />
   );
 }
-
-

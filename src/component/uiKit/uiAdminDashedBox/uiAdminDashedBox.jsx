@@ -107,7 +107,7 @@ const UiAdminDashedBox = ({ boxInfo, handleForms, hideLabel }) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            "& > :not(style)": { m: 5 },
+            "& > :not(style)": { m: 0 },
           }}
         >
           <AddNewButton

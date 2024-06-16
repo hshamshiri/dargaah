@@ -20,12 +20,14 @@ import Avatar from "@mui/material/Avatar";
 import useWindowSize from "../../hooks/useWindowSize";
 //icons
 import UiIcon from "../uiIcon/uiIcon";
-import seplogo from "../../../images/seplogo.jpg"
+import seplogo from "../../../images/seplogo.jpg";
 
 //
 import avatarImg from "../../../images/avatar.png";
 //translation
 import { t } from "i18next";
+import EditButton from "../uiButton/editButton";
+import { useAuth } from "../../hooks/useAuth";
 
 const drawerWidth = 240;
 
@@ -88,7 +90,6 @@ export default function PersistentDrawerRight({ children, buttonList }) {
     size < 768 && handleDrawerClose();
   }, [size]);
 
-
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -103,21 +104,21 @@ export default function PersistentDrawerRight({ children, buttonList }) {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open} sx={{ backgroundColor: "white" }}>
+      <AppBar position='fixed' open={open} sx={{ backgroundColor: "white" }}>
         <Toolbar>
           <Typography
-            variant="h6"
-            color="base.main"
+            variant='h6'
+            color='base.main'
             noWrap
             sx={{ flexGrow: 1 }}
-            component="div"
+            component='div'
           >
             {t("dashboard.drawer.vezarat")}
           </Typography>
           <IconButton
-            color="base.main"
-            aria-label="open drawer"
-            edge="end"
+            color='base.main'
+            aria-label='open drawer'
+            edge='end'
             onClick={handleDrawerOpen}
             sx={{ ...(open && { display: "none" }) }}
           >
@@ -137,8 +138,8 @@ export default function PersistentDrawerRight({ children, buttonList }) {
             width: drawerWidth,
           },
         }}
-        variant="persistent"
-        anchor="right"
+        variant='persistent'
+        anchor='right'
         open={open}
       >
         <DrawerHeader sx={{ boxShadow: 3 }}>
@@ -181,8 +182,8 @@ export default function PersistentDrawerRight({ children, buttonList }) {
                     >
                       {/* <UiIcon iconName={item.iconName} /> */}
                       <img
-                        alt="menuIcon"
-                        className="w-6 object-contain"
+                        alt='menuIcon'
+                        className='w-6 object-contain'
                         src={item?.icon?.url}
                       />
                     </ListItemIcon>
@@ -212,17 +213,17 @@ const TopView = () => {
           paddingTop: 1,
         }}
       >
-        <div className="w-full h-1/2">
-          <img alt="sepLogo" className=" h-full object-contain" src={seplogo} />
+        <div className='w-full h-1/2'>
+          <img alt='sepLogo' className=' h-full object-contain' src={seplogo} />
         </div>
-        <div className="w-full flex p-1 justify-between items-center h-1/2  s">
+        <div className='w-full flex p-1 justify-between items-center h-1/2  s'>
           <UiIcon iconName={"dots"} classes={{ color: "white" }} />
-          <Typography variant="body1" sx={{ color: "white", fontWeight: 700 }}>
+          <Typography variant='body1' sx={{ color: "white", fontWeight: 700 }}>
             کاربر مهمان
           </Typography>
         </div>
         <Avatar
-          alt="avatar"
+          alt='avatar'
           src={avatarImg}
           sx={{
             width: 90,
@@ -243,6 +244,8 @@ const TopView = () => {
 };
 
 const LogoutView = () => {
+  const { logout } = useAuth();
+
   return (
     <Box
       height={"100%"}
@@ -259,32 +262,14 @@ const LogoutView = () => {
         flexDirection={"column"}
         justifyContent={"center"}
       >
-        <Typography variant="medium" color={"white"} margin={0.5}>
+        <Typography variant='medium' color={"white"} margin={0.5}>
           {t("dashboard.drawer.date")}
         </Typography>
-        <Typography variant="button" borderRadius={5} backgroundColor={"white"}>
+        <Typography variant='button' borderRadius={5} backgroundColor={"white"}>
           {"۱۴۰۲/۰۲/۰۴"}
         </Typography>
       </Box>
-      <Box
-        width={1 / 3}
-        height={"70%"}
-        display={"flex"}
-        flexDirection={"column"}
-        justifyContent={"end"}
-        alignItems={"center"}
-      >
-        <UiIcon
-          iconName={"power"}
-          classes={{
-            width: 35,
-            height: 35,
-            color: "red",
-            backgroundColor: "white",
-          }}
-        />
-        <Typography color={"white"}>{t("dashboard.drawer.exit")}</Typography>
-      </Box>
+      <EditButton onClick={logout} />
       <Box
         width={1 / 3}
         height={"50%"}
@@ -292,10 +277,10 @@ const LogoutView = () => {
         flexDirection={"column"}
         justifyContent={"center"}
       >
-        <Typography variant="medium" color={"white"} margin={0.5}>
+        <Typography variant='medium' color={"white"} margin={0.5}>
           {t("dashboard.drawer.lastEnter")}
         </Typography>
-        <Typography variant="button" borderRadius={5} backgroundColor={"white"}>
+        <Typography variant='button' borderRadius={5} backgroundColor={"white"}>
           {"لحظاتی قبل"}
         </Typography>
       </Box>

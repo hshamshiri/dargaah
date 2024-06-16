@@ -1,8 +1,9 @@
 import { createContext, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import writeData from "../../utils/localStoarageMangement/writeData";
 import { useDispatch, useSelector } from "react-redux";
 import { setAccessToken } from "../../redux/tokenReducer";
+import { setLoginState } from "../../redux/loginConfigeReducer";
+import { setAuth } from "../../redux/authenticateReducer";
 
 const AuthContext = createContext();
 
@@ -13,15 +14,18 @@ export const AuthProvider = ({ children }) => {
 
   // call this function when you want to authenticate the user
   const login = async (token) => {
-    writeData(token);
+    localStorage.setItem("token", token);
     dispatch(setAccessToken(token));
-    navigate("/");
+    dispatch(setLoginState("report"));
+    dispatch(setAuth(true));
   };
 
   // call this function to sign out logged in user
   const logout = () => {
-    writeData(null);
-    //navigate("/login", { replace: true });
+    dispatch(setLoginState("logout"));
+    dispatch(setAuth(false));
+    localStorage.setItem("token", null);
+    navigate("/", { replace: true });
   };
 
   const value = useMemo(

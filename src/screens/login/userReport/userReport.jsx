@@ -1,6 +1,6 @@
 import { Box, Stack, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { changeLoginState } from "../../../redux/loginConfigeReducer";
+import { setLoginState } from "../../../redux/loginConfigeReducer";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { useTranslation } from "react-i18next";
 import BasicTable from "../../../component/uiKit/table/table";
@@ -41,7 +41,7 @@ export default function UserReport() {
       <NavigateButton
         label={t("general.next")}
         iconName='next'
-        onClick={() => dispatch(changeLoginState("term"))}
+        onClick={() => dispatch(setLoginState("term"))}
       />
     </Box>
   );

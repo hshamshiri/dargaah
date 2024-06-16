@@ -24,7 +24,7 @@ export const uiConfigeSlice = createSlice({
     addJournalImage: (state, action) => {
       state.journal_list = action.payload;
     },
-    // changeLoginState: (state, action) => {
+    // setLoginState: (state, action) => {
     //   state.loginState = action.payload;
     // },
 
