@@ -5,11 +5,27 @@ import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { useTranslation } from "react-i18next";
 import BasicTable from "../../../component/uiKit/table/table";
 import { useTheme } from "@emotion/react";
+import { useEffect, useState } from "react";
+import { getRequest } from "../../../utils/network/requsets/getRequest";
+import { APIs } from "../../../utils/network/apiClient";
+import { toast } from "react-toastify";
 
-export default function UserReport() {
+export default function LoginReport() {
+  const [loginList, setLoginList] = useState([]);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const theme = useTheme();
+
+  useEffect(() => {
+    getRequest(APIs.user.log).then((res) => {
+      if (res.data) {
+        setLoginList(res.data);
+      }
+      if (res.error.msg) {
+        toast.error(res.error.msg + "\n" + res.error.status);
+      }
+    });
+  }, []);
 
   return (
     <Box
@@ -36,7 +52,7 @@ export default function UserReport() {
         {t("login.general.lastLogin")}
       </Typography>
       <Stack alignItems={"center"}>
-        <BasicTable />
+        {loginList.length > 0 && <BasicTable items={loginList} />}
       </Stack>
       <NavigateButton
         label={t("general.next")}

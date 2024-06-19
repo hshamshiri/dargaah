@@ -10,7 +10,6 @@ import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify";
 import { useAuth } from "../../component/hooks/useAuth";
 import { getRequest } from "../../utils/network/requsets/getRequest";
-import { useNavigate } from "react-router-dom";
 import generateCaptchaToken from "../../utils/helper/captcha/generateRandomCaptchaToken";
 import generateNewCaptchaUrl from "../../utils/helper/captcha/generateNewCaptchaUrl";
 import { setCaptchaToken } from "../../redux/captchaTokenReducer";
@@ -18,9 +17,8 @@ import { setCaptchaUrl } from "../../redux/captchaUrlReducer";
 
 const WithMaterialUI = (WrappedComponent) => {
   const FormikChecked = (props) => {
-    const navigate = useNavigate();
-    const { login } = useAuth();
     const dispatch = useDispatch();
+    const { login } = useAuth();
     const [t] = useTranslation();
     const { captchaToken } = useSelector((state) => state?.captchaToken);
 
@@ -44,7 +42,8 @@ const WithMaterialUI = (WrappedComponent) => {
         true
       ).then((response) => {
         if (response?.data?.access_token) {
-          login();
+          login(response.data.access_token);
+          console.log("eeeeeee", response.data.access_token);
         }
         if (response.error.msg) {
           toast.error(response.error.msg);
@@ -70,7 +69,8 @@ const WithMaterialUI = (WrappedComponent) => {
       validationSchema: validationSchema,
       onSubmit: async (values) => {
         getRequest(
-          APIs.captcha.checkCaptcha + captchaToken + "/" + values.captcha
+          APIs.captcha.checkCaptcha + captchaToken + "/" + values.captcha,
+          true
         ).then((response) => {
           if (response?.data) {
             if (response?.data === "correct") {

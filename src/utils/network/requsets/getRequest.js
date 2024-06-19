@@ -1,11 +1,20 @@
 import { axiosClient } from "../apiClient";
 import handlingResponseError from "./handlingError";
 
-export async function getRequest(url) {
+export async function getRequest(url, isCaptcha = false) {
   const result = {
     data: null,
     error: { status: null, msg: null },
   };
+
+  let ACCESS_TOKEN = localStorage.getItem("token");
+  if (isCaptcha) {
+    delete axiosClient.defaults.headers.common["Authorization"];
+  } else {
+    axiosClient.defaults.headers.common[
+      "Authorization"
+    ] = `Bearer ${ACCESS_TOKEN}`;
+  }
 
   try {
     await axiosClient

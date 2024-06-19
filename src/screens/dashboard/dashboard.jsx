@@ -21,7 +21,6 @@ import {
   addDashBox,
 } from "../../redux/uiConfigeReducer";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
-// import UiSlide from "../../component/uiKit/uiTransitions/uiSlide/uiSlide";
 
 const Dashboard = () => {
   const dispatch = useDispatch();

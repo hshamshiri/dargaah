@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import LoginFrame from "../../component/layout/loginFrame/loginFrame";
 import LoginForm from "./loginform/loginForm";
 import ForgetPaswordForm from "./forgetPassword/forgetPaswordForm";
-import UserReport from "./userReport/userReport";
+import LoginReport from "./loginReport/loginReport";
 import Terms from "./terms/terms";
 
 // import TabComp from "../../component/uiKit/uiTab/uiTab";
@@ -14,12 +14,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const loginState = useSelector((state) => state.loginState.loginState);
 
-  console.log(loginState);
   return (
     <LoginFrame>
       {loginState === "logout" && <LoginForm />}
       {loginState === "forget" && <ForgetPaswordForm />}
-      {loginState === "report" && <UserReport />}
+      {loginState === "report" && <LoginReport />}
       {loginState === "term" && <Terms />}
     </LoginFrame>
   );

@@ -10,7 +10,8 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const accessToken = useSelector((state) => state.accessToken.accessToken);
+  const { accessToken } = useSelector((state) => state.accessToken);
+  const { isAuth } = useSelector((state) => state.authenticate);
 
   // call this function when you want to authenticate the user
   const login = async (token) => {
@@ -24,14 +25,31 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     dispatch(setLoginState("logout"));
     dispatch(setAuth(false));
-    localStorage.setItem("token", null);
+    localStorage.clear();
     navigate("/", { replace: true });
+  };
+
+  const checkAuth = async () => {
+    await checkTokenValidation();
+    console.log("ooooo", isAuth);
+    if (!isAuth) {
+      //logout();
+      //or refreshToken()
+      //or redirect("login")
+    }
+  };
+
+  const checkTokenValidation = () => {
+    //write validation
+    dispatch(setAuth(true));
   };
 
   const value = useMemo(
     () => ({
       login,
       logout,
+      checkAuth,
+      isAuth,
     }),
     []
   );

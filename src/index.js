@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { AuthProvider } from "./component/hooks/useAuth";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -21,7 +22,9 @@ root.render(
       <ThemeProvider theme={theme}>
         <ToastContainer rtl />
         <Provider store={store}>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </Provider>
       </ThemeProvider>
     </I18nextProvider>

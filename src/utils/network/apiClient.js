@@ -1,20 +1,18 @@
 import axios from "axios";
 
-const BASE_URL = "http://192.168.8.187/dashboard/api/v1/";
+const BASE_URL = "http://192.168.8.187/dashboard/api/v2/";
 //v1 without token
 //v2 need token
-
-let AUTH_TOKEN = localStorage.getItem("token");
 
 const defaultOptions = {
   baseURL: BASE_URL,
   Headers,
 };
 
-const axiosClient = axios.create(defaultOptions);
-//axiosClient.defaults.headers.common["Authorization"] = "Bearer " + AUTH_TOKEN;
 axios.defaults.headers.common["Accept"] = "application/json";
 axios.defaults.headers.common["Content-Type"] = "application/json";
+
+const axiosClient = axios.create(defaultOptions);
 
 const APIs = {
   home: "home",
@@ -24,6 +22,9 @@ const APIs = {
   },
   login: {
     login: "oauth2/login",
+  },
+  user: {
+    log: "user/log",
   },
   dashBox: {
     new_dashBox: `dashbox/new-dashbox`,
