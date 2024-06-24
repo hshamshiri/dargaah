@@ -1,16 +1,21 @@
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { setLoginState } from "../../../redux/loginConfigeReducer";
+import { useAuth } from "../../../component/hooks/useAuth";
 import { Box, Typography, Stack } from "@mui/material";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { useTheme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
 
 export default function Terms() {
-  const dispatch = useDispatch();
   const { t } = useTranslation();
   const theme = useTheme();
   const navigate = useNavigate();
+  const { setLoginState } = useAuth();
+
+  const handleClick = () => {
+    setLoginState("logout");
+    navigate("/");
+  };
 
   return (
     <Box
@@ -39,20 +44,20 @@ export default function Terms() {
         </Typography>
         <Box width={"80%"} height={300} padding={1}>
           {
-            "این پیام جهت اطلاع شما می باشد &nbsp این پیام جهت اطلاع شما می باشد"
+            "این پیام جهت اطلاع شما می باشد &nbsp این پیام جهت اطلاع شما می باشد این پیام جهت اطلاع شما می باشد &nbsp این پیام جهت اطلاع شما می باشد"
           }
         </Box>
       </Stack>
       <Stack alignItems={"center"}>
         <NavigateButton
-          onClick={() => navigate("dashboard")}
+          onClick={() => handleClick()}
           label={"دیده شد"}
           iconName={"checkTick"}
         />
         <NavigateButton
           label={t("general.back")}
           iconName='back'
-          onClick={() => dispatch(setLoginState("report"))}
+          onClick={() => setLoginState("report")}
         />
       </Stack>
     </Box>

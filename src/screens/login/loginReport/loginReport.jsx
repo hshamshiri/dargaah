@@ -1,6 +1,6 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, CircularProgress } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setLoginState } from "../../../redux/loginConfigeReducer";
+import { useAuth } from "../../../component/hooks/useAuth";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { useTranslation } from "react-i18next";
 import BasicTable from "../../../component/uiKit/table/table";
@@ -12,11 +12,14 @@ import { toast } from "react-toastify";
 
 export default function LoginReport() {
   const [loginList, setLoginList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const theme = useTheme();
+  const { setLoginState } = useAuth();
 
   useEffect(() => {
+    setLoading(true);
     getRequest(APIs.user.log).then((res) => {
       if (res.data) {
         setLoginList(res.data);
@@ -24,6 +27,7 @@ export default function LoginReport() {
       if (res.error.msg) {
         toast.error(res.error.msg + "\n" + res.error.status);
       }
+      setLoading(false);
     });
   }, []);
 
@@ -52,12 +56,13 @@ export default function LoginReport() {
         {t("login.general.lastLogin")}
       </Typography>
       <Stack alignItems={"center"}>
-        {loginList.length > 0 && <BasicTable items={loginList} />}
+        {loading && <CircularProgress />}
+        <BasicTable items={loginList} />
       </Stack>
       <NavigateButton
         label={t("general.next")}
         iconName='next'
-        onClick={() => dispatch(setLoginState("term"))}
+        onClick={() => setLoginState("term")}
       />
     </Box>
   );

@@ -1,18 +1,17 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import LoginFrame from "../../component/layout/loginFrame/loginFrame";
 import LoginForm from "./loginform/loginForm";
 import ForgetPaswordForm from "./forgetPassword/forgetPaswordForm";
 import LoginReport from "./loginReport/loginReport";
 import Terms from "./terms/terms";
+import { useAuth } from "../../component/hooks/useAuth";
 
 // import TabComp from "../../component/uiKit/uiTab/uiTab";
 // import QRLoginView from "./loginform/qrLoginView";
 
 const Login = () => {
   const [t] = useTranslation();
-  const dispatch = useDispatch();
-  const loginState = useSelector((state) => state.loginState.loginState);
+  const { loginState } = useAuth();
 
   return (
     <LoginFrame>

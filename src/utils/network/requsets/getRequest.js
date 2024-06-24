@@ -7,7 +7,9 @@ export async function getRequest(url, isCaptcha = false) {
     error: { status: null, msg: null },
   };
 
-  let ACCESS_TOKEN = localStorage.getItem("token");
+  let ACCESS_TOKEN = localStorage.getItem("jwt");
+  console.log("***", ACCESS_TOKEN);
+
   if (isCaptcha) {
     delete axiosClient.defaults.headers.common["Authorization"];
   } else {

@@ -1,60 +1,60 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setAccessToken } from "../../redux/tokenReducer";
-import { setLoginState } from "../../redux/loginConfigeReducer";
-import { setAuth } from "../../redux/authenticateReducer";
+import { jwtDecode } from "jwt-decode";
+import moment from "jalali-moment";
 
 const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { accessToken } = useSelector((state) => state.accessToken);
-  const { isAuth } = useSelector((state) => state.authenticate);
+  const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
+  const [loginState, setLoginState] = useState("logout");
 
-  // call this function when you want to authenticate the user
   const login = async (token) => {
-    localStorage.setItem("token", token);
-    dispatch(setAccessToken(token));
-    dispatch(setLoginState("report"));
-    dispatch(setAuth(true));
+    await localStorage.setItem("jwt", token);
+    await localStorage.setItem("isAuth", true);
+    setIsAuth(true);
+    setLoginState("report");
   };
 
-  // call this function to sign out logged in user
   const logout = () => {
-    dispatch(setLoginState("logout"));
-    dispatch(setAuth(false));
     localStorage.clear();
-    navigate("/", { replace: true });
+    navigate("/login", { replace: true });
   };
 
   const checkAuth = async () => {
-    await checkTokenValidation();
-    console.log("ooooo", isAuth);
-    if (!isAuth) {
-      //logout();
-      //or refreshToken()
-      //or redirect("login")
-    }
+    checkTokenValid().then(async (isTokenValid) => {
+      await setIsAuth(isTokenValid);
+      await localStorage.setItem("isAuth", isTokenValid);
+    });
   };
 
-  const checkTokenValidation = () => {
-    //write validation
-    dispatch(setAuth(true));
+  const checkTokenValid = async () => {
+    const jwt = await localStorage.getItem("jwt");
+    if (!jwt) return false;
+
+    const isValid = checkTokenExpire(jwt);
+    if (!isValid) return false;
+
+    return true;
   };
 
-  const value = useMemo(
-    () => ({
-      login,
-      logout,
-      checkAuth,
-      isAuth,
-    }),
-    []
+  const checkTokenExpire = (jwt) => {
+    const jwt_decode = jwtDecode(jwt);
+    if (jwt_decode.exp * 1000 < moment().unix()) return false;
+    return true;
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{ isAuth, checkAuth, login, logout, setLoginState, loginState }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
+
+export default AuthProvider;
 
 export const useAuth = () => {
   return useContext(AuthContext);

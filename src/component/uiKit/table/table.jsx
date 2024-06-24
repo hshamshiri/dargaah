@@ -11,9 +11,12 @@ import convertTimestampTojalali from "../../../utils/helper/momentJalali/moment"
 
 export default function BasicTable({ items }) {
   return (
-    <TableContainer component={Paper} sx={{ maxHeight: 400, boxShadow: 0 }}>
+    <TableContainer
+      component={Paper}
+      sx={{ maxHeight: 400, minHeight: 300, boxShadow: 0 }}
+    >
       <Table aria-label='simple table'>
-        <TableHead sx={{ border: 0, borderWidth: 0, boxShadow: 0 }}>
+        <TableHead sx={{ borderWidth: 0 }}>
           <TableRow>
             <TableCell align='center'>نقش</TableCell>
             <TableCell align='center'>زمان</TableCell>
@@ -48,11 +51,12 @@ export default function BasicTable({ items }) {
                     padding: 1,
                   }}
                 >
-                  {item?.success ? (
-                    <UiIcon iconName={"check"} iconColor='green' />
-                  ) : (
-                    <UiIcon iconName={"close"} iconColor={"red"} />
-                  )}
+                  {
+                    <UiIcon
+                      iconName={item?.success ? "check" : "close"}
+                      iconColor={item?.success ? "green" : "red"}
+                    />
+                  }
                 </TableCell>
                 <TableCell
                   align='center'

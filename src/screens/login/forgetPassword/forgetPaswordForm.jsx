@@ -7,13 +7,13 @@ import { useNavigate } from "react-router-dom";
 import SubmitButton from "../../../component/uiKit/uiButton/SubmitButton";
 import NavigateButton from "../../../component/uiKit/uiButton/NavigateButton";
 import { UseSelector, useDispatch } from "react-redux";
-import { setLoginState } from "../../../redux/loginConfigeReducer";
+import { useAuth } from "../../../component/hooks/useAuth";
 import Logo from "../../../component/uiKit/logo/logo";
 
 const ForgetPasswordForm = ({ onSubmit, formik }) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [t] = useTranslation();
+  const { setLoginState } = useAuth();
 
   const submitAction = () => {
     toast("خوش آمدید");
@@ -36,7 +36,7 @@ const ForgetPasswordForm = ({ onSubmit, formik }) => {
           <NavigateButton
             label={t("general.back")}
             iconName='back'
-            onClick={() => dispatch(setLoginState("logout"))}
+            onClick={() => setLoginState("logout")}
           />
         </Stack>
       </Stack>

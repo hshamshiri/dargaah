@@ -43,10 +43,8 @@ const WithMaterialUI = (WrappedComponent) => {
       ).then((response) => {
         if (response?.data?.access_token) {
           login(response.data.access_token);
-          console.log("eeeeeee", response.data.access_token);
         }
         if (response.error.msg) {
-          toast.error(response.error.msg);
           values.captcha = "";
           refreshCaptchaUrl();
         }

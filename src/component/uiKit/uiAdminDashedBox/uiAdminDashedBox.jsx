@@ -44,7 +44,7 @@ const UiAdminDashedBox = ({ boxInfo, handleForms, hideLabel }) => {
       sm={12}
       md={12}
     >
-      <AlertDialog myRef={dialogRef} deleteAction={deleteForm} />
+      <AlertDialog myRef={dialogRef} message={"حذف شود"} action={deleteForm} />
       <Box
         height={35}
         minWidth={100}
