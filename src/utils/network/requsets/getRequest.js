@@ -8,7 +8,6 @@ export async function getRequest(url, isCaptcha = false) {
   };
 
   let ACCESS_TOKEN = localStorage.getItem("jwt");
-  console.log("***", ACCESS_TOKEN);
 
   if (isCaptcha) {
     delete axiosClient.defaults.headers.common["Authorization"];
@@ -28,7 +27,7 @@ export async function getRequest(url, isCaptcha = false) {
       })
       .catch(function (error) {
         if (error.response && error.response.status) {
-          result.error.status = error.response.status;
+          result.error.status = ""; //error.response.status;
           result.error.msg = handlingResponseError(error.response.status);
         }
       });

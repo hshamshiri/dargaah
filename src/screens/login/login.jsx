@@ -12,7 +12,7 @@ import { useAuth } from "../../component/hooks/useAuth";
 const Login = () => {
   const [t] = useTranslation();
   const { loginState } = useAuth();
-
+  console.log("loginnnn", loginState);
   return (
     <LoginFrame>
       {loginState === "logout" && <LoginForm />}

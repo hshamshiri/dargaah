@@ -32,16 +32,13 @@ const AuthProvider = ({ children }) => {
   const checkTokenValid = async () => {
     const jwt = await localStorage.getItem("jwt");
     if (!jwt) return false;
-
-    const isValid = checkTokenExpire(jwt);
-    if (!isValid) return false;
-
+    if (tokenExpire(jwt)) return false;
     return true;
   };
 
-  const checkTokenExpire = (jwt) => {
+  const tokenExpire = (jwt) => {
     const jwt_decode = jwtDecode(jwt);
-    if (jwt_decode.exp * 1000 < moment().unix()) return false;
+    if (jwt_decode.exp > moment().unix()) return false;
     return true;
   };
 

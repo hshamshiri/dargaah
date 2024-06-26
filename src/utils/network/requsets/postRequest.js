@@ -23,7 +23,7 @@ export async function postRequest(url, data, isFormdata = false) {
       })
       .catch(function (error) {
         if (error.response && error.response.status) {
-          result.error.status = error.response.status;
+          result.error.status = ""; // error.response.status;
           result.error.msg = handlingResponseError(error.response.status);
         }
       });

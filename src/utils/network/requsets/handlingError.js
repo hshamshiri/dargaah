@@ -6,7 +6,7 @@ const handlingResponseError = (status) => {
     return "آدرس مورد نظر یافت نشد";
   }
   if (status === 401) {
-    return "نام کاربری یا رمز عبور اشتباه است";
+    return "لطفا دوباره وارد شوید";
   }
 };
 
