@@ -5,13 +5,12 @@ import { Stack, Box, Button } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
 import sampleImage from "../../../images/album.png";
+import { useTheme } from "@emotion/react";
 
-const AddTopSliderImageForm = ({
-  formik,
-  toggleShowModal,
-}) => {
+const AddTopSliderImageForm = ({ formik, toggleShowModal }) => {
   const [t] = useTranslation();
   const [topSlideImage, setTopSlideImage] = useState();
+  const theme = useTheme();
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -24,7 +23,7 @@ const AddTopSliderImageForm = ({
         alignItems={"center"}
       >
         <Box>
-          <Button component="label" sx={{ padding: 0 }}>
+          <Button component='label' sx={{ padding: 0 }}>
             {/* <input
               type="file"
               name="file"
@@ -37,10 +36,10 @@ const AddTopSliderImageForm = ({
               hidden={true}
             /> */}
             <UiInputText
-              type="file"
-              name="file"
-              id="file"
-              accept="image/jpeg,image/gif,image/png,image/tiff,image/webp"
+              type='file'
+              name='file'
+              id='file'
+              accept='image/jpeg,image/gif,image/png,image/tiff,image/webp'
               onChange={(event) => {
                 formik.setFieldValue("file", event.target.files[0]);
                 setTopSlideImage(event?.target?.files[0]);
@@ -51,8 +50,8 @@ const AddTopSliderImageForm = ({
             />
             <Box>
               <img
-                alt="sliderImage"
-                className="w-40"
+                alt='sliderImage'
+                className='w-40'
                 src={
                   topSlideImage
                     ? URL.createObjectURL(topSlideImage)
@@ -66,8 +65,8 @@ const AddTopSliderImageForm = ({
           formik={formik}
           //onChange={(e) => setBoxName(e?.target?.value)}
           sx={{ alignSelf: "center" }}
-          id="imageLink"
-          name="imageLink"
+          id='imageLink'
+          name='imageLink'
           label={t("dashboard.main.link")}
           value={formik.values.imageLink}
           onChange={formik.handleChange}
@@ -75,9 +74,11 @@ const AddTopSliderImageForm = ({
           helperText={formik.touched.imageLink && formik.errors.imageLink}
         />
         <UiButton
-          type="submit"
+          type='submit'
           label={t("dashboard.main.add")}
           variant={"contained"}
+          backgroundColor={theme.palette.base.mid}
+          hoverColor={theme.palette.base.light}
           sx={{ width: 200 }}
         />
       </Stack>

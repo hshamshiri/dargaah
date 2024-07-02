@@ -81,7 +81,10 @@ const LoginForm = ({ formik }) => {
 
           <CaptchaInput formik={formik} />
           <Link
-            onClick={() => setLoginState("forget")}
+            onClick={() => {
+              localStorage.setItem("loginStatus", "forget");
+              setLoginState("forget");
+            }}
             sx={{ cursor: "pointer" }}
             variant={"body1"}
             underline='hover'

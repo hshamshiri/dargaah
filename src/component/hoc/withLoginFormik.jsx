@@ -4,7 +4,6 @@ import * as yup from "yup";
 import regexList from "../../utils/regex";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { setLoginState } from "../../redux/loginConfigeReducer";
 import { postRequest } from "../../utils/network/requsets/postRequest";
 import { APIs } from "../../utils/network/apiClient";
 import { toast } from "react-toastify";
@@ -84,17 +83,6 @@ const WithMaterialUI = (WrappedComponent) => {
             toast.error(response.error.msg);
           }
         });
-
-        // dispatch(setLoginState("report"));
-        // Here you would usually send a request to your backend to authenticate the user
-        // For the sake of this example, we're using a mock authentication
-        // if (values.username === "user" && values.password === "pass") {
-        // Replace with actual authentication logic
-        //await AuthProvider.login(values.username);
-        //   alert("ok");
-        // } else {
-        //   alert("Invalid username or password");
-        //}
       },
     });
     return (

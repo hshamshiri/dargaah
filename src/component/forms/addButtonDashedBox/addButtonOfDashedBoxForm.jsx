@@ -6,16 +6,12 @@ import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
 import sampleImage from "../../../images/album.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useTheme } from "@emotion/react";
 
-
-const AddButtonOfDashedBox = ({
-  formik,
-  boxInfo,
-  buttonInfo,
-}) => {
+const AddButtonOfDashedBox = ({ formik, boxInfo, buttonInfo }) => {
   const [t] = useTranslation();
   const [buttonImage, setButtonImage] = React.useState(null);
-
+  const theme = useTheme();
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -26,24 +22,25 @@ const AddButtonOfDashedBox = ({
         justifyContent={"center"}
         alignItems={"center"}
       >
-
-
-        <Button sx={{ display: "flex", flexDirection: "column" }} component="label">
+        <Button
+          sx={{ display: "flex", flexDirection: "column" }}
+          component='label'
+        >
           <LazyLoadImage
-            className="w-40"
+            className='w-40'
             src={
               buttonImage
                 ? URL.createObjectURL(buttonImage)
                 : buttonInfo?.image_url
-                  ? buttonInfo.image_url
-                  : sampleImage
+                ? buttonInfo.image_url
+                : sampleImage
             }
           />
           <UiInputText
-            type="file"
-            name="file"
-            id="file"
-            accept="image/jpeg,image/png,image/tiff,image/webp"
+            type='file'
+            name='file'
+            id='file'
+            accept='image/jpeg,image/png,image/tiff,image/webp'
             onChange={(event) => {
               formik.setFieldValue("file", event.target.files[0]);
               setButtonImage(event?.target?.files[0]);
@@ -54,15 +51,16 @@ const AddButtonOfDashedBox = ({
           />
           <FormHelperText
             error={formik.touched.file && Boolean(formik.errors.file)}
-          >{formik.touched.file && formik.errors.file}
+          >
+            {formik.touched.file && formik.errors.file}
           </FormHelperText>
         </Button>
 
         <UiInputText
           formik={formik}
           //onChange={(e) => setBoxName(e?.target?.value)}
-          id="btnName"
-          name="btnName"
+          id='btnName'
+          name='btnName'
           label={t("dashboard.main.buttonName")}
           value={
             buttonInfo && formik.values.btnName === null
@@ -77,8 +75,8 @@ const AddButtonOfDashedBox = ({
         <UiInputText
           formik={formik}
           //onChange={(e) => setBoxName(e?.target?.value)}
-          id="btnLink"
-          name="btnLink"
+          id='btnLink'
+          name='btnLink'
           label={t("dashboard.main.link")}
           value={
             buttonInfo && formik.values.btnLink === null
@@ -92,9 +90,11 @@ const AddButtonOfDashedBox = ({
         />
 
         <UiButton
-          type="submit"
+          type='submit'
           label={t("dashboard.main.add")}
           variant={"contained"}
+          backgroundColor={theme.palette.base.mid}
+          hoverColor={theme.palette.base.light}
           sx={{ width: 200 }}
         />
       </Stack>

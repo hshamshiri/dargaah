@@ -41,7 +41,7 @@ const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
     let url = isTopSlider
       ? APIs.topSlider.delete_Image
       : APIs.journal.delete_Image;
-
+    console.log("iiiiiid:", id);
     deleteRequest(url + id).then((response) => {
       if (response.data) {
         isTopSlider
@@ -60,7 +60,7 @@ const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
       {images && images.length > 0 && (
         <ImageList
           sx={styles.imageListStyle}
-          cols={{ xs: 3 }}
+          cols={isTopSlider ? 1 : 2}
           rowHeight={isTopSlider ? 200 : 200}
         >
           {images.map((image, i) => {
@@ -77,13 +77,13 @@ const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
                   <DeleteButton
                     // hover={false}
                     toolTipPlacement={"bottom"}
-                    onclick={() => removeImage(image?.id)}
+                    onClick={() => removeImage(image?.id)}
                   />
-                  <EditButton
+                  {/* <EditButton
                     // hover={false}
                     toolTipPlacement={"bottom"}
                     onclick={() => removeImage(image?.id)}
-                  />
+                  /> */}
                 </Box>
               </Box>
             );
@@ -115,8 +115,10 @@ const styles = {
   },
   optionButtonBox: {
     display: "flex",
+    justifyContent: "center",
     margin: 1,
     marginBottom: 1,
+    width: "100%",
   },
 };
 

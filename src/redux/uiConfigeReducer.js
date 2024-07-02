@@ -24,13 +24,6 @@ export const uiConfigeSlice = createSlice({
     addJournalImage: (state, action) => {
       state.journal_list = action.payload;
     },
-    // setLoginState: (state, action) => {
-    //   state.loginState = action.payload;
-    // },
-
-    // addDrawerButtons: (state, action) => {
-    //     state.drawerButtons.push(action.payload)
-    // }
   },
 });
 

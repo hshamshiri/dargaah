@@ -4,13 +4,11 @@ import WithAddDashedBoxFormik from "../../hoc/withAddDashedBoxFormik";
 import { Stack } from "@mui/material";
 import UiInputText from "../../uiKit/uiInput/uiInput";
 import UiButton from "../../uiKit/uiButton/uiButton";
+import { useTheme } from "@emotion/react";
 
-const AddDashedBoxForm = ({
-  formik,
-  toggleShowModal,
-  boxInfo,
-}) => {
+const AddDashedBoxForm = ({ formik, toggleShowModal, boxInfo }) => {
   const [t] = useTranslation();
+  const theme = useTheme();
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -26,8 +24,8 @@ const AddDashedBoxForm = ({
           formik={formik}
           //onChange={(e) => setBoxName(e?.target?.value)}
           sx={{ alignSelf: "center" }}
-          id="boxName"
-          name="boxName"
+          id='boxName'
+          name='boxName'
           label={t("dashboard.main.boxName")}
           value={formik.values.boxName}
           placeHolder={boxInfo && boxInfo.label}
@@ -36,9 +34,11 @@ const AddDashedBoxForm = ({
           helperText={formik.touched.boxName && formik.errors.boxName}
         />
         <UiButton
-          type="submit"
+          type='submit'
           label={boxInfo ? "ویرایش" : "افزودن"}
           variant={"contained"}
+          backgroundColor={theme.palette.base.mid}
+          hoverColor={theme.palette.base.light}
           sx={{ width: 200 }}
         />
       </Stack>

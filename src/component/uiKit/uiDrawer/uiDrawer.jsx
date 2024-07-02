@@ -26,8 +26,8 @@ import seplogo from "../../../images/seplogo.jpg";
 import avatarImg from "../../../images/avatar.png";
 //translation
 import { t } from "i18next";
-import EditButton from "../uiButton/editButton";
 import { useAuth } from "../../hooks/useAuth";
+import ExitButton from "../uiButton/exitButton";
 
 const drawerWidth = 240;
 
@@ -269,7 +269,7 @@ const LogoutView = () => {
           {"۱۴۰۲/۰۲/۰۴"}
         </Typography>
       </Box>
-      <EditButton onClick={logout} />
+      <ExitButton onClick={logout} />
       <Box
         width={1 / 3}
         height={"50%"}

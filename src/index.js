@@ -7,6 +7,7 @@ import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import i18next from "i18next";
 import { ThemeProvider } from "@mui/material";
+import AuthProvider from "./component/hooks/useAuth";
 import { theme } from "./utils/theme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +22,9 @@ root.render(
       <ThemeProvider theme={theme}>
         <ToastContainer rtl />
         <Provider store={store}>
-          <App />
+          <AuthProvider>
+            <App />
+          </AuthProvider>
         </Provider>
       </ThemeProvider>
     </I18nextProvider>

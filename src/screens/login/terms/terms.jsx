@@ -13,6 +13,7 @@ export default function Terms() {
   const { setLoginState } = useAuth();
 
   const handleClick = () => {
+    localStorage.setItem("loginStatus", "logout");
     setLoginState("logout");
     navigate("/");
   };
@@ -42,10 +43,19 @@ export default function Terms() {
         >
           {t("login.form.rules")}
         </Typography>
-        <Box width={"80%"} height={300} padding={1}>
-          {
-            "این پیام جهت اطلاع شما می باشد &nbsp این پیام جهت اطلاع شما می باشد این پیام جهت اطلاع شما می باشد &nbsp این پیام جهت اطلاع شما می باشد"
-          }
+        <Box width={300} height={300} padding={1}>
+          <Typography>
+            به وب سایت رسمی ما خوش آمدید. استفاده از این سایت تابع شرایط و
+            مقرراتی است که در زیر اعلام می شود. لطفاً این شرایط و مقررات را قبل
+            از استفاده از سایت به دقت مطالعه فرمایید. با استفاده، خرید، دسترسی
+            یا دانلود مطالب از این وب سایت، عملاً با پذیرش شرایط و مقررات مطرح
+            شده در این اطلاعیه حقوقی موافقت می کنید.
+          </Typography>
+          <Typography>
+            این شرایط، تمام بازدیدهایی که در حال و آینده از وب سایت به عمل خواهد
+            آمد را در بر می گیرد. در هر زمان ممکن است در این مقررات تجدید نظر
+            شده و بروز شود.
+          </Typography>
         </Box>
       </Stack>
       <Stack alignItems={"center"}>
@@ -57,7 +67,10 @@ export default function Terms() {
         <NavigateButton
           label={t("general.back")}
           iconName='back'
-          onClick={() => setLoginState("report")}
+          onClick={() => {
+            localStorage.setItem("loginStatus", "report");
+            setLoginState("report");
+          }}
         />
       </Stack>
     </Box>

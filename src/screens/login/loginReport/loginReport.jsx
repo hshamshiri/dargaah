@@ -62,7 +62,10 @@ export default function LoginReport() {
       <NavigateButton
         label={t("general.next")}
         iconName='next'
-        onClick={() => setLoginState("term")}
+        onClick={() => {
+          localStorage.setItem("loginStatus", "term");
+          setLoginState("term");
+        }}
       />
     </Box>
   );

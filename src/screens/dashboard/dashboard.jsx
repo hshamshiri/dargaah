@@ -21,11 +21,13 @@ import {
   addDashBox,
 } from "../../redux/uiConfigeReducer";
 import UiButton from "../../component/uiKit/uiButton/uiButton";
+import { useTheme } from "@emotion/react";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [t] = useTranslation();
+  const theme = useTheme();
 
   useEffect(() => {
     const getAllData = () => {
@@ -56,7 +58,9 @@ const Dashboard = () => {
         <UiButton
           onclick={() => navigate("/dashboardAdmin")}
           sx={{ width: 200 }}
-          label={t("dashboard.main.change")}
+          backgroundColor={theme.palette.base.mid}
+          hoverColor={theme.palette.base.light}
+          label={t("adminpage")}
           variant={"contained"}
           iconName={"manager"}
           iconType={"button"}

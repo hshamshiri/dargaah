@@ -8,17 +8,23 @@ const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(localStorage.getItem("isAuth"));
-  const [loginState, setLoginState] = useState("logout");
+  const [loginState, setLoginState] = useState(
+    localStorage.getItem("loginStatus")
+      ? localStorage.getItem("loginStatus")
+      : "logout"
+  );
 
   const login = async (token) => {
     await localStorage.setItem("jwt", token);
     await localStorage.setItem("isAuth", true);
-    setIsAuth(true);
+    await localStorage.setItem("loginStatus", "report");
     setLoginState("report");
+    setIsAuth(true);
   };
 
   const logout = () => {
     localStorage.clear();
+    setLoginState("logout");
     navigate("/login", { replace: true });
   };
 
@@ -32,11 +38,11 @@ const AuthProvider = ({ children }) => {
   const checkTokenValid = async () => {
     const jwt = await localStorage.getItem("jwt");
     if (!jwt) return false;
-    if (tokenExpire(jwt)) return false;
+    if (tokenExpired(jwt)) return false;
     return true;
   };
 
-  const tokenExpire = (jwt) => {
+  const tokenExpired = (jwt) => {
     const jwt_decode = jwtDecode(jwt);
     if (jwt_decode.exp > moment().unix()) return false;
     return true;
