@@ -32,6 +32,7 @@ const AuthProvider = ({ children }) => {
     checkTokenValid().then(async (isTokenValid) => {
       await setIsAuth(isTokenValid);
       await localStorage.setItem("isAuth", isTokenValid);
+      if (!isTokenValid) console.log("logout");
     });
   };
 

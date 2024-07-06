@@ -1,4 +1,5 @@
 const handlingResponseError = (status) => {
+  console.log("status", status);
   if (status === 404) {
     return "صفحه مورد نظر وجود ندارد";
   }

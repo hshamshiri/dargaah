@@ -41,7 +41,7 @@ const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
     let url = isTopSlider
       ? APIs.topSlider.delete_Image
       : APIs.journal.delete_Image;
-    console.log("iiiiiid:", id);
+
     deleteRequest(url + id).then((response) => {
       if (response.data) {
         isTopSlider

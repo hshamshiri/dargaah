@@ -31,7 +31,12 @@ export default function AlertDialog({ myRef, message, action }) {
         aria-describedby='alert-dialog-description'
       >
         <DialogTitle id='alert-dialog-title' />
-        <DialogContent>
+        <DialogContent
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <DialogContentText id='alert-dialog-description'>
             {message}
           </DialogContentText>
