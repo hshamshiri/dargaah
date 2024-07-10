@@ -10,7 +10,7 @@ import AddSliderImageForm from "../../component/forms/addDashboardSliderImage/ad
 import AddTopSliderImageForm from "../../component/forms/addDashboardTopSliderImage/addTopSliderImageForm";
 import EditSliderImagesForm from "../../component/forms/editSliderImages/editSliderImagesForm";
 // -------
-import { Stack, Divider } from "@mui/material";
+import { Stack, Divider, Box } from "@mui/material";
 import JournalSlider from "../../component/uiKit/sliders/journal/journalSlider";
 import BannerSlider from "../../component/uiKit/sliders/banner/bannerSlider";
 import UiAdminDashedBox from "../../component/uiKit/uiAdminDashedBox/uiAdminDashedBox";
@@ -23,13 +23,14 @@ import { toast } from "react-toastify";
 //
 import { getRequest } from "../../utils/network/requsets/getRequest";
 import { APIs } from "../../utils/network/apiClient";
-import { addTopSliderImage, addJournalImage, addDashBox } from "../../redux/uiConfigeReducer";
+import {
+  addTopSliderImage,
+  addJournalImage,
+  addDashBox,
+} from "../../redux/uiConfigeReducer";
 import BannerEditButtons from "../../component/uiKit/editButtons/bannerEditButtons/bannerEditButtons";
-import JournalEditButtons from "../../component/uiKit/editButtons/journalEditButtons/journalEditButtons";
-
-
-
-
+import AddNewJournalButton from "../../component/uiKit/uiButton/addNewJournalButton.jsx";
+import AddNewJournalForm from "../../component/forms/addJournal/addNewJournalForm.jsx";
 
 const ManagerModalForm = ({
   toggleShowModal,
@@ -37,10 +38,10 @@ const ManagerModalForm = ({
   selectedBox,
   selectedButton,
   chosenSlider,
-  activeForms, }) => {
+  activeForms,
+}) => {
   return (
     <UiModal activeModal={activeModal} toggleShowModal={toggleShowModal}>
-
       {activeForms["dashedBox"] && (
         <AddDashedBoxForm
           toggleShowModal={toggleShowModal}
@@ -54,38 +55,28 @@ const ManagerModalForm = ({
           buttonInfo={selectedButton}
         />
       )}
-      {activeForms["addLeftImageSlider"] && (
-        <AddSliderImageForm
-          toggleShowModal={toggleShowModal}
-        />
-      )}
       {activeForms["addTopImageSlider"] && (
-        <AddTopSliderImageForm
-          toggleShowModal={toggleShowModal}
-        />
+        <AddTopSliderImageForm toggleShowModal={toggleShowModal} />
       )}
       {activeForms["editSliderImages"] && (
-        <EditSliderImagesForm
-          toggleShowModal={toggleShowModal}
-          sliderName={chosenSlider}
-        />
+        <EditSliderImagesForm toggleShowModal={toggleShowModal} />
+      )}
+      {activeForms["addLeftImageSlider"] && (
+        <AddSliderImageForm toggleShowModal={toggleShowModal} />
+      )}
+      {activeForms["addNewJournal"] && (
+        <AddNewJournalForm toggleShowModal={toggleShowModal} />
       )}
     </UiModal>
-  )
-
-}
-
-
-
+  );
+};
 
 const DashboardAdmin = () => {
-
   const [t] = useTranslation();
   const [interfaceUI] = useState(interfaceConfige);
   const [activeModal, setActiveModal] = useState(false);
   const [selectedBox, setSelectedBox] = useState(null);
   const [selectedButton, setSelectedButton] = useState(null);
-  const [chosenSlider, setChosenSlider] = useState();
   const [activeForms, setActiveForms] = useState({
     dashedBox: false,
     addButtonOfDashedBox: false,
@@ -93,39 +84,38 @@ const DashboardAdmin = () => {
     addTopImageSlider: false,
   });
 
-
-
-  const dispatch = useDispatch()
-  const toggleShowModal = useCallback(() => setActiveModal(!activeModal), [activeModal])
+  const dispatch = useDispatch();
+  const toggleShowModal = useCallback(
+    () => setActiveModal(!activeModal),
+    [activeModal]
+  );
   const dashBoxes = useSelector((state) => state.uiConfigeJson.dashBox_list);
   const journals = useSelector((state) => state?.uiConfigeJson?.journal_list);
-  const banners = useSelector((state) => state?.uiConfigeJson?.topSlider_list)
-
+  const banners = useSelector((state) => state?.uiConfigeJson?.topSlider_list);
 
   useEffect(() => {
     const getAllData = () => {
       getRequest(APIs.home).then((response) => {
         if (response.data) {
-          response.data?.dashBoxes && dispatch(addDashBox(response.data?.dashBoxes))
-          response.data?.top_slider && dispatch(addTopSliderImage(response.data?.top_slider))
-          response.data?.journals && dispatch(addJournalImage(response.data?.journals))
+          response.data?.dashBoxes &&
+            dispatch(addDashBox(response.data?.dashBoxes));
+          response.data?.top_slider &&
+            dispatch(addTopSliderImage(response.data?.top_slider));
+          response.data?.journals &&
+            dispatch(addJournalImage(response.data?.journals));
         }
         if (response.error.msg) {
-          toast.error(response.error.msg + "\n" + response.error.status)
+          toast.error(response.error.msg + "\n" + response.error.status);
         }
-      })
-    }
-    getAllData()
-
+      });
+    };
+    getAllData();
   }, [dispatch]);
 
-
-
-  const handleForms = (formName, boxInfo, buttonInfo, sliderName) => {
+  const handleForms = (formName, boxInfo, buttonInfo) => {
     setActiveModal(true);
     setSelectedBox(boxInfo);
     setSelectedButton(buttonInfo);
-    setChosenSlider(sliderName);
     setActiveForms((prevState) => {
       const nextState = {};
       Object.keys(prevState).forEach(() => {
@@ -133,9 +123,7 @@ const DashboardAdmin = () => {
       });
       return nextState;
     });
-
   };
-
 
   return (
     <MiniDrawer buttonList={interfaceUI?.drawerButtons?.buttons || []}>
@@ -144,8 +132,8 @@ const DashboardAdmin = () => {
         activeModal={activeModal}
         selectedBox={selectedBox}
         selectedButton={selectedButton}
-        chosenSlider={chosenSlider}
-        activeForms={activeForms} />
+        activeForms={activeForms}
+      />
 
       {/* banner */}
       <Stack spacing={2}>
@@ -168,14 +156,10 @@ const DashboardAdmin = () => {
         marginTop={0}
       >
         {/* left side */}
-        <Grid
-          columnSpacing={{ xs: 1, sm: 2, md: 2 }}
-          position={"relative"}
-          xs={12}
-          sm={12}
-          md={4}
-        >
-          <JournalEditButtons handleForms={handleForms} />
+        <Grid xs={12} sm={12} md={4} marginTop={5}>
+          <Box width={"100%"} display={"flex"} padding={1}>
+            <AddNewJournalButton onClick={() => handleForms("addNewJournal")} />
+          </Box>
           <JournalSlider journals={journals} />
         </Grid>
 
@@ -190,26 +174,23 @@ const DashboardAdmin = () => {
           justifyContent={"end"}
           rowGap={1}
           marginTop={7}
-          paddingLeft={5}
         >
           {/* <Divider>افزودن مجموعه</Divider> */}
           <AddNewboxButton onClick={() => handleForms("dashedBox")} />
 
-          {dashBoxes && dashBoxes.map((dashBox, i) => (
-            <UiAdminDashedBox
-              key={uuidv4()}
-              handleForms={handleForms}
-              boxInfo={dashBox}
-              hideLabel={true}
-            />
-          ))}
+          {dashBoxes &&
+            dashBoxes.map((dashBox, i) => (
+              <UiAdminDashedBox
+                key={uuidv4()}
+                handleForms={handleForms}
+                boxInfo={dashBox}
+                hideLabel={true}
+              />
+            ))}
         </Grid>
       </Grid>
-
     </MiniDrawer>
   );
 };
 
-
-
-export default DashboardAdmin
+export default DashboardAdmin;

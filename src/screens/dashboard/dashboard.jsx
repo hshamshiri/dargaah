@@ -127,6 +127,6 @@ const Dashboard = () => {
 // const arr = [icon, icon, icon];
 // {arr.map((icon, i) => (
 //     <UiSlide timeout={1000 * ((i + 1) / 2)} key={i}>{icon}</UiSlide>
-//   ))}
+//   ))}npm i keycloak-js
 
 export default Dashboard;

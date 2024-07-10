@@ -2,30 +2,22 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Box, ImageList, ImageListItem } from "@mui/material";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import UiButton from "../../uiKit/uiButton/uiButton";
-import EditButton from "../../uiKit/uiButton/editButton";
 import DeleteButton from "../../uiKit/uiButton/deleteButton";
 
 import { deleteRequest } from "../../../utils/network/requsets/deleteRequest";
 import { APIs } from "../../../utils/network/apiClient";
-import {
-  addTopSliderImage,
-  addJournalImage,
-} from "../../../redux/uiConfigeReducer";
+import { addTopSliderImage } from "../../../redux/uiConfigeReducer";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
-  const isTopSlider = sliderName === "topSlider" ? true : false;
   const topImages = useSelector(
     (state) => state?.uiConfigeJson?.topSlider_list
   );
-  const journals = useSelector(
-    (state) => state?.uiConfigeJson?.journal_list?.images
-  );
+
   const dispatch = useDispatch();
   const [t] = useTranslation();
-  let images = isTopSlider ? topImages : journals;
+  let images = topImages;
 
   useEffect(() => {
     const checkImagesIsEmpty = () => {
@@ -38,15 +30,11 @@ const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
   }, [images]);
 
   const removeImage = (id) => {
-    let url = isTopSlider
-      ? APIs.topSlider.delete_Image
-      : APIs.journal.delete_Image;
+    let url = APIs.topSlider.delete_Image;
 
     deleteRequest(url + id).then((response) => {
       if (response.data) {
-        isTopSlider
-          ? dispatch(addTopSliderImage(response.data))
-          : dispatch(addJournalImage(response.data));
+        dispatch(addTopSliderImage(response.data));
       }
       response.error.msg &&
         toast.error(response.error.msg + "\n" + response.error.status);
@@ -58,11 +46,7 @@ const EditSliderImagesForm = ({ toggleShowModal, sliderName }) => {
       {/* container */}
 
       {images && images.length > 0 && (
-        <ImageList
-          sx={styles.imageListStyle}
-          cols={isTopSlider ? 1 : 2}
-          rowHeight={isTopSlider ? 200 : 200}
-        >
+        <ImageList sx={styles.imageListStyle} cols={1} rowHeight={200}>
           {images.map((image, i) => {
             return (
               <Box key={i}>

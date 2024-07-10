@@ -17,6 +17,7 @@ import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import AddIcon from "@mui/icons-material/Add";
+import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
@@ -98,6 +99,7 @@ const UiIcon = ({ iconType, iconName, iconColor, iconHoverColor, sx }) => {
     checkTick: <TaskAltIcon sx={iconStyle} />,
     close: <CancelIcon sx={iconStyle} />,
     refresh: <RefreshIcon sx={iconStyle} />,
+    addAlbum: <AddToPhotosIcon sx={iconStyle} />,
   };
 
   return icons[iconName];

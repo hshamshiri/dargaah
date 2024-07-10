@@ -42,9 +42,11 @@ const APIs = {
     delete_Image: `slider/`,
   },
   journal: {
+    add_journal: `journal/new-slider`,
     image_list: `journal/all`,
     upload_image: `journal/image`,
     delete_Image: `journal/`,
+    delete_journal: `journal/`,
   },
 };
 

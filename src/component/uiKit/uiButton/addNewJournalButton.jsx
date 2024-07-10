@@ -9,11 +9,11 @@ export default function AddButton({ onClick }) {
     <UiButton
       onclick={onClick}
       variant={"contained"}
-      iconName={"add"}
+      iconName={"addAlbum"}
       iconType={"button"}
       iconColor={theme.palette.base.success}
       iconHoverColor={theme.palette.base.success}
-      tooltipTitle={t("dashboard.main.add")}
+      tooltipTitle={t("addNewJournal")}
     />
   );
 }

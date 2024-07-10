@@ -105,5 +105,7 @@
   },
   "refresh":"ارسال مجدد",
   "exit":"خروج",
-  "adminpage":"تنظیمات صفحه"
+  "adminpage":"تنظیمات صفحه",
+  "journalName":"نام اسلایدر",
+  "addNewJournal":"افزودن اسلایدر جدید"
 }
